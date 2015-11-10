@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<object name="ens" meta_type="Dexterity FTI" i18n:domain="plone"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title" i18n:translate="">Ens</property>
+ <property name="description"
+    i18n:translate="">Entitat com ara una universitat o una empresa.</property>
+ <property name="icon_expr">string:${portal_url}/document_icon.png</property>
+ <property name="factory">ens</property>
+ <property name="add_view_expr">string:${folder_url}/++add++ens</property>
+ <property name="link_target"></property>
+ <property name="immediate_view">view</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types"/>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">view</property>
+ <property name="view_methods">
+  <element value="view"/>
+ </property>
+ <property name="default_view_fallback">False</property>
+ <property name="add_permission">cmf.AddPortalContent</property>
+ <property name="klass">plone.dexterity.content.Container</property>
+ <property name="behaviors">
+  <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
+  <element value="plone.app.content.interfaces.INameFromTitle"/>
+ </property>
+ <property name="schema"></property>
+ <property name="model_source">&lt;?xml version='1.0' encoding='utf8'?&gt;
+  &lt;model xmlns:lingua="http://namespaces.plone.org/supermodel/lingua" xmlns:form="http://namespaces.plone.org/supermodel/form" xmlns:indexer="http://namespaces.plone.org/supermodel/indexer" xmlns:i18n="http://xml.zope.org/namespaces/i18n" xmlns:security="http://namespaces.plone.org/supermodel/security" xmlns:marshal="http://namespaces.plone.org/supermodel/marshal" xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
+    &lt;schema&gt;
+      &lt;fieldset name="dades_identificatives" label="Dades identificatives"&gt;
+          &lt;field name="denominacio_complerta" type="zope.schema.TextLine"&gt;
+            &lt;description/&gt;
+            &lt;title&gt;Denominació complerta&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="acronim" type="zope.schema.TextLine"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Acrònim&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="nif" type="zope.schema.TextLine"&gt;
+            &lt;description/&gt;
+            &lt;title&gt;NIF&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="sub_ens" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Sub-ens / Òrgans de govern de&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="domicili_social" type="zope.schema.TextLine"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Domicili social / Adreça oficines&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="telefon" type="zope.schema.TextLine"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Teléfon&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="persona_contacte" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Persona de contacte&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="carrecs_directius" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Càrrecs directius&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="web" type="zope.schema.TextLine"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Web&lt;/title&gt;
+          &lt;/field&gt;
+      &lt;/fieldset&gt;
+      &lt;fieldset name="participacio" label="Participació"&gt;
+          &lt;field name="aportacio" type="zope.schema.TextLine"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Aportació&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="participacio_percentatge" type="zope.schema.TextLine"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Participació en %&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="participacio_capital" type="zope.schema.TextLine"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Participació en capital social o fons patrimonial&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="participacio_govern" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Participació en persones en els òrgans de govern&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="participacio_assessors" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Participació en òrgans assessors&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="participacio_unitats" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Participació en unitats implicades&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="observacions" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Observacions&lt;/title&gt;
+          &lt;/field&gt;
+      &lt;/fieldset&gt;
+      &lt;fieldset name="marc_legal" label="Marc Legal"&gt;
+          &lt;field name="data_constitucio" type="zope.schema.Date"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Data de constitució&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="entitats_constituents" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Entitats constituents&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="entitats_actuals" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Entitats actuals&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="data_entrada" type="zope.schema.Date"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Data de entrada&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="acord_govern" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Acord òrgans de govern&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="escriptures_publiques" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Escriptures públiques&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="estatus" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Estatus&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="convenis" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Convenis&lt;/title&gt;
+          &lt;/field&gt;
+          &lt;field name="altres_documents" type="zope.schema.Text"&gt;
+            &lt;description/&gt;
+            &lt;required&gt;False&lt;/required&gt;
+            &lt;title&gt;Altres documents d'interés&lt;/title&gt;
+          &lt;/field&gt;
+      &lt;/fieldset&gt;
+    &lt;/schema&gt;
+  &lt;/model&gt;</property>
+ <property name="model_file"></property>
+ <property name="schema_policy">dexterity</property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="edit" to="@@edit"/>
+ <alias from="sharing" to="@@sharing"/>
+ <alias from="view" to="(selected layout)"/>
+ <action title="View" action_id="view" category="object" condition_expr=""
+    description="" icon_expr="" link_target="" url_expr="string:${object_url}"
+    visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit" action_id="edit" category="object" condition_expr=""
+    description="" icon_expr="" link_target=""
+    url_expr="string:${object_url}/edit" visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+</object>
