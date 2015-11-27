@@ -1,0 +1,15 @@
+<tal:block define="results view/search">
+<ul class="list-portlet ens-result"
+    tal:condition="results">
+  <li tal:repeat="ens results">
+    <article>
+      <h5 tal:content="python:ens[2]"/>
+      <a tal:attributes="href python:ens[0]" tal:content="python:ens[1]"/>
+    </article>
+  </li>
+</ul>
+<p tal:condition="not: results"
+   i18n:translate="No s&apos;han trobat coincid&egrave;ncies amb aquests criteris de cerca">
+    No s&apos;han trobat coincid&egrave;ncies amb aquests criteris de cerca
+</p>
+</tal:block>

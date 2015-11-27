@@ -1,0 +1,179 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:metal="http://xml.zope.org/namespaces/metal"
+            xmlns:tal="http://xml.zope.org/namespaces/tal"
+            xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+            metal:use-macro="context/main_template/macros/master">
+
+<body>
+  <metal:custom_title fill-slot="content-title">
+    <h1 class="documentFirstHeading" tal:content="context/title"></h1>
+  </metal:custom_title>
+  <metal:content-core fill-slot="content-core">
+    <section id="ens-metadata" class="ens-metadata">
+        <h2 i18n:translate="Dades indentificatives" class="collapsable">
+            Dades identificatives
+        </h2>
+        <dl>
+          <dt i18n:translate="Denominacio">Denominaci&oacute;</dt>
+          <dd tal:content="context/title"/>
+
+          <dt i18n:translate="Acr&ograve;nim">Acr&ograve;nim</dt>
+          <dd tal:content="python: context.acronim or '-'"/>
+
+          <dt i18n:translate="NIF">NIF</dt>
+          <dd tal:content="context/nif"/>
+
+          <dt i18n:translate="Figura jur&iacute;dica">Figura jur&iacute;dica</dt>
+          <dd tal:content="python: view.get_figura_juridica_title(context.figura_juridica)"/>
+
+          <dt i18n:translate="Estat">Estat</dt>
+          <dd tal:content="python: view.get_estat_title(context.estat)"/>
+
+          <dt i18n:translate="Domicili social">Domicili social</dt>
+          <dd tal:content="python: context.domicili_social or '-'"/>
+
+          <dt i18n:translate="Adre&ccedil;a oficines">Adre&ccedil;a oficines</dt>
+          <dd tal:content="python: context.adreca_oficines or '-'"/>
+
+          <dt i18n:translate="Web">Web</dt>
+          <dd tal:content="python: context.web or '-'"/>
+
+          <dt i18n:translate="Tipologia">Tipologia</dt>
+          <dd tal:content="python: view.get_tipologia_title(context.tipologia)"/>
+        </dl>
+
+        <h2 i18n:translate="Informaci&oacute; de participaci&oacute;">
+            Informaci&oacute; de participaci&oacute;
+        </h2>
+        <dl>
+          <dt i18n:translate="Aportaci&oacute; inicial">Aportaci&oacute; inicial</dt>
+          <dd tal:content="python:context.aportacio or '-'"/>
+
+          <dt i18n:translate="Quota">Quota</dt>
+          <dd tal:content="python:context.quota or '-'"/>
+
+          <dt i18n:translate="Percentatge">Percentatge</dt>
+          <dd tal:content="python:context.participacio_percentatge or '-'"/>
+
+          <dt i18n:translate="Observacions">Observacions</dt>
+          <dd tal:content="python:context.participacio_percentatge_observacions or '-'"/>
+
+          <dt i18n:translate="Capital social o fons patrimonial">Capital social o fons patrimonial</dt>
+          <dd tal:content="python:context.participacio_capital or '-'"/>
+        </dl>
+
+        <h2 i18n:translate="Marc legal">Marc legal</h2>
+        <div>
+        <dl>
+          <dt i18n:translate="Data de constituci&oacute;">Data de constituci&oacute;</dt>
+          <dd tal:content="python:context.data_constitucio and context.data_constitucio.strftime('%d/%m/%Y') or '-'"/>
+
+          <dt i18n:translate="Entitats constituents">Entitats constituents</dt>
+          <dd tal:content="python:context.entitats_constituents or '-'"/>
+
+          <dt i18n:translate="Entitats actuals">Entitats actuals</dt>
+          <dd tal:content="python:context.entitats_actuals or '-'"/>
+
+          <dt i18n:translate="Data d&apos;entrada">Data d&apos;entrada</dt>
+          <dd tal:content="python:context.data_entrada and context.data_entrada.strftime('%d/%m/%Y') or '-'"/>
+
+          <dt i18n:translate="Seu social">Seu social</dt>
+          <dd tal:content="python:view.get_seu_social_title(context.seu_social) or '-'"/>
+
+          <dt i18n:translate="Observacions">Observacions</dt>
+          <dd tal:content="python:context.marc_legal_observacions or '-'"/>
+        </dl>
+
+        <h3 i18n:translate="Escriptures p&uacute;bliques">Escriptures p&uacute;bliques</h3>
+        <tal:block define="escriptures view/get_escriptures">
+        <table tal:condition="escriptures">
+          <thead>
+            <tr>
+              <th i18n:translate="Data">Data</th>
+              <th i18n:translate="Descripci&oacute;">Descripci&oacute;</th>
+              <th i18n:translate="Notari">Notari</th>
+              <th i18n:translate="Fitxer">Fitxer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr tal:repeat="escriptura escriptures">
+              <td tal:content="python: escriptura.data and escriptura.data.strftime('%d/%m/%Y') or '-'"/>
+              <td>
+                <a tal:attributes="href escriptura/absolute_url"
+                   tal:content="escriptura/title"/>
+              </td>
+              <td tal:content="python: escriptura.notari or '-'"/>
+              <td>
+                <a tal:attributes="href string:${escriptura/absolute_url}/view/++widget++form.widgets.fitxer/@@download/${escriptura/fitxer/filename}"
+                   tal:content="escriptura/fitxer/filename"/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p tal:condition="not: escriptures"
+          i18n:translate="No hi ha escriptures p&uacute;bliques">No hi ha escriptures p&uacute;bliques</p>
+        </tal:block>
+
+        <h3 i18n:translate="Altres documents d&apos;inter&egrave;s">Altres documents d&apos;inter&egrave;s</h3>
+        <tal:block define="documents view/get_documents_interes">
+        <table tal:condition="documents">
+          <thead>
+            <tr>
+              <th i18n:translate="Data">Data</th>
+              <th i18n:translate="Descripci&oacute;">Descripci&oacute;</th>
+              <th i18n:translate="Fitxer">Fitxer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr tal:repeat="document documents">
+              <td tal:content="python: document.data and document.data.strftime('%d/%m/%Y') or '-'"/>
+              <td>
+                <a tal:attributes="href document/absolute_url"
+                   tal:content="document/title"/>
+              </td>
+              <td>
+                <a tal:attributes="href string:${document/absolute_url}/view/++widget++form.widgets.fitxer/@@download/${document/fitxer/filename}"
+                   tal:content="document/fitxer/filename"/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p tal:condition="not: documents"
+          i18n:translate="No hi ha altres documents d&apos;inter&egrave;s">No hi ha altres documents d&apos;inter&egrave;s</p>
+        </tal:block>
+
+        <h3 i18n:translate="Convenis">Convenis</h3>
+        <tal:block define="convenis view/get_convenis">
+        <table tal:condition="convenis">
+          <thead>
+            <tr>
+              <th i18n:translate="Data">Data</th>
+              <th i18n:translate="Descripci&oacute;">Descripci&oacute;</th>
+              <th i18n:translate="Fitxer">Fitxer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr tal:repeat="conveni convenis">
+              <td tal:content="python: conveni.data and conveni.data.strftime('%d/%m/%Y') or '-'"/>
+              <td>
+                <a tal:attributes="href conveni/absolute_url"
+                   tal:content="conveni/title"/>
+              </td>
+              <td>
+                <a tal:attributes="href string:${conveni/absolute_url}/view/++widget++form.widgets.fitxer/@@download/${conveni/fitxer/filename}"
+                   tal:content="conveni/fitxer/filename"/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p tal:condition="not: convenis"
+          i18n:translate="No hi ha convenis">No hi ha convenis</p>
+        </tal:block>
+        </div>
+    </section>
+    <script type="text/javascript"
+            tal:attributes="src string:${portal_url}/++genweb++ens/ens_view.js">
+    </script>
+  </metal:content-core>
+</body>
+</html>

@@ -1,0 +1,56 @@
+section.ens-metadata a
+{
+    color: #007BC0;
+}
+
+section.ens-metadata dt
+{
+    float: left;
+    width: 200px;
+}
+
+section.ens-metadata dd
+{
+    margin-left: 200px;
+}
+
+section.ens-metadata h2
+{
+    border-bottom: 1px solid #b2b2b2;
+}
+
+section.ens-metadata th
+{
+    text-align: left;
+}
+
+section.ens-metadata tr
+{
+    border-bottom: 1px solid #ddd;
+}
+
+div.ens-search-field
+{
+   margin: 10px;
+}
+
+.ens-search-field label
+{
+    display: inline-block;
+    width: 150px;
+}
+
+.ens-search-field select
+{
+    width: 150px;
+}
+
+.ens-search-field input[type=text]
+{
+    width: 350px;
+}
+
+.ens-result li:before
+{
+    margin-top: -7px;
+}
