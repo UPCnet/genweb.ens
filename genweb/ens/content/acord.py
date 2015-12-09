@@ -2,8 +2,8 @@
 from genweb.ens.content.document_legal import IDocumentLegal
 
 
-class IConveni(IDocumentLegal):
+class IAcord(IDocumentLegal):
     """
-    Conveni legal associat a un ens.
+    Acord legal associt a un òrgan de govern.
     """
     pass

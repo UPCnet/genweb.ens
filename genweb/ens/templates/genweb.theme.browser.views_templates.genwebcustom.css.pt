@@ -29,6 +29,16 @@ section.ens-metadata tr
     border-bottom: 1px solid #ddd;
 }
 
+section.ens-metadata th.column-small
+{
+    width: 15%;
+}
+
+section.ens-metadata th.column-medium
+{
+    width: 30%;
+}
+
 div.ens-search-field
 {
    margin: 10px;

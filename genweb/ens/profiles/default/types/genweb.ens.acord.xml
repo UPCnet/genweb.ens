@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<object name="genweb.ens.ens" meta_type="Dexterity FTI"
+<object name="genweb.ens.acord" meta_type="Dexterity FTI"
    i18n:domain="genweb.ens"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Ens</property>
- <property name="description" i18n:translate="">Entitat u organització com ara una universitat o una empresa</property>
+ <property name="title" i18n:translate="">Acord</property>
+ <property name="description" i18n:translate="">Acord legal associat a un òrgan de govern</property>
  <property name="icon_expr"></property>
- <property name="factory">genweb.ens.ens</property>
+ <property name="factory">genweb.ens.acord</property>
  <property
-    name="add_view_expr">string:${folder_url}/++add++genweb.ens.ens</property>
+    name="add_view_expr">string:${folder_url}/++add++genweb.ens.acord</property>
  <property name="link_target"></property>
  <property name="immediate_view">view</property>
  <property name="global_allow">True</property>
@@ -20,16 +20,6 @@
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">plone.dexterity.content.Container</property>
-
- <property name="allowed_content_types">
-  <element value="genweb.ens.escriptura"/>
-  <element value="genweb.ens.document_interes"/>
-  <element value="genweb.ens.conveni"/>
-  <element value="genweb.ens.organ"/>
-  <element value="genweb.ens.estatut"/>
-  <element value="genweb.ens.percentatge_participacio"/>
-  <element value="genweb.ens.unitat"/>
- </property>
 
  <property name="behaviors">
   <element value="plone.app.dexterity.behaviors.metadata.ICategorization"/>
@@ -46,7 +36,7 @@
   <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
  </property>
 
- <property name="schema">genweb.ens.content.ens.IEns</property>
+ <property name="schema">genweb.ens.content.acord.IAcord</property>
  <property
     name="model_source">&lt;model xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
       &lt;schema /&gt;

@@ -1,7 +1,12 @@
 from Products.CMFCore.utils import getToolByName
 
 fields_to_index = [('estat', 'FieldIndex'),
-                   ('figura_juridica', 'FieldIndex')]
+                   ('figura_juridica', 'FieldIndex'),
+                   ('is_directiu', 'FieldIndex'),
+                   ('is_contacte', 'FieldIndex'),
+                   ('is_vigent', 'FieldIndex'),
+                   ('data', 'DateIndex'),
+                   ('tipus', 'FieldIndex')]
 
 
 def add_catalog_indexes(catalog):

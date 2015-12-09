@@ -5,12 +5,12 @@ from genweb.ens import _
 from genweb.ens.content.document_legal import IDocumentLegal
 
 
-class IEscriptura(IDocumentLegal):
+class IEstatut(IDocumentLegal):
     """
-    Escriptura pública associada a un ens.
+    Estatut associat a un ens.
     """
 
-    notari = schema.TextLine(
-        title=_(u"Notari"),
+    is_vigent = schema.Bool(
+        title=_(u"Vigent"),
         required=False,
     )

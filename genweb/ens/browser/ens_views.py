@@ -1,7 +1,10 @@
+import json
+
 from five import grok
 from Products.CMFCore.interfaces import IFolderish
 from Products.CMFCore.utils import getToolByName
 from zope.interface import Interface
+from zope.component import getMultiAdapter
 
 from genweb.ens.content import ens
 from genweb.ens.interfaces import IGenwebEnsLayer
@@ -11,7 +14,7 @@ grok.templatedir("ens_views")
 
 class Search(grok.View):
     grok.context(IFolderish)
-    grok.name('ens_search')
+    grok.name('search-ens')
     grok.layer(IGenwebEnsLayer)
 
     def get_figura_juridica_vocabulary(self):
@@ -23,6 +26,43 @@ class Search(grok.View):
         estat_vocabulary = dict(ens.estat_value_title)
         estat_vocabulary.update({'': 'Qualsevol'})
         return estat_vocabulary.iteritems()
+
+    def is_user_folder(self, folder):
+        portal_state = getMultiAdapter(
+            (self.context, self.request), name="plone_portal_state")
+        if portal_state.anonymous():
+            return False
+        elif not portal_state.member().getUser().getGroups():
+            return False
+        else:
+            group_ids = portal_state.member().getUser().getGroupIds()
+            return any(folder.getPath().endswith(user_folder_name)
+                       for user_folder_name in group_ids)
+
+    def get_user_folders(self):
+        portal_state = getMultiAdapter(
+            (self.context, self.request), name="plone_portal_state")
+        if portal_state.anonymous():
+            return set()
+        elif not portal_state.member().getUser().getGroups():
+            return set()
+        else:
+            return set(portal_state.member().getUser().getGroupIds())
+
+    def get_carpetes_vocabulary(self):
+        user_folders = self.get_user_folders()
+        catalog = getToolByName(self, 'portal_catalog')
+        return [(folder.getPath(),
+                 folder.Title,
+                 folder.getPath().split('/')[-1] in user_folders)
+
+                for folder in catalog.searchResults(
+                    portal_type='Folder',
+                    sort_on='sortable_title',
+                    path={
+                        'query': '/',
+                        'depth': 3
+                    })]
 
 
 class SearchResults(grok.View):
@@ -41,6 +81,15 @@ class SearchResults(grok.View):
         try:
             estat = int(self.request.form.get('estat', ''))
             search_filters['estat'] = estat
+        except ValueError:
+            pass
+
+        try:
+            carpetes = json.loads(self.request.form.get('carpetes', None))
+            if carpetes:
+                search_filters["path"] = {"depth": 1}
+                search_filters["path"]["query"] = [
+                    carpeta for carpeta in carpetes]
         except ValueError:
             pass
 

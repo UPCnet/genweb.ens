@@ -1,25 +1,9 @@
 # -*- coding: utf-8 -*-
-from zope import schema
-from plone.directives import form
-from plone.namedfile.field import NamedBlobFile
-
-from genweb.ens import _
+from genweb.ens.content.document_legal import IDocumentLegal
 
 
-class IDocumentInteres(form.Schema):
+class IDocumentInteres(IDocumentLegal):
     """
-    Document legal d'interès
+    Document d'interès legal
     """
-
-    title = schema.TextLine(
-        title=_(u"Descripció"),
-        required=True)
-
-    data = schema.Date(
-        title=_(u"Data"),
-        required=False)
-
-    fitxer = NamedBlobFile(
-        title=_(u"Fitxer"),
-        description=_(u"Puja un fitxer"),
-        required=True)
+    pass

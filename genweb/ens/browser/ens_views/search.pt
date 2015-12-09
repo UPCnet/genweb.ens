@@ -30,6 +30,15 @@
       </div>
 
       <div class="ens-search-field">
+        <label for="search_input_carpetes" i18n:translate="Cercar solament en">Cercar solament en</label>
+        <select id="search_input_carpetes" multiple="multiple">
+          <option tal:repeat="option view/get_carpetes_vocabulary"
+                  tal:attributes="value python:option[0]; selected python:option[2]"
+                  tal:content="python: option[1]"></option>
+        </select>
+      </div>
+
+      <div class="ens-search-field">
         <label for="search_input_text" i18n:translate="Amb el text">Amb el text</label>
         <input id="search_input_text" class="searchInput"
                type="text" placeholder="Introduïu el text a cercar"/>

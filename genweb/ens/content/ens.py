@@ -8,6 +8,7 @@ from five import grok
 from Products.CMFCore.utils import getToolByName
 
 from genweb.ens import _
+from genweb.ens import content
 
 
 figura_juridica_value_title = {1: u"Fundació",
@@ -15,22 +16,23 @@ figura_juridica_value_title = {1: u"Fundació",
                                3: u"Consorci",
                                4: u"Associació",
                                5: u"Sense NIF",
-                               6: u"Altres"}
+                               6: u"Altra"}
 
 estat_value_title = {1: u"Actiu",
                      2: u"Pre-Baixa",
                      3: u"Pre-Alta",
                      4: u"Baixa",
-                     5: u"Pre-alta cancel·lada"}
+                     5: u"Pre-alta cancel·lada",
+                     6: u"Altre"}
 
-tipologia_value_title = {1: u"Grup",
+tipologia_value_title = {1: u"Grup UPC",
                          2: u"Participació Superior",
-                         3: u"Entitat Vinculada a Recerca",
+                         3: u"Entitat Vinculada de Recerca",
                          4: u"Centre Docent",
                          5: u"Institut de Recerca",
                          6: u"Spin-off",
                          7: u"Internacional",
-                         8: u"Altres"}
+                         8: u"Altra"}
 
 seu_social_value_title = {1: u"CAT: Catalunya",
                           2: u"ESP: Altres localitats d'Espanya",
@@ -50,8 +52,9 @@ class IEns(form.Schema):
     form.fieldset(
         "dades_identificatives",
         label=u"Dades identificatives",
-        fields=['title', 'acronim', 'nif', 'figura_juridica', 'estat',
-                'domicili_social', 'adreca_oficines', 'web', 'tipologia']
+        fields=['title', 'description', 'acronim', 'codi', 'nif',
+                'figura_juridica', 'estat', 'domicili_social',
+                'adreca_oficines', 'web', 'tipologia']
     )
 
     title = schema.TextLine(
@@ -59,10 +62,18 @@ class IEns(form.Schema):
         required=True
     )
 
+    description = schema.Text(
+        title=_(u"Descripció"),
+        required=False)
+
     acronim = schema.TextLine(
         title=_(u"Acrònim"),
         required=True,
     )
+
+    codi = schema.TextLine(
+        title=_(u"Codi de classificació"),
+        required=False)
 
     nif = schema.TextLine(
         title=_(u"NIF"),
@@ -100,9 +111,8 @@ class IEns(form.Schema):
     form.fieldset(
         "participacio",
         label=u"Participació",
-        fields=['aportacio', 'quota', 'participacio_percentatge',
-                'participacio_percentatge_observacions',
-                'participacio_capital']
+        fields=['aportacio', 'quota', 'unitat_carrec', 'participacio_capital',
+                'participacio_observacions']
     )
 
     aportacio = schema.TextLine(
@@ -113,16 +123,16 @@ class IEns(form.Schema):
         title=_(u"Quota"),
         required=False)
 
-    participacio_percentatge = schema.Float(
-        title=_(u"Percentatge"),
-        required=False)
-
-    participacio_percentatge_observacions = schema.Text(
-        title=_(u"Observacions"),
+    unitat_carrec = schema.TextLine(
+        title=_(u"Unitat de càrrec"),
         required=False)
 
     participacio_capital = schema.Float(
         title=_(u"Capital social o fons patrimonial"),
+        required=False)
+
+    participacio_observacions = schema.Text(
+        title=_(u"Observacions"),
         required=False)
 
     form.fieldset(
@@ -146,7 +156,7 @@ class IEns(form.Schema):
         required=False)
 
     data_entrada = schema.Date(
-        title=_(u"Data d'entrada"),
+        title=_(u"Data d'entrada UPC"),
         required=False)
 
     seu_social = schema.Choice(
@@ -181,7 +191,76 @@ class View(dexterity.DisplayForm):
             return _(seu_social_value_title[seu_social_value])
         return None
 
-    def get_escriptures(self):
+    def get_percentatges_participacio_obj(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        folder_path = '/'.join(self.context.getPhysicalPath())
+
+        return [percentatge.getObject()
+                for percentatge in catalog.searchResults(
+            portal_type='genweb.ens.percentatge_participacio',
+            sort_on='sortable_title',
+            path={
+                'query': folder_path,
+                'depth': 1
+            })]
+
+    def get_unitats(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        folder_path = '/'.join(self.context.getPhysicalPath())
+
+        return [unitat for unitat in catalog.searchResults(
+            portal_type='genweb.ens.unitat',
+            sort_on='sortable_title',
+            path={
+                'query': folder_path,
+                'depth': 1
+            })]
+
+    def get_acords_obj(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        folder_path = '/'.join(self.context.getPhysicalPath())
+
+        return [acord.getObject() for acord in catalog.searchResults(
+            portal_type='genweb.ens.acord',
+            sort_on='getObjPositionInParent',
+            path={
+                'query': folder_path,
+                'depth': 2
+            })]
+
+    def get_estatuts_vigents_obj(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        folder_path = '/'.join(self.context.getPhysicalPath())
+
+        return [estatut.getObject() for estatut in catalog.searchResults(
+            portal_type='genweb.ens.estatut',
+            is_vigent=True,
+            # TODO Handle the cases where data is None (the current
+            #      implementation just ignores those instances)
+            sort_on='data',
+            sort_order='descending',
+            path={
+                'query': folder_path,
+                'depth': 1
+            })]
+
+    def get_estatuts_anteriors_obj(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        folder_path = '/'.join(self.context.getPhysicalPath())
+
+        return [estatut.getObject() for estatut in catalog.searchResults(
+            portal_type='genweb.ens.estatut',
+            is_vigent=False,
+            # TODO Handle the cases where data is None (the current
+            #      implementation just ignores those instances)
+            sort_on='data',
+            sort_order='descending',
+            path={
+                'query': folder_path,
+                'depth': 1
+            })]
+
+    def get_escriptures_obj(self):
         catalog = getToolByName(self, 'portal_catalog')
         folder_path = '/'.join(self.context.getPhysicalPath())
 
@@ -193,7 +272,7 @@ class View(dexterity.DisplayForm):
                 'depth': 1
             })]
 
-    def get_documents_interes(self):
+    def get_documents_interes_obj(self):
         catalog = getToolByName(self, 'portal_catalog')
         folder_path = '/'.join(self.context.getPhysicalPath())
 
@@ -205,12 +284,76 @@ class View(dexterity.DisplayForm):
                 'depth': 1
             })]
 
-    def get_convenis(self):
+    def get_convenis_obj(self):
         catalog = getToolByName(self, 'portal_catalog')
         folder_path = '/'.join(self.context.getPhysicalPath())
 
         return [conveni.getObject() for conveni in catalog.searchResults(
             portal_type='genweb.ens.conveni',
+            sort_on='getObjPositionInParent',
+            path={
+                'query': folder_path,
+                'depth': 1
+            })]
+
+    def get_organs_govern(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        folder_path = '/'.join(self.context.getPhysicalPath())
+
+        return [organ for organ in catalog.searchResults(
+            portal_type='genweb.ens.organ',
+            tipus=content.organ.TIPUS_GOVERN,
+            sort_on='getObjPositionInParent',
+            path={
+                'query': folder_path,
+                'depth': 1
+            })]
+
+    def get_organs_assessors(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        folder_path = '/'.join(self.context.getPhysicalPath())
+
+        return [organ for organ in catalog.searchResults(
+            portal_type='genweb.ens.organ',
+            tipus=content.organ.TIPUS_ASSESSOR,
+            sort_on='getObjPositionInParent',
+            path={
+                'query': folder_path,
+                'depth': 1
+            })]
+
+    def get_directius(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        folder_path = '/'.join(self.context.getPhysicalPath())
+
+        return [carrec for carrec in catalog.searchResults(
+            portal_type='genweb.ens.carrec',
+            is_directiu=True,
+            sort_on='getObjPositionInParent',
+            path={
+                'query': folder_path,
+                'depth': 2
+            })]
+
+    def get_contactes(self):
+        catalog = getToolByName(self, 'portal_catalog')
+        folder_path = '/'.join(self.context.getPhysicalPath())
+
+        return [carrec for carrec in catalog.searchResults(
+            portal_type='genweb.ens.carrec',
+            is_contacte=True,
+            sort_on='getObjPositionInParent',
+            path={
+                'query': folder_path,
+                'depth': 2
+            })]
+
+    def get_carrecs_by_organ(self, organ):
+        catalog = getToolByName(self, 'portal_catalog')
+        folder_path = organ.getPath()
+
+        return [carrec for carrec in catalog.searchResults(
+            portal_type='genweb.ens.carrec',
             sort_on='getObjPositionInParent',
             path={
                 'query': folder_path,
