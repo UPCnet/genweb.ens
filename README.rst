@@ -14,7 +14,7 @@ Tipus de contingut disponibles:
 - ``genweb.ens.conveni``
 - ``genweb.ens.document_interes``
 - ``genweb.ens.ens``
-- ``genweb.ens.escriptura``
+- ``genweb.ens.escriptura_publica``
 - ``genweb.ens.estatut``
 - ``genweb.ens.organ``
 - ``genweb.ens.percentatge_participacio``

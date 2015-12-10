@@ -9,7 +9,8 @@
     <h1 class="documentFirstHeading" i18n:translate="ens">Ens</h1>
   </metal:custom_title>
 
-  <metal:content-core fill-slot="content-core">
+  <!-- TODO Replace the condition below by something equivalent but more graceful -->
+  <metal:content-core fill-slot="content-core" tal:condition="view/is_authenticated">
     <div class="input-append">
       <div class="ens-search-field">
       <label for="search_input_figura_juridica" i18n:translate="Figura jur&iacute;dica">Figura jur&iacute;dica</label>

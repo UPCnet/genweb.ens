@@ -115,11 +115,11 @@ class IEns(form.Schema):
                 'participacio_observacions']
     )
 
-    aportacio = schema.TextLine(
+    aportacio = schema.Float(
         title=_(u"Aportació inicial"),
         required=False)
 
-    quota = schema.TextLine(
+    quota = schema.Float(
         title=_(u"Quota"),
         required=False)
 
@@ -144,7 +144,7 @@ class IEns(form.Schema):
     )
 
     data_constitucio = schema.Date(
-        title=_(u"Data de constitucio"),
+        title=_(u"Data de constitució"),
         required=False)
 
     entitats_constituents = schema.Text(
@@ -265,7 +265,7 @@ class View(dexterity.DisplayForm):
         folder_path = '/'.join(self.context.getPhysicalPath())
 
         return [escriptura.getObject() for escriptura in catalog.searchResults(
-            portal_type='genweb.ens.escriptura',
+            portal_type='genweb.ens.escriptura_publica',
             sort_on='getObjPositionInParent',
             path={
                 'query': folder_path,

@@ -5,7 +5,7 @@ from genweb.ens import _
 from genweb.ens.content.document_legal import IDocumentLegal
 
 
-class IEscriptura(IDocumentLegal):
+class IEscripturaPublica(IDocumentLegal):
     """
     Escriptura pública associada a un ens.
     """

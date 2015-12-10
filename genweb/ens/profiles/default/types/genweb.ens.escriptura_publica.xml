@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<object name="genweb.ens.escriptura" meta_type="Dexterity FTI"
+<object name="genweb.ens.escriptura_publica" meta_type="Dexterity FTI"
    i18n:domain="genweb.ens"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Escriptura</property>
+ <property name="title" i18n:translate="">Escriptura pública</property>
  <property name="description" i18n:translate="">Escriptura pública associada a un ens</property>
  <property name="icon_expr"></property>
- <property name="factory">genweb.ens.escriptura</property>
+ <property name="factory">genweb.ens.escriptura_publica</property>
  <property
-    name="add_view_expr">string:${folder_url}/++add++genweb.ens.escriptura</property>
+    name="add_view_expr">string:${folder_url}/++add++genweb.ens.escriptura_publica</property>
  <property name="link_target"></property>
  <property name="immediate_view">view</property>
  <property name="global_allow">True</property>
@@ -36,7 +36,7 @@
   <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
  </property>
 
- <property name="schema">genweb.ens.content.escriptura.IEscriptura</property>
+ <property name="schema">genweb.ens.content.escriptura_publica.IEscripturaPublica</property>
  <property
     name="model_source">&lt;model xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
       &lt;schema /&gt;

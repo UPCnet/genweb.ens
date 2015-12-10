@@ -22,7 +22,7 @@
  <property name="klass">plone.dexterity.content.Container</property>
 
  <property name="allowed_content_types">
-  <element value="genweb.ens.escriptura"/>
+  <element value="genweb.ens.escriptura_publica"/>
   <element value="genweb.ens.document_interes"/>
   <element value="genweb.ens.conveni"/>
   <element value="genweb.ens.organ"/>

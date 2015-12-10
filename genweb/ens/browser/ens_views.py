@@ -1,20 +1,21 @@
-import json
-
 from five import grok
 from Products.CMFCore.interfaces import IFolderish
 from Products.CMFCore.utils import getToolByName
 from zope.interface import Interface
-from zope.component import getMultiAdapter
 
 from genweb.ens.content import ens
 from genweb.ens.interfaces import IGenwebEnsLayer
 
-grok.templatedir("ens_views")
+from genweb.theme.browser.views import HomePageBase
+from genweb.theme.browser.interfaces import IHomePageView
+from plone.app.layout.navigation.interfaces import INavigationRoot
 
 
-class Search(grok.View):
-    grok.context(IFolderish)
-    grok.name('search-ens')
+class Search(HomePageBase):
+    grok.name('homepage')
+    grok.implements(IHomePageView)
+    grok.context(INavigationRoot)
+    grok.template('search')
     grok.layer(IGenwebEnsLayer)
 
     def get_figura_juridica_vocabulary(self):
@@ -27,19 +28,16 @@ class Search(grok.View):
         estat_vocabulary.update({'': 'Qualsevol'})
         return estat_vocabulary.iteritems()
 
-    def is_user_folder(self, folder):
+    def is_authenticated(self):
         portal_state = getMultiAdapter(
             (self.context, self.request), name="plone_portal_state")
-        if portal_state.anonymous():
-            return False
-        elif not portal_state.member().getUser().getGroups():
-            return False
-        else:
-            group_ids = portal_state.member().getUser().getGroupIds()
-            return any(folder.getPath().endswith(user_folder_name)
-                       for user_folder_name in group_ids)
+        return not portal_state.anonymous()
 
-    def get_user_folders(self):
+    def get_portal_groups(self):
+        acl_users = getToolByName(self, 'acl_users')
+        return [group_id for group_id in acl_users.source_groups.getGroupIds()]
+
+    def get_user_groups(self):
         portal_state = getMultiAdapter(
             (self.context, self.request), name="plone_portal_state")
         if portal_state.anonymous():
@@ -50,11 +48,12 @@ class Search(grok.View):
             return set(portal_state.member().getUser().getGroupIds())
 
     def get_carpetes_vocabulary(self):
-        user_folders = self.get_user_folders()
+        portal_groups = self.get_portal_groups()
+        user_groups = self.get_user_groups()
         catalog = getToolByName(self, 'portal_catalog')
         return [(folder.getPath(),
                  folder.Title,
-                 folder.getPath().split('/')[-1] in user_folders)
+                 folder.getPath().split('/')[-1] in user_groups)
 
                 for folder in catalog.searchResults(
                     portal_type='Folder',
@@ -62,7 +61,7 @@ class Search(grok.View):
                     path={
                         'query': '/',
                         'depth': 3
-                    })]
+                    }) if folder.getPath().split('/')[-1] in portal_groups]
 
 
 class SearchResults(grok.View):
@@ -81,15 +80,6 @@ class SearchResults(grok.View):
         try:
             estat = int(self.request.form.get('estat', ''))
             search_filters['estat'] = estat
-        except ValueError:
-            pass
-
-        try:
-            carpetes = json.loads(self.request.form.get('carpetes', None))
-            if carpetes:
-                search_filters["path"] = {"depth": 1}
-                search_filters["path"]["query"] = [
-                    carpeta for carpeta in carpetes]
         except ValueError:
             pass
 
