@@ -49,5 +49,5 @@ $('#search_input_button').on('click', function(event)
 {
     ens_search();
 });
-
+ens_search();
 });

@@ -251,7 +251,7 @@
           <thead>
             <tr>
               <th i18n:translate="Data" class="column-small">Data</th>
-              <th i18n:translate="Data" class="column-medium">&Ograve;gan</th>
+              <th i18n:translate="Data" class="column-medium">&Ograve;rgan</th>
               <th i18n:translate="Descripci&oacute;" class="column-medium">Descripci&oacute;</th>
               <th i18n:translate="Fitxer">Fitxer</th>
             </tr>

@@ -6,7 +6,7 @@
 
 <body>
   <metal:custom_title fill-slot="content-title">
-    <h1 class="documentFirstHeading" i18n:translate="ens">Ens</h1>
+    <h1 class="documentFirstHeading" i18n:translate="Cercador d&apos;Ens">Cercador d&apos;Ens</h1>
   </metal:custom_title>
 
   <!-- TODO Replace the condition below by something equivalent but more graceful -->
@@ -47,7 +47,7 @@
                class="standalone"></input>
       </div>
     </div>
-    <div id="search_results"></div>
+    <div id="search_results" class="ens-results"></div>
     <script type="text/javascript"
             tal:attributes="src string:${portal_url}/++genweb++ens/ens_search.js">
     </script>

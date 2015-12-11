@@ -39,6 +39,11 @@ section.ens-metadata th.column-medium
     width: 30%;
 }
 
+section.ens-metadata dd
+{
+    text-align: justify;
+}
+
 div.ens-search-field
 {
    margin: 10px;
@@ -63,4 +68,14 @@ div.ens-search-field
 .ens-result li:before
 {
     margin-top: -7px;
+}
+
+div.ens-results
+{
+    margin-top: 30px;
+}
+
+.ens-results p
+{
+    margin: 10px;
 }

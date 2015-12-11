@@ -322,13 +322,14 @@ class View(dexterity.DisplayForm):
                 'depth': 1
             })]
 
-    def get_directius(self):
+    def get_directius(self, is_vigent=True):
         catalog = getToolByName(self, 'portal_catalog')
         folder_path = '/'.join(self.context.getPhysicalPath())
 
         return [carrec for carrec in catalog.searchResults(
             portal_type='genweb.ens.carrec',
             is_directiu=True,
+            is_vigent=is_vigent,
             sort_on='getObjPositionInParent',
             path={
                 'query': folder_path,
@@ -348,12 +349,13 @@ class View(dexterity.DisplayForm):
                 'depth': 2
             })]
 
-    def get_carrecs_by_organ(self, organ):
+    def get_carrecs_by_organ(self, organ, is_vigent=True):
         catalog = getToolByName(self, 'portal_catalog')
         folder_path = organ.getPath()
 
         return [carrec for carrec in catalog.searchResults(
             portal_type='genweb.ens.carrec',
+            is_vigent=is_vigent,
             sort_on='getObjPositionInParent',
             path={
                 'query': folder_path,
