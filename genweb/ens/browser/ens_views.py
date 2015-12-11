@@ -1,7 +1,9 @@
+import json
+
 from five import grok
-from Products.CMFCore.interfaces import IFolderish
 from Products.CMFCore.utils import getToolByName
 from zope.interface import Interface
+from zope.component import getMultiAdapter
 
 from genweb.ens.content import ens
 from genweb.ens.interfaces import IGenwebEnsLayer
@@ -80,6 +82,15 @@ class SearchResults(grok.View):
         try:
             estat = int(self.request.form.get('estat', ''))
             search_filters['estat'] = estat
+        except ValueError:
+            pass
+
+        try:
+            carpetes = json.loads(self.request.form.get('carpetes', None))
+            if carpetes:
+                search_filters["path"] = {"depth": 1}
+                search_filters["path"]["query"] = [
+                    carpeta for carpeta in carpetes]
         except ValueError:
             pass
 
