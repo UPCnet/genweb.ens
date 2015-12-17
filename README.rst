@@ -11,6 +11,7 @@ Tipus de contingut disponibles:
 
 - ``genweb.ens.acord``
 - ``genweb.ens.carrec``
+- ``genweb.ens.carrec_upc``
 - ``genweb.ens.conveni``
 - ``genweb.ens.document_interes``
 - ``genweb.ens.ens``
@@ -18,11 +19,14 @@ Tipus de contingut disponibles:
 - ``genweb.ens.estatut``
 - ``genweb.ens.organ``
 - ``genweb.ens.percentatge_participacio``
+- ``genweb.ens.persona_contacte``
+- ``genweb.ens.persona_directiu``
+- ``genweb.ens.representant``
 - ``genweb.ens.unitat``
 
 Vistes disponibles:
 
-- ``search-ens``
+- ``homepage``
 
 Instal·lació
 ============

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import json
 
 from five import grok
@@ -12,6 +14,8 @@ from genweb.theme.browser.views import HomePageBase
 from genweb.theme.browser.interfaces import IHomePageView
 from plone.app.layout.navigation.interfaces import INavigationRoot
 
+from genweb.ens import _
+
 
 class Search(HomePageBase):
     grok.name('homepage')
@@ -21,13 +25,13 @@ class Search(HomePageBase):
     grok.layer(IGenwebEnsLayer)
 
     def get_figura_juridica_vocabulary(self):
-        figura_juridica_vocabulary = dict(ens.figura_juridica_value_title)
-        figura_juridica_vocabulary.update({'': 'Qualsevol'})
+        figura_juridica_vocabulary = dict([(value, value) for value in ens.figura_juridica_values])
+        figura_juridica_vocabulary.update({'': _(u"Qualsevol")})
         return figura_juridica_vocabulary.iteritems()
 
     def get_estat_vocabulary(self):
-        estat_vocabulary = dict(ens.estat_value_title)
-        estat_vocabulary.update({'': 'Qualsevol'})
+        estat_vocabulary = dict([(value, value) for value in ens.estat_values])
+        estat_vocabulary.update({'': _(u"Qualsevol")})
         return estat_vocabulary.iteritems()
 
     def is_authenticated(self):
@@ -73,17 +77,14 @@ class SearchResults(grok.View):
 
     def parse_search_filters(self):
         search_filters = {}
-        try:
-            figura_juridica = int(self.request.form.get('figura_juridica', ''))
-            search_filters['figura_juridica'] = figura_juridica
-        except ValueError:
-            pass
 
-        try:
-            estat = int(self.request.form.get('estat', ''))
-            search_filters['estat'] = estat
-        except ValueError:
-            pass
+        figura_juridica = self.request.form.get('figura_juridica', '')
+        if figura_juridica:
+            search_filters['figura_juridica'] = figura_juridica.decode('utf-8')
+
+        estat = self.request.form.get('estat', '')
+        if estat:
+            search_filters['estat'] = estat.decode('utf-8')
 
         try:
             carpetes = json.loads(self.request.form.get('carpetes', None))
@@ -96,7 +97,7 @@ class SearchResults(grok.View):
 
         text = self.request.form.get('text', None)
         if text:
-            search_filters['SearchableText'] = text
+            search_filters['SearchableText'] = "*{0}*".format(text)
 
         return search_filters
 

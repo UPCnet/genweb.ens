@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from zope import schema
 from plone.directives import form
+from collective import dexteritytextindexer
 
 from genweb.ens import _
 
@@ -15,6 +16,7 @@ class IPercentatgeParticipacio(form.Schema):
         required=True
     )
 
+    dexteritytextindexer.searchable('observacions')
     observacions = schema.Text(
         title=_(u"Observacions"),
         required=False)

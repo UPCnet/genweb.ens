@@ -1,5 +1,3 @@
-$(document).ready(function ()
-{
 var ens_search_results_url = portal_url + '/ens_searchresults/';
 
 function ens_search()
@@ -37,17 +35,20 @@ function ens_search()
     });
 }
 
-$('#search_input_text').on('keydown', function(event)
+$(document).ready(function ()
 {
-    if (event.keyCode == 13)
+    $('#search_input_text').on('keydown', function(event)
+    {
+        if (event.keyCode == 13)
+        {
+            ens_search();
+        }
+    });
+
+    $('#search_input_button').on('click', function(event)
     {
         ens_search();
-    }
-});
+    });
 
-$('#search_input_button').on('click', function(event)
-{
     ens_search();
-});
-ens_search();
 });

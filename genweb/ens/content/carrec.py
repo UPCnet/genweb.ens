@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
+
 from zope import schema
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.component.hooks import getSite
+from zope.interface import directlyProvides
+from zope.schema.interfaces import IContextSourceBinder
 from plone.directives import form
 from plone.namedfile.field import NamedBlobFile
+from collective import dexteritytextindexer
 
 from genweb.ens import _
 
@@ -10,22 +16,26 @@ class ICarrec(form.Schema):
     """
     Càrrec associat a un òrgan d'un ens.
     """
+
+    dexteritytextindexer.searchable('ens')
+    ens = schema.TextLine(
+        title=_(u"Ens"),
+        required=True)
+
+    dexteritytextindexer.searchable('title')
     title = schema.TextLine(
-        title=_(u"Nom"),
+        title=_(u"Cognoms i nom"),
         required=True
     )
 
-    description = schema.Text(
-        title=_(u"Descripció"),
-        required=False)
-
-    persona = schema.TextLine(
-        title=_(u"Persona"),
+    dexteritytextindexer.searchable('carrec')
+    carrec = schema.TextLine(
+        title=_(u"Càrrec"),
         required=True)
 
     data_nomenament = schema.Date(
         title=_(u"Data de nomenament"),
-        required=True)
+        required=False)
 
     document_nomenament = NamedBlobFile(
         title=_(u"Document de nomenament"),
@@ -36,26 +46,50 @@ class ICarrec(form.Schema):
         title=_(u"Data de venciment"),
         required=False)
 
-    is_vigent = schema.Bool(
-        title=_(u"Vigent"),
+    is_historic = schema.Bool(
+        title=_(u"Històric"),
+        defaultFactory=lambda: False,
         required=False)
 
+    dexteritytextindexer.searchable('observacions')
     observacions = schema.Text(
         title=_(u"Observacions"),
         required=False)
 
-    is_directiu = schema.Bool(
-        title=_(u"Directiu"),
-        required=False)
 
-    is_contacte = schema.Bool(
-        title=_(u"Persona de contacte"),
-        required=False)
+def prettify_representant(representant):
+    return representant.Title.decode('utf-8') + ' - ' + representant.carrec
 
-    telefon = schema.TextLine(
-        title=_(u"Telèfon"),
-        required=False)
 
-    email = schema.TextLine(
-        title=_("Email"),
-        required=False)
+def get_vocabulary_representants_upc(context):
+    catalog = getSite().portal_catalog
+    return SimpleVocabulary([
+        SimpleTerm(title=prettify_representant(representant),
+                   value=representant.Title,
+                   token=representant.id)
+        for representant in catalog.searchResults(
+            portal_type='genweb.ens.representant',
+            sort_on='sortable_title',
+        )])
+directlyProvides(get_vocabulary_representants_upc, IContextSourceBinder)
+
+
+class ICarrecUPC(ICarrec):
+    """
+    Càrrec associat a un òrgan d'UPC.
+    """
+
+    dexteritytextindexer.searchable('ens')
+    ens = schema.TextLine(
+        title=_(u"Ens"),
+        defaultFactory=lambda: u"UPC",
+        readonly=True,
+        required=True)
+
+    form.order_before(title='carrec')
+    dexteritytextindexer.searchable('title')
+    title = schema.Choice(
+        title=_(u"Cognoms i nom"),
+        source=get_vocabulary_representants_upc,
+        required=True
+    )

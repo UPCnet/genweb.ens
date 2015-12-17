@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<object name="genweb.ens.organ" meta_type="Dexterity FTI"
+<object name="genweb.ens.persona_contacte" meta_type="Dexterity FTI"
    i18n:domain="genweb.ens"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Òrgan</property>
- <property name="description" i18n:translate="">Òrgan associat a un ens</property>
+ <property name="title" i18n:translate="">Persona de contacte</property>
+ <property name="description" i18n:translate="">Persona de contacte d'un ens</property>
  <property name="icon_expr"></property>
- <property name="factory">genweb.ens.organ</property>
+ <property name="factory">genweb.ens.persona_contacte</property>
  <property
-    name="add_view_expr">string:${folder_url}/++add++genweb.ens.organ</property>
+    name="add_view_expr">string:${folder_url}/++add++genweb.ens.persona_contacte</property>
  <property name="link_target"></property>
  <property name="immediate_view">view</property>
  <property name="global_allow">True</property>
@@ -20,12 +20,6 @@
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">plone.dexterity.content.Container</property>
-
- <property name="allowed_content_types">
-  <element value="genweb.ens.carrec"/>
-  <element value="genweb.ens.carrec_upc"/>
-  <element value="genweb.ens.acord"/>
- </property>
 
  <property name="behaviors">
   <element value="plone.app.dexterity.behaviors.metadata.ICategorization"/>
@@ -42,7 +36,7 @@
   <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
  </property>
 
- <property name="schema">genweb.ens.content.organ.IOrgan</property>
+ <property name="schema">genweb.ens.content.persona_contacte.IPersonaContacte</property>
  <property
     name="model_source">&lt;model xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
       &lt;schema /&gt;

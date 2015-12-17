@@ -29,6 +29,8 @@
   <element value="genweb.ens.estatut"/>
   <element value="genweb.ens.percentatge_participacio"/>
   <element value="genweb.ens.unitat"/>
+  <element value="genweb.ens.persona_contacte"/>
+  <element value="genweb.ens.persona_directiu"/>
  </property>
 
  <property name="behaviors">

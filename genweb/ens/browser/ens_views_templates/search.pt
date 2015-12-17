@@ -13,10 +13,10 @@
   <metal:content-core fill-slot="content-core" tal:condition="view/is_authenticated">
     <div class="input-append">
       <div class="ens-search-field">
-      <label for="search_input_figura_juridica" i18n:translate="Figura jur&iacute;dica">Figura jur&iacute;dica</label>
+      <label for="search_input_figura_juridica" i18n:translate="Figura jurídica">Figura jurídica</label>
       <select id="search_input_figura_juridica" placeholder="Sel·lecciona">
         <option tal:repeat="option view/get_figura_juridica_vocabulary"
-                tal:attributes="value python:option[0]"
+                tal:attributes="value python: option[0]; selected python: not option[0]"
                 tal:content="python:option[1]"></option>
       </select>
       </div>
@@ -25,8 +25,8 @@
         <label for="search_input_estat" i18n:translate="Estat">Estat</label>
         <select id="search_input_estat">
           <option tal:repeat="option view/get_estat_vocabulary"
-                  tal:attributes="value python:option[0]"
-                  tal:content="python:option[1]"></option>
+                  tal:attributes="value python: option[0]; selected python: not option[0]"
+                  tal:content="python: option[1]"></option>
         </select>
       </div>
 

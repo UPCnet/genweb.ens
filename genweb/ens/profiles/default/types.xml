@@ -7,7 +7,11 @@
     <object meta_type="Dexterity FTI" name="genweb.ens.estatut"/>
     <object meta_type="Dexterity FTI" name="genweb.ens.organ"/>
     <object meta_type="Dexterity FTI" name="genweb.ens.carrec"/>
+    <object meta_type="Dexterity FTI" name="genweb.ens.carrec_upc"/>
     <object meta_type="Dexterity FTI" name="genweb.ens.acord"/>
     <object meta_type="Dexterity FTI" name="genweb.ens.percentatge_participacio"/>
     <object meta_type="Dexterity FTI" name="genweb.ens.unitat"/>
+    <object meta_type="Dexterity FTI" name="genweb.ens.persona_contacte"/>
+    <object meta_type="Dexterity FTI" name="genweb.ens.persona_directiu"/>
+    <object meta_type="Dexterity FTI" name="genweb.ens.representant"/>
 </object>

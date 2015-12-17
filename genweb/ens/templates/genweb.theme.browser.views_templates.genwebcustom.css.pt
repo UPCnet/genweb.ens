@@ -39,9 +39,36 @@ section.ens-metadata th.column-medium
     width: 30%;
 }
 
+section.ens-metadata th.column-center, td.column-center
+{
+    text-align: center;
+}
+
 section.ens-metadata dd
 {
     text-align: justify;
+}
+
+section.ens-metadata-level-2
+{
+    padding: 0px 0px 10px 10px;
+}
+
+section.ens-metadata h3
+{
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+section.ens-metadata input[type=checkbox].label-aligned
+{
+    margin: 0px 3px 3px 0px;
+}
+
+section.ens-metadata tr.historic
+{
+    background: #f7f7f7;
+    opacity: 0.8;
 }
 
 div.ens-search-field

@@ -9,7 +9,7 @@
   </li>
 </ul>
 <p tal:condition="not: results"
-   i18n:translate="No s&apos;han trobat coincid&egrave;ncies amb aquests criteris de cerca">
-    No s&apos;han trobat coincid&egrave;ncies amb aquests criteris de cerca
+   i18n:translate="No s&apos;han trobat coincidències amb aquests criteris de cerca">
+    No s&apos;han trobat coincidències amb aquests criteris de cerca
 </p>
 </tal:block>
