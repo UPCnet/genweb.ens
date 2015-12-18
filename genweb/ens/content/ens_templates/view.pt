@@ -356,7 +356,7 @@
 
         <h3 i18n:translate="Estatuts">Estatuts</h3>
         <h4 i18n:translate="Vigents">Vigents</h4>
-        <tal:block define="estatuts_vigents view/get_estatuts_vigents_obj">
+        <tal:block define="estatuts_vigents view/get_estatuts_obj">
         <table tal:condition="estatuts_vigents">
           <thead>
             <tr>
@@ -383,7 +383,7 @@
           i18n:translate="No hi ha estatuts vigents">No hi ha estatus vigents</p>
         </tal:block>
         <h4 i18n:translate="Vigents">Anteriors</h4>
-        <tal:block define="estatuts_anteriors view/get_estatuts_anteriors_obj">
+        <tal:block define="estatuts_anteriors python: view.get_estatuts_obj(False)">
         <table tal:condition="estatuts_anteriors">
           <thead>
             <tr>

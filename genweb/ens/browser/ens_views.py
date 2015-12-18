@@ -25,14 +25,12 @@ class Search(HomePageBase):
     grok.layer(IGenwebEnsLayer)
 
     def get_figura_juridica_vocabulary(self):
-        figura_juridica_vocabulary = dict([(value, value) for value in ens.figura_juridica_values])
-        figura_juridica_vocabulary.update({'': _(u"Qualsevol")})
-        return figura_juridica_vocabulary.iteritems()
+        return [('', _(u"Qualsevol"))] + [
+            (value, value) for value in ens.figura_juridica_values]
 
     def get_estat_vocabulary(self):
-        estat_vocabulary = dict([(value, value) for value in ens.estat_values])
-        estat_vocabulary.update({'': _(u"Qualsevol")})
-        return estat_vocabulary.iteritems()
+        return [('', _(u"Qualsevol"))] + [
+            (value, value) for value in ens.estat_values]
 
     def is_authenticated(self):
         portal_state = getMultiAdapter(
@@ -54,6 +52,15 @@ class Search(HomePageBase):
             return set(portal_state.member().getUser().getGroupIds())
 
     def get_carpetes_vocabulary(self):
+        """
+        Get 3-level folders (e.g. gabinet-juridic in ens/ca/gabinet-juridic/)
+        that match a user group name.
+        Returns a list of tuples with the following structure:
+          - index 0: path of the folder, e.g. /ens/ca/gabinet-juridic
+          - index 1: title of the folder, e.g. Gabinet Jurídic
+          - index 2: boolean representing whether the folder path matches
+            any of the authenticated user's group ids
+        """
         portal_groups = self.get_portal_groups()
         user_groups = self.get_user_groups()
         catalog = getToolByName(self, 'portal_catalog')

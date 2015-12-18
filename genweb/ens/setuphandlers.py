@@ -14,6 +14,7 @@ fields_to_index = [('estat', 'FieldIndex'),
                    ('figura_juridica', 'FieldIndex'),
                    ('is_historic', 'FieldIndex'),
                    ('data', 'DateIndex'),
+                   ('is_vigent', 'FieldIndex'),
                    ('tipus', 'FieldIndex')]
 
 

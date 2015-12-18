@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import datetime
+
 from zope import schema
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
@@ -280,37 +282,21 @@ class View(dexterity.DisplayForm):
                 'depth': 2
             })]
 
-    def get_estatuts_vigents_obj(self):
+    def get_estatuts_obj(self, is_vigent=True):
         catalog = getToolByName(self, 'portal_catalog')
         folder_path = '/'.join(self.context.getPhysicalPath())
 
-        return [estatut.getObject() for estatut in catalog.searchResults(
-            portal_type='genweb.ens.estatut',
-            is_vigent=True,
-            # TODO Handle the cases where data is None (the current
-            #      implementation just ignores those instances)
-            sort_on='data',
-            sort_order='descending',
-            path={
-                'query': folder_path,
-                'depth': 1
-            })]
-
-    def get_estatuts_anteriors_obj(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [estatut.getObject() for estatut in catalog.searchResults(
-            portal_type='genweb.ens.estatut',
-            is_vigent=False,
-            # TODO Handle the cases where data is None (the current
-            #      implementation just ignores those instances)
-            sort_on='data',
-            sort_order='descending',
-            path={
-                'query': folder_path,
-                'depth': 1
-            })]
+        # TODO Optimise this code so that the sorting is performed by ZODB
+        return sorted([
+            estatut.getObject() for estatut in catalog.searchResults(
+                portal_type='genweb.ens.estatut',
+                is_vigent=is_vigent,
+                path={
+                    'query': folder_path,
+                    'depth': 1
+                })],
+            key=lambda e: e.data if e.data else datetime.date.min,
+            reverse=True)
 
     def get_escriptures_obj(self):
         catalog = getToolByName(self, 'portal_catalog')
@@ -425,8 +411,9 @@ class View(dexterity.DisplayForm):
                 carrecs_by_ens[carrec.ens] = []
             carrecs_by_ens[carrec.ens].append(carrec)
 
-        # Append not-UPC carrecs
-        for ens, carrecs in carrecs_by_ens.iteritems():
+        # Append not-UPC carrecs grouped by their alphabetically sorted ens
+        for ens, carrecs in sorted(
+                carrecs_by_ens.iteritems(), key=lambda e: e[0].lower()):
             carrecs_by_organ.append((ens, carrecs))
 
         return carrecs_by_organ

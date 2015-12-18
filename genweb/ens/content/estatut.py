@@ -12,5 +12,6 @@ class IEstatut(IDocumentLegal):
 
     is_vigent = schema.Bool(
         title=_(u"Vigent"),
+        defaultFactory=lambda: True,
         required=False,
     )

@@ -89,7 +89,7 @@ div.ens-search-field
 
 .ens-search-field input[type=text]
 {
-    width: 350px;
+    width: 136px;
 }
 
 .ens-result li:before
