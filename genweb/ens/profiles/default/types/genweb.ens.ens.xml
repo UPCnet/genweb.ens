@@ -22,12 +22,13 @@
  <property name="klass">plone.dexterity.content.Container</property>
 
  <property name="allowed_content_types">
+  <element value="genweb.ens.acord"/>
   <element value="genweb.ens.escriptura_publica"/>
   <element value="genweb.ens.document_interes"/>
   <element value="genweb.ens.conveni"/>
+  <element value="genweb.ens.acta_reunio"/>
   <element value="genweb.ens.organ"/>
   <element value="genweb.ens.estatut"/>
-  <element value="genweb.ens.percentatge_participacio"/>
   <element value="genweb.ens.unitat"/>
   <element value="genweb.ens.persona_contacte"/>
   <element value="genweb.ens.persona_directiu"/>

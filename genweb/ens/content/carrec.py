@@ -33,8 +33,8 @@ class ICarrec(form.Schema):
         title=_(u"Càrrec"),
         required=True)
 
-    data_nomenament = schema.Date(
-        title=_(u"Data de nomenament"),
+    data_inici = schema.Date(
+        title=_(u"Data d'inici"),
         required=False)
 
     document_nomenament = NamedBlobFile(
@@ -42,8 +42,8 @@ class ICarrec(form.Schema):
         description=_(u"Puja un fitxer"),
         required=False)
 
-    data_venciment = schema.Date(
-        title=_(u"Data de venciment"),
+    data_fi = schema.Date(
+        title=_(u"Data de fi"),
         required=False)
 
     is_historic = schema.Bool(
@@ -65,7 +65,7 @@ def get_vocabulary_representants_upc(context):
     catalog = getSite().portal_catalog
     return SimpleVocabulary([
         SimpleTerm(title=prettify_representant(representant),
-                   value=representant.Title,
+                   value=prettify_representant(representant),
                    token=representant.id)
         for representant in catalog.searchResults(
             portal_type='genweb.ens.representant',

@@ -22,7 +22,7 @@ class IUnitat(form.Schema):
         title=_(u"Persona de referència"),
         required=False)
 
-    dexteritytextindexer.searchable('tipus_gestio')
-    tipus_gestio = schema.TextLine(
-        title=_(u"Tipus de gestió"),
+    dexteritytextindexer.searchable('observacions')
+    observacions = schema.TextLine(
+        title=_(u"Observacions"),
         required=False)

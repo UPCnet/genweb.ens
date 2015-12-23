@@ -18,7 +18,6 @@ Tipus de contingut disponibles:
 - ``genweb.ens.escriptura_publica``
 - ``genweb.ens.estatut``
 - ``genweb.ens.organ``
-- ``genweb.ens.percentatge_participacio``
 - ``genweb.ens.persona_contacte``
 - ``genweb.ens.persona_directiu``
 - ``genweb.ens.representant``

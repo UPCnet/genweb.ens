@@ -1,8 +1,4 @@
 <?xml version="1.0"?>
 <object name="portal_catalog">
   <column value="acronim"/>
-  <column value="persona"/>
-  <column value="carrec"/>
-  <column value="ens"/>
-  <column value="is_historic"/>
 </object>

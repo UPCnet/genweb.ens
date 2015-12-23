@@ -6,12 +6,14 @@ section.ens-metadata a
 section.ens-metadata dt
 {
     float: left;
-    width: 200px;
+    width: 250px;
+    margin-bottom: 5px;
 }
 
 section.ens-metadata dd
 {
-    margin-left: 200px;
+    margin-left: 250px;
+    margin-bottom: 5px;
 }
 
 section.ens-metadata h2
@@ -84,12 +86,12 @@ div.ens-search-field
 
 .ens-search-field select
 {
-    width: 150px;
+    width: 180px;
 }
 
 .ens-search-field input[type=text]
 {
-    width: 136px;
+    width: 166px;
 }
 
 .ens-result li:before

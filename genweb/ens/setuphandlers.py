@@ -9,12 +9,14 @@ from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
 
 
 data_folder_name = 'data'
-representants_file_name = 'representants.csv'
+consell_direccio_file_name = 'consell_direccio.csv'
 fields_to_index = [('estat', 'FieldIndex'),
                    ('figura_juridica', 'FieldIndex'),
+                   ('carrec', 'FieldIndex'),
                    ('is_historic', 'FieldIndex'),
                    ('data', 'DateIndex'),
                    ('is_vigent', 'FieldIndex'),
+                   ('organ', 'FieldIndex'),
                    ('tipus', 'FieldIndex')]
 
 
@@ -29,7 +31,7 @@ def add_catalog_indexes(catalog):
             catalog.manage_reindexIndex(ids=indexables)
 
 
-def add_folder(container, title, allowed_types):
+def add_folder(container, title, allowed_types, exclude_from_nav=False):
     folder_id = getUtility(IIDNormalizer).normalize(title)
     if folder_id not in container:
         folder = api.content.create(
@@ -44,6 +46,7 @@ def add_folder(container, title, allowed_types):
         behavior.setConstrainTypesMode(1)
         behavior.setLocallyAllowedTypes(allowed_types)
         behavior.setImmediatelyAddableTypes(allowed_types)
+        folder.exclude_from_nav = exclude_from_nav
     return container[folder_id]
 
 
@@ -67,18 +70,24 @@ def add_representants_upc():
     portal = api.portal.get()
     if 'ca' in portal:
         representants_folder = add_folder(
-            portal['ca'], "Representants UPC", ('genweb.ens.representant',))
+            portal['ca'], "Representants UPC", ('Folder', ), True)
+        consell_direccio_folder = add_folder(
+            representants_folder,
+            "Consell de Direccio", ('genweb.ens.representant',))
+        add_folder(
+            representants_folder,
+            "Altres", ('genweb.ens.representant',))
 
-        representants_file_path = os.path.join(
+        consell_direccio_file_path = os.path.join(
             os.path.dirname(os.path.realpath(__file__)),
             data_folder_name,
-            representants_file_name)
+            consell_direccio_file_name)
 
-        with open(representants_file_path, 'r') as representants_file:
-            for row in csv.reader(representants_file,
+        with open(consell_direccio_file_path, 'r') as consell_direccio_file:
+            for row in csv.reader(consell_direccio_file,
                                   delimiter=',', quotechar='"'):
                 add_representant_upc(
-                    representants_folder,
+                    consell_direccio_folder,
                     title=row[1].decode('utf-8'),
                     carrec=row[0].decode('utf-8'),
                     is_consell_direccio=True)
