@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:metal="http://xml.zope.org/namespaces/metal"
+            xmlns:tal="http://xml.zope.org/namespaces/tal"
+            xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+            metal:use-macro="context/main_template/macros/master">
+
+<body>
+  <metal:custom_title fill-slot="content-title">
+    <h1 class="documentFirstHeading" i18n:translate="Taula identificativa">
+      Taula identificativa
+    </h1>
+  </metal:custom_title>
+
+  <metal:content-core fill-slot="content-core">
+    <nav>
+        <ul>
+          <li>
+            <a tal:attributes="href string:${portal_url}/taula_identificativa_csv">
+                Exportar a format CSV
+            </a>
+        </ul>
+    </nav>
+    <table class="ens-taula">
+      <thead>
+        <tr>
+          <th style="width: 5%;">Acrònim</th>
+          <th style="width: 15%;">Denom. comp.</th>
+          <th style="width: 8%;">NIF</th>
+          <th style="width: 10%;">Estat</th>
+          <th style="width: 10%;">Fig. jurídica</th>
+          <th style="width: 15%;">Seu social</th>
+          <th style="width: 7%;">% part.</th>
+          <th style="width: 10%;">Ap. inicial</th>
+          <th style="width: 10%;">Quota</th>
+          <th style="width: 10%;">Web</th>
+        </tr>
+      </thead> 
+      <tbody>
+        <tr tal:repeat="ens view/list_ens_obj">
+          <td tal:content="ens/acronim"/>
+          <td><a tal:content="ens/title" tal:attributes="href ens/absolute_url"/></td>
+          <td tal:content="ens/nif"/>
+          <td tal:content="ens/estat"/>
+          <td tal:content="ens/figura_juridica"/>
+          <td tal:content="python: view.prettify_seu_social(ens)"/>
+          <td class="numeric" tal:content="python: view.prettify_percentatge_participacio(ens)"/>
+          <td class="numeric" tal:content="python: view.prettify_aportacio(ens)"/>
+          <td class="numeric" tal:content="python: view.prettify_quota(ens)"/>
+          <td tal:content="ens/web"/>
+        </tr>
+      </tbody>
+    </table> 
+  </metal:content-core>
+</body>
+</html>

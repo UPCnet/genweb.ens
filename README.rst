@@ -9,23 +9,26 @@ Com funciona
 
 Tipus de contingut disponibles:
 
-- ``genweb.ens.acord``
-- ``genweb.ens.carrec``
-- ``genweb.ens.carrec_upc``
-- ``genweb.ens.conveni``
-- ``genweb.ens.document_interes``
-- ``genweb.ens.ens``
-- ``genweb.ens.escriptura_publica``
-- ``genweb.ens.estatut``
-- ``genweb.ens.organ``
-- ``genweb.ens.persona_contacte``
-- ``genweb.ens.persona_directiu``
-- ``genweb.ens.representant``
-- ``genweb.ens.unitat``
+- ``genweb.ens.acord`` (Acord òrgan de govern)
+- ``genweb.ens.acta_reunio`` (Acta de reunió)
+- ``genweb.ens.carrec`` (Càrrec)
+- ``genweb.ens.carrec_upc`` (Càrrec UPC)
+- ``genweb.ens.conveni`` (Conveni)
+- ``genweb.ens.document_interes`` (Document d'interès)
+- ``genweb.ens.ens`` (En)
+- ``genweb.ens.escriptura_publica`` (Escriptura pública)
+- ``genweb.ens.estatut`` (Estatu)
+- ``genweb.ens.organ`` (Òrgan)
+- ``genweb.ens.persona_contacte`` (Persona de contacte)
+- ``genweb.ens.persona_directiu`` (Càrrec directiu)
+- ``genweb.ens.representant`` (Representant UPC)
+- ``genweb.ens.unitat`` (Unitat UPC)
 
 Vistes disponibles:
 
 - ``homepage``
+- ``taula_identificativa``
+- ``taula_identificativa_csv``
 
 Instal·lació
 ============

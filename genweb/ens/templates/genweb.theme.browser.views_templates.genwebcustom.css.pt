@@ -73,6 +73,29 @@ section.ens-metadata tr.historic
     opacity: 0.8;
 }
 
+table.ens-taula th
+{
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+table.ens-taula td
+{
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+table.ens-taula td.numeric
+{
+    text-align: right;
+}
+
+table.ens-taula tr
+{
+    border-bottom: 1px solid #ddd;
+}
+
 div.ens-search-field
 {
    margin: 10px;

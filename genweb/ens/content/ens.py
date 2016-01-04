@@ -287,76 +287,94 @@ class Ens(Item):
     implements(IEns)
 
 
+def get_percentatge_participacio(ens):
+        if ens.percentatge_participacio:
+            return "{0:,.2f}%".format(ens.percentatge_participacio)
+        else:
+            return "-"
+
+
+def get_aportacio(ens):
+    if ens.aportacio_sn is None:
+        return "-"
+    elif not ens.aportacio_sn:
+        return _(u"No")
+    else:
+        if ens.aportacio_import:
+            moneda = "" if ens.aportacio_moneda is None \
+                     else " " + ens.aportacio_moneda.encode("utf-8")
+            return "{0:,.2f}{1}".format(
+                ens.aportacio_import, moneda).decode('utf-8')
+        else:
+            return _(u"Sí")
+
+
+def get_quota(ens):
+    if ens.quota_sn is None:
+        return "-"
+    elif not ens.quota_sn:
+        return _(u"No")
+    else:
+        if ens.quota_import:
+            moneda = "" if ens.quota_moneda is None \
+                else " " + ens.quota_moneda.encode("utf-8")
+            return "{0:,.2f}{1}".format(
+                ens.quota_import, moneda).decode('utf-8')
+        else:
+            return _(u"Sí")
+
+
+def get_capital_social(ens):
+    if ens.capital_social_sn is None:
+        return "-"
+    elif not ens.capital_social_sn:
+        return _(u"No")
+    else:
+        if ens.capital_social_import:
+            moneda = "" if ens.capital_social_moneda is None \
+                else " " + ens.capital_social_moneda.encode("utf-8")
+            return "{0:,.2f}{1}".format(
+                ens.capital_social_import, moneda).decode('utf-8')
+        else:
+            return _(u"Sí")
+
+
+def get_seu_social(ens):
+    if ens.seu_social:
+        if ens.seu_social == u"Estranger":
+            if ens.seu_social_estranger:
+                return ens.seu_social_estranger
+            else:
+                return ens.seu_social
+        else:
+            return ens.seu_social
+    else:
+        return "-"
+
+
 class View(dexterity.DisplayForm):
     grok.context(IEns)
     grok.template('view')
 
     @property
     def percentatge_participacio(self):
-        if self.context.percentatge_participacio:
-            return "{0:,.2f}%".format(self.context.percentatge_participacio)
-        else:
-            return "-"
+        return get_percentatge_participacio(self.context)
 
     @property
     def aportacio(self):
-        if self.context.aportacio_sn is None:
-            return "-"
-        elif not self.context.aportacio_sn:
-            return _(u"No")
-        else:
-            if self.context.aportacio_import:
-                moneda = "" if self.context.aportacio_moneda is None \
-                    else " " + self.context.aportacio_moneda.encode("utf-8")
-                return "{0:,.2f} {1}".format(
-                    self.context.aportacio_import,
-                    moneda)
-            else:
-                return _(u"Sí")
+        return get_aportacio(self.context)
 
     @property
     def quota(self):
-        if self.context.quota_sn is None:
-            return "-"
-        elif not self.context.quota_sn:
-            return _(u"No")
-        else:
-            if self.context.quota_import:
-                moneda = "" if self.context.quota_moneda is None \
-                    else " " + self.context.quota_moneda.encode("utf-8")
-                return "{0:,.2f} {1}".format(self.context.quota_import, moneda)
-            else:
-                return _(u"Sí")
+        return get_quota(self.context)
 
     @property
     def capital_social(self):
-        if self.context.capital_social_sn is None:
-            return "-"
-        elif not self.context.capital_social_sn:
-            return _(u"No")
-        else:
-            if self.context.capital_social_import:
-                moneda = "" if self.context.capital_social_moneda is None \
-                    else " " + self.context.capital_social_moneda.encode(
-                        "utf-8")
-                return "{0:,.2f} {1}".format(
-                    self.context.capital_social_import,
-                    moneda)
-            else:
-                return _(u"Sí")
+        return get_capital_social(self.context)
 
     @property
     def seu_social(self):
-        if self.context.seu_social:
-            if self.context.seu_social == u"Estranger":
-                if self.context.seu_social_estranger:
-                    return self.context.seu_social_estranger
-                else:
-                    return self.context.seu_social
-            else:
-                return self.context.seu_social
-        else:
-            return "-"
+        return get_seu_social(self.context)
 
     def get_unitats_obj(self):
         catalog = getToolByName(self, 'portal_catalog')

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import csv
 
@@ -73,7 +75,7 @@ def add_representants_upc():
             portal['ca'], "Representants UPC", ('Folder', ), True)
         consell_direccio_folder = add_folder(
             representants_folder,
-            "Consell de Direccio", ('genweb.ens.representant',))
+            u"Consell de Direcció", ('genweb.ens.representant',))
         add_folder(
             representants_folder,
             "Altres", ('genweb.ens.representant',))
