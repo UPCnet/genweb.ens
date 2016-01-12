@@ -23,8 +23,8 @@
     <table class="ens-taula">
       <thead>
         <tr>
-          <th style="width: 5%;">Acrònim</th>
-          <th style="width: 15%;">Denom. comp.</th>
+          <th style="width: 5%;">Codi</th>
+          <th style="width: 15%;">Denomimació</th>
           <th style="width: 8%;">NIF</th>
           <th style="width: 10%;">Estat</th>
           <th style="width: 10%;">Fig. jurídica</th>
@@ -36,16 +36,16 @@
         </tr>
       </thead> 
       <tbody>
-        <tr tal:repeat="ens view/list_ens_obj">
-          <td tal:content="ens/acronim"/>
-          <td><a tal:content="ens/title" tal:attributes="href ens/absolute_url"/></td>
+        <tr tal:repeat="ens view/list">
+          <td tal:content="ens/codi"/>
+          <td><a tal:content="ens/denominacio" tal:attributes="href ens/absolute_url"/></td>
           <td tal:content="ens/nif"/>
           <td tal:content="ens/estat"/>
           <td tal:content="ens/figura_juridica"/>
-          <td tal:content="python: view.prettify_seu_social(ens)"/>
-          <td class="numeric" tal:content="python: view.prettify_percentatge_participacio(ens)"/>
-          <td class="numeric" tal:content="python: view.prettify_aportacio(ens)"/>
-          <td class="numeric" tal:content="python: view.prettify_quota(ens)"/>
+          <td tal:content="ens/seu_social"/>
+          <td class="numeric" tal:content="ens/percentatge_participacio"/>
+          <td class="numeric" tal:content="ens/aportacio"/>
+          <td class="numeric" tal:content="ens/quota"/>
           <td tal:content="ens/web"/>
         </tr>
       </tbody>

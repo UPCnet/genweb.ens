@@ -67,7 +67,7 @@
           <dd tal:content="python: context.anotacions or '-'"/>
         </dl>
         <h3 i18n:translate="Càrrecs directius">Càrrecs directius</h3>
-        <tal:block define="directius view/get_directius_obj">
+        <tal:block define="directius view/directius">
         <table tal:condition="directius">
           <thead>
             <tr>
@@ -93,7 +93,7 @@
           i18n:translate="No hi ha càrrecs directius">No hi ha càrrecs directius</p>
         </tal:block>
         <h3 i18n:translate="Persones de contacte">Persones de contacte</h3>
-        <tal:block define="contactes view/get_contactes_obj">
+        <tal:block define="contactes view/contactes">
         <table tal:condition="contactes">
           <thead>
             <tr>
@@ -148,13 +148,13 @@
         </dl>
 
         <h3 i18n:translate="Òrgans de govern">Òrgans de govern</h3>
-        <tal:block define="organs view/get_organs_govern">
+        <tal:block define="organs view/organs_govern">
         <tal:block repeat="organ organs">
           <section class="ens-metadata-level-2">
           <h4><a tal:content="organ/Title"
                  tal:attributes="href organ/getURL"/>
           </h4>
-          <tal:block define="carrecs python: view.get_carrecs_by_organ_grouped_by_ens_obj(organ)">
+          <tal:block define="carrecs python: view.list_carrecs_by_organ(organ)">
             <tal:block condition="carrecs">
               <input type="checkbox" class="label-aligned selector-input-historic"
                      tal:attributes="id python: 'cb-' + organ.id"/>
@@ -203,13 +203,13 @@
         </tal:block>
 
         <h3 i18n:translate="Òrgans assessors">Òrgans assessors</h3>
-        <tal:block define="organs view/get_organs_assessors">
+        <tal:block define="organs view/organs_assessors">
         <tal:block repeat="organ organs">
           <section class="ens-metadata-level-2">
           <h4><a tal:content="organ/Title"
                  tal:attributes="href organ/getURL"/>
           </h4>
-          <tal:block define="carrecs python: view.get_carrecs_by_organ_grouped_by_ens_obj(organ)">
+          <tal:block define="carrecs python: view.list_carrecs_by_organ(organ)">
             <tal:block condition="carrecs">
               <input type="checkbox" class="label-aligned selector-input-historic"
                      tal:attributes="id python: 'cb-' + organ.id" />
@@ -257,7 +257,7 @@
         </tal:block>
 
         <h3 i18n:translate="Unitats UPC implicades">Unitats UPC implicades</h3>
-        <tal:block define="unitats view/get_unitats_obj">
+        <tal:block define="unitats view/unitats">
           <table tal:condition="unitats">
             <thead>
               <tr>
@@ -307,7 +307,7 @@
         </dl>
 
         <h3 i18n:translate="Acords òrgans de govern">Acords òrgans de govern</h3>
-        <tal:block define="acords view/get_acords_obj">
+        <tal:block define="acords view/acords">
         <table tal:condition="acords">
           <thead>
             <tr>
@@ -337,7 +337,7 @@
         </tal:block>
 
         <h3 i18n:translate="Escriptures públiques">Escriptures públiques</h3>
-        <tal:block define="escriptures view/get_escriptures_obj">
+        <tal:block define="escriptures view/escriptures">
         <table tal:condition="escriptures">
           <thead>
             <tr>
@@ -368,7 +368,7 @@
 
         <h3 i18n:translate="Estatuts">Estatuts</h3>
         <h4 i18n:translate="Vigents">Vigents</h4>
-        <tal:block define="estatuts_vigents view/get_estatuts_obj">
+        <tal:block define="estatuts_vigents view/estatuts_vigents">
         <table tal:condition="estatuts_vigents">
           <thead>
             <tr>
@@ -395,7 +395,7 @@
           i18n:translate="No hi ha estatuts vigents">No hi ha estatus vigents</p>
         </tal:block>
         <h4 i18n:translate="Vigents">Anteriors</h4>
-        <tal:block define="estatuts_anteriors python: view.get_estatuts_obj(False)">
+        <tal:block define="estatuts_anteriors python: view.estatuts_historics">
         <table tal:condition="estatuts_anteriors">
           <thead>
             <tr>
@@ -423,7 +423,7 @@
         </tal:block>
 
         <h3 i18n:translate="Actes de reunions">Actes de reunions</h3>
-        <tal:block define="actes view/get_actes_reunio_obj">
+        <tal:block define="actes view/actes_reunio">
         <table tal:condition="actes">
           <thead>
             <tr>
@@ -451,7 +451,7 @@
         </tal:block>
 
         <h3 i18n:translate="Convenis">Convenis</h3>
-        <tal:block define="convenis view/get_convenis_obj">
+        <tal:block define="convenis view/convenis">
         <table tal:condition="convenis">
           <thead>
             <tr>
@@ -479,7 +479,7 @@
         </tal:block>
 
         <h3 i18n:translate="Altres documents d&apos;interès">Altres documents d&apos;interès</h3>
-        <tal:block define="documents view/get_documents_interes_obj">
+        <tal:block define="documents view/documents_interes">
         <table tal:condition="documents">
           <thead>
             <tr>

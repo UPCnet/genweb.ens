@@ -12,6 +12,34 @@
   </metal:custom_title>
 
   <metal:content-core fill-slot="content-core">
+    <nav>
+        <ul>
+          <li>
+            <a tal:attributes="href string:${portal_url}/taula_representacio_csv">
+                Exportar a format CSV
+            </a>
+        </ul>
+    </nav>
+    <table class="ens-taula">
+      <thead>
+        <tr>
+          <th style="width: 25%;">Denomimació</th>
+          <th style="width: 15%;">Òrgan</th>
+          <th style="width: 35%;">Persona</th>
+          <th style="width: 15%;">Càrrec</th>
+          <th style="width: 10%;">Data nom.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr tal:repeat="ens view/list">
+          <td><a tal:content="ens/denominacio" tal:attributes="href ens/absolute_url"/></td>
+          <td tal:content="ens/organ"/>
+          <td tal:content="ens/persona"/>
+          <td tal:content="ens/carrec"/>
+          <td tal:content="ens/data_nomenament"/>
+        </tr>
+      </tbody>
+    </table>
   </metal:content-core>
 </body>
 </html>

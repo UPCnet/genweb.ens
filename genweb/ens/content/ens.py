@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import datetime
-
 from zope import schema
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from z3c.form.browser.radio import RadioFieldWidget
-from plone.directives import form, dexterity
+from plone.directives import form
 from plone.dexterity.content import Item
-from five import grok
 from collective import dexteritytextindexer
-from Products.CMFCore.utils import getToolByName
 
 from genweb.ens import _
 
@@ -27,7 +23,7 @@ estat_values = [
     u"Pre-Baixa",
     u"Pre-Alta",
     u"Baixa",
-    u"Pre-alta cancel·lada",
+    u"Pre-Alta cancel·lada",
     u"Altre"]
 
 
@@ -287,6 +283,15 @@ class Ens(Item):
     implements(IEns)
 
 
+def get_denominacio(ens):
+        if ens.acronim:
+            return "{0} ({1})".format(
+                ens.title.encode("utf-8"),
+                ens.acronim.encode("utf-8")).decode("utf-8")
+        else:
+            return ens.title
+
+
 def get_percentatge_participacio(ens):
         if ens.percentatge_participacio:
             return "{0:,.2f}%".format(ens.percentatge_participacio)
@@ -350,202 +355,3 @@ def get_seu_social(ens):
             return ens.seu_social
     else:
         return "-"
-
-
-class View(dexterity.DisplayForm):
-    grok.context(IEns)
-    grok.template('view')
-
-    @property
-    def percentatge_participacio(self):
-        return get_percentatge_participacio(self.context)
-
-    @property
-    def aportacio(self):
-        return get_aportacio(self.context)
-
-    @property
-    def quota(self):
-        return get_quota(self.context)
-
-    @property
-    def capital_social(self):
-        return get_capital_social(self.context)
-
-    @property
-    def seu_social(self):
-        return get_seu_social(self.context)
-
-    def get_unitats_obj(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [unitat.getObject() for unitat in catalog.searchResults(
-            portal_type='genweb.ens.unitat',
-            sort_on='sortable_title',
-            path={
-                'query': folder_path,
-                'depth': 1
-            })]
-
-    def get_acords_obj(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [acord.getObject() for acord in catalog.searchResults(
-            portal_type='genweb.ens.acord',
-            sort_on='organ',
-            path={
-                'query': folder_path,
-                'depth': 1
-            })]
-
-    def get_estatuts_obj(self, is_vigent=True):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        # TODO Optimise this code so that the sorting is performed by ZODB
-        return sorted([
-            estatut.getObject() for estatut in catalog.searchResults(
-                portal_type='genweb.ens.estatut',
-                is_vigent=is_vigent,
-                path={
-                    'query': folder_path,
-                    'depth': 1
-                })],
-            key=lambda e: e.data if e.data else datetime.date.min,
-            reverse=True)
-
-    def get_escriptures_obj(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [escriptura.getObject() for escriptura in catalog.searchResults(
-            portal_type='genweb.ens.escriptura_publica',
-            sort_on='getObjPositionInParent',
-            path={
-                'query': folder_path,
-                'depth': 1
-            })]
-
-    def get_documents_interes_obj(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [document.getObject() for document in catalog.searchResults(
-            portal_type='genweb.ens.document_interes',
-            sort_on='getObjPositionInParent',
-            path={
-                'query': folder_path,
-                'depth': 1
-            })]
-
-    def get_convenis_obj(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [conveni.getObject() for conveni in catalog.searchResults(
-            portal_type='genweb.ens.conveni',
-            sort_on='getObjPositionInParent',
-            path={
-                'query': folder_path,
-                'depth': 1
-            })]
-
-    def get_actes_reunio_obj(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [acta.getObject() for acta in catalog.searchResults(
-            portal_type='genweb.ens.acta_reunio',
-            sort_on='sortable_title',
-            path={
-                'query': folder_path,
-                'depth': 1
-            })]
-
-    def get_organs_govern(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [organ for organ in catalog.searchResults(
-            portal_type='genweb.ens.organ',
-            tipus="Govern",
-            sort_on='getObjPositionInParent',
-            path={
-                'query': folder_path,
-                'depth': 1
-            })]
-
-    def get_organs_assessors(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [organ for organ in catalog.searchResults(
-            portal_type='genweb.ens.organ',
-            tipus="Assessor",
-            sort_on='getObjPositionInParent',
-            path={
-                'query': folder_path,
-                'depth': 1
-            })]
-
-    def get_directius_obj(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [carrec.getObject() for carrec in catalog.searchResults(
-            portal_type='genweb.ens.persona_directiu',
-            sort_on='sortable_title',
-            path={
-                'query': folder_path,
-                'depth': 2
-            })]
-
-    def get_contactes_obj(self):
-        catalog = getToolByName(self, 'portal_catalog')
-        folder_path = '/'.join(self.context.getPhysicalPath())
-
-        return [carrec.getObject() for carrec in catalog.searchResults(
-            portal_type='genweb.ens.persona_contacte',
-            sort_on='sortable_title',
-            path={
-                'query': folder_path,
-                'depth': 2
-            })]
-
-    def get_carrecs_by_organ_grouped_by_ens_obj(self, organ, is_historic=None):
-        carrecs_by_organ = []
-
-        catalog = getToolByName(self, 'portal_catalog')
-        query = {
-            'portal_type': 'genweb.ens.carrec_upc',
-            'sort_on': 'carrec',
-            'path': {
-                'query': organ.getPath(),
-                'depth': 1
-            }}
-        if is_historic is not None:
-            query['is_historic'] = is_historic
-
-        # Retrieve UPC carrecs
-        carrecs_upc = [carrec.getObject()
-                       for carrec in catalog.searchResults(query)]
-        if carrecs_upc:
-            carrecs_by_organ.append(("UPC", carrecs_upc))
-
-        # Retrieve not-UPC carrecs
-        query['portal_type'] = 'genweb.ens.carrec'
-        carrecs_by_ens = {}
-        for carrec in catalog.searchResults(query):
-            carrec_obj = carrec.getObject()
-            if carrec_obj.ens not in carrecs_by_ens:
-                carrecs_by_ens[carrec_obj.ens] = []
-            carrecs_by_ens[carrec_obj.ens].append(carrec_obj)
-
-        # Append not-UPC carrecs grouped by their alphabetically sorted ens
-        for ens, carrecs in sorted(
-                carrecs_by_ens.iteritems(), key=lambda e: e[0].lower()):
-            carrecs_by_organ.append((ens, carrecs))
-
-        return carrecs_by_organ

@@ -53,6 +53,12 @@ FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(FIXTURE,), name="GenwebEnsLayer:Functional")
 
 
+class UnitTestCase(unittest.TestCase):
+    """Base class for unit tests."""
+
+    layer = INTEGRATION_TESTING
+
+
 class IntegrationTestCase(unittest.TestCase):
     """Base class for integration tests."""
 
