@@ -41,6 +41,8 @@ class TaulaIdentificativaCsv(grok.View):
 
     def render(self):
         output_file = StringIO()
+        # Write the BOM of the text stream to make its charset explicit
+        output_file.write(u'\ufeff'.encode('utf8'))
         self.write_data(output_file)
 
         header_content_type = 'text/csv'
@@ -53,7 +55,7 @@ class TaulaIdentificativaCsv(grok.View):
 
     def write_data(self, output_file):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
-        writer = csv.writer(output_file)
+        writer = csv.writer(output_file, dialect='excel', delimiter=';')
         writer.writerow(TaulaIdentificativaCsv.data_header_columns)
         for ens in reporter.list_identificacio():
             writer.writerow([
@@ -95,6 +97,8 @@ class TaulaRepresentacioCsv(grok.View):
 
     def render(self):
         output_file = StringIO()
+        # Write the BOM of the text stream to make its charset explicit
+        output_file.write(u'\ufeff'.encode('utf8'))
         self.write_data(output_file)
 
         header_content_type = 'text/csv'
@@ -107,7 +111,7 @@ class TaulaRepresentacioCsv(grok.View):
 
     def write_data(self, output_file):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
-        writer = csv.writer(output_file)
+        writer = csv.writer(output_file, dialect='excel', delimiter=';')
         writer.writerow(TaulaRepresentacioCsv.data_header_columns)
         for ens in reporter.list_representacio(is_historic=False):
             writer.writerow([

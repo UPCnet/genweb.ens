@@ -131,3 +131,8 @@ div.ens-results
 {
     margin: 10px;
 }
+
+nav
+{
+    margin: 20px 0px 20px 0px;
+}

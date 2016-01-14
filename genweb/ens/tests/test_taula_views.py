@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
+
 """Integration tests for taula views."""
 import os
 from StringIO import StringIO
-from datetime import datetime
 
 from plone import api
 
 from genweb.ens.testing import IntegrationTestCase
+from genweb.ens.tests.fixtures import fixtures
 
 
 class TestTaulaViews(IntegrationTestCase):
@@ -18,54 +19,9 @@ class TestTaulaViews(IntegrationTestCase):
             os.path.dirname(os.path.realpath(__file__)), 'files')
 
     def test_taula_identificativa_csv_write_data(self):
-        api.content.create(
-            container=self.layer['portal'],
-            type='genweb.ens.ens',
-            id='amnistia-internacional',
-            title=u"Amnistía Internacional",
-            acronim=u"AI",
-            codi=u"11A",
-            nif=u"X82771235",
-            estat=u"Pre-alta cancel·lada",
-            figura_juridica=u"Fundació",
-            seu_social=u"Resta d'Espanya",
-            seu_social_stranger=None,
-            percentatge_participacio=15.35,
-            aportacio_sn=True,
-            aportacio_import=2300.50,
-            aportacio_moneda=u"€/any",
-            quota_sn=True,
-            quota_import=253.44,
-            quota_moneda=u"€/mes",
-            web=u"www.amnistia.org")
-
-        api.content.create(
-            container=self.layer['portal'],
-            type='genweb.ens.ens',
-            id='amitges',
-            title=u"Amitges",
-            acronim=u"Amt")
-
-        api.content.create(
-            container=self.layer['portal'],
-            type='genweb.ens.ens',
-            id='green peace',
-            title=u"Green Peace",
-            acronim=u"Gp",
-            codi=u"22A",
-            nif=None,
-            estat=u"Pre-Baixa",
-            figura_juridica=u"Sense NIF",
-            seu_social=u"Estranger",
-            seu_social_estranger=u"Dublín",
-            percentatge_participacio=None,
-            aportacio_sn=False,
-            aportacio_import=None,
-            aportacio_moneda=None,
-            quota_sn=True,
-            quota_import=253.44,
-            quota_moneda=None,
-            web=u"www.greenpeace.org")
+        fixtures.create_content(self.layer['portal'], fixtures.ens_1)
+        fixtures.create_content(self.layer['portal'], fixtures.ens_2)
+        fixtures.create_content(self.layer['portal'], fixtures.ens_incomplete)
 
         view = api.content.get_view("taula_identificativa_csv",
                                     self.layer['portal'],
@@ -81,63 +37,11 @@ class TestTaulaViews(IntegrationTestCase):
             self.assertEqual(csv_file_reference.read(), csv_file_contents)
 
     def test_taula_representacio_csv_write_data(self):
-        ens = api.content.create(
-            container=self.layer['portal'],
-            type='genweb.ens.ens',
-            id='amnistia-internacional',
-            title=u"Amnistía Internacional",
-            acronim=u"AI",
-            codi=u"11A",
-            nif=u"X82771235",
-            estat=u"Pre-alta cancel·lada",
-            figura_juridica=u"Fundació",
-            seu_social=u"Resta d'Espanya",
-            seu_social_stranger=None,
-            percentatge_participacio=15.35,
-            aportacio_sn=True,
-            aportacio_import=2300.50,
-            aportacio_moneda=u"€/any",
-            quota_sn=True,
-            quota_import=253.44,
-            quota_moneda=u"€/mes",
-            web=u"www.amnistia.org")
-
-        organ = api.content.create(
-            container=ens,
-            type='genweb.ens.organ',
-            id='consell-de-direccio',
-            title=u'Consell de Direcció',
-            tipus='Govern')
-
-        api.content.create(
-            container=organ,
-            type='genweb.ens.carrec_upc',
-            id='colomina-pardo-otto',
-            title=u'Colomina Pardo, Ottö',
-            carrec=u"Membre excel·lent",
-            is_historic=False,
-            data_inici=datetime(2015, 2, 15))
-
-        api.content.create(
-            container=self.layer['portal'],
-            type='genweb.ens.ens',
-            id='green peace',
-            title=u"Green Peace",
-            acronim=u"Gp",
-            codi=u"22A",
-            nif=None,
-            estat=u"Pre-Baixa",
-            figura_juridica=u"Sense NIF",
-            seu_social=u"Estranger",
-            seu_social_estranger=u"Dublín",
-            percentatge_participacio=None,
-            aportacio_sn=False,
-            aportacio_import=None,
-            aportacio_moneda=None,
-            quota_sn=True,
-            quota_import=253.44,
-            quota_moneda=None,
-            web=u"www.greenpeace.org")
+        ens = fixtures.create_content(self.layer['portal'], fixtures.ens_1)
+        organ = fixtures.create_content(ens, fixtures.organ_1)
+        fixtures.create_content(organ, fixtures.carrec_1)
+        fixtures.create_content(organ, fixtures.carrec_2)
+        fixtures.create_content(self.layer['portal'], fixtures.ens_2)
 
         view = api.content.get_view("taula_representacio_csv",
                                     self.layer['portal'],

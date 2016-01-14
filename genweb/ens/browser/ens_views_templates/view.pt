@@ -508,6 +508,9 @@
         </div>
     </section>
     <script type="text/javascript"
+            tal:attributes="src string:${portal_url}/++genweb++ens/jquery_hidable_group.js">
+    </script>
+    <script type="text/javascript"
             tal:attributes="src string:${portal_url}/++genweb++ens/ens_view.js">
     </script>
   </metal:content-core>

@@ -259,7 +259,7 @@ class EnsDataReporter(object):
             ens_obj = ens.getObject()
             for organ_tipus in ('Govern', 'Assessor'):
                 for organ in self.list_organs_by_ens(ens, organ_tipus):
-                    for carrec in self.list_carrec_upc_by_organ(organ):
+                    for carrec in self.list_carrec_upc_by_organ(organ, False):
                         carrec_obj = carrec.getObject()
                         representacio.append(Representacio(
                             denominacio=get_denominacio(ens_obj),
