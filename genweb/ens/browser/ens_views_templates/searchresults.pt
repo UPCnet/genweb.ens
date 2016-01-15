@@ -1,10 +1,10 @@
 <tal:block define="results view/search">
-<ul class="list-portlet ens-result"
+<ul class="list-portlet"
     tal:condition="results">
-  <li tal:repeat="ens results">
+  <li tal:repeat="result results">
     <article>
-      <h5 tal:content="python:ens[2]"/>
-      <a tal:attributes="href python:ens[0]" tal:content="python:ens[1]"/>
+      <h5 tal:content="result/acronim"/>
+      <a tal:attributes="href python: result.url" tal:content="python: result.title"/>
     </article>
   </li>
 </ul>

@@ -1,102 +1,102 @@
-section.ens-metadata a
+.ens-metadata a
 {
     color: #007BC0;
 }
 
-section.ens-metadata dt
+.ens-metadata dt
 {
     float: left;
     width: 250px;
     margin-bottom: 5px;
 }
 
-section.ens-metadata dd
+.ens-metadata dd
 {
     margin-left: 250px;
     margin-bottom: 5px;
 }
 
-section.ens-metadata h2
+.ens-metadata h2
 {
     border-bottom: 1px solid #b2b2b2;
 }
 
-section.ens-metadata th
+.ens-metadata th
 {
     text-align: left;
 }
 
-section.ens-metadata tr
+.ens-metadata tr
 {
     border-bottom: 1px solid #ddd;
 }
 
-section.ens-metadata th.column-small
+.ens-metadata th.column-small
 {
     width: 15%;
 }
 
-section.ens-metadata th.column-medium
+.ens-metadata th.column-medium
 {
     width: 30%;
 }
 
-section.ens-metadata th.column-center, td.column-center
+.ens-metadata th.column-center, td.column-center
 {
     text-align: center;
 }
 
-section.ens-metadata dd
+.ens-metadata dd
 {
     text-align: justify;
 }
 
-section.ens-metadata-level-2
+.ens-metadata-level-2
 {
     padding: 0px 0px 10px 10px;
 }
 
-section.ens-metadata h3
+.ens-metadata h3
 {
     padding-bottom: 5px;
     border-bottom: 1px solid #ccc;
 }
 
-section.ens-metadata input[type=checkbox].label-aligned
+.ens-metadata input[type=checkbox].label-aligned
 {
     margin: 0px 3px 3px 0px;
 }
 
-section.ens-metadata tr.historic
+.ens-metadata tr.historic
 {
     background: #f7f7f7;
     opacity: 0.8;
 }
 
-table.ens-taula th
+.ens-taula th
 {
     text-align: center;
     border: 1px solid #ccc;
     padding: 5px;
 }
 
-table.ens-taula td
+.ens-taula td
 {
     border: 1px solid #ccc;
     padding: 5px;
 }
 
-table.ens-taula td.numeric
+.ens-taula td.numeric
 {
     text-align: right;
 }
 
-table.ens-taula tr
+.ens-taula tr
 {
     border-bottom: 1px solid #ddd;
 }
 
-div.ens-search-field
+.ens-search-field
 {
    margin: 10px;
 }
@@ -117,17 +117,27 @@ div.ens-search-field
     width: 166px;
 }
 
-.ens-result li:before
+.ens-search-field input[type=checkbox]
 {
-    margin-top: -7px;
+    margin: 2px;
 }
 
-div.ens-results
+.ens-search-field-large input[type=text]
+{
+    width: 350px;
+}
+
+.ens-search-results
 {
     margin-top: 30px;
 }
 
-.ens-results p
+.ens-search-results li:before
+{
+    margin-top: -7px;
+}
+
+.ens-search-results p
 {
     margin: 10px;
 }

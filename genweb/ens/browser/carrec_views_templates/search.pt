@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:metal="http://xml.zope.org/namespaces/metal"
+            xmlns:tal="http://xml.zope.org/namespaces/tal"
+            xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+            metal:use-macro="context/main_template/macros/master">
+
+<body>
+  <metal:custom_title fill-slot="content-title">
+    <h1 class="documentFirstHeading" i18n:translate="Cercar càrrecs">Cercar càrrecs</h1>
+  </metal:custom_title>
+
+  <metal:content-core fill-slot="content-core">
+    <section class="input-append">
+      <div class="ens-search-field-large ens-search-field">
+        <input id="search_input_text" class="searchInput"
+               type="text" placeholder="Introduïu el nom del càrrec"/>
+        <input id="search_input_button" type="button" value="Cerca"
+               class="standalone"></input>
+      </div>
+      <div class="ens-search-field">
+        <input id="search_input_historics" type="checkbox" value="incloure_historics"/>
+        <label for="search_input_historics" i18n:translate="Incloure càrrecs històrics">
+          Incloure càrrecs histórics
+        </label>
+      </div>
+    </section>
+
+    <section>
+      <div id="search_results"></div>
+    </section>
+    <script type="text/javascript"
+            tal:attributes="src string:${portal_url}/++genweb++ens/carrec_search.js">
+    </script>
+  </metal:content-core>
+</body>
+</html>

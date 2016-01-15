@@ -6,6 +6,13 @@ from genweb.ens.content.ens import (get_denominacio, get_seu_social,
                                     get_aportacio, get_quota)
 
 
+class EnsSearchResult(object):
+    def __init__(self, title, acronim, url):
+        self.title = title
+        self.acronim = acronim
+        self.url = url
+
+
 class Identificacio(object):
     def __init__(self, codi, denominacio, absolute_url, nif, estat,
                  figura_juridica, seu_social, percentatge_participacio,
@@ -270,3 +277,13 @@ class EnsDataReporter(object):
                             data_nomenament=carrec_obj.data_inici and
                             carrec_obj.data_inici.strftime('%d/%m/%Y') or "-"))
         return representacio
+
+    def search(self, searchFilters=None):
+        query = {'portal_type': 'genweb.ens.ens', 'sort_on': 'sortable_title'}
+        if searchFilters:
+            query.update(searchFilters)
+
+        return [EnsSearchResult(
+            title=ens.Title,
+            acronim=ens.acronim,
+            url=ens.getURL()) for ens in self.catalog.searchResults(query)]

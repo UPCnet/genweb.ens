@@ -14,7 +14,6 @@ from genweb.ens.data_access.ens import EnsDataReporter
 class TaulaIdentificativa(grok.View):
     grok.name('taula_identificativa')
     grok.context(Interface)
-    grok.template('taula_identificativa')
     grok.layer(IGenwebEnsLayer)
 
     def list(self):
@@ -75,7 +74,6 @@ class TaulaIdentificativaCsv(grok.View):
 class TaulaRepresentacio(grok.View):
     grok.name('taula_representacio')
     grok.context(Interface)
-    grok.template('taula_representacio')
     grok.layer(IGenwebEnsLayer)
 
     def list(self):

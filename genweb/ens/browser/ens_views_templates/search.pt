@@ -9,8 +9,7 @@
     <h1 class="documentFirstHeading" i18n:translate="Inici">Inici</h1>
   </metal:custom_title>
 
-  <!-- TODO Replace the condition below by something equivalent but more graceful -->
-  <metal:content-core fill-slot="content-core" tal:condition="view/is_authenticated">
+  <metal:content-core fill-slot="content-core">
     <nav>
       <ul>
         <li><a tal:attributes="href string:${portal_url}/ca/representants-upc">
@@ -22,10 +21,13 @@
         <li><a tal:attributes="href string:${portal_url}/taula_representacio">
           Taula de representació</a>
         </li>
+        <li><a tal:attributes="href string:${portal_url}/carrec_search">
+          Cercador de càrrecs</a>
+        </li>
       </ul>
     </nav>
-    <section id="search-ens">
-    <div class="input-append">
+
+    <section class="input-append">
       <div class="ens-search-field">
       <label for="search_input_figura_juridica" i18n:translate="Figura jurídica">Figura jurídica</label>
       <select id="search_input_figura_juridica" placeholder="Sel·lecciona">
@@ -60,9 +62,12 @@
         <input id="search_input_button" type="button" value="Cerca"
                class="standalone"></input>
       </div>
-    </div>
-    <div id="search_results" class="ens-results"></div>
     </section>
+
+    <section>
+      <div id="search_results" class="ens-search-results"></div>
+    </section>
+
     <script type="text/javascript"
             tal:attributes="src string:${portal_url}/++genweb++ens/ens_search.js">
     </script>

@@ -1,0 +1,36 @@
+<tal:block define="results view/search">
+<section class="ens-metadata">
+<table tal:condition="results">
+  <thead>
+    <tr>
+      <th class="column-medium">Nom</th>
+      <th class="column-small">Càrrec</th>
+      <th class="column-small">Òrgan</th>
+      <th class="column-small">Ens</th>
+      <th class="column-small">Data inici</th>
+      <th class="column-small">Data fi</th>
+      <th class="column-center">Històric</th>
+    </tr>
+  </thead>
+  <tbody> 
+    <tr tal:repeat="result results"
+        tal:attributes="class python: 'historic' if result.is_historic else ''">
+      <td><a tal:attributes="href result/url" tal:content="result/title"/></td>
+      <td tal:content="result/carrec"/>
+      <td><a tal:attributes="href result/organ_url" tal:content="result/organ"/></td>
+      <td><a tal:attributes="href result/ens_url" tal:content="result/ens"/></td>
+      <td tal:content="result/data_inici_str"/>
+      <td tal:content="result/data_fi_str"/>
+      <td class="column-center">
+        <input type="checkbox"
+               tal:attributes="checked result/is_historic; disabled True"/>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</section>
+<p tal:condition="not: results"
+   i18n:translate="No s&apos;han trobat coincidències amb aquests criteris de cerca">
+    No s&apos;han trobat coincidències amb aquests criteris de cerca
+</p>
+</tal:block>

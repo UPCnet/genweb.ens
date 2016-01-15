@@ -27,6 +27,9 @@ Tipus de contingut disponibles:
 Vistes disponibles:
 
 - ``homepage``
+- ``ens_search_results``
+- ``carrec_search``
+- ``carrec_search_results``
 - ``taula_identificativa``
 - ``taula_identificativa_csv``
 

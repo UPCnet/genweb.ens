@@ -1,4 +1,4 @@
-var ens_search_results_url = portal_url + '/ens_searchresults/';
+var ens_search_results_url = portal_url + '/ens_search_results/';
 
 function ens_search()
 {
