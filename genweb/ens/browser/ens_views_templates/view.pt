@@ -61,7 +61,7 @@
           <dd tal:content="python: context.web or '-'"/>
 
           <dt i18n:translate="Tipologia UPC">Tipologia UPC</dt>
-          <dd tal:content="python: context.tipologia or '-'"/>
+          <dd tal:content="python: context.tipologia_upc or '-'"/>
 
           <dt i18n:translate="Anotacions">Anotacions</dt>
           <dd tal:content="python: context.anotacions or '-'"/>
