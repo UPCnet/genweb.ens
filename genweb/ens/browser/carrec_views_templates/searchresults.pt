@@ -1,14 +1,14 @@
-<tal:block define="results view/search">
-<section class="ens-metadata">
-<table tal:condition="results">
+<tal:block define="results view/search; portal_url context/portal_url;">
+<section class="ens-metadata" tal:condition="results">
+<table id="results" class="ens-results">
   <thead>
     <tr>
       <th class="column-medium">Nom</th>
-      <th class="column-small">Càrrec</th>
+      <th class="column-xsmall">Ens</th>
       <th class="column-small">Òrgan</th>
-      <th class="column-small">Ens</th>
-      <th class="column-small">Data inici</th>
-      <th class="column-small">Data fi</th>
+      <th class="column-small">Càrrec</th>
+      <th class="column-xsmall column-center">Data inici</th>
+      <th class="column-xsmall column-center">Data fi</th>
       <th class="column-center">Històric</th>
     </tr>
   </thead>
@@ -16,21 +16,30 @@
     <tr tal:repeat="result results"
         tal:attributes="class python: 'historic' if result.is_historic else ''">
       <td><a tal:attributes="href result/url" tal:content="result/title"/></td>
-      <td tal:content="result/carrec"/>
-      <td><a tal:attributes="href result/organ_url" tal:content="result/organ"/></td>
       <td><a tal:attributes="href result/ens_url" tal:content="result/ens"/></td>
-      <td tal:content="result/data_inici_str"/>
-      <td tal:content="result/data_fi_str"/>
+      <td><a tal:attributes="href result/organ_url" tal:content="result/organ"/></td>
+      <td tal:content="result/carrec"/>
+      <td class="column-center" tal:content="result/data_inici_str"/>
+      <td class="column-center" tal:content="result/data_fi_str"/>
       <td class="column-center">
         <input type="checkbox"
-               tal:attributes="checked result/is_historic; disabled True"/>
+               tal:attributes="checked result/is_historic; disabled python: True"/>
       </td>
     </tr>
   </tbody>
 </table>
+<div class="pagination-center"><ul id="pagination"/></div>
+<script type="text/javascript"
+        tal:attributes="src string: ${portal_url}/++genweb++ens/jquery.twbsPagination.min.js">
+</script>
+<script type="text/javascript"
+        tal:attributes="src string: ${portal_url}/++genweb++ens/carrec_searchresults.js">
+</script>
 </section>
+
 <p tal:condition="not: results"
-   i18n:translate="No s&apos;han trobat coincidències amb aquests criteris de cerca">
+   i18n:translate="No s&apos;han trobat coincidències amb aquests criteris de cerca"
+   class="ens-message-center">
     No s&apos;han trobat coincidències amb aquests criteris de cerca
 </p>
 </tal:block>

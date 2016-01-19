@@ -36,6 +36,11 @@
     width: 15%;
 }
 
+.ens-metadata th.column-xsmall
+{
+    width: 10%;
+}
+
 .ens-metadata th.column-medium
 {
     width: 30%;
@@ -96,6 +101,11 @@
     border-bottom: 1px solid #ddd;
 }
 
+.ens-results tbody tr
+{
+    height: 50px;
+}
+
 .ens-search-field
 {
    margin: 10px;
@@ -122,6 +132,12 @@
     margin: 2px;
 }
 
+.ens-search-field-large
+{
+   width: 430px;
+   margin: 10px auto 10px auto;
+}
+
 .ens-search-field-large input[type=text]
 {
     width: 350px;
@@ -140,6 +156,17 @@
 .ens-search-results p
 {
     margin: 10px;
+}
+
+.ens-message-center
+{
+    text-align: center;
+}
+
+.pagination-center
+{
+   height: 50px;
+   margin-left: 350px;
 }
 
 nav

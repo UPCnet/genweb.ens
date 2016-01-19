@@ -185,7 +185,7 @@
                       <td tal:content="python: carrec.data_fi and carrec.data_fi.strftime('%d/%m/%Y') or '-'"/>
                       <td class="column-center">
                         <input type="checkbox" class="hidable-group-element"
-                               tal:attributes="checked carrec/is_historic; disabled True"/>
+                               tal:attributes="checked carrec/is_historic; disabled python: True"/>
                       </td>
                     </tr>
                   </tal:block>
@@ -239,7 +239,7 @@
                       <td tal:content="python: carrec.data_inici and carrec.data_inici.strftime('%d/%m/%Y') or '-'"/>
                       <td tal:content="python: carrec.data_fi and carrec.data_fi.strftime('%d/%m/%Y') or '-'"/>
                       <td class="column-center">
-                        <input type="checkbox" class="hidable-group-element" tal:attributes="checked carrec/is_historic; disabled True"/>
+                        <input type="checkbox" class="hidable-group-element" tal:attributes="checked carrec/is_historic; disabled python: True"/>
                       </td>
                     </tr>
                   </tal:block>

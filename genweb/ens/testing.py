@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Base module for unittesting."""
 
+from plone.testing import z2
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -10,7 +11,7 @@ from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
-from plone.testing import z2
+from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
 
 import unittest2 as unittest
 
@@ -51,12 +52,9 @@ INTEGRATION_TESTING = IntegrationTesting(
     bases=(FIXTURE,), name="GenwebEnsLayer:Integration")
 FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(FIXTURE,), name="GenwebEnsLayer:Functional")
-
-
-class UnitTestCase(unittest.TestCase):
-    """Base class for unit tests."""
-
-    layer = INTEGRATION_TESTING
+ROBOT_TESTING = FunctionalTesting(
+    bases=(FIXTURE, AUTOLOGIN_LIBRARY_FIXTURE, z2.ZSERVER_FIXTURE),
+    name="GenwebEnsLayer:Robot")
 
 
 class IntegrationTestCase(unittest.TestCase):

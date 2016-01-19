@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """Unit tests for helper functions."""
 
+import unittest
 from mock import Mock
 
-from genweb.ens.testing import UnitTestCase
 from genweb.ens import _
 from genweb.ens.content.ens import (get_denominacio,
                                     get_percentatge_participacio,
@@ -11,10 +11,10 @@ from genweb.ens.content.ens import (get_denominacio,
                                     get_capital_social, get_seu_social)
 
 
-class TestHelpers(UnitTestCase):
+class TestHelpers(unittest.TestCase):
     """Test helper functions."""
 
-    def test_denominacio(self):
+    def test_ens_get_denominacio(self):
         self.assertEqual(
             u"Amnistía Internacional",
             get_denominacio(Mock(title=u"Amnistía Internacional",

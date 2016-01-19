@@ -60,7 +60,7 @@
         <input id="search_input_text" class="searchInput"
                type="text" placeholder="Introduïu el text"/>
         <input id="search_input_button" type="button" value="Cerca"
-               class="standalone"></input>
+               class="standalone"/>
       </div>
     </section>
 

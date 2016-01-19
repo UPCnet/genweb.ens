@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """Unit tests for data access functions."""
 
+import unittest
 from mock import Mock, patch
 
-from genweb.ens.testing import UnitTestCase
 from genweb.ens.data_access.ens import EnsDataReporter
 
 
@@ -12,7 +12,7 @@ class MockCatalog(object):
         return []
 
 
-class TestDataAccess(UnitTestCase):
+class TestDataAccess(unittest.TestCase):
     """Test data access functions."""
 
     def setUp(self):
