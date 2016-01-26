@@ -1,5 +1,5 @@
-<tal:block define="results view/search">
-<ul class="list-portlet"
+<tal:block define="results view/search; portal_url context/portal_url;">
+<ul id="results" class="list-portlet"
     tal:condition="results">
   <li tal:repeat="result results">
     <article>
@@ -8,6 +8,19 @@
     </article>
   </li>
 </ul>
+
+<div class="pagination-center"><ul id="pagination"/></div>
+
+<script type="text/javascript"
+        tal:attributes="src string: ${portal_url}/++genweb++ens/jquery.twbsPagination.min.js">
+</script>
+<script type="text/javascript"
+        tal:attributes="src string: ${portal_url}/++genweb++ens/jquery.paginated.js">
+</script>
+<script type="text/javascript"
+        tal:attributes="src string: ${portal_url}/++genweb++ens/ens_searchresults.js">
+</script>
+
 <p tal:condition="not: results"
    i18n:translate="No s&apos;han trobat coincidències amb aquests criteris de cerca">
     No s&apos;han trobat coincidències amb aquests criteris de cerca

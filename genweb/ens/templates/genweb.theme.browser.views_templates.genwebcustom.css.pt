@@ -1,3 +1,6 @@
+/*
+ * Metadata
+ */
 .ens-metadata a
 {
     color: #007BC0;
@@ -18,7 +21,7 @@
 
 .ens-metadata h2
 {
-    border-bottom: 1px solid #b2b2b2;
+    border-bottom: 1px solid;
 }
 
 .ens-metadata th
@@ -78,17 +81,34 @@
     opacity: 0.8;
 }
 
+/*
+ * Taula
+ */
+table th
+{
+    background-color: #557c95;
+}
+
+.ens-taula .denominacio
+{
+    font-size: 13px;
+    min-width: 300px;
+}
+
 .ens-taula th
 {
-    text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid white;
+    color: white;
     padding: 5px;
+    text-align: center;
 }
 
 .ens-taula td
 {
-    border: 1px solid #ccc;
-    padding: 5px;
+    border: 1px solid #ededed;
+    font-size: 12px;
+    line-height: 14px;
+    padding: 8px 6px;
 }
 
 .ens-taula td.numeric
@@ -101,6 +121,9 @@
     border-bottom: 1px solid #ddd;
 }
 
+/*
+ * Search
+ */
 .ens-results tbody tr
 {
     height: 50px;
@@ -119,12 +142,17 @@
 
 .ens-search-field select
 {
-    width: 180px;
+    width: 74.5%;
+}
+
+.ens-search-field select[multiple]
+{
+    height: 70px;
 }
 
 .ens-search-field input[type=text]
 {
-    width: 166px;
+    width: 73%;
 }
 
 .ens-search-field input[type=checkbox]
@@ -132,20 +160,23 @@
     margin: 2px;
 }
 
-.ens-search-field-large
+.ens-search-field input[type=button]
 {
-   width: 430px;
-   margin: 10px auto 10px auto;
-}
-
-.ens-search-field-large input[type=text]
-{
-    width: 350px;
+    background: #557c95 none repeat scroll 0 0;
+    border-radius: 3px !important;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    height: 34px;
+    margin-left: 150px;
+    margin-top: 5px;
+    text-shadow: none;
+    width: 75%;
 }
 
 .ens-search-results
 {
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 .ens-search-results li:before
@@ -158,9 +189,95 @@
     margin: 10px;
 }
 
+#results h5
+{
+    margin-bottom: 0;
+}
+
+#results > li:hover
+{
+    background: #f9f9f9 none repeat scroll 0 0;
+}
+
+/*
+ * Navigation menu
+ */
+nav
+{
+    margin: 20px 0px 20px 0px;
+}
+
+.nav.nav-pills.opcions a
+ {
+    background: #557c95 none repeat scroll 0 0;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.nav.nav-pills.opcions a:hover
+{
+    background: #3c5769 none repeat scroll 0 0;
+}
+
+.nav.nav-pills.opcions > li
+{
+    margin-right: 10px;
+}
+
+.nav.nav-pills.opcions > li:last-child
+{
+    margin-right: 0;
+}
+
+ul.opcions
+{
+    margin-bottom: 5px;
+}
+
+/*
+ * Panels
+ */
+.ui-helper-reset
+{
+    border: 0 none;
+    font-size: 13px;
+    line-height: 1.6;
+    list-style: outside none none;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    text-decoration: none;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: #557c95 none repeat scroll 0 0;
+    border: 1px solid #557c95;
+    color: #fff;
+    font-weight: normal;
+    vertical-align: middle;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active
+{
+    background: #557c95 none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    color: #fff;
+    font-weight: bold;
+}
+
+/*
+ * Other
+ */
 .ens-message-center
 {
     text-align: center;
+}
+
+.export
+{
+    float: right;
+    margin-bottom: 10px;
 }
 
 .pagination-center
@@ -169,7 +286,34 @@
    margin-left: 350px;
 }
 
-nav
+.documentDescription
 {
-    margin: 20px 0px 20px 0px;
+    color: #888;
+    font-size: 107.692%;
+    font-weight: bold;
+    line-height: 20px;
+    margin-bottom: 18px;
+    margin-top: 10px;
+}
+
+/*.documentModified
+{
+    color: #777;
+    float: left;
+    font-size: 11px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}*/
+
+.share_popover
+{
+    display: none;
+}
+
+.input-append
+{
+    background: #f7f7f7 none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 20px;
 }

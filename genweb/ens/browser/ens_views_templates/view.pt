@@ -68,7 +68,7 @@
         </dl>
         <h3 i18n:translate="Càrrecs directius">Càrrecs directius</h3>
         <tal:block define="directius view/directius">
-        <table tal:condition="directius">
+        <table tal:condition="directius" class="ens-taula">
           <thead>
             <tr>
               <th i18n:translate="Nom" class="column-medium">Nom</th>
@@ -94,7 +94,7 @@
         </tal:block>
         <h3 i18n:translate="Persones de contacte">Persones de contacte</h3>
         <tal:block define="contactes view/contactes">
-        <table tal:condition="contactes">
+        <table tal:condition="contactes" class="ens-taula">
           <thead>
             <tr>
               <th i18n:translate="Nom" class="column-medium">Nom</th>
@@ -160,7 +160,7 @@
                      tal:attributes="id python: 'cb-' + organ.id"/>
               <label i18n:translate="Mostra els càrrecs històrics"
                      tal:attributes="for python: 'cb-' + organ.id">Mostra els càrrecs històrics</label>
-              <table>
+              <table class="ens-taula">
               <thead>
                 <tr>
                   <th i18n:translate="Ens" class="column-small">Ens</th>
@@ -215,7 +215,7 @@
                      tal:attributes="id python: 'cb-' + organ.id" />
               <label i18n:translate="Mostra els càrrecs històrics"
                      tal:attributes="for python: 'cb-' + organ.id">Mostra els càrrecs històrics</label>
-              <table>
+              <table class="ens-taula">
               <thead>
                 <tr>
                   <th i18n:translate="Ens" class="column-small">Ens</th>
@@ -258,7 +258,7 @@
 
         <h3 i18n:translate="Unitats UPC implicades">Unitats UPC implicades</h3>
         <tal:block define="unitats view/unitats">
-          <table tal:condition="unitats">
+          <table tal:condition="unitats" class="ens-taula">
             <thead>
               <tr>
                 <th i18n:translate="Unitat" class="column-medium">Unitat</th>
@@ -308,7 +308,7 @@
 
         <h3 i18n:translate="Acords òrgans de govern">Acords òrgans de govern</h3>
         <tal:block define="acords view/acords">
-        <table tal:condition="acords">
+        <table tal:condition="acords" class="ens-taula">
           <thead>
             <tr>
               <th i18n:translate="Data" class="column-small">Data</th>
@@ -338,7 +338,7 @@
 
         <h3 i18n:translate="Escriptures públiques">Escriptures públiques</h3>
         <tal:block define="escriptures view/escriptures">
-        <table tal:condition="escriptures">
+        <table tal:condition="escriptures" class="ens-taula">
           <thead>
             <tr>
               <th i18n:translate="Data" class="column-small">Data</th>
@@ -369,7 +369,7 @@
         <h3 i18n:translate="Estatuts">Estatuts</h3>
         <h4 i18n:translate="Vigents">Vigents</h4>
         <tal:block define="estatuts_vigents view/estatuts_vigents">
-        <table tal:condition="estatuts_vigents">
+        <table tal:condition="estatuts_vigents" class="ens-taula">
           <thead>
             <tr>
               <th i18n:translate="Data" class="column-small">Data</th>
@@ -396,7 +396,7 @@
         </tal:block>
         <h4 i18n:translate="Vigents">Anteriors</h4>
         <tal:block define="estatuts_anteriors python: view.estatuts_historics">
-        <table tal:condition="estatuts_anteriors">
+        <table tal:condition="estatuts_anteriors" class="ens-taula">
           <thead>
             <tr>
               <th i18n:translate="Data" class="column-small">Data</th>
@@ -424,7 +424,7 @@
 
         <h3 i18n:translate="Actes de reunions">Actes de reunions</h3>
         <tal:block define="actes view/actes_reunio">
-        <table tal:condition="actes">
+        <table tal:condition="actes" class="ens-taula">
           <thead>
             <tr>
               <th i18n:translate="Data" class="column-small">Data</th>
@@ -452,7 +452,7 @@
 
         <h3 i18n:translate="Convenis">Convenis</h3>
         <tal:block define="convenis view/convenis">
-        <table tal:condition="convenis">
+        <table tal:condition="convenis" class="ens-taula">
           <thead>
             <tr>
               <th i18n:translate="Data" class="column-small">Data</th>
@@ -480,7 +480,7 @@
 
         <h3 i18n:translate="Altres documents d&apos;interès">Altres documents d&apos;interès</h3>
         <tal:block define="documents view/documents_interes">
-        <table tal:condition="documents">
+        <table tal:condition="documents" class="ens-taula">
           <thead>
             <tr>
               <th i18n:translate="Data" class="column-small">Data</th>

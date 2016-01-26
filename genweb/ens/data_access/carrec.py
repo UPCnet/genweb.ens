@@ -30,14 +30,14 @@ class CarrecDataReporter(object):
     def __init__(self, catalog):
         self.catalog = catalog
 
-    def search(self, searchFilters=None):
+    def search(self, search_filters=None):
         results = []
 
         query = {
             'portal_type': ('genweb.ens.carrec', 'genweb.ens.carrec_upc'),
             'sort_on': 'sortable_title'}
-        if searchFilters:
-            query.update(searchFilters)
+        if search_filters:
+            query.update(search_filters)
 
         for carrec in self.catalog.searchResults(query):
             carrec_obj = carrec.getObject()

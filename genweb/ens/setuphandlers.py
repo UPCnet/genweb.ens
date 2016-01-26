@@ -52,7 +52,7 @@ def add_folder(container, title, allowed_types, exclude_from_nav=False):
     return container[folder_id]
 
 
-def add_representant_upc(folder, title, carrec, is_consell_direccio):
+def add_representant_upc(folder, title, carrec):
     representant_id = getUtility(IIDNormalizer).normalize(title)
     if representant_id not in folder:
         representant = api.content.create(
@@ -60,8 +60,7 @@ def add_representant_upc(folder, title, carrec, is_consell_direccio):
             id=representant_id,
             title=title,
             container=folder,
-            carrec=carrec,
-            is_consell_direccio=is_consell_direccio)
+            carrec=carrec)
         api.content.transition(
             obj=representant,
             transition='publishtointranet')
@@ -91,8 +90,7 @@ def add_representants_upc():
                 add_representant_upc(
                     consell_direccio_folder,
                     title=row[1].decode('utf-8'),
-                    carrec=row[0].decode('utf-8'),
-                    is_consell_direccio=True)
+                    carrec=row[0].decode('utf-8'))
 
 
 def add_predefined_data():

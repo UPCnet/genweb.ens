@@ -1,6 +1,6 @@
 <tal:block define="results view/search; portal_url context/portal_url;">
 <section class="ens-metadata" tal:condition="results">
-<table id="results" class="ens-results">
+<table class="ens-results ens-taula">
   <thead>
     <tr>
       <th class="column-medium">Nom</th>
@@ -12,12 +12,12 @@
       <th class="column-center">Històric</th>
     </tr>
   </thead>
-  <tbody> 
+  <tbody id="results">
     <tr tal:repeat="result results"
         tal:attributes="class python: 'historic' if result.is_historic else ''">
-      <td><a tal:attributes="href result/url" tal:content="result/title"/></td>
-      <td><a tal:attributes="href result/ens_url" tal:content="result/ens"/></td>
-      <td><a tal:attributes="href result/organ_url" tal:content="result/organ"/></td>
+      <td><a tal:attributes="href result/url; target string: _blank" tal:content="result/title"/></td>
+      <td><a tal:attributes="href result/ens_url; target string: _blank" tal:content="result/ens"/></td>
+      <td><a tal:attributes="href result/organ_url; target string: _blank" tal:content="result/organ"/></td>
       <td tal:content="result/carrec"/>
       <td class="column-center" tal:content="result/data_inici_str"/>
       <td class="column-center" tal:content="result/data_fi_str"/>
@@ -31,6 +31,9 @@
 <div class="pagination-center"><ul id="pagination"/></div>
 <script type="text/javascript"
         tal:attributes="src string: ${portal_url}/++genweb++ens/jquery.twbsPagination.min.js">
+</script>
+<script type="text/javascript"
+        tal:attributes="src string: ${portal_url}/++genweb++ens/jquery.paginated.js">
 </script>
 <script type="text/javascript"
         tal:attributes="src string: ${portal_url}/++genweb++ens/carrec_searchresults.js">

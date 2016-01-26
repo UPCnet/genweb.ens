@@ -15,6 +15,18 @@ def create_content(container, properties):
     content_dict.update(properties)
     return api.content.create(**content_dict)
 
+folder_1 = {
+    'type': 'Folder',
+    'id': 'folder-1',
+    'title': 'Folder One'
+}
+
+folder_2 = {
+    'type': 'Folder',
+    'id': 'folder-2',
+    'title': 'Folder Two'
+}
+
 ens_ai = {
     'type': 'genweb.ens.ens',
     'id': 'amnistia-internacional',

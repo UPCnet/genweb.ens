@@ -7,7 +7,6 @@ from Products.CMFCore.utils import getToolByName
 from plone.directives import dexterity
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from zope.interface import Interface
-from zope.component import getMultiAdapter
 
 from genweb.theme.browser.views import HomePageBase
 from genweb.theme.browser.interfaces import IHomePageView
@@ -19,6 +18,7 @@ from genweb.ens.content.ens import (get_percentatge_participacio,
                                     get_aportacio, get_quota,
                                     get_capital_social, get_seu_social)
 from genweb.ens.data_access.ens import EnsDataReporter
+from genweb.ens.browser import helper
 
 
 class View(dexterity.DisplayForm):
@@ -117,57 +117,19 @@ class Search(HomePageBase):
     grok.context(INavigationRoot)
     grok.layer(IGenwebEnsLayer)
 
-    def get_figura_juridica_vocabulary(self):
+    @property
+    def figura_juridica_vocabulary(self):
         return [('', _(u"Qualsevol"))] + [
             (value, value) for value in ens.figura_juridica_values]
 
-    def get_estat_vocabulary(self):
+    @property
+    def estat_vocabulary(self):
         return [('', _(u"Qualsevol"))] + [
             (value, value) for value in ens.estat_values]
 
-    def is_authenticated(self):
-        portal_state = getMultiAdapter(
-            (self.context, self.request), name="plone_portal_state")
-        return not portal_state.anonymous()
-
-    def get_portal_groups(self):
-        acl_users = getToolByName(self, 'acl_users')
-        return [group_id for group_id in acl_users.source_groups.getGroupIds()]
-
-    def get_user_groups(self):
-        portal_state = getMultiAdapter(
-            (self.context, self.request), name="plone_portal_state")
-        if portal_state.anonymous():
-            return set()
-        elif not portal_state.member().getUser().getGroups():
-            return set()
-        else:
-            return set(portal_state.member().getUser().getGroupIds())
-
-    def get_carpetes_vocabulary(self):
-        """
-        Get 3-level folders (e.g. gabinet-juridic in ens/ca/gabinet-juridic/)
-        that match a user group name.
-        Returns a list of tuples with the following structure:
-          - index 0: path of the folder, e.g. /ens/ca/gabinet-juridic
-          - index 1: title of the folder, e.g. Gabinet Jurídic
-          - index 2: boolean representing whether the folder path matches
-            any of the authenticated user's group ids
-        """
-        portal_groups = self.get_portal_groups()
-        user_groups = self.get_user_groups()
-        catalog = getToolByName(self, 'portal_catalog')
-        return [(folder.getPath(),
-                 folder.Title,
-                 folder.getPath().split('/')[-1] in user_groups)
-
-                for folder in catalog.searchResults(
-                    portal_type='Folder',
-                    sort_on='sortable_title',
-                    path={
-                        'query': '/',
-                        'depth': 3
-                    }) if folder.getPath().split('/')[-1] in portal_groups]
+    @property
+    def carpetes_vocabulary(self):
+        return helper.get_carpetes_vocabulary(self)
 
 
 class SearchResults(grok.View):
@@ -187,11 +149,10 @@ class SearchResults(grok.View):
             search_filters['estat'] = estat.decode('utf-8')
 
         try:
-            carpetes = json.loads(self.request.form.get('carpetes', None))
+            carpetes = json.loads(self.request.form.get('carpetes', ''))
             if carpetes:
                 search_filters["path"] = {"depth": 1}
-                search_filters["path"]["query"] = [
-                    carpeta for carpeta in carpetes]
+                search_filters["path"]["query"] = carpetes
         except ValueError:
             pass
 

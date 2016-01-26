@@ -56,7 +56,7 @@ class EnsDataReporter(object):
         else:
             return None
 
-    def list(self):
+    def list(self, search_filters=None):
         """
         List ens.
         """
@@ -64,6 +64,8 @@ class EnsDataReporter(object):
             'portal_type': 'genweb.ens.ens',
             'sort_on': 'sortable_title'
         }
+        if search_filters:
+            query.update(search_filters)
         return self.catalog.searchResults(query)
 
     def list_unitat_by_ens_obj(self, ens):
@@ -176,7 +178,6 @@ class EnsDataReporter(object):
         """
         query = {
             'portal_type': 'genweb.ens.carrec_upc',
-            'sort_on': 'carrec',
             'path': {
                 'query': self.get_path(organ),
                 'depth': 1
@@ -184,7 +185,9 @@ class EnsDataReporter(object):
         }
         if is_historic is not None:
             query['is_historic'] = is_historic
-        return self.catalog.searchResults(query)
+
+        return sorted(self.catalog.searchResults(query),
+                      key=lambda e: (e.carrec + e.Title.decode('utf-8')))
 
     def list_carrecs_by_organ_grouped_by_ens_obj(self, organ,
                                                  is_historic=None):
@@ -232,12 +235,12 @@ class EnsDataReporter(object):
 
         return carrecs_by_organ
 
-    def list_identificacio(self):
+    def list_identificacio(self, search_filters=None):
         """
         List all the ens(s)' identification info.
         """
         identificacio = []
-        for ens in self.list():
+        for ens in self.list(search_filters):
             ens_obj = ens.getObject()
             identificacio.append(Identificacio(
                 codi=ens_obj.codi or "-",
@@ -253,7 +256,7 @@ class EnsDataReporter(object):
                 web=ens_obj.web or "-"))
         return identificacio
 
-    def list_representacio(self, is_historic=None):
+    def list_representacio(self, is_historic=None, search_filters=None):
         """
         List all the ens(s) along with the carrec_upc(s) related to their
         organs, only for those ens(s) having at least one carrec_upc
@@ -262,7 +265,7 @@ class EnsDataReporter(object):
         (3rd) carrec.carrec.
         """
         representacio = []
-        for ens in self.list():
+        for ens in self.list(search_filters):
             ens_obj = ens.getObject()
             for organ_tipus in ('Govern', 'Assessor'):
                 for organ in self.list_organs_by_ens(ens, organ_tipus):
@@ -278,10 +281,10 @@ class EnsDataReporter(object):
                             carrec_obj.data_inici.strftime('%d/%m/%Y') or "-"))
         return representacio
 
-    def search(self, searchFilters=None):
+    def search(self, search_filters=None):
         query = {'portal_type': 'genweb.ens.ens', 'sort_on': 'sortable_title'}
-        if searchFilters:
-            query.update(searchFilters)
+        if search_filters:
+            query.update(search_filters)
 
         return [EnsSearchResult(
             title=ens.Title,

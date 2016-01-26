@@ -35,6 +35,21 @@ function ens_search()
     });
 }
 
+function apply_filter_to_link(link)
+{
+    link.click(function()
+    {
+        var carpetes = $('#search_input_carpetes').val();
+        if (carpetes != null)
+        {
+            var base_url = link.attr('href').split('?')[0];
+            var filter_url = base_url + '?carpetes=' + JSON.stringify(carpetes);
+            window.location.href = filter_url;
+            return false;
+        }
+    });
+}
+
 $(document).ready(function ()
 {
     $('#search_input_text').on('keydown', function(event)
@@ -49,6 +64,10 @@ $(document).ready(function ()
     {
         ens_search();
     });
+
+    apply_filter_to_link($('#link_taula_identificativa'));
+    apply_filter_to_link($('#link_taula_representacio'));
+    apply_filter_to_link($('#link_taula_transparencia'));
 
     ens_search();
 });

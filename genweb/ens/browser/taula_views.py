@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from StringIO import StringIO
+import json
 import csv
 
 from five import grok
@@ -11,17 +12,37 @@ from genweb.ens.interfaces import IGenwebEnsLayer
 from genweb.ens.data_access.ens import EnsDataReporter
 
 
-class TaulaIdentificativa(grok.View):
+class Taula(object):
+    def parse_search_filters(self):
+        search_filters = {}
+        try:
+            carpetes = json.loads(self.request.form.get('carpetes', ''))
+            if carpetes:
+                search_filters["path"] = {"depth": 1}
+                search_filters["path"]["query"] = [
+                    carpeta for carpeta in carpetes]
+        except ValueError:
+            pass
+        return search_filters
+
+
+class TaulaIdentificativa(grok.View, Taula):
     grok.name('taula_identificativa')
     grok.context(Interface)
     grok.layer(IGenwebEnsLayer)
 
     def list(self):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
-        return reporter.list_identificacio()
+        return reporter.list_identificacio(self.parse_search_filters())
+
+    @property
+    def export_url(self):
+        query_string = 'carpetes=' + self.request.form.get('carpetes', '')
+        return '{0}/taula_identificativa_csv?{1}'.format(
+            self.context.absolute_url(), query_string)
 
 
-class TaulaIdentificativaCsv(grok.View):
+class TaulaIdentificativaCsv(grok.View, Taula):
     grok.name('taula_identificativa_csv')
     grok.context(Interface)
     grok.layer(IGenwebEnsLayer)
@@ -56,7 +77,8 @@ class TaulaIdentificativaCsv(grok.View):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
         writer = csv.writer(output_file, dialect='excel', delimiter=';')
         writer.writerow(TaulaIdentificativaCsv.data_header_columns)
-        for ens in reporter.list_identificacio():
+
+        for ens in reporter.list_identificacio(self.parse_search_filters()):
             writer.writerow([
                 ens.codi.encode('utf-8'),
                 ens.denominacio.encode('utf-8'),
@@ -71,17 +93,25 @@ class TaulaIdentificativaCsv(grok.View):
             ])
 
 
-class TaulaRepresentacio(grok.View):
+class TaulaRepresentacio(grok.View, Taula):
     grok.name('taula_representacio')
     grok.context(Interface)
     grok.layer(IGenwebEnsLayer)
 
     def list(self):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
-        return reporter.list_representacio()
+        return reporter.list_representacio(
+            is_historic=False,
+            search_filters=self.parse_search_filters())
+
+    @property
+    def export_url(self):
+        query_string = 'carpetes=' + self.request.form.get('carpetes', '')
+        return '{0}/taula_representacio_csv?{1}'.format(
+            self.context.absolute_url(), query_string)
 
 
-class TaulaRepresentacioCsv(grok.View):
+class TaulaRepresentacioCsv(grok.View, Taula):
     grok.name('taula_representacio_csv')
     grok.context(Interface)
     grok.layer(IGenwebEnsLayer)
@@ -111,7 +141,9 @@ class TaulaRepresentacioCsv(grok.View):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
         writer = csv.writer(output_file, dialect='excel', delimiter=';')
         writer.writerow(TaulaRepresentacioCsv.data_header_columns)
-        for ens in reporter.list_representacio(is_historic=False):
+        for ens in reporter.list_representacio(
+                is_historic=False,
+                search_filters=self.parse_search_filters()):
             writer.writerow([
                 ens.denominacio.encode('utf-8'),
                 ens.organ.encode('utf-8'),
@@ -119,3 +151,9 @@ class TaulaRepresentacioCsv(grok.View):
                 ens.carrec.encode('utf-8'),
                 ens.data_nomenament.encode('utf-8')
             ])
+
+
+class TaulaTransparencia(grok.View, Taula):
+    grok.name('taula_transparencia')
+    grok.context(Interface)
+    grok.layer(IGenwebEnsLayer)

@@ -13,14 +13,13 @@
 
   <metal:content-core fill-slot="content-core">
     <nav>
-        <ul>
-          <li>
-            <a tal:attributes="href string:${portal_url}/taula_identificativa_csv">
+        <div class="export">
+            <a tal:attributes="href view/export_url">
                 Exportar a format CSV
             </a>
-        </ul>
+        </div>
     </nav>
-    <table class="ens-taula">
+    <table class="ens-taula table-striped">
       <thead>
         <tr>
           <th style="width: 5%;">Codi</th>
@@ -38,7 +37,7 @@
       <tbody>
         <tr tal:repeat="ens view/list">
           <td tal:content="ens/codi"/>
-          <td><a tal:content="ens/denominacio" tal:attributes="href ens/absolute_url"/></td>
+          <td class="denominacio"><a tal:content="ens/denominacio" tal:attributes="href ens/absolute_url"/></td>
           <td tal:content="ens/nif"/>
           <td tal:content="ens/estat"/>
           <td tal:content="ens/figura_juridica"/>

@@ -6,6 +6,6 @@ $(document).ready(function ()
     $('#results').paginated({
        navigation: 'pagination',
        resultsPerPage: results_per_page,
-       visiblePages: visible_pages
+       visiblePages: visible_pages 
     });
 });
