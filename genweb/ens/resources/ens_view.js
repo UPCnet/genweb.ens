@@ -2,7 +2,8 @@ $(document).ready(function()
 {
     $("#ens-metadata").accordion({
         collapsible: true,
-        active: false
+        active: false,
+        heightStyle: 'content'
     });
     $("input[type=checkbox].selector-input-historic").hidable_group({
             lang: "ca",
