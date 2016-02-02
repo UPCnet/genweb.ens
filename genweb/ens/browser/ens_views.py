@@ -48,22 +48,22 @@ class View(dexterity.DisplayForm):
     @property
     def unitats(self):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
-        return reporter.list_unitat_by_ens_obj(self.context)
+        return reporter.list_unitats_by_ens_obj(self.context)
 
     @property
     def acords(self):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
-        return reporter.list_acord_by_ens_obj(self.context)
+        return reporter.list_acords_by_ens_obj(self.context)
 
     @property
     def estatuts_vigents(self):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
-        return reporter.list_estatut_by_ens_obj(self.context, is_vigent=True)
+        return reporter.list_estatuts_by_ens_obj(self.context, is_vigent=True)
 
     @property
     def estatuts_historics(self):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
-        return reporter.list_estatut_by_ens_obj(self.context, is_vigent=False)
+        return reporter.list_estatuts_by_ens_obj(self.context, is_vigent=False)
 
     @property
     def escriptures(self):

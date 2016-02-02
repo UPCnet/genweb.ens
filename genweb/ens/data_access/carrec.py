@@ -30,6 +30,14 @@ class CarrecDataReporter(object):
     def __init__(self, catalog):
         self.catalog = catalog
 
+    def list_representants(self, parent_id=None):
+        query = {
+            'portal_type': 'genweb.ens.representant',
+            'sort_on': 'sortable_title'}
+        return [result for result in self.catalog.searchResults(query)
+                if parent_id is None
+                or parent_id == result.getObject().getParentNode().id]
+
     def search(self, search_filters=None):
         results = []
 

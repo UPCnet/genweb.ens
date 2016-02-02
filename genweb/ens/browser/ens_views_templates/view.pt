@@ -18,14 +18,16 @@
           <dt i18n:translate="Denominació">Denominació</dt>
           <dd tal:content="context/title"/>
 
-          <dt i18n:translate="Descripció">Descripció</dt>
-          <dd tal:content="python: context.description or '-'"/>
-
           <dt i18n:translate="Acrònim">Acrònim</dt>
           <dd tal:content="python: context.acronim or '-'"/>
 
-          <dt i18n:translate="Codi de classificació">Codi de classificació</dt>
-          <dd tal:content="python: context.codi or '-'"/>
+          <dt i18n:translate="Descripció">Descripció</dt>
+          <dd tal:content="python: context.description or '-'"
+              class="fieldset-end"/>
+
+
+          <dt i18n:translate="Estat">Estat</dt>
+          <dd tal:content="python: context.estat or '-'"/>
 
           <dt i18n:translate="NIF">NIF</dt>
           <dd tal:content="python: context.nif or '-'"/>
@@ -33,11 +35,10 @@
           <dt i18n:translate="Figura jurídica">Figura jurídica</dt>
           <dd tal:content="python: context.figura_juridica or '-'"/>
 
-          <dt i18n:translate="Núm. Identif.">Núm. Identif.</dt>
-          <dd tal:content="python: context.numero_identificacio or '-'"/>
+          <dt i18n:translate="Núm. Identif." class="subfield">Núm. Identif.</dt>
+          <dd tal:content="python: context.numero_identificacio or '-'"
+              class="fieldset-end"/>
 
-          <dt i18n:translate="Estat">Estat</dt>
-          <dd tal:content="python: context.estat or '-'"/>
 
           <dt i18n:translate="Domicili social">Domicili social</dt>
           <dd tal:content="python: context.domicili_social or '-'"/>
@@ -45,26 +46,30 @@
           <dt i18n:translate="Adreça oficines 1">Adreça oficines 1</dt>
           <dd tal:content="python: context.adreca_oficines_1 or '-'"/>
 
-          <dt i18n:translate="Observacions">Observacions</dt>
-          <dd tal:content="python: context.adreca_oficines_1_observacions or '-'"/>
-
           <dt i18n:translate="Adreça oficines 2">Adreça oficines 2</dt>
           <dd tal:content="python: context.adreca_oficines_2 or '-'"/>
-
-          <dt i18n:translate="Observacions">Observacions</dt>
-          <dd tal:content="python: context.adreca_oficines_2_observacions or '-'"/>
 
           <dt i18n:translate="Telèfon">Telèfon</dt>
           <dd tal:content="python: context.telefon or '-'"/>
 
+          <dt i18n:translate="Fax">Fax</dt>
+          <dd tal:content="python: context.fax or '-'"/>
+
           <dt i18n:translate="Web">Web</dt>
-          <dd tal:content="python: context.web or '-'"/>
+          <dd tal:content="python: context.web or '-'"
+              class="fieldset-end"/>
+
 
           <dt i18n:translate="Tipologia UPC">Tipologia UPC</dt>
           <dd tal:content="python: context.tipologia_upc or '-'"/>
 
-          <dt i18n:translate="Anotacions">Anotacions</dt>
-          <dd tal:content="python: context.anotacions or '-'"/>
+          <dt i18n:translate="Codi UPC">Codi UPC</dt>
+          <dd tal:content="python: context.codi or '-'"
+              class="fieldset-end"/>
+
+
+          <dt i18n:translate="Observacions">Observacions</dt>
+          <dd tal:content="python: context.dades_identificatives_observacions or '-'"/>
         </dl>
         <h3 i18n:translate="Càrrecs directius">Càrrecs directius</h3>
         <tal:block define="directius view/directius">
@@ -137,8 +142,8 @@
           <dt i18n:translate="Percentatge de participació">Percentatge de participació</dt>
           <dd tal:content="view/percentatge_participacio"/>
 
-          <dt i18n:translate="Observacions">Observacions</dt>
-          <dd tal:content="python: context.percentatge_participacio_observacions or '-'"/>
+          <dt i18n:translate="Nombre de membres UPC">Nombre de membres UPC</dt>
+          <dd tal:content="python: context.nombre_membres or '-'"/>
 
           <dt i18n:translate="Part. en cap. social o fons patrimonial">Part. en cap. social o fons patrimonial</dt>
           <dd tal:content="view/capital_social"/>
@@ -296,7 +301,7 @@
           <dt i18n:translate="Data d&apos;entrada UPC">Data d&apos;entrada UPC</dt>
           <dd tal:content="python: context.data_entrada and context.data_entrada.strftime('%d/%m/%Y') or '-'"/>
 
-          <dt i18n:translate="Descripció">Descripció</dt>
+          <dt i18n:translate="Descripció" class="subfield">Descripció</dt>
           <dd tal:content="python: context.data_entrada_descripcio or '-'"/>
 
           <dt i18n:translate="Seu social">Seu social</dt>

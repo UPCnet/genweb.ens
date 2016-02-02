@@ -14,4 +14,5 @@
     <object meta_type="Dexterity FTI" name="genweb.ens.persona_contacte"/>
     <object meta_type="Dexterity FTI" name="genweb.ens.persona_directiu"/>
     <object meta_type="Dexterity FTI" name="genweb.ens.representant"/>
+    <object meta_type="Dexterity FTI" name="genweb.ens.contenidor_ens"/>
 </object>

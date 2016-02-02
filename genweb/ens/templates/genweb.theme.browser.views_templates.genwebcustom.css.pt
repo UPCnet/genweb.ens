@@ -13,10 +13,22 @@
     margin-bottom: 5px;
 }
 
+.ens-metadata dt.subfield
+{
+    float: left;
+    width: 235px;
+    margin-left: 15px;
+}
+
 .ens-metadata dd
 {
     margin-left: 250px;
     margin-bottom: 5px;
+}
+
+.ens-metadata dd.fieldset-end
+{
+    margin-bottom: 25px;
 }
 
 .ens-metadata h2

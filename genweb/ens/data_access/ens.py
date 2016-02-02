@@ -41,6 +41,17 @@ class Representacio(object):
         self.data_nomenament = data_nomenament
 
 
+def get_sortable_key_by_date(obj):
+    """
+    Given an object A with a 'data' property with type datetime.date,
+    returns a string that can be used to compare A with B, so that
+    A < B is true when A.data is older than B.data. If data is None, then
+    the oldest possible date is considered.
+    """
+    return (obj.data and obj.data.strftime('%Y%m%d') or
+            datetime.datetime(1900, 1, 1).strftime('%Y%m%d'))
+
+
 class EnsDataReporter(object):
     def __init__(self, catalog):
         self.catalog = catalog
@@ -68,7 +79,7 @@ class EnsDataReporter(object):
             query.update(search_filters)
         return self.catalog.searchResults(query)
 
-    def list_unitat_by_ens_obj(self, ens):
+    def list_unitats_by_ens_obj(self, ens):
         return [unitat.getObject() for unitat in self.catalog.searchResults(
             portal_type='genweb.ens.unitat',
             sort_on='sortable_title',
@@ -77,19 +88,30 @@ class EnsDataReporter(object):
                 'depth': 1
             })]
 
-    def list_acord_by_ens_obj(self, ens):
+    def list_acords_by_ens_obj(self, ens):
         """
         List acord(s) related to the specified ens.
         """
-        return [acord.getObject() for acord in self.catalog.searchResults(
-            portal_type='genweb.ens.acord',
-            sort_on='organ',
-            path={
-                'query': self.get_path(ens),
-                'depth': 1
-            })]
+        return sorted(
+            [acord.getObject() for acord in self.catalog.searchResults(
+                portal_type='genweb.ens.acord',
+                path={
+                    'query': self.get_path(ens),
+                    'depth': 1
+                })],
+            key=get_sortable_key_by_date, reverse=True)
 
-    def list_estatut_by_ens_obj(self, ens, is_vigent=True):
+    def list_escriptures_by_ens_obj(self, ens):
+        return sorted([
+            escript.getObject() for escript in self.catalog.searchResults(
+                portal_type='genweb.ens.escriptura_publica',
+                path={
+                    'query': self.get_path(ens),
+                    'depth': 1
+                })],
+            key=get_sortable_key_by_date, reverse=True)
+
+    def list_estatuts_by_ens_obj(self, ens, is_vigent=True):
         # TODO Optimise this code so that the sorting is performed by ZODB
         return sorted([
             estatut.getObject() for estatut in self.catalog.searchResults(
@@ -99,44 +121,35 @@ class EnsDataReporter(object):
                     'query': self.get_path(ens),
                     'depth': 1
                 })],
-            key=lambda e: e.data if e.data else datetime.date.min,
-            reverse=True)
-
-    def list_escriptures_by_ens_obj(self, ens):
-        return [escript.getObject() for escript in self.catalog.searchResults(
-            portal_type='genweb.ens.escriptura_publica',
-            sort_on='getObjPositionInParent',
-            path={
-                'query': self.get_path(ens),
-                'depth': 1
-            })]
-
-    def list_documents_interes_by_ens_obj(self, ens):
-        return [doc.getObject() for doc in self.catalog.searchResults(
-            portal_type='genweb.ens.document_interes',
-            sort_on='getObjPositionInParent',
-            path={
-                'query': self.get_path(ens),
-                'depth': 1
-            })]
-
-    def list_convenis_by_ens_obj(self, ens):
-        return [conveni.getObject() for conveni in self.catalog.searchResults(
-            portal_type='genweb.ens.conveni',
-            sort_on='getObjPositionInParent',
-            path={
-                'query': self.get_path(ens),
-                'depth': 1
-            })]
+            key=get_sortable_key_by_date, reverse=True)
 
     def list_actes_reunio_by_ens_obj(self, ens):
-        return [acta.getObject() for acta in self.catalog.searchResults(
+        return sorted([acta.getObject() for acta in self.catalog.searchResults(
             portal_type='genweb.ens.acta_reunio',
-            sort_on='sortable_title',
             path={
                 'query': self.get_path(ens),
                 'depth': 1
-            })]
+            })],
+            key=get_sortable_key_by_date, reverse=True)
+
+    def list_convenis_by_ens_obj(self, ens):
+        return sorted(
+            [conveni.getObject() for conveni in self.catalog.searchResults(
+                portal_type='genweb.ens.conveni',
+                path={
+                    'query': self.get_path(ens),
+                    'depth': 1
+                })],
+            key=get_sortable_key_by_date, reverse=True)
+
+    def list_documents_interes_by_ens_obj(self, ens):
+        return sorted([doc.getObject() for doc in self.catalog.searchResults(
+            portal_type='genweb.ens.document_interes',
+            path={
+                'query': self.get_path(ens),
+                'depth': 1
+            })],
+            key=get_sortable_key_by_date, reverse=True)
 
     def list_organs_by_ens(self, ens, tipus=None):
         """
@@ -144,7 +157,7 @@ class EnsDataReporter(object):
         """
         query = {
             'portal_type': 'genweb.ens.organ',
-            'sort_on': 'sortable_title',
+            'sort_on': 'getObjPositionInParent',
             'path': {
                 'query': self.get_path(ens),
                 'depth': 1
@@ -172,7 +185,7 @@ class EnsDataReporter(object):
                 'depth': 1
             })]
 
-    def list_carrec_upc_by_organ(self, organ, is_historic=None):
+    def list_carrecs_upc_by_organ(self, organ, is_historic=None):
         """
         List carrec_upc(s) related to the specified ens' organ.
         """
@@ -269,7 +282,7 @@ class EnsDataReporter(object):
             ens_obj = ens.getObject()
             for organ_tipus in ('Govern', 'Assessor'):
                 for organ in self.list_organs_by_ens(ens, organ_tipus):
-                    for carrec in self.list_carrec_upc_by_organ(organ, False):
+                    for carrec in self.list_carrecs_upc_by_organ(organ, False):
                         carrec_obj = carrec.getObject()
                         representacio.append(Representacio(
                             denominacio=get_denominacio(ens_obj),

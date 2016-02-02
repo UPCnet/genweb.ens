@@ -2,8 +2,8 @@
 <object name="genweb.ens.carrec" meta_type="Dexterity FTI"
    i18n:domain="genweb.ens"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Càrrec</property>
- <property name="description" i18n:translate="">Càrrec associat a un òrgan d'un ens</property>
+ <property name="title" i18n:translate="">Càrrec altres org.</property>
+ <property name="description" i18n:translate="">Càrrec associat a un òrgan d'un ens que no és UPC</property>
  <property name="icon_expr"></property>
  <property name="factory">genweb.ens.carrec</property>
  <property

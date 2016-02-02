@@ -40,12 +40,12 @@ class IEns(form.Schema):
     form.fieldset(
         "dades_identificatives",
         label=u"Dades identificatives",
-        fields=['title', 'description', 'acronim', 'codi', 'nif',
-                'figura_juridica', 'numero_identificacio', 'estat',
-                'domicili_social',
-                'adreca_oficines_1', 'adreca_oficines_1_observacions',
-                'adreca_oficines_2', 'adreca_oficines_2_observacions',
-                'telefon', 'web', 'tipologia_upc', 'anotacions']
+        fields=['title', 'acronim', 'description',
+                'estat', 'nif', 'figura_juridica', 'numero_identificacio',
+                'domicili_social', 'adreca_oficines_1', 'adreca_oficines_2',
+                'telefon', 'fax', 'web',
+                'tipologia_upc', 'codi',
+                'dades_identificatives_observacions']
     )
 
     dexteritytextindexer.searchable('title')
@@ -54,21 +54,21 @@ class IEns(form.Schema):
         required=True
     )
 
-    dexteritytextindexer.searchable('description')
-    description = schema.Text(
-        title=_(u"Descripció"),
-        required=False)
-
     dexteritytextindexer.searchable('acronim')
     acronim = schema.TextLine(
         title=_(u"Acrònim"),
         required=True,
     )
 
-    dexteritytextindexer.searchable('codi')
-    codi = schema.TextLine(
-        title=_(u"Codi de classificació"),
+    dexteritytextindexer.searchable('description')
+    description = schema.Text(
+        title=_(u"Descripció"),
         required=False)
+
+    estat = schema.Choice(
+        title=_(u"Estat"),
+        vocabulary=get_vocabulary(estat_values),
+        required=True)
 
     dexteritytextindexer.searchable('nif')
     nif = schema.TextLine(
@@ -86,11 +86,6 @@ class IEns(form.Schema):
         title=_(u"Número d'identificació"),
         required=False)
 
-    estat = schema.Choice(
-        title=_(u"Estat"),
-        vocabulary=get_vocabulary(estat_values),
-        required=True)
-
     dexteritytextindexer.searchable('domicili_social')
     domicili_social = schema.TextLine(
         title=_(u"Domicili social"),
@@ -101,19 +96,9 @@ class IEns(form.Schema):
         title=_(u"Adreça oficines 1"),
         required=False)
 
-    dexteritytextindexer.searchable('adreca_oficines_1_observacions')
-    adreca_oficines_1_observacions = schema.TextLine(
-        title=_(u"Observacions"),
-        required=False)
-
     dexteritytextindexer.searchable('adreca_oficines_2')
     adreca_oficines_2 = schema.TextLine(
         title=_(u"Adreça oficines 2"),
-        required=False)
-
-    dexteritytextindexer.searchable('adreca_oficines_2_observacions')
-    adreca_oficines_2_observacions = schema.TextLine(
-        title=_(u"Observacions"),
         required=False)
 
     dexteritytextindexer.searchable('telefon')
@@ -121,10 +106,14 @@ class IEns(form.Schema):
         title=_(u"Telèfon"),
         required=False)
 
+    dexteritytextindexer.searchable('fax')
+    fax = schema.TextLine(
+        title=_(u"Fax"),
+        required=False)
+
     dexteritytextindexer.searchable('web')
     web = schema.TextLine(
         title=_(u"Web"),
-        description=_(u"Direcció de la pàgina web"),
         required=False)
 
     tipologia_upc = schema.Choice(
@@ -140,9 +129,14 @@ class IEns(form.Schema):
             u"Altra"]),
         required=True)
 
-    dexteritytextindexer.searchable('anotacions')
-    anotacions = schema.Text(
-        title=_(u"Anotacions"),
+    dexteritytextindexer.searchable('codi')
+    codi = schema.TextLine(
+        title=_(u"Codi UPC"),
+        required=False)
+
+    dexteritytextindexer.searchable('dades_identificatives_observacions')
+    dades_identificatives_observacions = schema.Text(
+        title=_(u"Observacions"),
         required=False)
 
     form.fieldset(
@@ -151,7 +145,7 @@ class IEns(form.Schema):
         fields=['aportacio_sn', 'aportacio_import', 'aportacio_moneda',
                 'quota_sn', 'quota_import', 'quota_moneda',
                 'unitat_carrec', 'percentatge_participacio',
-                'percentatge_participacio_observacions',
+                'nombre_membres',
                 'capital_social_sn', 'capital_social_import',
                 'capital_social_moneda', 'participacio_observacions']
     )
@@ -201,9 +195,9 @@ class IEns(form.Schema):
         title=_(u"Percentatge de participació"),
         required=False)
 
-    dexteritytextindexer.searchable('percentatge_participacio_observacions')
-    percentatge_participacio_observacions = schema.Text(
-        title=_(u"Observacions"),
+    dexteritytextindexer.searchable('nombre_membres')
+    nombre_membres = schema.TextLine(
+        title=_(u"Nombre de membres UPC"),
         required=False)
 
     form.widget(capital_social_sn=RadioFieldWidget)
@@ -270,7 +264,7 @@ class IEns(form.Schema):
         required=False)
 
     seu_social_estranger = schema.TextLine(
-        title=_(u"Seu social en el estranger"),
+        title=_(u"Seu social a l'estranger"),
         required=False)
 
     dexteritytextindexer.searchable('marc_legal_observacions')

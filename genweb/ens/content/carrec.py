@@ -3,13 +3,14 @@
 from zope import schema
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component.hooks import getSite
-from zope.interface import directlyProvides
+from zope.interface import directlyProvides, Invalid
 from zope.schema.interfaces import IContextSourceBinder
 from plone.directives import form
 from plone.namedfile.field import NamedBlobFile
 from collective import dexteritytextindexer
 
 from genweb.ens import _
+from genweb.ens.data_access.carrec import CarrecDataReporter
 
 
 class ICarrec(form.Schema):
@@ -25,8 +26,7 @@ class ICarrec(form.Schema):
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
         title=_(u"Cognoms i nom"),
-        required=True
-    )
+        required=True)
 
     dexteritytextindexer.searchable('carrec')
     carrec = schema.TextLine(
@@ -63,15 +63,41 @@ def prettify_representant(representant):
 
 def get_vocabulary_representants_upc(context):
     catalog = getSite().portal_catalog
-    return SimpleVocabulary([
-        SimpleTerm(title=prettify_representant(representant),
+    reporter = CarrecDataReporter(catalog)
+
+    vocabulary_terms = []
+    # Get representants from Consell de Direcció
+    vocabulary_terms.append(SimpleTerm(
+        title="Consell de direcció:",
+        value="consell-de-direccio",
+        token="consell-de-direccio"))
+    vocabulary_terms += [
+        SimpleTerm(title=" - " + prettify_representant(
+                   representant).encode('utf-8'),
                    value=prettify_representant(representant),
                    token=representant.id)
-        for representant in catalog.searchResults(
-            portal_type='genweb.ens.representant',
-            sort_on='sortable_title',
-        )])
+        for representant in reporter.list_representants('consell-de-direccio')]
+
+    # Get representants from Altres
+    vocabulary_terms.append(SimpleTerm(
+        title="Altres:",
+        value="altres",
+        token="altres"))
+    vocabulary_terms += [
+        SimpleTerm(title=" - " + prettify_representant(
+                   representant).encode('utf-8'),
+                   value=prettify_representant(representant),
+                   token=representant.id)
+        for representant in reporter.list_representants('altres')]
+
+    return SimpleVocabulary(vocabulary_terms)
 directlyProvides(get_vocabulary_representants_upc, IContextSourceBinder)
+
+
+def title_constraint(value):
+    if value in ("consell-de-direccio", "altres"):
+        raise Invalid(_(u"Cal que introduïu cognoms i nom"))
+    return True
 
 
 class ICarrecUPC(ICarrec):
@@ -91,5 +117,5 @@ class ICarrecUPC(ICarrec):
     title = schema.Choice(
         title=_(u"Cognoms i nom"),
         source=get_vocabulary_representants_upc,
-        required=True
-    )
+        required=True,
+        constraint=title_constraint)

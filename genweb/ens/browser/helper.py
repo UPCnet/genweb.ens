@@ -22,13 +22,13 @@ def get_user_groups(view):
 
 def get_carpetes_vocabulary(view):
     """
-    Get 3-level folders (e.g. gabinet-juridic in ens/ca/gabinet-juridic/)
-    that match a user group name.
-    Returns a list of tuples with the following structure:
-      - index 0: path of the folder, e.g. /ens/ca/gabinet-juridic
-      - index 1: title of the folder, e.g. Gabinet Jurídic
-      - index 2: boolean representing whether the folder path matches
-        any of the authenticated user's group ids
+    Get 3-level folders (genweb.ens.contenidor_ens actually)
+    (e.g. gabinet-juridic in ens/ca/gabinet-juridic/) that match a portal group
+    id. Return a list of tuples with the following structure:
+      - index 0: path of the folder, e.g. /ens/ca/gabinet-juridic.
+      - index 1: title of the folder, e.g. Gabinet Jurídic.
+      - index 2: boolean representing whether the authenticated user belongs to
+        the matched group.
     """
     portal_groups = get_portal_groups(view)
     user_groups = get_user_groups(view)
@@ -38,7 +38,7 @@ def get_carpetes_vocabulary(view):
              folder.getPath().split('/')[-1] in user_groups)
 
             for folder in catalog.searchResults(
-                portal_type='Folder',
+                portal_type='genweb.ens.contenidor_ens',
                 sort_on='sortable_title',
                 path={
                     'query': '/',

@@ -40,13 +40,12 @@ ens_ai = {
     'estat': u"Pre-alta cancel·lada",
     'domicili_social': u"Carrer Rosselló 99",
     'adreca_oficines_1': u"Avinguda Diagonal 123",
-    'adreca_oficines_1_observacions': u"Oficines principals",
     'adreca_oficines_2': u"Carrer Gran de Sant Andreu 55 1r-1a",
-    'adreca_oficines_2_observacions': u"Oficines secundàries",
     'telefon': u"698767762",
+    'fax': u"987336536",
     'web': u"www.amnesty.org",
     'tipologia_upc': u"Participació Superior",
-    'anotacions': u"Participació recent",
+    'dades_identificatives_observacions': u"Participació recent",
     'aportacio_sn': True,
     'aportacio_import': 2300.50,
     'aportacio_moneda': u"€/any",
@@ -55,7 +54,7 @@ ens_ai = {
     'quota_moneda': u"€/mes",
     'unitat_carrec': u"Desconeguda",
     'percentatge_participacio': 15.35,
-    'percentatge_participacio_observacions': u"Participació força petita",
+    'nombre_membres': u"2 de 10",
     'capital_social_sn': True,
     'capital_social_import': 2000,
     'capital_social_moneda': u"EUR",
@@ -129,14 +128,26 @@ organ_2 = {
 
 organ_3 = {
     'type': 'genweb.ens.organ',
+    'id': 'administracio',
+    'title': u'Administració',
+    'tipus': 'Govern'}
+
+organ_4 = {
+    'type': 'genweb.ens.organ',
     'id': 'justicia',
     'title': u'Justícia',
     'tipus': 'Assessor'}
 
-organ_4 = {
+organ_5 = {
     'type': 'genweb.ens.organ',
     'id': 'investigacio',
     'title': u'Investigació',
+    'tipus': 'Assessor'}
+
+organ_6 = {
+    'type': 'genweb.ens.organ',
+    'id': 'Finances',
+    'title': u'Finances',
     'tipus': 'Assessor'}
 
 carrec_1 = {
@@ -246,7 +257,7 @@ acord_1 = {
     'id': 'primer-acord',
     'title': 'Primer acord',
     'description': "És el primer acord",
-    'data': datetime(2005, 12, 13),
+    'data': datetime(2015, 1, 5),
     'fitxer': MockFile('acord_1.pdf'),
     'organ': 'Patronat'
 }
@@ -258,6 +269,26 @@ acord_2 = {
     'description': "És el segon acord",
     'data': datetime(2015, 1, 3),
     'fitxer': MockFile('acord_2.pdf'),
+    'organ': 'Yoga'
+}
+
+acord_3 = {
+    'type': 'genweb.ens.acord',
+    'id': 'tercer-acord',
+    'title': 'Tercer acord',
+    'description': "És el tercer acord",
+    'data': None,
+    'fitxer': MockFile('acord_3.pdf'),
+    'organ': 'Administració'
+}
+
+acord_4 = {
+    'type': 'genweb.ens.acord',
+    'id': 'quart-acord',
+    'title': 'Quart acord',
+    'description': "És el quart acord",
+    'data': datetime(2015, 1, 4),
+    'fitxer': MockFile('acord_4.pdf'),
     'organ': 'Administració'
 }
 
@@ -266,7 +297,7 @@ escriptura_1 = {
     'id': 'primera-escriptura',
     'title': 'Primera escriptura',
     'description': "És la primera escriptura",
-    'data': datetime(2011, 3, 21),
+    'data': datetime(2012, 5, 25),
     'fitxer': MockFile('escriptura_1.pdf'),
     'notari': 'Asensi Llopis, Neus'
 }
@@ -281,12 +312,32 @@ escriptura_2 = {
     'notari': 'Filiu Torrent, Eli'
 }
 
+escriptura_3 = {
+    'type': 'genweb.ens.escriptura_publica',
+    'id': 'tercera-escriptura',
+    'title': 'Tercera escriptura',
+    'description': "És la tercera escriptura",
+    'data': None,
+    'fitxer': MockFile('escriptura_3.pdf'),
+    'notari': None
+}
+
+escriptura_4 = {
+    'type': 'genweb.ens.escriptura_publica',
+    'id': 'quarta-escriptura',
+    'title': 'Quarta escriptura',
+    'description': "És la quarta escriptura",
+    'data': datetime(2012, 5, 26),
+    'fitxer': MockFile('escriptura_4.pdf'),
+    'notari': 'Salinas Martorell, Héctor'
+}
+
 estatut_1 = {
     'type': 'genweb.ens.estatut',
     'id': 'primer-estatut',
     'title': 'Primer estatut',
     'description': "És el primer estatut",
-    'data': datetime(2001, 11, 23),
+    'data': None,
     'fitxer': MockFile('estatut_1.pdf'),
     'is_vigent': True
 }
@@ -306,9 +357,9 @@ estatut_3 = {
     'id': 'tercer-estatut',
     'title': 'Tercer estatut',
     'description': "És el tercer estatut",
-    'data': datetime(2003, 11, 23),
+    'data': datetime(2002, 11, 22),
     'fitxer': MockFile('estatut_3.pdf'),
-    'is_vigent': False
+    'is_vigent': True
 }
 
 estatut_4 = {
@@ -316,8 +367,28 @@ estatut_4 = {
     'id': 'quart-estatut',
     'title': 'Quart estatut',
     'description': "És el quart estatut",
-    'data': datetime(2004, 11, 23),
+    'data': datetime(2003, 11, 24),
     'fitxer': MockFile('estatut_4.pdf'),
+    'is_vigent': False
+}
+
+estatut_5 = {
+    'type': 'genweb.ens.estatut',
+    'id': 'cinque-estatut',
+    'title': 'Cinquè estatut',
+    'description': "És el cinquè estatut",
+    'data': None,
+    'fitxer': MockFile('estatut_5.pdf'),
+    'is_vigent': False
+}
+
+estatut_6 = {
+    'type': 'genweb.ens.estatut',
+    'id': 'sise-estatut',
+    'title': 'Sisè estatut',
+    'description': "És el sisè estatut",
+    'data': datetime(2003, 11, 23),
+    'fitxer': MockFile('estatut_6.pdf'),
     'is_vigent': False
 }
 
@@ -326,7 +397,7 @@ acta_1 = {
     'id': 'acta-a',
     'title': 'Acta A',
     'description': "És la A",
-    'data': datetime(2000, 3, 12),
+    'data': datetime(2001, 4, 23),
     'fitxer': MockFile('acta_1.pdf')
 }
 
@@ -337,6 +408,15 @@ acta_2 = {
     'description': "És la B",
     'data': datetime(2001, 4, 24),
     'fitxer': MockFile('acta_2.pdf')
+}
+
+acta_3 = {
+    'type': 'genweb.ens.acta_reunio',
+    'id': 'acta-c',
+    'title': 'Acta C',
+    'description': "És la C",
+    'data': None,
+    'fitxer': MockFile('acta_3.pdf')
 }
 
 conveni_1 = {
@@ -353,8 +433,17 @@ conveni_2 = {
     'id': 'conveni-segon',
     'title': 'Segon conveni',
     'description': "És el segon",
-    'data': datetime(2011, 9, 2),
+    'data': None,
     'fitxer': MockFile('conveni_2.pdf')
+}
+
+conveni_3 = {
+    'type': 'genweb.ens.conveni',
+    'id': 'conveni-tercer',
+    'title': 'Tercer conveni',
+    'description': "És el tercer",
+    'data': datetime(2010, 9, 3),
+    'fitxer': MockFile('conveni_3.pdf')
 }
 
 document_1 = {
@@ -362,7 +451,7 @@ document_1 = {
     'id': 'document-primer',
     'title': 'Primer document',
     'description': "És el primer",
-    'data': datetime(2011, 4, 12),
+    'data': None,
     'fitxer': MockFile('document_1.pdf')
 }
 
@@ -373,4 +462,13 @@ document_2 = {
     'description': "És el segon",
     'data': datetime(2013, 4, 12),
     'fitxer': MockFile('document_2.pdf')
+}
+
+document_3 = {
+    'type': 'genweb.ens.document_interes',
+    'id': 'document-tercer',
+    'title': 'Tercer document',
+    'description': "És el tercer",
+    'data': datetime(2013, 4, 11),
+    'fitxer': MockFile('document_3.pdf')
 }
