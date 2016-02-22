@@ -27,7 +27,7 @@
           <th style="width: 8%;">NIF</th>
           <th style="width: 10%;">Estat</th>
           <th style="width: 10%;">Fig. jurídica</th>
-          <th style="width: 15%;">Seu social</th>
+          <th style="width: 15%;">Adm. Pública d&apos;adscripció</th>
           <th style="width: 7%;">% part.</th>
           <th style="width: 10%;">Ap. inicial</th>
           <th style="width: 10%;">Quota</th>
@@ -41,7 +41,7 @@
           <td tal:content="ens/nif"/>
           <td tal:content="ens/estat"/>
           <td tal:content="ens/figura_juridica"/>
-          <td tal:content="ens/seu_social"/>
+          <td tal:content="ens/adscripcio"/>
           <td class="numeric" tal:content="ens/percentatge_participacio"/>
           <td class="numeric" tal:content="ens/aportacio"/>
           <td class="numeric" tal:content="ens/quota"/>

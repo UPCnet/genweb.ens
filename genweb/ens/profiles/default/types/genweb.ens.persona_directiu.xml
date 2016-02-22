@@ -21,6 +21,10 @@
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">plone.dexterity.content.Container</property>
 
+ <property name="allowed_content_types">
+  <element value="genweb.ens.documentacio"/>
+ </property>
+
  <property name="behaviors">
   <element value="plone.app.dexterity.behaviors.metadata.IPublication"/>
   <element value="plone.app.dexterity.behaviors.metadata.IOwnership"/>
@@ -34,7 +38,7 @@
   <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
  </property>
 
- <property name="schema">genweb.ens.content.persona_directiu.IPersonaContacte</property>
+ <property name="schema">genweb.ens.content.persona_directiu.IPersonaDirectiu</property>
  <property
     name="model_source">&lt;model xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
       &lt;schema /&gt;

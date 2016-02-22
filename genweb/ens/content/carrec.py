@@ -6,7 +6,6 @@ from zope.component.hooks import getSite
 from zope.interface import directlyProvides, Invalid
 from zope.schema.interfaces import IContextSourceBinder
 from plone.directives import form
-from plone.namedfile.field import NamedBlobFile
 from collective import dexteritytextindexer
 
 from genweb.ens import _
@@ -35,11 +34,6 @@ class ICarrec(form.Schema):
 
     data_inici = schema.Date(
         title=_(u"Data d'inici"),
-        required=False)
-
-    document_nomenament = NamedBlobFile(
-        title=_(u"Document de nomenament"),
-        description=_(u"Puja un fitxer"),
         required=False)
 
     data_fi = schema.Date(
@@ -75,7 +69,7 @@ def get_vocabulary_representants_upc(context):
         SimpleTerm(title=" - " + prettify_representant(
                    representant).encode('utf-8'),
                    value=prettify_representant(representant),
-                   token=representant.id)
+                   token=representant.getRID())
         for representant in reporter.list_representants('consell-de-direccio')]
 
     # Get representants from Altres

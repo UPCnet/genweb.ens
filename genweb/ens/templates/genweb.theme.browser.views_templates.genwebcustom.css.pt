@@ -89,8 +89,7 @@
 
 .ens-metadata tr.historic
 {
-    background: #f7f7f7;
-    opacity: 0.8;
+    background: #ccc;
 }
 
 /*

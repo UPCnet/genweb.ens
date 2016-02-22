@@ -66,6 +66,7 @@ ens_ai = {
     'data_entrada_descripcio': u"Va ser un gran dia",
     'seu_social': u"Resta d'Espanya",
     'seu_social_stranger': None,
+    'adscripcio': u'Vallés oriental',
     'marc_legal_observacions': u"És un marc legal impecable"}
 
 ens_1 = {
@@ -79,6 +80,7 @@ ens_1 = {
     'figura_juridica': u"Fundació",
     'seu_social': u"Resta d'Espanya",
     'seu_social_stranger': None,
+    'adscripcio': u"Vallés occidental",
     'percentatge_participacio': 15.35,
     'aportacio_sn': True,
     'aportacio_import': 2300.50,
@@ -99,6 +101,7 @@ ens_2 = {
     'figura_juridica': u"Sense NIF",
     'seu_social': u"Estranger",
     'seu_social_estranger': u"Dublín",
+    'adscripcio': u"Vallés oriental",
     'percentatge_participacio': None,
     'aportacio_sn': False,
     'aportacio_import': None,
@@ -268,7 +271,7 @@ acord_2 = {
     'title': 'Segon acord',
     'description': "És el segon acord",
     'data': datetime(2015, 1, 3),
-    'fitxer': MockFile('acord_2.pdf'),
+    'fitxer': None,
     'organ': 'Yoga'
 }
 
@@ -308,7 +311,7 @@ escriptura_2 = {
     'title': 'Segona escriptura',
     'description': "És la segona escriptura",
     'data': datetime(2012, 5, 24),
-    'fitxer': MockFile('escriptura_2.pdf'),
+    'fitxer': None,
     'notari': 'Filiu Torrent, Eli'
 }
 
@@ -358,7 +361,7 @@ estatut_3 = {
     'title': 'Tercer estatut',
     'description': "És el tercer estatut",
     'data': datetime(2002, 11, 22),
-    'fitxer': MockFile('estatut_3.pdf'),
+    'fitxer': None,
     'is_vigent': True
 }
 
@@ -378,7 +381,7 @@ estatut_5 = {
     'title': 'Cinquè estatut',
     'description': "És el cinquè estatut",
     'data': None,
-    'fitxer': MockFile('estatut_5.pdf'),
+    'fitxer': None,
     'is_vigent': False
 }
 
@@ -407,7 +410,7 @@ acta_2 = {
     'title': 'Acta B',
     'description': "És la B",
     'data': datetime(2001, 4, 24),
-    'fitxer': MockFile('acta_2.pdf')
+    'fitxer': None
 }
 
 acta_3 = {
@@ -425,7 +428,7 @@ conveni_1 = {
     'title': 'Primer conveni',
     'description': "És el primer",
     'data': datetime(2010, 9, 2),
-    'fitxer': MockFile('conveni_1.pdf')
+    'fitxer': None
 }
 
 conveni_2 = {
@@ -470,5 +473,31 @@ document_3 = {
     'title': 'Tercer document',
     'description': "És el tercer",
     'data': datetime(2013, 4, 11),
-    'fitxer': MockFile('document_3.pdf')
+    'fitxer': None
+}
+
+representant_1 = {
+    'type': 'genweb.ens.representant',
+    'id': 'jose-vicente-osorio',
+    'title': u'José Vicente Osorio',
+    'carrec': u'Vicerrector de Música'
+}
+
+representant_1_bis = {
+    'type': 'genweb.ens.representant',
+    'id': 'jose-vicente-osorio',
+    'title': u'José Vicente Osorio',
+    'carrec': u'Vicerrector de Concerts'
+}
+
+folder_consell_direccio = {
+    'type': 'Folder',
+    'id': 'consell-de-direccio',
+    'title': u'Consell de direcció'
+}
+
+folder_altres = {
+    'type': 'Folder',
+    'id': 'altres',
+    'title': u'Altres'
 }

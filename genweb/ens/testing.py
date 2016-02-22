@@ -23,19 +23,26 @@ class GenwebEnsLayer(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         """Set up Zope."""
         # Load ZCML
+        import genweb.upc
         import genweb.ens
+        self.loadZCML(package=genweb.upc)
         self.loadZCML(package=genweb.ens)
+        z2.installProduct(app, 'genweb.controlpanel')
+        z2.installProduct(app, 'genweb.theme')
         z2.installProduct(app, 'genweb.ens')
+        z2.installProduct(app, 'collective.js.jqueryui')
 
     def setUpPloneSite(self, portal):
         """Set up Plone."""
         # Install into Plone site using portal_setup
+        applyProfile(portal, 'genweb.controlpanel:default')
+        applyProfile(portal, 'genweb.theme:default')
         applyProfile(portal, 'genweb.ens:default')
+        applyProfile(portal, 'collective.js.jqueryui:default')
 
         # Login and create some test content
         setRoles(portal, TEST_USER_ID, ['Manager'])
         login(portal, TEST_USER_NAME)
-        portal.invokeFactory('Folder', 'folder')
 
         # Commit so that the test browser sees these objects
         portal.portal_catalog.clearFindAndRebuild()
@@ -44,7 +51,10 @@ class GenwebEnsLayer(PloneSandboxLayer):
 
     def tearDownZope(self, app):
         """Tear down Zope."""
+        z2.uninstallProduct(app, 'collective.js.jqueryui')
         z2.uninstallProduct(app, 'genweb.ens')
+        z2.uninstallProduct(app, 'genweb.theme')
+        z2.uninstallProduct(app, 'genweb.controlpanel')
 
 
 FIXTURE = GenwebEnsLayer()

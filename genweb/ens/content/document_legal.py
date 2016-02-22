@@ -31,4 +31,4 @@ class IDocumentLegal(form.Schema):
     fitxer = NamedBlobFile(
         title=_(u"Fitxer"),
         description=_(u"Puja un fitxer"),
-        required=True)
+        required=False)

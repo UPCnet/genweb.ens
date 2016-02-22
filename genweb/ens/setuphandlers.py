@@ -33,21 +33,23 @@ def add_catalog_indexes(catalog):
             catalog.manage_reindexIndex(ids=indexables)
 
 
-def add_folder(container, title, allowed_types, exclude_from_nav=False):
+def add_container(container, type, title,
+                  allowed_types=None, exclude_from_nav=False):
     folder_id = getUtility(IIDNormalizer).normalize(title)
     if folder_id not in container:
         folder = api.content.create(
-            type='Folder',
+            type=type,
             id=folder_id,
             title=title,
             container=container)
         api.content.transition(
             obj=folder,
             transition='publishtointranet')
-        behavior = ISelectableConstrainTypes(folder)
-        behavior.setConstrainTypesMode(1)
-        behavior.setLocallyAllowedTypes(allowed_types)
-        behavior.setImmediatelyAddableTypes(allowed_types)
+        if allowed_types:
+            behavior = ISelectableConstrainTypes(folder)
+            behavior.setConstrainTypesMode(1)
+            behavior.setLocallyAllowedTypes(allowed_types)
+            behavior.setImmediatelyAddableTypes(allowed_types)
         folder.exclude_from_nav = exclude_from_nav
     return container[folder_id]
 
@@ -70,14 +72,19 @@ def add_representant_upc(folder, title, carrec):
 def add_representants_upc():
     portal = api.portal.get()
     if 'ca' in portal:
-        representants_folder = add_folder(
-            portal['ca'], "Representants UPC", ('Folder', ), True)
-        consell_direccio_folder = add_folder(
-            representants_folder,
-            u"Consell de Direcció", ('genweb.ens.representant',))
-        add_folder(
-            representants_folder,
-            "Altres", ('genweb.ens.representant',))
+        representants_folder = add_container(
+            container=portal['ca'],
+            type='Folder',
+            title=u"Representants UPC",
+            exclude_from_nav=True)
+        consell_direccio_folder = add_container(
+            container=representants_folder,
+            type='genweb.ens.contenidor_representants',
+            title=u"Consell de Direcció")
+        add_container(
+            container=representants_folder,
+            type='genweb.ens.contenidor_representants',
+            title=u"Altres")
 
         consell_direccio_file_path = os.path.join(
             os.path.dirname(os.path.realpath(__file__)),

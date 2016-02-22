@@ -33,6 +33,25 @@ Vistes disponibles:
 - ``taula_identificativa``
 - ``taula_identificativa_csv``
 
+La vista homepage
+-----------------
+
+La vista ``homepage`` conté un cercador de contingut de tipus
+``genweb.ens.ens``. Els possibles valors dels camps de cerca *Figura jurídica*
+i *Estat* són fixos. En canvi, els del camp *Cercar solament en* estan
+calculats utilitzant l'estat actual del web i tenen les següents
+característiques:
+
+* Són noms de carpetes contingudes a la carpeta arrel de l'idioma. Per exemple,
+  *Gabinet del Rector*, que té el *path* ``ens/ca/gabinet-del-rector``.
+* Els identificadors de les carpetes coincideixen amb l'identificador d'algun
+  dels grups d'usuaris definits al lloc web. Per exemple, `gabinet-del-rector`.
+* Els valors apareixen seleccionats si l'usuari que està identificat al lloc
+  web pertany al grup d'usuaris relacionat amb la carpeta.
+* Si hi ha un o més valors seleccionats, la cerca ignorarà el contingut que no
+  estiga dintre de les carpetes seleccionades. Si no n'hi ha cap, la cerca
+  inclourà resultats continguts en qualsevol carpeta del lloc web.
+
 Instal·lació
 ============
 

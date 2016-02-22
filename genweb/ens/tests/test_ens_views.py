@@ -224,6 +224,11 @@ class TestEnsViews(FunctionalTestCase):
         self.assertIn("<dd>{0}</dd>".format(
             ens.seu_social.encode('utf-8')), self.browser.contents)
 
+        self.assertIn("<dt>Adm. Pública d&apos;adscripció</dt>",
+                      self.browser.contents)
+        self.assertIn("<dd>{0}</dd>".format(
+            ens.adscripcio.encode('utf-8')), self.browser.contents)
+
         self.assertIn("<dt>Observacions</dt>", self.browser.contents)
         self.assertIn("<dd>{0}</dd>".format(
             ens.marc_legal_observacions.encode('utf-8')),

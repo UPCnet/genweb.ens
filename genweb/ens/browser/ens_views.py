@@ -46,6 +46,10 @@ class View(dexterity.DisplayForm):
         return get_seu_social(self.context)
 
     @property
+    def adscripcio(self):
+        return self.context.adscripcio or "-"
+
+    @property
     def unitats(self):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
         return reporter.list_unitats_by_ens_obj(self.context)
@@ -104,6 +108,10 @@ class View(dexterity.DisplayForm):
     def contactes(self):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
         return reporter.list_contactes_by_ens_obj(self.context)
+
+    def get_file_href(self, content):
+        return "{0}/view/++widget++form.widgets.fitxer/@@download/{1}".format(
+            content.absolute_url(), content.fitxer.filename)
 
     def list_carrecs_by_organ(self, organ, is_historic=None):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))

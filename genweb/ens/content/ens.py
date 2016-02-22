@@ -229,7 +229,8 @@ class IEns(form.Schema):
         fields=['data_constitucio', 'entitats_constituents',
                 'entitats_actuals', 'data_entrada',
                 'data_entrada_descripcio', 'seu_social',
-                'seu_social_estranger', 'marc_legal_observacions']
+                'seu_social_estranger', 'adscripcio',
+                'marc_legal_observacions']
     )
 
     data_constitucio = schema.Date(
@@ -265,6 +266,11 @@ class IEns(form.Schema):
 
     seu_social_estranger = schema.TextLine(
         title=_(u"Seu social a l'estranger"),
+        required=False)
+
+    dexteritytextindexer.searchable('adscripcio')
+    adscripcio = schema.TextLine(
+        title=_(u"Adm. Pública d'adscripció"),
         required=False)
 
     dexteritytextindexer.searchable('marc_legal_observacions')

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 
-from genweb.ens.content.ens import (get_denominacio, get_seu_social,
+from genweb.ens.content.ens import (get_denominacio,
                                     get_percentatge_participacio,
                                     get_aportacio, get_quota)
 
@@ -15,7 +15,7 @@ class EnsSearchResult(object):
 
 class Identificacio(object):
     def __init__(self, codi, denominacio, absolute_url, nif, estat,
-                 figura_juridica, seu_social, percentatge_participacio,
+                 figura_juridica, adscripcio, percentatge_participacio,
                  aportacio, quota, web):
         self.codi = codi
         self.denominacio = denominacio
@@ -23,7 +23,7 @@ class Identificacio(object):
         self.nif = nif
         self.estat = estat
         self.figura_juridica = figura_juridica
-        self.seu_social = seu_social
+        self.adscripcio = adscripcio
         self.percentatge_participacio = percentatge_participacio
         self.aportacio = aportacio
         self.quota = quota
@@ -262,7 +262,7 @@ class EnsDataReporter(object):
                 nif=ens_obj.nif or "-",
                 estat=ens_obj.estat or "-",
                 figura_juridica=ens_obj.figura_juridica or "-",
-                seu_social=get_seu_social(ens_obj),
+                adscripcio=ens_obj.adscripcio or "-",
                 percentatge_participacio=get_percentatge_participacio(ens_obj),
                 aportacio=get_aportacio(ens_obj),
                 quota=get_quota(ens_obj),

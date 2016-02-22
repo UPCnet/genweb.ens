@@ -73,17 +73,24 @@
         </dl>
         <h3 i18n:translate="Càrrecs directius">Càrrecs directius</h3>
         <tal:block define="directius view/directius">
-        <table tal:condition="directius" class="ens-taula">
+          <tal:block condition="directius">
+          <input type="checkbox" class="label-aligned selector-input-historic"
+                 tal:attributes="id string:cb-directius"/>
+          <label i18n:translate="Mostra els càrrecs històrics"
+                 tal:attributes="for string:cb-directius">Mostra els càrrecs històrics</label>
+          <table class="ens-taula">
           <thead>
             <tr>
               <th i18n:translate="Nom" class="column-medium">Nom</th>
               <th i18n:translate="Càrrec" class="column-medium">Càrrec</th>
               <th i18n:translate="Telèfon" class="column-small">Telèfon</th>
-              <th i18n:translate="Email">Email</th>
+              <th i18n:translate="Email" class="column-small">Email</th>
+              <th i18n:translate="Històric" class="column-center">Històric</th>
             </tr>
           </thead>
           <tbody>
-            <tr tal:repeat="directiu directius">
+            <tr tal:repeat="directiu directius"
+                tal:attributes="class python: 'historic' if directiu.is_historic else ''">
               <td>
                 <a tal:attributes="href directiu/absolute_url"
                    tal:content="directiu/title"/>
@@ -91,11 +98,16 @@
               <td tal:content="python: directiu.carrec or '-'"/>
               <td tal:content="python: directiu.telefon or '-'"/>
               <td tal:content="python: directiu.email or '-'"/>
+              <td class="column-center">
+                <input type="checkbox" class="hidable-group-element"
+                       tal:attributes="checked directiu/is_historic; disabled python: True"/>
+              </td>
             </tr>
           </tbody>
-        </table>
-        <p tal:condition="not: directius"
-          i18n:translate="No hi ha càrrecs directius">No hi ha càrrecs directius</p>
+          </table>
+          </tal:block>
+          <p tal:condition="not: directius"
+             i18n:translate="No hi ha càrrecs directius">No hi ha càrrecs directius</p>
         </tal:block>
         <h3 i18n:translate="Persones de contacte">Persones de contacte</h3>
         <tal:block define="contactes view/contactes">
@@ -307,6 +319,9 @@
           <dt i18n:translate="Seu social">Seu social</dt>
           <dd tal:content="view/seu_social"/>
 
+          <dt i18n:translate="Adm. Pública d&apos;adscripció">Adm. Pública d&apos;adscripció</dt>
+          <dd tal:content="view/adscripcio"/>
+
           <dt i18n:translate="Observacions">Observacions</dt>
           <dd tal:content="python: context.marc_legal_observacions or '-'"/>
         </dl>
@@ -331,8 +346,10 @@
                    tal:content="acord/title"/>
               </td>
               <td>
-                <a tal:attributes="href string:${acord/absolute_url}/view/++widget++form.widgets.fitxer/@@download/${acord/fitxer/filename}"
+                <a tal:condition="acord/fitxer"
+                   tal:attributes="href python: view.get_file_href(acord)"
                    tal:content="acord/fitxer/filename"/>
+                <tal:block tal:condition="not: acord/fitxer" tal:content="string: -"/>
               </td>
             </tr>
           </tbody>
@@ -361,8 +378,10 @@
               </td>
               <td tal:content="python: escriptura.notari or '-'"/>
               <td>
-                <a tal:attributes="href string:${escriptura/absolute_url}/view/++widget++form.widgets.fitxer/@@download/${escriptura/fitxer/filename}"
+                <a tal:condition="escriptura/fitxer"
+                   tal:attributes="href python: view.get_file_href(escriptura)"
                    tal:content="escriptura/fitxer/filename"/>
+                <tal:block tal:condition="not: escriptura/fitxer" tal:content="string: -"/>
               </td>
             </tr>
           </tbody>
@@ -390,8 +409,10 @@
                    tal:content="estatut/title"/>
               </td>
               <td>
-                <a tal:attributes="href string:${estatut/absolute_url}/view/++widget++form.widgets.fitxer/@@download/${estatut/fitxer/filename}"
+                <a tal:condition="estatut/fitxer"
+                   tal:attributes="href python: view.get_file_href(estatut)"
                    tal:content="estatut/fitxer/filename"/>
+                <tal:block tal:condition="not: estatut/fitxer" tal:content="string: -"/>
               </td>
             </tr>
           </tbody>
@@ -417,8 +438,10 @@
                    tal:content="estatut/title"/>
               </td>
               <td>
-                <a tal:attributes="href string:${estatut/absolute_url}/view/++widget++form.widgets.fitxer/@@download/${estatut/fitxer/filename}"
+                <a tal:condition="estatut/fitxer"
+                   tal:attributes="href python: view.get_file_href(estatut)"
                    tal:content="estatut/fitxer/filename"/>
+                <tal:block tal:condition="not: estatut/fitxer" tal:content="string: -"/>
               </td>
             </tr>
           </tbody>
@@ -445,8 +468,10 @@
                    tal:content="acta/title"/>
               </td>
               <td>
-                <a tal:attributes="href string:${acta/absolute_url}/view/++widget++form.widgets.fitxer/@@download/${acta/fitxer/filename}"
+                <a tal:condition="acta/fitxer"
+                   tal:attributes="href python: view.get_file_href(acta)"
                    tal:content="acta/fitxer/filename"/>
+                <tal:block tal:condition="not: acta/fitxer" tal:content="string: -"/>
               </td>
             </tr>
           </tbody>
@@ -473,8 +498,10 @@
                    tal:content="conveni/title"/>
               </td>
               <td>
-                <a tal:attributes="href string:${conveni/absolute_url}/view/++widget++form.widgets.fitxer/@@download/${conveni/fitxer/filename}"
+                <a tal:condition="conveni/fitxer"
+                   tal:attributes="href python: view.get_file_href(conveni)"
                    tal:content="conveni/fitxer/filename"/>
+                <tal:block tal:condition="not: conveni/fitxer" tal:content="string: -"/>
               </td>
             </tr>
           </tbody>
@@ -501,8 +528,10 @@
                    tal:content="document/title"/>
               </td>
               <td>
-                <a tal:attributes="href string:${document/absolute_url}/view/++widget++form.widgets.fitxer/@@download/${document/fitxer/filename}"
+                <a tal:condition="document/fitxer"
+                   tal:attributes="href python: view.get_file_href(document)"
                    tal:content="document/fitxer/filename"/>
+                <tal:block tal:condition="not: document/fitxer" tal:content="string: -"/>
               </td>
             </tr>
           </tbody>
