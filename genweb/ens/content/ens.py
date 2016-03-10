@@ -15,6 +15,7 @@ figura_juridica_values = [
     u"Fundació",
     u"Societat",
     u"Consorci",
+    u"Associació",
     u"Sense NIF",
     u"Altra"]
 
