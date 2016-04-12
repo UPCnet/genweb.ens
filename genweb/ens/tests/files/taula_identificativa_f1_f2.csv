@@ -1,4 +1,4 @@
-Codi;Denominació;NIF;Estat;Fig. jurídica;Adscripció;% part.;Ap. inicial;Quota;Web
--;Amitges (Amt);-;-;-;-;-;-;-;-
-11A;Amnistía Internacional (AI);X82771235;Pre-alta cancel·lada;Fundació;Vallés occidental;15.35%;2,300.50 €/any;253.44 €/mes;www.amnistia.org
-22A;Green Peace (Gp);-;Pre-Baixa;Sense NIF;Vallés oriental;-;No;253.44;www.greenpeace.org
+Codi;Denominació;NIF;Estat;Fig. jurídica;Adscripció;% part.;Ap. inicial;Quota;Etiquetes;Web
+-;Amitges (Amt);-;-;-;-;-;-;-;-;-
+11A;Amnistía Internacional (AI);X82771235;Pre-alta cancel·lada;Fundació;Vallés occidental;15.35%;2,300.50 €/any;253.44 €/mes;Etiquetes amnistía;www.amnistia.org
+22A;Green Peace (Gp);-;Pre-Baixa;Sense NIF;Vallés oriental;-;No;253.44;Etiquetes green pís;www.greenpeace.org

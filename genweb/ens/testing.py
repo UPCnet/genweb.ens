@@ -27,6 +27,8 @@ class GenwebEnsLayer(PloneSandboxLayer):
         import genweb.ens
         self.loadZCML(package=genweb.upc)
         self.loadZCML(package=genweb.ens)
+        z2.installProduct(app, 'Products.DateRecurringIndex')
+        z2.installProduct(app, 'plone.app.contenttypes')
         z2.installProduct(app, 'genweb.controlpanel')
         z2.installProduct(app, 'genweb.theme')
         z2.installProduct(app, 'genweb.ens')
@@ -35,6 +37,7 @@ class GenwebEnsLayer(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         """Set up Plone."""
         # Install into Plone site using portal_setup
+        applyProfile(portal, 'plone.app.contenttypes:default')
         applyProfile(portal, 'genweb.controlpanel:default')
         applyProfile(portal, 'genweb.theme:default')
         applyProfile(portal, 'genweb.ens:default')
@@ -55,6 +58,8 @@ class GenwebEnsLayer(PloneSandboxLayer):
         z2.uninstallProduct(app, 'genweb.ens')
         z2.uninstallProduct(app, 'genweb.theme')
         z2.uninstallProduct(app, 'genweb.controlpanel')
+        z2.uninstallProduct(app, 'plone.app.contenttypes')
+        z2.uninstallProduct(app, 'Products.DateRecurringIndex')
 
 
 FIXTURE = GenwebEnsLayer()

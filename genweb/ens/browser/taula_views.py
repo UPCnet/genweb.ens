@@ -57,6 +57,7 @@ class TaulaIdentificativaCsv(grok.View, Taula):
         "% part.",
         "Ap. inicial",
         "Quota",
+        "Etiquetes",
         "Web"]
 
     def render(self):
@@ -89,6 +90,7 @@ class TaulaIdentificativaCsv(grok.View, Taula):
                 ens.percentatge_participacio.encode('utf-8'),
                 ens.aportacio.encode('utf-8'),
                 ens.quota.encode('utf-8'),
+                ens.etiquetes.encode('utf-8'),
                 ens.web.encode('utf-8')
             ])
 
@@ -151,9 +153,3 @@ class TaulaRepresentacioCsv(grok.View, Taula):
                 ens.carrec.encode('utf-8'),
                 ens.data_nomenament.encode('utf-8')
             ])
-
-
-class TaulaTransparencia(grok.View, Taula):
-    grok.name('taula_transparencia')
-    grok.context(Interface)
-    grok.layer(IGenwebEnsLayer)

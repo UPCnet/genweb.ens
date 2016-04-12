@@ -26,12 +26,13 @@
           <th style="width: 15%;">Denomimació</th>
           <th style="width: 8%;">NIF</th>
           <th style="width: 10%;">Estat</th>
-          <th style="width: 10%;">Fig. jurídica</th>
-          <th style="width: 15%;">Adm. Pública d&apos;adscripció</th>
+          <th style="width: 8%;">Fig. jurídica</th>
+          <th style="width: 15%;">Adm. Púb. Adscrip.</th>
           <th style="width: 7%;">% part.</th>
-          <th style="width: 10%;">Ap. inicial</th>
-          <th style="width: 10%;">Quota</th>
-          <th style="width: 10%;">Web</th>
+          <th style="width: 8%;">Ap. inicial</th>
+          <th style="width: 8%;">Quota</th>
+          <th style="width: 8%;">Etiquetes</th>
+          <th style="width: 8%;">Web</th>
         </tr>
       </thead> 
       <tbody>
@@ -45,6 +46,7 @@
           <td class="numeric" tal:content="ens/percentatge_participacio"/>
           <td class="numeric" tal:content="ens/aportacio"/>
           <td class="numeric" tal:content="ens/quota"/>
+          <td tal:content="ens/etiquetes"/>
           <td tal:content="ens/web"/>
         </tr>
       </tbody>

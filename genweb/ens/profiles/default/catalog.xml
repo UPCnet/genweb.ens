@@ -2,4 +2,6 @@
 <object name="portal_catalog">
   <column value="acronim"/>
   <column value="carrec"/>
+  <column value="is_historic"/>
+  <column value="composicio"/>
 </object>

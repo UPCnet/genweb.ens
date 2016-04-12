@@ -118,6 +118,11 @@ class View(dexterity.DisplayForm):
         return reporter.list_carrecs_by_organ_grouped_by_ens_obj(
             organ, is_historic=is_historic)
 
+    def prettify_organ_title(self, organ):
+        return "{0}{1}".format(
+            organ.Title,
+            _(u" (Històric)").encode('utf-8') if organ.is_historic else u"")
+
 
 class Search(HomePageBase):
     grok.name('homepage')

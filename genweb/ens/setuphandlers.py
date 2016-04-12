@@ -100,8 +100,20 @@ def add_representants_upc():
                     carrec=row[0].decode('utf-8'))
 
 
+def add_collections_folder():
+    portal = api.portal.get()
+    if 'ca' in portal:
+        add_container(
+            container=portal['ca'],
+            type='Folder',
+            title=u"Col·leccions",
+            allowed_types=('Collection',),
+            exclude_from_nav=True)
+
+
 def add_predefined_data():
     add_representants_upc()
+    add_collections_folder()
 
 
 def setupVarious(context):

@@ -16,7 +16,7 @@ class EnsSearchResult(object):
 class Identificacio(object):
     def __init__(self, codi, denominacio, absolute_url, nif, estat,
                  figura_juridica, adscripcio, percentatge_participacio,
-                 aportacio, quota, web):
+                 aportacio, quota, etiquetes, web):
         self.codi = codi
         self.denominacio = denominacio
         self.absolute_url = absolute_url
@@ -27,6 +27,7 @@ class Identificacio(object):
         self.percentatge_participacio = percentatge_participacio
         self.aportacio = aportacio
         self.quota = quota
+        self.etiquetes = etiquetes
         self.web = web
 
 
@@ -266,6 +267,7 @@ class EnsDataReporter(object):
                 percentatge_participacio=get_percentatge_participacio(ens_obj),
                 aportacio=get_aportacio(ens_obj),
                 quota=get_quota(ens_obj),
+                etiquetes=ens_obj.etiquetes or "-",
                 web=ens_obj.web or "-"))
         return identificacio
 

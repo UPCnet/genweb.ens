@@ -9,4 +9,27 @@ $(document).ready(function()
             lang: "ca",
             msg_empty: {"ca": "(No hi ha càrrecs històrics)"}
     });
+    $("input.composicio-switch").each(function(index, item)
+    {
+        function display(checkbox)
+        {
+            if (checkbox.prop('checked'))
+            {
+                checkbox.next().next().show();
+            }
+            else
+            {
+                checkbox.next().next().hide();
+            }
+        }
+        if ($(this).next().next().html() == '')
+        {
+            $(this).parent().css('display', 'none');
+        }
+        else
+        {
+            $(item).click(function(){display($(item))});
+            display($(item));
+        }
+    });
 });

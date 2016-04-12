@@ -21,8 +21,8 @@
           <dt i18n:translate="Acrònim">Acrònim</dt>
           <dd tal:content="python: context.acronim or '-'"/>
 
-          <dt i18n:translate="Descripció">Descripció</dt>
-          <dd tal:content="python: context.description or '-'"
+          <dt i18n:translate="Objecte social">Objecte social</dt>
+          <dd tal:content="python: context.objecte_social or '-'"
               class="fieldset-end"/>
 
 
@@ -40,14 +40,14 @@
               class="fieldset-end"/>
 
 
-          <dt i18n:translate="Domicili social">Domicili social</dt>
-          <dd tal:content="python: context.domicili_social or '-'"/>
+          <dt i18n:translate="Domicili social (població)">Domicili social (població)</dt>
+          <dd tal:content="python: context.domicili_social_poblacio or '-'"/>
 
-          <dt i18n:translate="Adreça oficines 1">Adreça oficines 1</dt>
-          <dd tal:content="python: context.adreca_oficines_1 or '-'"/>
+          <dt i18n:translate="Domicili social (adreça)">Domicili social (adreça)</dt>
+          <dd tal:content="python: context.domicili_social_adreca or '-'"/>
 
-          <dt i18n:translate="Adreça oficines 2">Adreça oficines 2</dt>
-          <dd tal:content="python: context.adreca_oficines_2 or '-'"/>
+          <dt i18n:translate="Adreça 2">Adreça 2</dt>
+          <dd tal:content="python: context.adreca_2 or '-'"/>
 
           <dt i18n:translate="Telèfon">Telèfon</dt>
           <dd tal:content="python: context.telefon or '-'"/>
@@ -64,7 +64,10 @@
           <dd tal:content="python: context.tipologia_upc or '-'"/>
 
           <dt i18n:translate="Codi UPC">Codi UPC</dt>
-          <dd tal:content="python: context.codi or '-'"
+          <dd tal:content="python: context.codi or '-'"/>
+
+          <dt i18n:translate="Etiquetes">Etiquetes</dt>
+          <dd tal:content="python: context.etiquetes or '-'"
               class="fieldset-end"/>
 
 
@@ -106,8 +109,7 @@
           </tbody>
           </table>
           </tal:block>
-          <p tal:condition="not: directius"
-             i18n:translate="No hi ha càrrecs directius">No hi ha càrrecs directius</p>
+          <p tal:condition="not: directius">---</p>
         </tal:block>
         <h3 i18n:translate="Persones de contacte">Persones de contacte</h3>
         <tal:block define="contactes view/contactes">
@@ -132,8 +134,7 @@
             </tr>
           </tbody>
         </table>
-        <p tal:condition="not: contactes"
-          i18n:translate="No hi ha persones de contacte">No hi ha persones de contacte</p>
+        <p tal:condition="not: contactes">---</p>
         </tal:block>
         </div>
 
@@ -154,7 +155,7 @@
           <dt i18n:translate="Percentatge de participació">Percentatge de participació</dt>
           <dd tal:content="view/percentatge_participacio"/>
 
-          <dt i18n:translate="Nombre de membres UPC">Nombre de membres UPC</dt>
+          <dt i18n:translate="Membres UPC als òrgans de govern">Membres UPC als òrgans de govern</dt>
           <dd tal:content="python: context.nombre_membres or '-'"/>
 
           <dt i18n:translate="Part. en cap. social o fons patrimonial">Part. en cap. social o fons patrimonial</dt>
@@ -168,9 +169,16 @@
         <tal:block define="organs view/organs_govern">
         <tal:block repeat="organ organs">
           <section class="ens-metadata-level-2">
-          <h4><a tal:content="organ/Title"
+          <h4><a tal:content="python: view.prettify_organ_title(organ)"
                  tal:attributes="href organ/getURL"/>
           </h4>
+          <div>
+            <input type="checkbox" class="composicio-switch label-aligned"
+                   tal:attributes="id python: 'cb-composicio-' + organ.id"/>
+            <label i18n:translate="Mostra composició"
+                   tal:attributes="for python: 'cb-composicio-' + organ.id">Mostra composició</label>
+            <p tal:content="organ/composicio"></p>
+          </div>
           <tal:block define="carrecs python: view.list_carrecs_by_organ(organ)">
             <tal:block condition="carrecs">
               <input type="checkbox" class="label-aligned selector-input-historic"
@@ -210,22 +218,27 @@
               </tbody>
               </table>
             </tal:block>
-            <p tal:condition="not: carrecs"
-              i18n:translate="No hi ha càrrecs">No hi ha càrrecs</p>
+            <p tal:condition="not: carrecs">---</p>
           </tal:block>
           </section>
         </tal:block>
-        <p tal:condition="not: organs"
-          i18n:translate="No hi ha òrgans de govern">No hi ha òrgans de govern</p>
+        <p tal:condition="not: organs">---</p>
         </tal:block>
 
         <h3 i18n:translate="Òrgans assessors">Òrgans assessors</h3>
         <tal:block define="organs view/organs_assessors">
         <tal:block repeat="organ organs">
           <section class="ens-metadata-level-2">
-          <h4><a tal:content="organ/Title"
+          <h4><a tal:content="python: view.prettify_organ_title(organ)"
                  tal:attributes="href organ/getURL"/>
           </h4>
+          <div>
+            <input type="checkbox" class="composicio-switch label-aligned"
+                   tal:attributes="id python: 'cb-composicio-' + organ.id"/>
+            <label i18n:translate="Mostra composició"
+                   tal:attributes="for python: 'cb-composicio-' + organ.id">Mostra composició</label>
+            <p tal:content="organ/composicio"></p>
+          </div>
           <tal:block define="carrecs python: view.list_carrecs_by_organ(organ)">
             <tal:block condition="carrecs">
               <input type="checkbox" class="label-aligned selector-input-historic"
@@ -264,13 +277,11 @@
               </tbody>
               </table>
             </tal:block>
-            <p tal:condition="not: carrecs"
-              i18n:translate="No hi ha càrrecs">No hi ha càrrecs</p>
+            <p tal:condition="not: carrecs">---</p>
           </tal:block>
           </section>
         </tal:block>
-        <p tal:condition="not: organs"
-          i18n:translate="No hi ha òrgans de govern">No hi ha òrgans assessors</p>
+        <p tal:condition="not: organs">---</p>
         </tal:block>
 
         <h3 i18n:translate="Unitats UPC implicades">Unitats UPC implicades</h3>
@@ -293,8 +304,7 @@
               </tr>
             </tbody>
           </table>
-          <p tal:condition="not: unitats"
-            i18n:translate="No hi ha unitats UPC implicades">No hi ha unitats UPC implicades</p>
+          <p tal:condition="not: unitats">---</p>
         </tal:block>
         </div>
 
@@ -313,8 +323,8 @@
           <dt i18n:translate="Data d&apos;entrada UPC">Data d&apos;entrada UPC</dt>
           <dd tal:content="python: context.data_entrada and context.data_entrada.strftime('%d/%m/%Y') or '-'"/>
 
-          <dt i18n:translate="Descripció" class="subfield">Descripció</dt>
-          <dd tal:content="python: context.data_entrada_descripcio or '-'"/>
+          <dt i18n:translate="Procediment d&apos;entrada" class="subfield">Procediment d&apos;entrada</dt>
+          <dd tal:content="python: context.data_entrada_procediment or '-'"/>
 
           <dt i18n:translate="Seu social">Seu social</dt>
           <dd tal:content="view/seu_social"/>
@@ -354,11 +364,10 @@
             </tr>
           </tbody>
         </table>
-        <p tal:condition="not: acords"
-          i18n:translate="No hi ha acords">No hi ha acords</p>
+        <p tal:condition="not: acords">---</p>
         </tal:block>
 
-        <h3 i18n:translate="Escriptures públiques">Escriptures públiques</h3>
+        <h3 i18n:translate="Documents públics">Documents públics</h3>
         <tal:block define="escriptures view/escriptures">
         <table tal:condition="escriptures" class="ens-taula">
           <thead>
@@ -386,11 +395,10 @@
             </tr>
           </tbody>
         </table>
-        <p tal:condition="not: escriptures"
-          i18n:translate="No hi ha escriptures públiques">No hi ha escriptures públiques</p>
+        <p tal:condition="not: escriptures">---</p>
         </tal:block>
 
-        <h3 i18n:translate="Estatuts">Estatuts</h3>
+        <h3 i18n:translate="Estatuts i normatives">Estatuts i normatives</h3>
         <h4 i18n:translate="Vigents">Vigents</h4>
         <tal:block define="estatuts_vigents view/estatuts_vigents">
         <table tal:condition="estatuts_vigents" class="ens-taula">
@@ -417,8 +425,7 @@
             </tr>
           </tbody>
         </table>
-        <p tal:condition="not: estatuts_vigents"
-          i18n:translate="No hi ha estatuts vigents">No hi ha estatus vigents</p>
+        <p tal:condition="not: estatuts_vigents">---</p>
         </tal:block>
         <h4 i18n:translate="Vigents">Anteriors</h4>
         <tal:block define="estatuts_anteriors python: view.estatuts_historics">
@@ -446,39 +453,11 @@
             </tr>
           </tbody>
         </table>
-        <p tal:condition="not: estatuts_anteriors"
-          i18n:translate="No hi ha estatuts anteriors">No hi ha estatus anteriors</p>
+        <p tal:condition="not: estatuts_anteriors">---</p>
         </tal:block>
 
-        <h3 i18n:translate="Actes de reunions">Actes de reunions</h3>
-        <tal:block define="actes view/actes_reunio">
-        <table tal:condition="actes" class="ens-taula">
-          <thead>
-            <tr>
-              <th i18n:translate="Data" class="column-small">Data</th>
-              <th i18n:translate="Descripció" class="column-medium">Descripció</th>
-              <th i18n:translate="Fitxer">Fitxer</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr tal:repeat="acta actes">
-              <td tal:content="python: acta.data and acta.data.strftime('%d/%m/%Y') or '-'"/>
-              <td>
-                <a tal:attributes="href acta/absolute_url"
-                   tal:content="acta/title"/>
-              </td>
-              <td>
-                <a tal:condition="acta/fitxer"
-                   tal:attributes="href python: view.get_file_href(acta)"
-                   tal:content="acta/fitxer/filename"/>
-                <tal:block tal:condition="not: acta/fitxer" tal:content="string: -"/>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <p tal:condition="not: actes"
-          i18n:translate="No hi ha actes de runions">No hi ha actes de reunions</p>
-        </tal:block>
+        <h3 i18n:translate="Reunions">Reunions</h3>
+        <a href="reunions" target="_blank">Accés reunions</a>
 
         <h3 i18n:translate="Convenis">Convenis</h3>
         <tal:block define="convenis view/convenis">
@@ -506,39 +485,11 @@
             </tr>
           </tbody>
         </table>
-        <p tal:condition="not: convenis"
-          i18n:translate="No hi ha convenis">No hi ha convenis</p>
+        <p tal:condition="not: convenis">---</p>
         </tal:block>
 
         <h3 i18n:translate="Altres documents d&apos;interès">Altres documents d&apos;interès</h3>
-        <tal:block define="documents view/documents_interes">
-        <table tal:condition="documents" class="ens-taula">
-          <thead>
-            <tr>
-              <th i18n:translate="Data" class="column-small">Data</th>
-              <th i18n:translate="Descripció" class="column-medium">Descripció</th>
-              <th i18n:translate="Fitxer">Fitxer</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr tal:repeat="document documents">
-              <td tal:content="python: document.data and document.data.strftime('%d/%m/%Y') or '-'"/>
-              <td>
-                <a tal:attributes="href document/absolute_url"
-                   tal:content="document/title"/>
-              </td>
-              <td>
-                <a tal:condition="document/fitxer"
-                   tal:attributes="href python: view.get_file_href(document)"
-                   tal:content="document/fitxer/filename"/>
-                <tal:block tal:condition="not: document/fitxer" tal:content="string: -"/>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <p tal:condition="not: documents"
-          i18n:translate="No hi ha altres documents d&apos;interès">No hi ha altres documents d&apos;interès</p>
-        </tal:block>
+        <a href="altres-documents" target="_blank">Accés altres documents d&apos;interès</a>
         </div>
     </section>
     <script type="text/javascript"

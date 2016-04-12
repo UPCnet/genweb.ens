@@ -20,9 +20,9 @@
                tal:attributes="href string:${portal_url}/taula_representacio">
           Taula de representació</a>
         </li>
-        <li><a id='link_taula_transparencia'
-               tal:attributes="href string:${portal_url}/taula_transparencia">
-          Taula de transparència</a>
+        <li><a id='link_colleccions'
+               tal:attributes="href string:${portal_url}/ca/col-leccions">
+          Col·leccions</a>
         </li>
       </ul>
       <ul class="nav nav-pills opcions">

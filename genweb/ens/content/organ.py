@@ -29,9 +29,19 @@ class IOrgan(form.Schema):
         title=_(u"Descripció"),
         required=False)
 
+    dexteritytextindexer.searchable('composicio')
+    composicio = schema.Text(
+        title=_(u"Composició"),
+        required=False)
+
     tipus = schema.Choice(
         title=_(u"Tipus"),
         vocabulary=get_vocabulary([
             u"Govern",
             u"Assessor"]),
         required=True)
+
+    is_historic = schema.Bool(
+        title=_(u"Històric"),
+        defaultFactory=lambda: False,
+        required=False)

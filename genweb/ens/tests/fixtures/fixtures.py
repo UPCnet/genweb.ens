@@ -32,15 +32,17 @@ ens_ai = {
     'id': 'amnistia-internacional',
     'title': u"Amnistía Internacional",
     'description': u"ONG que defensa els drets humans arreu del món",
+    'objecte_social': u"ONG",
     'acronim': u"AI",
     'codi': u"11A",
+    'etiquetes': u"Les etiquetes són importants",
     'nif': u"X82771235",
     'figura_juridica': u"Fundació",
     'numero_identificacio': u"12345A",
     'estat': u"Pre-alta cancel·lada",
-    'domicili_social': u"Carrer Rosselló 99",
-    'adreca_oficines_1': u"Avinguda Diagonal 123",
-    'adreca_oficines_2': u"Carrer Gran de Sant Andreu 55 1r-1a",
+    'domicili_social_poblacio': u"Blanes",
+    'domicili_social_adreca': u"Avinguda Diagonal 123",
+    'adreca_2': u"Carrer Gran de Sant Andreu 55 1r-1a",
     'telefon': u"698767762",
     'fax': u"987336536",
     'web': u"www.amnesty.org",
@@ -63,7 +65,7 @@ ens_ai = {
     'entitats_constituents': u"Són varies",
     'entitats_actuals': u"Les mateixes",
     'data_entrada': datetime(2015, 3, 11),
-    'data_entrada_descripcio': u"Va ser un gran dia",
+    'data_entrada_procediment': u"Va ser un gran dia",
     'seu_social': u"Resta d'Espanya",
     'seu_social_stranger': None,
     'adscripcio': u'Vallés oriental',
@@ -74,6 +76,7 @@ ens_1 = {
     'id': 'amnistia-internacional',
     'title': u"Amnistía Internacional",
     'acronim': u"AI",
+    'etiquetes': u"Etiquetes amnistía",
     'codi': u"11A",
     'nif': u"X82771235",
     'estat': u"Pre-alta cancel·lada",
@@ -95,6 +98,7 @@ ens_2 = {
     'id': 'green peace',
     'title': u"Green Peace",
     'acronim': u"Gp",
+    'etiquetes': u"Etiquetes green pís",
     'codi': u"22A",
     'nif': None,
     'estat': u"Pre-Baixa",
@@ -121,37 +125,43 @@ organ_1 = {
     'type': 'genweb.ens.organ',
     'id': 'consell-de-direccio',
     'title': u'Consell de Direcció',
-    'tipus': 'Govern'}
+    'tipus': 'Govern',
+    'is_historic': False}
 
 organ_2 = {
     'type': 'genweb.ens.organ',
     'id': 'patronat',
     'title': u'Patronat',
-    'tipus': 'Govern'}
+    'tipus': 'Govern',
+    'is_historic': True}
 
 organ_3 = {
     'type': 'genweb.ens.organ',
     'id': 'administracio',
     'title': u'Administració',
-    'tipus': 'Govern'}
+    'tipus': 'Govern',
+    'is_historic': False}
 
 organ_4 = {
     'type': 'genweb.ens.organ',
     'id': 'justicia',
     'title': u'Justícia',
-    'tipus': 'Assessor'}
+    'tipus': 'Assessor',
+    'is_historic': False}
 
 organ_5 = {
     'type': 'genweb.ens.organ',
     'id': 'investigacio',
     'title': u'Investigació',
-    'tipus': 'Assessor'}
+    'tipus': 'Assessor',
+    'is_historic': False}
 
 organ_6 = {
     'type': 'genweb.ens.organ',
     'id': 'Finances',
     'title': u'Finances',
-    'tipus': 'Assessor'}
+    'tipus': 'Assessor',
+    'is_historic': False}
 
 carrec_1 = {
     'type': 'genweb.ens.carrec_upc',
