@@ -2,8 +2,8 @@
 <object name="genweb.ens.document_interes" meta_type="Dexterity FTI"
    i18n:domain="genweb.ens"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Document d'interès</property>
- <property name="description" i18n:translate="">Document d'interès legal associat a un ens</property>
+ <property name="title" i18n:translate="">Document d'interes</property>
+ <property name="description" i18n:translate="">Document d'interes legal associat a un ens</property>
  <property name="icon_expr"></property>
  <property name="factory">genweb.ens.document_interes</property>
  <property

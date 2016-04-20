@@ -2,8 +2,8 @@
 <object name="genweb.ens.carrec_upc" meta_type="Dexterity FTI"
    i18n:domain="genweb.ens"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Càrrec UPC</property>
- <property name="description" i18n:translate="">Càrrec associat a un òrgan d'UPC</property>
+ <property name="title" i18n:translate="">Carrec UPC</property>
+ <property name="description" i18n:translate="">Carrec associat a un organ d'UPC</property>
  <property name="icon_expr"></property>
  <property name="factory">genweb.ens.carrec_upc</property>
  <property

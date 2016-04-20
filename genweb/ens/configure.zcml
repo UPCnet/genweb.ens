@@ -17,6 +17,11 @@
     <!-- Include configuration for dependencies listed in setup.py -->
     <includeDependencies package="." />
 
+    <!-- Configure the directory locales as a translation container -->
+    <configure xmlns:i18n="http://namespaces.zope.org/i18n">
+        <i18n:registerTranslations directory="locales" />
+    </configure>
+
     <!-- Register all components defined with grok -->
     <grok:grok package="." />
 

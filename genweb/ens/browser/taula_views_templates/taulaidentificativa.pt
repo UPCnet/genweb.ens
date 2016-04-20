@@ -2,6 +2,7 @@
             xmlns:metal="http://xml.zope.org/namespaces/metal"
             xmlns:tal="http://xml.zope.org/namespaces/tal"
             xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+            i18n:domain="genweb.ens"
             metal:use-macro="context/main_template/macros/master">
 
 <body>
@@ -23,7 +24,7 @@
       <thead>
         <tr>
           <th style="width: 5%;">Codi</th>
-          <th style="width: 15%;">Denomimació</th>
+          <th style="width: 15%;">Denominació</th>
           <th style="width: 8%;">NIF</th>
           <th style="width: 10%;">Estat</th>
           <th style="width: 8%;">Fig. jurídica</th>

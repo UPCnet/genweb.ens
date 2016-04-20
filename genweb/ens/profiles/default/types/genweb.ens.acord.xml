@@ -2,8 +2,8 @@
 <object name="genweb.ens.acord" meta_type="Dexterity FTI"
    i18n:domain="genweb.ens"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Acord òrgan de govern</property>
- <property name="description" i18n:translate="">Acord legal associat a un òrgan de govern</property>
+ <property name="title" i18n:translate="">Acord organ de govern</property>
+ <property name="description" i18n:translate="">Acord legal associat a un organ de govern</property>
  <property name="icon_expr"></property>
  <property name="factory">genweb.ens.acord</property>
  <property

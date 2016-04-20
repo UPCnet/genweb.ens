@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: genweb.ens\n"
+"POT-Creation-Date: 2016-04-20 12:00+0000\n"
+"PO-Revision-Date: 2016-04-20 12:00+0000\n"
+"Last-Translator: Santi Cortés <santiago.cortes.vaillo@upcnet.es>\n"
+"Language-Team: Plone Team@UPCnet <plone.team@upcnet.es>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: ca\n"
+"Language-Name: Catalan\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: genweb.ens\n"
+
+msgid "Acord organ de govern"
+msgstr "Acord òrgan de govern"
+
+msgid "Acord legal associat a un organ de govern"
+msgstr "Acord legal associat a un òrgan de govern"
+
+msgid "Acta de reunio"
+msgstr "Acta de reunió"
+
+msgid "Acta de reunio associada a un ens"
+msgstr "Acta de reunió associada a un ens"
+
+msgid "Carrec altres org."
+msgstr "Càrrec altres org."
+
+msgid "Carrec associat a un organ d'un ens que no es UPC"
+msgstr "Càrrec associat a un òrgan d'un ens que no és UPC"
+
+msgid "Carrec UPC"
+msgstr "Càrrec UPC"
+
+msgid "Carrec associat a un organ d'UPC"
+msgstr "Càrrec associat a un òrgan d'UPC"
+
+msgid "Document d'interes"
+msgstr "Document d'interès"
+
+msgid "Document d'interes legal associat a un ens"
+msgstr "Document d'interès legal associat a un ens"
+
+msgid "Documentacio"
+msgstr "Documentació"
+
+msgid "Documentacio associada a un carrec"
+msgstr "Documentació associada a un càrrec"
+
+msgid "Entitat u organitzacio com ara una universitat o una empresa"
+msgstr "Entitat u organització com ara una universitat o una empresa"
+
+msgid "Document public"
+msgstr "Document públic"
+
+msgid "Document public associat a un ens"
+msgstr "Document públic associat a un ens"
+
+msgid "Organ"
+msgstr "Òrgan"
+
+msgid "Organ associat a un ens"
+msgstr "Òrgan associat a un ens"
+
+msgid "Carrec directiu"
+msgstr "Càrrec directiu"
+
+msgid "Carrec directiu d'un ens"
+msgstr "Càrrec directiu d'un ens"
+
+msgid "Càrrec que pot representar UPC en algun ens"
+msgstr "Carrec que pot representar UPC en algun ens"

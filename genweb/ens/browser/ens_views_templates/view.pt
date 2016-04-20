@@ -2,6 +2,7 @@
             xmlns:metal="http://xml.zope.org/namespaces/metal"
             xmlns:tal="http://xml.zope.org/namespaces/tal"
             xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+            i18n:domain="genweb.ens"
             metal:use-macro="context/main_template/macros/master">
 
 <body>
@@ -69,10 +70,6 @@
           <dt i18n:translate="Etiquetes">Etiquetes</dt>
           <dd tal:content="python: context.etiquetes or '-'"
               class="fieldset-end"/>
-
-
-          <dt i18n:translate="Observacions">Observacions</dt>
-          <dd tal:content="python: context.dades_identificatives_observacions or '-'"/>
         </dl>
         <h3 i18n:translate="Càrrecs directius">Càrrecs directius</h3>
         <tal:block define="directius view/directius">
@@ -160,9 +157,6 @@
 
           <dt i18n:translate="Part. en cap. social o fons patrimonial">Part. en cap. social o fons patrimonial</dt>
           <dd tal:content="view/capital_social"/>
-
-          <dt i18n:translate="Observacions">Observacions</dt>
-          <dd tal:content="python: context.participacio_observacions or '-'"/>
         </dl>
 
         <h3 i18n:translate="Òrgans de govern">Òrgans de govern</h3>
@@ -331,9 +325,6 @@
 
           <dt i18n:translate="Adm. Pública d&apos;adscripció">Adm. Pública d&apos;adscripció</dt>
           <dd tal:content="view/adscripcio"/>
-
-          <dt i18n:translate="Observacions">Observacions</dt>
-          <dd tal:content="python: context.marc_legal_observacions or '-'"/>
         </dl>
 
         <h3 i18n:translate="Acords òrgans de govern">Acords òrgans de govern</h3>

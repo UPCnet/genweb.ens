@@ -3,7 +3,7 @@
    i18n:domain="genweb.ens"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">Representant UPC</property>
- <property name="description" i18n:translate="">Càrrec que pot representar UPC en algun ens</property>
+ <property name="description" i18n:translate="">Carrec que pot representar UPC en algun ens</property>
  <property name="icon_expr"></property>
  <property name="factory">genweb.ens.representant</property>
  <property

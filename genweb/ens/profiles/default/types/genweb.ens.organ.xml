@@ -2,8 +2,8 @@
 <object name="genweb.ens.organ" meta_type="Dexterity FTI"
    i18n:domain="genweb.ens"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Òrgan</property>
- <property name="description" i18n:translate="">Òrgan associat a un ens</property>
+ <property name="title" i18n:translate="">Organ</property>
+ <property name="description" i18n:translate="">Organ associat a un ens</property>
  <property name="icon_expr"></property>
  <property name="factory">genweb.ens.organ</property>
  <property

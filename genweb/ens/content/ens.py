@@ -72,7 +72,7 @@ class IEns(form.Schema):
         required=False)
 
     dexteritytextindexer.searchable('objecte_social')
-    objecte_social = schema.TextLine(
+    objecte_social = schema.Text(
         title=_(u"Objecte social"),
         required=False)
 

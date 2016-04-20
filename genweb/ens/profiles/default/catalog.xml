@@ -1,7 +1,16 @@
 <?xml version="1.0"?>
 <object name="portal_catalog">
   <column value="acronim"/>
+  <column value="adscripcio"/>
+  <column value="aportacio_import"/>
   <column value="carrec"/>
-  <column value="is_historic"/>
   <column value="composicio"/>
+  <column value="estat"/>
+  <column value="etiquetes"/>
+  <column value="figura_juridica"/>
+  <column value="is_historic"/>
+  <column value="nif"/>
+  <column value="percentatge_participacio"/>
+  <column value="quota_import"/>
+  <column value="web"/>
 </object>

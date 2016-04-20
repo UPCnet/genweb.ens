@@ -106,9 +106,6 @@ class TestEnsViews(FunctionalTestCase):
             "<dt>Etiquetes</dt>",
             '<dd class="fieldset-end">{0}</dd>'.format(
                 ens.etiquetes.encode('utf-8')),
-            "<dt>Observacions</dt>",
-            "<dd>{0}</dd>".format(
-                ens.dades_identificatives_observacions.encode('utf-8')),
             ], self.browser.contents)
 
         self.assertIn("<h3>Càrrecs directius</h3>", self.browser.contents)
@@ -158,11 +155,6 @@ class TestEnsViews(FunctionalTestCase):
         self.assertIn("<dt>Part. en cap. social o fons patrimonial</dt>",
                       self.browser.contents)
         self.assertIn("<dd>2,000.00 EUR</dd>", self.browser.contents)
-
-        self.assertIn("<dt>Observacions</dt>", self.browser.contents)
-        self.assertIn("<dd>{0}</dd>".format(
-            ens.participacio_observacions.encode('utf-8')),
-            self.browser.contents)
 
         self.assertAppearInOrder([
             organ_2.title.encode('utf-8') + u" (Històric)".encode('utf-8'),
@@ -226,11 +218,6 @@ class TestEnsViews(FunctionalTestCase):
                       self.browser.contents)
         self.assertIn("<dd>{0}</dd>".format(
             ens.adscripcio.encode('utf-8')), self.browser.contents)
-
-        self.assertIn("<dt>Observacions</dt>", self.browser.contents)
-        self.assertIn("<dd>{0}</dd>".format(
-            ens.marc_legal_observacions.encode('utf-8')),
-            self.browser.contents)
 
         self.assertAppearInOrder([
             "<h3>Acords òrgans de govern</h3>",
