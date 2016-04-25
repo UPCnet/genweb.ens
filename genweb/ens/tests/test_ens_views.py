@@ -220,7 +220,7 @@ class TestEnsViews(FunctionalTestCase):
             ens.adscripcio.encode('utf-8')), self.browser.contents)
 
         self.assertAppearInOrder([
-            "<h3>Acords òrgans de govern</h3>",
+            "<h3>Acords UPC</h3>",
             acord_1.title.encode('utf-8'),
             acord_4.title.encode('utf-8'),
             acord_2.title.encode('utf-8'),

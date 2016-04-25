@@ -14,8 +14,8 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: genweb.ens\n"
 
-msgid "Acord organ de govern"
-msgstr "Acord òrgan de govern"
+msgid "Acord UPC"
+msgstr "Acord UPC"
 
 msgid "Acord legal associat a un organ de govern"
 msgstr "Acord legal associat a un òrgan de govern"
