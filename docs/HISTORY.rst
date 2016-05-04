@@ -1,17 +1,23 @@
 Changelog
 =========
 
-0.4 (unreleased)
+1.0 (2016-05-04)
 ----------------
 
-- Nothing changed yet.
-
+* Corregir tipus de contingut permesos a un ens [Santiago Cortes]
+*  [Santiago Cortes]
+* - Llevar "Acta reunió" i "Document d'interès" dels tipus de contingut [Santiago Cortes]
+* permesos a un ens. [Santiago Cortes]
+* - Actualitzar el manual d'usuari en format zexp. [Santiago Cortes]
 
 0.3 (2016-04-25)
 ----------------
 
-- Nothing changed yet.
-
+* Corregir tipus de contingut permesos a un ens [Santiago Cortes]
+*  [Santiago Cortes]
+* - Llevar "Acta reunió" i "Document d'interès" dels tipus de contingut [Santiago Cortes]
+* permesos a un ens. [Santiago Cortes]
+* - Actualitzar el manual d'usuari en format zexp. [Santiago Cortes]
 
 0.2 (2016-04-25)
 ----------------
