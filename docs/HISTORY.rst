@@ -1,11 +1,15 @@
 Changelog
 =========
 
-1.1 (unreleased)
+1.1 (2016-05-05)
 ----------------
 
-- Nothing changed yet.
-
+* Corregir errors de codificació i altres [Santiago Cortes]
+*  [Santiago Cortes]
+* - Corregir error de codificació generat pels noms de fitxers amb [Santiago Cortes]
+* caràcters no ASCII. [Santiago Cortes]
+* - Corregir path de cerca dels contenidors d'ens. [Santiago Cortes]
+* - Afegir documentació com a tipus de contingut permés a un ens. [Santiago Cortes]
 
 1.0 (2016-05-04)
 ----------------
