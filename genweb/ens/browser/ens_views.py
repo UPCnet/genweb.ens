@@ -111,7 +111,7 @@ class View(dexterity.DisplayForm):
 
     def get_file_href(self, content):
         return "{0}/view/++widget++form.widgets.fitxer/@@download/{1}".format(
-            content.absolute_url(), content.fitxer.filename)
+            content.absolute_url(), content.fitxer.filename.encode('utf-8'))
 
     def list_carrecs_by_organ(self, organ, is_historic=None):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))

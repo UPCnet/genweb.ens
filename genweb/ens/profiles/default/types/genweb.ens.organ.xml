@@ -24,6 +24,7 @@
  <property name="allowed_content_types">
   <element value="genweb.ens.carrec"/>
   <element value="genweb.ens.carrec_upc"/>
+  <element value="genweb.ens.documentacio"/>
  </property>
 
  <property name="behaviors">

@@ -39,8 +39,5 @@ def get_carpetes_vocabulary(view):
 
             for folder in catalog.searchResults(
                 portal_type='genweb.ens.contenidor_ens',
-                sort_on='sortable_title',
-                path={
-                    'query': '/',
-                    'depth': 3
-                }) if folder.getPath().split('/')[-1] in portal_groups]
+                sort_on='sortable_title')
+            if folder.getPath().split('/')[-1] in portal_groups]
