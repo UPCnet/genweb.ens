@@ -4,7 +4,7 @@
   <stylesheet
     id="++genweb++ens/font-awesome.min.css"
     media="" rel="stylesheet" rendering="link"
-    cacheable="True" compression="safe" cookable="False"
+    cacheable="False" compression="safe" cookable="False"
     enabled="1" expression=""/>
 
 </object>
