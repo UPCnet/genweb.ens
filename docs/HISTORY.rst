@@ -1,11 +1,10 @@
 Changelog
 =========
 
-1.3 (unreleased)
+1.3 (2016-06-21)
 ----------------
 
-- Nothing changed yet.
-
+* Corregir la manera d'importar Font Awesome [Santiago Cortes]
 
 1.2 (2016-06-21)
 ----------------
