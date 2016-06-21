@@ -1,11 +1,16 @@
 Changelog
 =========
 
-1.2 (unreleased)
+1.2 (2016-06-21)
 ----------------
 
-- Nothing changed yet.
-
+* Afegir enllaç d'info [Santiago Cortes]
+*  [Santiago Cortes]
+* - Afegir a la capçalera un enllaç d'informació que condueix a la [Santiago Cortes]
+* pàgina del gestor d'ens al lloc web de Serveis TIC. [Santiago Cortes]
+* - Afegir paràmetres de configuració del gestor d'ens al panell de [Santiago Cortes]
+* control. [Santiago Cortes]
+* - Afegir llibreria Font Awesome. [Santiago Cortes]
 
 1.1 (2016-05-05)
 ----------------
