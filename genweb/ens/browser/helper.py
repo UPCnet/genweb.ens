@@ -2,6 +2,10 @@
 
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
+
+from genweb.ens.controlpanel import IEnsSettings
 
 
 def get_portal_groups(view):
@@ -41,3 +45,8 @@ def get_carpetes_vocabulary(view):
                 portal_type='genweb.ens.contenidor_ens',
                 sort_on='sortable_title')
             if folder.getPath().split('/')[-1] in portal_groups]
+
+
+def get_settings_property(property_id):
+    settings = getUtility(IRegistry).forInterface(IEnsSettings)
+    return getattr(settings, property_id, None)

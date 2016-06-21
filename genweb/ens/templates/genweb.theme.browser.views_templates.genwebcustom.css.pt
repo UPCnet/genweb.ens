@@ -328,3 +328,18 @@ ul.opcions
     border-radius: 3px;
     padding: 20px;
 }
+
+a.header-info-link
+{
+    padding-top: 2px !important;
+}
+
+a.header-info-link span
+{
+    font-size: 22px;
+}
+
+a.header-info-link img
+{
+    display: none;
+}

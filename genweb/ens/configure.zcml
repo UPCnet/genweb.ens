@@ -25,6 +25,14 @@
     <!-- Register all components defined with grok -->
     <grok:grok package="." />
 
+    <!-- Register Control Panel custom settings -->
+    <browser:page
+        name="ens-settings"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".controlpanel.EnsSettingsControlPanel"
+        permission="cmf.ManagePortal"
+        />
+
     <!-- Register static resources like images and js files to expose them
          via URL -->
     <plone:static
@@ -41,7 +49,7 @@
     <!-- Register the installation GenericSetup extension profile -->
     <genericsetup:registerProfile
         name="default"
-        title="genweb.ens"
+        title="Genweb Ens"
         directory="profiles/default"
         description="Extension profile for genweb.ens."
         provides="Products.GenericSetup.interfaces.EXTENSION"
