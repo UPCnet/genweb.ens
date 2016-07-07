@@ -1,11 +1,17 @@
 Changelog
 =========
 
-1.4 (unreleased)
+1.4 (2016-07-07)
 ----------------
 
-- Nothing changed yet.
-
+* Afegir actualització automàtica d'indicadors [Santiago Cortes]
+*  [Santiago Cortes]
+* Quan un ens s'esborra, publica o despublica, el següents [Santiago Cortes]
+* indicadors s'actualitzen automàticament: [Santiago Cortes]
+* - ens-n [Santiago Cortes]
+* - ens-n-estat_actiu [Santiago Cortes]
+* - ens-n-estat_baixa [Santiago Cortes]
+* - ens-n-data_mes [Santiago Cortes]
 
 1.3 (2016-06-21)
 ----------------
