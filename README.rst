@@ -52,7 +52,7 @@ característiques:
   estiga dintre de les carpetes seleccionades. Si no n'hi ha cap, la cerca
   inclourà resultats continguts en qualsevol carpeta del lloc web.
 
-Registar indicadors
+Registrar indicadors
 -------------------
 
 Els indicadors encapsulen informació sobre les dades del lloc web on està
