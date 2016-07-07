@@ -15,6 +15,25 @@ def create_content(container, properties):
     content_dict.update(properties)
     return api.content.create(**content_dict)
 
+
+contenidor_1 = {
+    'type': 'genweb.ens.contenidor_ens',
+    'id': 'contenidor-1',
+    'title': 'Contenidor 1'
+}
+
+contenidor_2 = {
+    'type': 'genweb.ens.contenidor_ens',
+    'id': 'contenidor-2',
+    'title': 'Contenidor 2'
+}
+
+contenidor_3 = {
+    'type': 'genweb.ens.contenidor_ens',
+    'id': 'contenidor-3',
+    'title': 'Contenidor 3'
+}
+
 folder_1 = {
     'type': 'Folder',
     'id': 'folder-1',
@@ -114,6 +133,56 @@ ens_2 = {
     'quota_import': 253.44,
     'quota_moneda': None,
     'web': u"www.greenpeace.org"}
+
+ens_3 = {
+    'type': 'genweb.ens.ens',
+    'id': 'wikimedia',
+    'title': u"Wikimedia",
+    'acronim': u"Wkm",
+    'etiquetes': u"Etiquetes wiki media",
+    'codi': u"33A",
+    'nif': None,
+    'estat': u"Baixa",
+    'figura_juridica': u"Sense NIF",
+    'seu_social': u"Estranger",
+    'seu_social_estranger': u"Madrid",
+    'adscripcio': u"Vallekas",
+    'percentatge_participacio': None,
+    'aportacio_sn': False,
+    'aportacio_import': None,
+    'aportacio_moneda': None,
+    'quota_sn': True,
+    'quota_import': 52.44,
+    'quota_moneda': None,
+    'web': u"www.wikimedia.org"}
+
+ens_1_actiu = {
+    'type': 'genweb.ens.ens',
+    'id': 'ens-1-actiu',
+    'title': u"Ens 1 Actiu",
+    'acronim': u"E1A",
+    'estat': u"Actiu"}
+
+ens_1_baixa = {
+    'type': 'genweb.ens.ens',
+    'id': 'ens-1-baixa',
+    'title': u"Ens 1 Baixa",
+    'acronim': u"E1B",
+    'estat': u"Baixa"}
+
+ens_2_actiu = {
+    'type': 'genweb.ens.ens',
+    'id': 'ens-2-actiu',
+    'title': u"Ens 2 Actiu",
+    'acronim': u"E2A",
+    'estat': u"Actiu"}
+
+ens_2_baixa = {
+    'type': 'genweb.ens.ens',
+    'id': 'ens-2-baixa',
+    'title': u"Ens 2 Baixa",
+    'acronim': u"E2B",
+    'estat': u"Baixa"}
 
 ens_incomplete = {
     'type': 'genweb.ens.ens',

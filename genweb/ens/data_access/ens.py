@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+from DateTime import DateTime
 
 from genweb.ens.content.ens import (get_denominacio,
                                     get_percentatge_participacio,
@@ -79,6 +80,81 @@ class EnsDataReporter(object):
         if search_filters:
             query.update(search_filters)
         return self.catalog.searchResults(query)
+
+    def list_by_contenidor_id_and_review_state(
+            self, contenidor_id, review_state=None):
+        ens = []
+        contenidor = self.list_contenidor_by_id(contenidor_id)
+        if contenidor:
+            filters = dict(
+                portal_type='genweb.ens.ens',
+                path={'query': contenidor.getPath()},
+                sort_on='sortable_title')
+            if review_state:
+                filters['review_state'] = review_state
+            ens = self.catalog.searchResults(filters)
+        return ens
+
+    def list_by_contenidor_id_and_estat_and_review_state(
+            self, contenidor_id, estat, review_state=None):
+        ens = []
+        contenidor = self.list_contenidor_by_id(contenidor_id)
+        if contenidor:
+            filters = dict(
+                portal_type='genweb.ens.ens',
+                estat=estat,
+                path={'query': contenidor.getPath()},
+                sort_on='sortable_title')
+            if review_state:
+                filters['review_state'] = review_state
+            ens = self.catalog.searchResults(filters)
+        return ens
+
+    def _datetime_to_DateTime(self, obj):
+        return DateTime(
+            obj.year, obj.month, obj.day,
+            obj.hour, obj.minute, obj.second)
+
+    def _get_date_range(self, delta, date_source=None):
+        """
+        Get a list representing the range of dates between now and now + delta.
+        :param delta: Number of days behind/ahead the source date. If < 0,
+        range is [source + delta, source], else [source, source + delta]
+        :param date_source: datetime.datetime to which delta is applied.
+        :return: 2-DateTime.DateTime element list representing the date range.
+        """
+        date_now = date_source if date_source else datetime.datetime.now()
+        date_delta = date_now + datetime.timedelta(days=delta)
+        datetime_now = self._datetime_to_DateTime(date_now)
+        datetime_delta = self._datetime_to_DateTime(date_delta)
+        return sorted([datetime_now, datetime_delta])
+
+    def list_by_contenidor_id_and_delta_and_review_state(
+            self, contenidor_id, delta, review_state=None, date_source=None):
+        ens = []
+        contenidor = self.list_contenidor_by_id(contenidor_id)
+        if contenidor:
+            filters = dict(
+                portal_type='genweb.ens.ens',
+                effective={
+                    'query': self._get_date_range(delta, date_source),
+                    'range': 'min:max'},
+                path={'query': contenidor.getPath()},
+                sort_on='sortable_title')
+            if review_state:
+                filters['review_state'] = review_state
+            ens = self.catalog.searchResults(filters)
+        return ens
+
+    def list_contenidor_by_id(self, contenidor_id):
+        contenidor = None
+        contenidors = self.catalog.searchResults(
+                portal_type='genweb.ens.contenidor_ens',
+                id=contenidor_id,
+                sort_on='sortable_title')
+        if contenidors:
+            contenidor = contenidors[0]
+        return contenidor
 
     def list_unitats_by_ens_obj(self, ens):
         return [unitat.getObject() for unitat in self.catalog.searchResults(

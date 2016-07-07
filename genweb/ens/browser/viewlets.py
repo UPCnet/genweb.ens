@@ -3,7 +3,7 @@ from plone.app.layout.viewlets.interfaces import IPortalHeader
 
 from genweb.theme.browser.viewlets import gwHeader
 from genweb.ens.interfaces import IGenwebEnsLayer
-from genweb.ens.browser.helper import get_settings_property
+from genweb.ens.helpers import get_settings_property
 
 
 class HeaderGWServeistic(gwHeader):

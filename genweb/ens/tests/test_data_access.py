@@ -3,6 +3,7 @@
 
 import unittest
 from mock import Mock, patch
+import datetime
 
 from genweb.ens.data_access.ens import EnsDataReporter
 
@@ -18,6 +19,14 @@ class TestDataAccess(unittest.TestCase):
     def setUp(self):
         """Custom shared utility setup for tests."""
         self.catalog = MockCatalog()
+
+    def assertDateEqual(self, date_src, date_trg):
+        self.assertEqual(date_src.year(), date_trg.year)
+        self.assertEqual(date_src.month(), date_trg.month)
+        self.assertEqual(date_src.day(), date_trg.day)
+        self.assertEqual(date_src.hour(), date_trg.hour)
+        self.assertEqual(date_src.minute(), date_trg.minute)
+        self.assertEqual(date_src.second(), date_trg.second)
 
     def test_list_carrecs_by_organ_grouped_by_ens_obj(self):
         reporter = EnsDataReporter(self.catalog)
@@ -77,3 +86,54 @@ class TestDataAccess(unittest.TestCase):
             self.assertEqual([c.title for c in carrecs[2][1]],
                              ['B1', 'B2', 'B3'])
             self.assertEqual([c.title for c in carrecs[3][1]], ['C1'])
+
+    def test_datetime_to_DateTime(self):
+        reporter = EnsDataReporter(self.catalog)
+        source = datetime.datetime(2009, 8, 15, 23, 52, 11)
+        target = reporter._datetime_to_DateTime(source)
+
+        self.assertEqual(source.day, target.day())
+        self.assertEqual(source.month, target.month())
+        self.assertEqual(source.year, target.year())
+        self.assertEqual(source.hour, target.hour())
+        self.assertEqual(source.minute, target.minute())
+        self.assertEqual(source.second, target.second())
+
+    def test_get_date_range_with_positive_delta(self):
+        reporter = EnsDataReporter(self.catalog)
+
+        start = datetime.datetime(2010, 1, 22, 13, 51, 23)
+        delta = 5
+        end = start + datetime.timedelta(days=delta)
+        date_range = reporter._get_date_range(delta, start)
+
+        self.assertEqual(len(date_range), 2)
+        self.assertDateEqual(date_range[0], start)
+        self.assertDateEqual(date_range[1], end)
+
+    def test_get_date_range_with_negative_delta(self):
+        reporter = EnsDataReporter(self.catalog)
+
+        start = datetime.datetime(2010, 1, 22, 13, 51, 23)
+        delta = -5
+        end = start + datetime.timedelta(days=delta)
+        date_range = reporter._get_date_range(delta, start)
+
+        self.assertEqual(len(date_range), 2)
+        self.assertDateEqual(date_range[0], end)
+        self.assertDateEqual(date_range[1], start)
+
+    def test_get_date_range_with_zero_delta(self):
+        reporter = EnsDataReporter(self.catalog)
+
+        start = datetime.datetime(2010, 1, 22, 13, 51, 23)
+        delta = 0
+        end = start + datetime.timedelta(days=delta)
+        date_range = reporter._get_date_range(delta, start)
+
+        self.assertEqual(len(date_range), 2)
+        self.assertDateEqual(date_range[0], start)
+        self.assertDateEqual(date_range[0], end)
+        self.assertDateEqual(date_range[1], start)
+        self.assertDateEqual(date_range[1], end)
+
