@@ -52,6 +52,41 @@ característiques:
   estiga dintre de les carpetes seleccionades. Si no n'hi ha cap, la cerca
   inclourà resultats continguts en qualsevol carpeta del lloc web.
 
+Registar indicadors
+-------------------
+
+Els indicadors encapsulen informació sobre les dades del lloc web on està
+instal·lat el paquet. Aquesta informació es publica de forma automàtica al servei
+web d'Indicadors.
+
+Els indicadors es registren al mòdul ``genweb.ens.indicators.registry`` afegint
+una instància de la classe ``genweb.ens.indicators.beans.Indicator`` a la llista
+``indicators`` dins de la funció ``register``. Per exemple:
+
+::
+
+    def register(context):
+        ens_number = Indicator(
+            service='entitats',
+            id='ens-n',
+            description="Nombre d'ens")
+        ens_number.add_category(
+            Category(
+                id='gabinet-juridic-i-entitats',
+                description="Gabinet Jurídic i Entitats",
+                calculator=EnsNumber(context, 'gabinet-juridic-i-entitats')))
+        ens_number.add_category(
+            Category(
+                id="gabinet-del-rector",
+                description="Gabinet del Rector",
+                calculator=EnsNumber(context, 'gabinet-del-rector')))
+        indicators.append(ens_number)
+
+Cada categoria de cada indicador té associada una calculadora encarregada de
+calcular el seu valor. La calculadora és un instància d'una sub-classe de
+``genweb.ens.indicators.beans.CategoryCalculator`` que ha d'implementar un
+mètode ``calculate`` amb la lògica necessària per a fer els càlculs.
+
 Instal·lació
 ============
 
