@@ -1,0 +1,11 @@
+id: ens-n-estat_baixa
+description: Nombre d'ens en estat baixa
+service: entitats
+categories:
+  - id: gabinet-juridic-i-entitats
+    description: Gabinet Jurídic i Entitats
+    calculator: genweb.ens.indicators.calculators.EnsNumberEstatBaixa
+  - id: gabinet-del-rector
+    description: Gabinet del Rector
+    calculator: genweb.ens.indicators.calculators.EnsNumberEstatBaixa
+

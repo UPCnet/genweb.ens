@@ -1,0 +1,11 @@
+id: ens-n
+description: Nombre d'ens
+service: entitats
+categories:
+  - id: gabinet-juridic-i-entitats
+    description: Gabinet Jurídic i Entitats
+    calculator: genweb.ens.indicators.calculators.EnsNumber
+  - id: gabinet-del-rector
+    description: Gabinet del Rector
+    calculator: genweb.ens.indicators.calculators.EnsNumber
+

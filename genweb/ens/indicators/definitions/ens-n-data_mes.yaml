@@ -1,0 +1,11 @@
+id: ens-n-data_mes
+description: Nombre d'ens registrats al darrer mes
+service: entitats
+categories:
+  - id: gabinet-juridic-i-entitats
+    description: Gabinet Jurídic i Entitats
+    calculator: genweb.ens.indicators.calculators.EnsNumberDeltaMonth
+  - id: gabinet-del-rector
+    description: Gabinet del Rector
+    calculator: genweb.ens.indicators.calculators.EnsNumberDeltaMonth
+
