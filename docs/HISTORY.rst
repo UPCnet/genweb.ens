@@ -1,11 +1,19 @@
 Changelog
 =========
 
-1.5 (unreleased)
+1.5 (2016-07-21)
 ----------------
 
-- Nothing changed yet.
-
+* Remove unnecessary dependencies [Santiago Cortes]
+* Adaptar indicadors a genweb.core.indicadors [Santiago Cortes]
+*  [Santiago Cortes]
+* - Eliminar el codi de gestió d'indicadors i utilitzar el codi [Santiago Cortes]
+* definit en genweb.core.indicadors. [Santiago Cortes]
+* - Redefinir els indicadors d'acord amb el paquet [Santiago Cortes]
+* genweb.core.indicadors. [Santiago Cortes]
+* modified .gitignore [root@peterpre]
+* Corregir documentació d'indicadors [Santiago Cortes]
+* Afegir documentació sobre indicadors [Santiago Cortes]
 
 1.4 (2016-07-07)
 ----------------
