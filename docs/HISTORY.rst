@@ -1,11 +1,14 @@
 Changelog
 =========
 
-1.6 (unreleased)
+1.6 (2016-09-06)
 ----------------
 
-- Nothing changed yet.
-
+* Corregir el càlcul dels indicadors [Santiago Cortes]
+*  [Santiago Cortes]
+* Els indicadors es calculaven abans de la finalització de la [Santiago Cortes]
+* transacció i això feia que no fossin precisos per no tenir en [Santiago Cortes]
+* compte l'impacte de la transacció sobre la base de dades. [Santiago Cortes]
 
 1.5 (2016-07-21)
 ----------------
