@@ -4,8 +4,12 @@ service: entitats
 categories:
   - id: gabinet-juridic-i-entitats
     description: Gabinet Jurídic i Entitats
+    type: online
+    frequency: ""
     calculator: genweb.ens.indicators.calculators.EnsNumber
   - id: gabinet-del-rector
     description: Gabinet del Rector
+    type: online
+    frequency: ""
     calculator: genweb.ens.indicators.calculators.EnsNumber
 
