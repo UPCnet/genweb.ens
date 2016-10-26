@@ -1,11 +1,13 @@
 Changelog
 =========
 
-1.7 (unreleased)
+1.7 (2016-10-26)
 ----------------
 
-- Nothing changed yet.
-
+* Afegir tipus i freqüència als indicadors [Santi]
+*  [Santi]
+* Afegir a la definició dels indicadors els valors dels camps [Santi]
+* 'tipusIndicador' i 'frequencia' del servei web d'indicadors. [Santi]
 
 1.6 (2016-09-06)
 ----------------
