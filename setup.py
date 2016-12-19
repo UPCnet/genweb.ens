@@ -31,7 +31,7 @@ setup(name='genweb.ens',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'collective.dexteritytextindexer == 2.0.1',
+          'collective.dexteritytextindexer',
       ],
       extras_require={'test': ['mock',
                                'plone.app.testing',
