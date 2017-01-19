@@ -343,3 +343,7 @@ a.header-info-link img
 {
     display: none;
 }
+
+body.template-homepage #contentActionMenus > li:nth-child(-n+3) {
+    display: none;
+}
