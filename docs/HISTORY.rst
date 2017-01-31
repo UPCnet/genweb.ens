@@ -1,11 +1,11 @@
 Changelog
 =========
 
-1.8 (unreleased)
-----------------
+1.7.1 (2017-01-31)
+------------------
 
-- Nothing changed yet.
-
+* Hide Tradueix, Accions, Vistes in homepage [Santi]
+* removed fixed version in package [Roberto Diaz]
 
 1.7 (2016-10-26)
 ----------------
