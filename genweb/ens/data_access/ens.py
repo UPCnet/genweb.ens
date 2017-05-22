@@ -15,13 +15,15 @@ class EnsSearchResult(object):
 
 
 class Identificacio(object):
-    def __init__(self, codi, denominacio, absolute_url, nif, estat,
+    def __init__(self, codi, acronim, title, absolute_url, nif,numero_identificacio, estat,
                  figura_juridica, adscripcio, percentatge_participacio,
                  aportacio, quota, etiquetes, web):
         self.codi = codi
-        self.denominacio = denominacio
+        self.acronim = acronim
+        self.title = title
         self.absolute_url = absolute_url
         self.nif = nif
+        self.numero_identificacio = numero_identificacio
         self.estat = estat
         self.figura_juridica = figura_juridica
         self.adscripcio = adscripcio
@@ -334,9 +336,11 @@ class EnsDataReporter(object):
             ens_obj = ens.getObject()
             identificacio.append(Identificacio(
                 codi=ens_obj.codi or "-",
-                denominacio=get_denominacio(ens_obj),
+                acronim=ens_obj.acronim or "-",
+                title=ens_obj.title or "-",
                 absolute_url=ens_obj.absolute_url,
                 nif=ens_obj.nif or "-",
+                numero_identificacio=ens_obj.numero_identificacio or "-",
                 estat=ens_obj.estat or "-",
                 figura_juridica=ens_obj.figura_juridica or "-",
                 adscripcio=ens_obj.adscripcio or "-",

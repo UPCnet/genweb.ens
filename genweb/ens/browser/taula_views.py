@@ -49,8 +49,10 @@ class TaulaIdentificativaCsv(grok.View, Taula):
 
     data_header_columns = [
         "Codi",
+        "Acronim",
         "Denominació",
         "NIF",
+        "Num. Identificacio",
         "Estat",
         "Fig. jurídica",
         "Adscripció",
@@ -82,8 +84,10 @@ class TaulaIdentificativaCsv(grok.View, Taula):
         for ens in reporter.list_identificacio(self.parse_search_filters()):
             writer.writerow([
                 ens.codi.encode('utf-8'),
-                ens.denominacio.encode('utf-8'),
+                ens.acronim.encode('utf-8'),
+                ens.title.encode('utf-8'),
                 ens.nif.encode('utf-8'),
+                ens.numero_identificacio.encode('utf-8'),
                 ens.estat.encode('utf-8'),
                 ens.figura_juridica.encode('utf-8'),
                 ens.adscripcio.encode('utf-8'),
