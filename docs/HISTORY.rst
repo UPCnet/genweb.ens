@@ -1,11 +1,10 @@
 Changelog
 =========
 
-1.7.2 (unreleased)
+1.7.2 (2017-05-23)
 ------------------
 
-- Nothing changed yet.
-
+* Add data to taulaidentificativa view [Corina Riba]
 
 1.7.1 (2017-01-31)
 ------------------
