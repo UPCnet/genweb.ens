@@ -1,11 +1,10 @@
 Changelog
 =========
 
-1.7.3 (unreleased)
+1.7.3 (2017-06-30)
 ------------------
 
-- Nothing changed yet.
-
+* Cambios solicitados por el cliente: nuevos campos y reordenacion contenidos y buscadores [Corina Riba]
 
 1.7.2 (2017-05-23)
 ------------------
