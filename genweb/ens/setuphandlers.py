@@ -44,7 +44,7 @@ def add_container(container, type, title,
             container=container)
         api.content.transition(
             obj=folder,
-            transition='publishtointranet')
+            transition='reject')
         if allowed_types:
             behavior = ISelectableConstrainTypes(folder)
             behavior.setConstrainTypesMode(1)
@@ -65,7 +65,7 @@ def add_representant_upc(folder, title, carrec):
             carrec=carrec)
         api.content.transition(
             obj=representant,
-            transition='publishtointranet')
+            transition='reject')
     return folder[representant_id]
 
 

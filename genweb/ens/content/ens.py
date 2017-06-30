@@ -24,12 +24,19 @@ figura_juridica_values = [
     u"Altra"]
 
 estat_values = [
-    u"Actiu",
+    _(u"Actiu"),
     u"Pre-Baixa",
     u"Pre-Alta",
     u"Baixa",
     u"Pre-Alta cancel·lada",
     u"Altre"]
+
+institution_type_values = [
+    u"Autonòmica",
+    u"Estatal",
+    u"Local",
+    u"Internacional",
+    u"Altres"]
 
 
 class IEns(form.Schema):
@@ -46,17 +53,18 @@ class IEns(form.Schema):
         "dades_identificatives",
         label=u"Dades identificatives",
         fields=['title', 'acronim', 'description', 'objecte_social',
-                'estat', 'nif', 'figura_juridica', 'numero_identificacio',
+                'estat', 'nif', 'institution_type', 'figura_juridica', 'numero_identificacio',
                 'domicili_social_poblacio', 'domicili_social_adreca',
                 'adreca_2',
                 'telefon', 'fax', 'web',
                 'tipologia_upc', 'codi', 'etiquetes',
+                'show_dades_identificatives_observacions',
                 'dades_identificatives_observacions']
     )
 
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
-        title=_(u"Denominació complerta"),
+        title=_(u"Denominació completa"),
         required=True
     )
 
@@ -76,6 +84,7 @@ class IEns(form.Schema):
         title=_(u"Objecte social"),
         required=False)
 
+    dexteritytextindexer.searchable('estat')
     estat = schema.Choice(
         title=_(u"Estat"),
         vocabulary=get_vocabulary(estat_values),
@@ -86,6 +95,12 @@ class IEns(form.Schema):
         title=_(u"NIF"),
         required=False,
     )
+
+    institution_type = schema.Choice(
+        title=_(u"Tipus d'institució"),
+        vocabulary=get_vocabulary(institution_type_values),
+        required=True,
+        default=None)
 
     figura_juridica = schema.Choice(
         title=_(u"Figura jurídica"),
@@ -130,6 +145,7 @@ class IEns(form.Schema):
     tipologia_upc = schema.Choice(
         title=_(u"Tipologia UPC"),
         vocabulary=get_vocabulary([
+            u"-",
             u"Grup UPC",
             u"Participació Superior",
             u"Entitat Vinculada de Recerca",
@@ -137,7 +153,19 @@ class IEns(form.Schema):
             u"Institut de Recerca",
             u"Spin-off",
             u"Internacional",
-            u"Altra"]),
+            u"Patronats i Consells Assessors",
+            u"Institut de Ciències de l’Educació",
+            u"Centres de Recerca",
+            u"Departaments",
+            u"Grups de Recerca",
+            u"Escola de Doctorat",
+            u"Càtedres",
+            u"Instituts Universitaris de Recerca vinculats",
+            u"Centres Docents",
+            u"Adscrits",
+            u"Unitats d’Administració i Serveis",
+            u"Altra",
+            ]),
         required=True)
 
     dexteritytextindexer.searchable('codi')
@@ -145,10 +173,17 @@ class IEns(form.Schema):
         title=_(u"Codi UPC"),
         required=False)
 
+    # Campo oculto porque se usaran las etiquetas estandar de plone
     dexteritytextindexer.searchable('etiquetes')
+    form.omitted('etiquetes')
     etiquetes = schema.Text(
         title=_(u"Etiquetes"),
         required=False)
+
+    show_dades_identificatives_observacions = schema.Bool(
+        title=_(u"Show data observations"),
+        required = False,
+        default = False)
 
     dexteritytextindexer.searchable('dades_identificatives_observacions')
     dades_identificatives_observacions = schema.Text(
@@ -163,7 +198,9 @@ class IEns(form.Schema):
                 'unitat_carrec', 'percentatge_participacio',
                 'nombre_membres',
                 'capital_social_sn', 'capital_social_import',
-                'capital_social_moneda', 'participacio_observacions']
+                'capital_social_moneda',
+                'show_participacio_observacions',
+                'participacio_observacions']
     )
 
     form.widget(aportacio_sn=RadioFieldWidget)
@@ -234,6 +271,11 @@ class IEns(form.Schema):
         title=_(u"Moneda"),
         required=False)
 
+    show_participacio_observacions = schema.Bool(
+        title = _(u"Show parcicipation observations"),
+        required = False,
+        default = False)
+
     dexteritytextindexer.searchable('participacio_observacions')
     participacio_observacions = schema.Text(
         title=_(u"Observacions"),
@@ -246,6 +288,7 @@ class IEns(form.Schema):
                 'entitats_actuals', 'data_entrada',
                 'data_entrada_procediment', 'seu_social',
                 'seu_social_estranger', 'adscripcio',
+                'show_observacions_marc_legal',
                 'marc_legal_observacions']
     )
 
@@ -288,6 +331,11 @@ class IEns(form.Schema):
     adscripcio = schema.TextLine(
         title=_(u"Adm. Pública d'adscripció"),
         required=False)
+
+    show_observacions_marc_legal = schema.Bool(
+        title = _(u"Show legal framework observations"),
+        required = False,
+        default = False)
 
     dexteritytextindexer.searchable('marc_legal_observacions')
     marc_legal_observacions = schema.Text(

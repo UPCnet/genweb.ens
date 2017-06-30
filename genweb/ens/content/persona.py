@@ -21,6 +21,6 @@ class IPersona(form.Schema):
 
     dexteritytextindexer.searchable('carrec')
     carrec = schema.TextLine(
-        title=_(u"Càrrec"),
+        title=_(u"Càrrec a l'entitat"),
         required=True
     )

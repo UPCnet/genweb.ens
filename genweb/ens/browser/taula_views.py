@@ -4,12 +4,15 @@ from StringIO import StringIO
 import json
 import csv
 
+from plone import api
+
 from five import grok
 from zope.interface import Interface
 from Products.CMFCore.utils import getToolByName
 
 from genweb.ens.interfaces import IGenwebEnsLayer
 from genweb.ens.data_access.ens import EnsDataReporter
+from Products.PythonScripts.standard import url_quote
 
 
 class Taula(object):
@@ -41,6 +44,28 @@ class TaulaIdentificativa(grok.View, Taula):
         return '{0}/taula_identificativa_csv?{1}'.format(
             self.context.absolute_url(), query_string)
 
+    def getSeu(self, ens):
+        if 'Estranger' in ens.seu_social:
+            seu = ens.seu_social + ' (' + ens.seu_social_estranger + ')'
+        else:
+            seu = ens.seu_social
+        return seu
+
+    def getTags(self, ens):
+        tags = []
+        lang = api.portal.get_current_language()
+        portal_url = api.portal.get().absolute_url() + '/' + lang
+        categories = ens.tags
+        try:
+            for category in categories():
+                quotedCat = url_quote(category)
+                tag_link =  portal_url + '/@@search?Subject%3Alist=' + quotedCat
+                tag = {'tag_name': category,'tag_url': tag_link}
+                tags.append(tag)
+            return tags
+        except:
+            return []
+
 
 class TaulaIdentificativaCsv(grok.View, Taula):
     grok.name('taula_identificativa_csv')
@@ -48,19 +73,23 @@ class TaulaIdentificativaCsv(grok.View, Taula):
     grok.layer(IGenwebEnsLayer)
 
     data_header_columns = [
-        "Codi",
-        "Acronim",
+        "Codi REP",
+        "Acrònim",
         "Denominació",
         "NIF",
         "Num. Identificacio",
         "Estat",
         "Fig. jurídica",
-        "Adscripció",
-        "% part.",
-        "Ap. inicial",
+        "Tipus institució",
+        "Tipologia UPC",
+        "Seu social",
+        "Adm. Púb. Adscrip.",
+        "Participació",
         "Quota",
         "Etiquetes",
-        "Web"]
+        "Etiquetes antigues",
+        "Web",
+        "Entitats participants"]
 
     def render(self):
         output_file = StringIO()
@@ -82,6 +111,7 @@ class TaulaIdentificativaCsv(grok.View, Taula):
         writer.writerow(TaulaIdentificativaCsv.data_header_columns)
 
         for ens in reporter.list_identificacio(self.parse_search_filters()):
+            ens_tags = ",".join([str(tag) for tag in ens.tags()])
             writer.writerow([
                 ens.codi.encode('utf-8'),
                 ens.acronim.encode('utf-8'),
@@ -90,12 +120,16 @@ class TaulaIdentificativaCsv(grok.View, Taula):
                 ens.numero_identificacio.encode('utf-8'),
                 ens.estat.encode('utf-8'),
                 ens.figura_juridica.encode('utf-8'),
+                ens.institution_type.encode('utf-8'),
+                ens.tipologia_upc.encode('utf-8'),
+                ens.seu_social.encode('utf-8'),
                 ens.adscripcio.encode('utf-8'),
                 ens.percentatge_participacio.encode('utf-8'),
-                ens.aportacio.encode('utf-8'),
                 ens.quota.encode('utf-8'),
+                ens_tags,
                 ens.etiquetes.encode('utf-8'),
-                ens.web.encode('utf-8')
+                ens.web.encode('utf-8'),
+                ens.entitats_actuals.encode('utf-8')                
             ])
 
 
@@ -125,8 +159,9 @@ class TaulaRepresentacioCsv(grok.View, Taula):
     data_header_columns = [
         "Denominació",
         "Òrgan",
+        "Càrrec"
         "Persona",
-        "Càrrec",
+        "Com a...",
         "Data nom."]
 
     def render(self):
@@ -147,13 +182,15 @@ class TaulaRepresentacioCsv(grok.View, Taula):
         reporter = EnsDataReporter(getToolByName(self, 'portal_catalog'))
         writer = csv.writer(output_file, dialect='excel', delimiter=';')
         writer.writerow(TaulaRepresentacioCsv.data_header_columns)
+
         for ens in reporter.list_representacio(
                 is_historic=False,
                 search_filters=self.parse_search_filters()):
             writer.writerow([
                 ens.denominacio.encode('utf-8'),
                 ens.organ.encode('utf-8'),
-                ens.persona.encode('utf-8'),
                 ens.carrec.encode('utf-8'),
+                ens.persona.encode('utf-8'),
+                ens.carrec_envirtud.encode('utf-8'),
                 ens.data_nomenament.encode('utf-8')
             ])

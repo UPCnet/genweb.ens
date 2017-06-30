@@ -15,9 +15,9 @@ class EnsSearchResult(object):
 
 
 class Identificacio(object):
-    def __init__(self, codi, acronim, title, absolute_url, nif,numero_identificacio, estat,
-                 figura_juridica, adscripcio, percentatge_participacio,
-                 aportacio, quota, etiquetes, web):
+    def __init__(self, codi, acronim, title, absolute_url, nif,numero_identificacio, estat, institution_type,
+                 figura_juridica,seu_social, seu_social_estranger, adscripcio, percentatge_participacio,
+                 aportacio, quota, tags, etiquetes, web, tipologia_upc, entitats_actuals):
         self.codi = codi
         self.acronim = acronim
         self.title = title
@@ -25,23 +25,30 @@ class Identificacio(object):
         self.nif = nif
         self.numero_identificacio = numero_identificacio
         self.estat = estat
+        self.institution_type = institution_type
         self.figura_juridica = figura_juridica
+        self.seu_social = seu_social
+        self.seu_social_estranger = seu_social_estranger
         self.adscripcio = adscripcio
         self.percentatge_participacio = percentatge_participacio
         self.aportacio = aportacio
         self.quota = quota
+        self.tags = tags
         self.etiquetes = etiquetes
         self.web = web
+        self.tipologia_upc = tipologia_upc
+        self.entitats_actuals = entitats_actuals
 
 
 class Representacio(object):
-    def __init__(self, denominacio, absolute_url, organ, persona, carrec,
+    def __init__(self, denominacio, absolute_url, organ, carrec, persona, carrec_envirtud,
                  data_nomenament):
         self.denominacio = denominacio
         self.absolute_url = absolute_url
         self.organ = organ
-        self.persona = persona
         self.carrec = carrec
+        self.persona = persona
+        self.carrec_envirtud = carrec_envirtud
         self.data_nomenament = data_nomenament
 
 
@@ -342,13 +349,19 @@ class EnsDataReporter(object):
                 nif=ens_obj.nif or "-",
                 numero_identificacio=ens_obj.numero_identificacio or "-",
                 estat=ens_obj.estat or "-",
+                institution_type=ens_obj.institution_type or "-",
                 figura_juridica=ens_obj.figura_juridica or "-",
+                seu_social=ens_obj.seu_social or "-",
+                seu_social_estranger=ens_obj.seu_social_estranger or "-",
                 adscripcio=ens_obj.adscripcio or "-",
                 percentatge_participacio=get_percentatge_participacio(ens_obj),
                 aportacio=get_aportacio(ens_obj),
                 quota=get_quota(ens_obj),
+                tags = ens_obj.Subject,
                 etiquetes=ens_obj.etiquetes or "-",
-                web=ens_obj.web or "-"))
+                web=ens_obj.web or "-",
+                tipologia_upc=ens_obj.tipologia_upc or "-",
+                entitats_actuals=ens_obj.entitats_actuals or "-"))
         return identificacio
 
     def list_representacio(self, is_historic=None, search_filters=None):
@@ -362,18 +375,21 @@ class EnsDataReporter(object):
         representacio = []
         for ens in self.list(search_filters):
             ens_obj = ens.getObject()
-            for organ_tipus in ('Govern', 'Assessor'):
-                for organ in self.list_organs_by_ens(ens, organ_tipus):
-                    for carrec in self.list_carrecs_upc_by_organ(organ, False):
-                        carrec_obj = carrec.getObject()
-                        representacio.append(Representacio(
-                            denominacio=get_denominacio(ens_obj),
-                            absolute_url=ens_obj.absolute_url,
-                            organ=organ.Title.decode('utf-8'),
-                            persona=carrec_obj.title,
-                            carrec=carrec_obj.carrec,
-                            data_nomenament=carrec_obj.data_inici and
-                            carrec_obj.data_inici.strftime('%d/%m/%Y') or "-"))
+            ens_estat = ens_obj.estat
+            if ens_estat != 'Baixa':
+                for organ_tipus in ('Govern', 'Assessor'):
+                    for organ in self.list_organs_by_ens(ens, organ_tipus):
+                        for carrec in self.list_carrecs_upc_by_organ(organ, False):
+                            carrec_obj = carrec.getObject()
+                            representacio.append(Representacio(
+                                denominacio=get_denominacio(ens_obj),
+                                absolute_url=ens_obj.absolute_url,
+                                organ=organ.Title.decode('utf-8'),
+                                carrec=carrec_obj.carrec,                            
+                                persona=carrec_obj.title,
+                                carrec_envirtud=carrec_obj.carrec_envirtud or "-",
+                                data_nomenament=carrec_obj.data_inici and 
+                                carrec_obj.data_inici.strftime('%d/%m/%Y') or "-"))
         return representacio
 
     def search(self, search_filters=None):

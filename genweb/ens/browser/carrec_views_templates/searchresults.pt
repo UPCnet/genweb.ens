@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th class="column-medium">Nom</th>
+      <th class="column-small">Com a...</th>
       <th class="column-xsmall">Ens</th>
       <th class="column-small">Òrgan</th>
       <th class="column-small">Càrrec</th>
@@ -16,6 +17,7 @@
     <tr tal:repeat="result results"
         tal:attributes="class python: 'historic' if result.is_historic else ''">
       <td><a tal:attributes="href result/url; target string: _blank" tal:content="result/title"/></td>
+      <td />hola</tr>
       <td><a tal:attributes="href result/ens_url; target string: _blank" tal:content="result/ens"/></td>
       <td><a tal:attributes="href result/organ_url; target string: _blank" tal:content="result/organ"/></td>
       <td tal:content="result/carrec"/>

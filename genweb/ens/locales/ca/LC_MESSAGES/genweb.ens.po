@@ -73,3 +73,15 @@ msgstr "Càrrec directiu d'un ens"
 
 msgid "Càrrec que pot representar UPC en algun ens"
 msgstr "Carrec que pot representar UPC en algun ens"
+
+msgid "Actiu"
+msgstr "Alta"
+
+msgid "Show data observations"
+msgstr "Mostra les observacions de les dades"
+
+msgid "Show parcicipation observations"
+msgstr "Mostra les observacions de la participació"
+
+msgid "Show legal framework observations"
+msgstr "Mostra les observacions del marc legal"

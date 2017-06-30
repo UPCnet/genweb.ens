@@ -23,19 +23,21 @@
     <table class="ens-taula table-striped">
       <thead>
         <tr>
-          <th style="width: 25%;">Denominació</th>
+          <th style="width: 20%;">Denominació</th>
           <th style="width: 15%;">Òrgan</th>
-          <th style="width: 35%;">Persona</th>
           <th style="width: 15%;">Càrrec</th>
-          <th style="width: 10%;">Data nom.</th>
+          <th style="width: 20%;">Persona</th>
+          <th style="width: 15%;">Com a...</th>          
+          <th style="width: 15%;">Data nom.</th>
         </tr>
       </thead>
       <tbody>
         <tr tal:repeat="ens view/list">
           <td class="denominacio"><a tal:content="ens/denominacio" tal:attributes="href ens/absolute_url"/></td>
           <td tal:content="ens/organ"/>
-          <td tal:content="ens/persona"/>
           <td tal:content="ens/carrec"/>
+          <td tal:content="ens/persona"/>
+          <td tal:content="ens/carrec_envirtud"/>
           <td tal:content="ens/data_nomenament"/>
         </tr>
       </tbody>

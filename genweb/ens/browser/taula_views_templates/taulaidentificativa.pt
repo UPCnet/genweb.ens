@@ -23,19 +23,22 @@
     <table class="ens-taula table-striped">
       <thead>
         <tr>
-          <th style="width: 6%;">Codi</th>
-          <th style="width: 6%;">Acronim</th>          
-          <th style="width: 12%;">Denominació</th>
+          <th style="width: 6%;">Codi REP</th>
+          <th style="width: 6%;">Acrònim</th>          
+          <th style="width: 6%;">Denominació</th>
           <th style="width: 6%;">NIF</th>
           <th style="width: 6%;">Num. Identificacio</th>
-          <th style="width: 10%;">Estat</th>
+          <th style="width: 6%;">Estat</th>
           <th style="width: 6%;">Fig. jurídica</th>
-          <th style="width: 12%;">Adm. Púb. Adscrip.</th>
-          <th style="width: 6%;">% part.</th>
-          <th style="width: 6%;">Ap. inicial</th>
+          <th style="width: 6%;">Tipus institució</th>
+          <th style="width: 6%;">Tipologia UPC</th>     
+          <th style="width: 6%;">Seu social</th>
+          <th style="width: 6%;">Adm. Púb. Adscrip.</th>
+          <th style="width: 6%;">Participació</th>
           <th style="width: 6%;">Quota</th>
-          <th style="width: 8%;">Etiquetes</th>
-          <th style="width: 10%;">Web</th>
+          <th style="width: 6%;">Etiquetes</th>
+          <th style="width: 6%;">Web</th>
+          <th style="width: 6%;">Entitats participants</th>
         </tr>
       </thead> 
       <tbody>
@@ -47,14 +50,26 @@
           </td>
           <td tal:content="ens/nif"/>
           <td tal:content="ens/numero_identificacio"/>
-          <td tal:content="ens/estat"/>
+          <td i18n:translate="" tal:content="ens/estat"/>
           <td tal:content="ens/figura_juridica"/>
+          <td tal:content="ens/institution_type"/>
+          <td tal:content="ens/tipologia_upc"/>
+          <td tal:content="python: view.getSeu(ens)"/>
           <td tal:content="ens/adscripcio"/>
           <td class="numeric" tal:content="ens/percentatge_participacio"/>
-          <td class="numeric" tal:content="ens/aportacio"/>
           <td class="numeric" tal:content="ens/quota"/>
-          <td tal:content="ens/etiquetes"/>
+          <td>
+            <div tal:define="ens_tags python: view.getTags(ens)"
+                 tal:condition="ens_tags">
+                <tal:rep tal:repeat="tag ens_tags">
+                    <a href="#" tal:attributes="href tag/tag_url" tal:content="tag/tag_name" />
+                    <span class="separator" tal:condition="not: repeat/tag/end">,</span>
+                </tal:rep>
+            </div>
+            <div tal:content="ens/etiquetes" />
+          </td>
           <td tal:content="ens/web"/>
+          <td tal:content="ens/entitats_actuals"/>
         </tr>
       </tbody>
     </table> 

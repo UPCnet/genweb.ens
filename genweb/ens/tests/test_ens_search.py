@@ -41,14 +41,14 @@ class TestEnsSearch(FunctionalTestCase):
         # folder  title   fig.jur.  estat                 description
         # 1       Ens 01  Fundació  Pre-Alta cancel·lada  desc-a
         # 1       Ens 02  Fundació  Pre-Alta cancel·lada  desc-b
-        # 1       Ens 03  Fundació  Actiu                 desc-a
-        # 1       Ens 04  Fundació  Actiu                 desc-b
+        # 1       Ens 03  Fundació  Alta                  desc-a
+        # 1       Ens 04  Fundació  Alta                  desc-b
         folder_1 = fixtures.create_content(self.portal, fixtures.folder_1)
         ens_list = []
         for figura_juridica in (u'Fundació',):
             for estat in (
                     u'Pre-Alta cancel·lada',
-                    u'Actiu'):
+                    u'Alta'):
                 for description in (u'desc-a', u'desc-b'):
                     ens_list.append(dummy.create_ens(
                         folder_1,

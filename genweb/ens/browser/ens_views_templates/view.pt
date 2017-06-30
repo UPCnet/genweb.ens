@@ -6,12 +6,10 @@
             metal:use-macro="context/main_template/macros/master">
 
 <body>
-  <metal:custom_title fill-slot="content-title">
-    <h1 class="documentFirstHeading" tal:content="context/title"></h1>
-  </metal:custom_title>
+
   <metal:content-core fill-slot="content-core">
     <section id="ens-metadata" class="ens-metadata">
-        <h2 i18n:translate="Dades indentificatives" class="collapsable">
+        <h2 i18n:translate="Dades indentificatives">
             Dades identificatives
         </h2>
         <div>
@@ -26,12 +24,14 @@
           <dd tal:content="python: context.objecte_social or '-'"
               class="fieldset-end"/>
 
-
           <dt i18n:translate="Estat">Estat</dt>
-          <dd tal:content="python: context.estat or '-'"/>
+          <dd i18n:translate="" tal:content="python: context.estat or '-'" />
 
           <dt i18n:translate="NIF">NIF</dt>
           <dd tal:content="python: context.nif or '-'"/>
+
+          <dt i18n:translate="Tipus d'institució">Tipus d'institució</dt>
+          <dd tal:content="python: context.institution_type or '-'"/>
 
           <dt i18n:translate="Figura jurídica">Figura jurídica</dt>
           <dd tal:content="python: context.figura_juridica or '-'"/>
@@ -39,7 +39,6 @@
           <dt i18n:translate="Núm. Identif." class="subfield">Núm. Identif.</dt>
           <dd tal:content="python: context.numero_identificacio or '-'"
               class="fieldset-end"/>
-
 
           <dt i18n:translate="Domicili social (població)">Domicili social (població)</dt>
           <dd tal:content="python: context.domicili_social_poblacio or '-'"/>
@@ -60,7 +59,6 @@
           <dd tal:content="python: context.web or '-'"
               class="fieldset-end"/>
 
-
           <dt i18n:translate="Tipologia UPC">Tipologia UPC</dt>
           <dd tal:content="python: context.tipologia_upc or '-'"/>
 
@@ -68,8 +66,27 @@
           <dd tal:content="python: context.codi or '-'"/>
 
           <dt i18n:translate="Etiquetes">Etiquetes</dt>
-          <dd tal:content="python: context.etiquetes or '-'"
-              class="fieldset-end"/>
+          <dd>
+            <div tal:define="categories context/Subject|nothing;
+                 url_quote  nocall:modules/Products.PythonScripts.standard/url_quote;"
+                 tal:condition="categories">
+                <span tal:repeat="category categories">
+                    <a href=""
+                       class="link-category"
+                       rel="tag"
+                       tal:content="category"
+                       tal:define="quotedCat python:url_quote(category)"
+                       tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/@@search?Subject%3Alist=${quotedCat}">
+                         Category
+                    </a>
+                    <span class="separator" tal:condition="not: repeat/category/end">,</span>
+                </span>
+            </div>
+            <!-- Pintamos las etiquetas que se introdujeron fuera de la categorización estandar -->
+            <div tal:condition="python:context.etiquetes"
+                 tal:content="python: context.etiquetes"
+                 class="fieldset-end" />
+          </dd>
         </dl>
         <h3 i18n:translate="Càrrecs directius">Càrrecs directius</h3>
         <tal:block define="directius view/directius">
@@ -133,6 +150,12 @@
         </table>
         <p tal:condition="not: contactes">---</p>
         </tal:block>
+        <div tal:condition="context/show_dades_identificatives_observacions">
+        <h3> Observacions </h3>
+        <tal:block>
+            <div tal:content="python: context.dades_identificatives_observacions or '-'">observaciones dades identificatives</div>
+        </tal:block>
+        </div>
         </div>
 
         <h2 i18n:translate="Participació de la UPC">
@@ -300,8 +323,13 @@
           </table>
           <p tal:condition="not: unitats">---</p>
         </tal:block>
+        <div tal:condition="context/show_participacio_observacions">
+        <h3> Observacions </h3>
+        <tal:block>
+            <div tal:content="python: context.participacio_observacions or '-'">observaciones dades participació</div>
+        </tal:block>
         </div>
-
+        </div>
         <h2 i18n:translate="Marc legal">Marc legal</h2>
         <div>
         <dl>
@@ -481,6 +509,12 @@
 
         <h3 i18n:translate="Altres documents d&apos;interès">Altres documents d&apos;interès</h3>
         <a href="altres-documents" target="_blank">Accés altres documents d&apos;interès</a>
+        <div tal:condition="context/show_observacions_marc_legal">
+            <h3> Observacions </h3>
+                <tal:block>
+                    <div tal:content="python: context.marc_legal_observacions or '-'">observaciones marc legal</div>
+                </tal:block>
+        </div>
         </div>
     </section>
     <script type="text/javascript"
@@ -492,3 +526,19 @@
   </metal:content-core>
 </body>
 </html>
+
+
+<div tal:define="categories context/Subject|nothing;
+                 url_quote  nocall:modules/Products.PythonScripts.standard/url_quote;"
+     tal:condition="categories">
+  <span tal:repeat="category categories">
+    <a href=""
+       class="link-category"
+       rel="tag"
+       tal:content="category"
+       tal:define="quotedCat python:url_quote(category)"
+       tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/@@search?Subject%3Alist=${quotedCat}">
+      Category
+      </a><span class="separator" tal:condition="not: repeat/category/end">,</span>
+  </span>
+</div>
