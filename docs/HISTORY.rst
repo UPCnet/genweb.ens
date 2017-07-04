@@ -1,11 +1,10 @@
 Changelog
 =========
 
-1.7.4 (unreleased)
+1.7.3 (2017-07-04)
 ------------------
 
-- Nothing changed yet.
-
+* Corregir error searchresult.pt [Corina Riba]
 
 1.7.3 (2017-06-30)
 ------------------
