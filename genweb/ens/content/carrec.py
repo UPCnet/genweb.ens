@@ -26,7 +26,8 @@ class ICarrec(form.Schema):
     title = schema.TextLine(
         title=_(u"Cognoms i nom"),
         required=True)
-
+    
+    dexteritytextindexer.searchable('carrec')    
     carrec_envirtud = schema.TextLine(
         title=_(u"En virtud del seu càrrec de:"),
         required=False)

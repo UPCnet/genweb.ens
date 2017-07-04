@@ -16,17 +16,23 @@
   <tbody id="results">
     <tr tal:repeat="result results"
         tal:attributes="class python: 'historic' if result.is_historic else ''">
-      <td><a tal:attributes="href result/url; target string: _blank" tal:content="result/title"/></td>
-      <td />hola</tr>
-      <td><a tal:attributes="href result/ens_url; target string: _blank" tal:content="result/ens"/></td>
-      <td><a tal:attributes="href result/organ_url; target string: _blank" tal:content="result/organ"/></td>
-      <td tal:content="result/carrec"/>
-      <td class="column-center" tal:content="result/data_inici_str"/>
-      <td class="column-center" tal:content="result/data_fi_str"/>
-      <td class="column-center">
-        <input type="checkbox"
-               tal:attributes="checked result/is_historic; disabled python: True"/>
-      </td>
+        <td>
+            <a tal:attributes="href result/url; target string: _blank" tal:content="result/title"/>
+        </td>
+        <td tal:content="result/carrec_envirtud"/>
+        <td>
+            <a tal:attributes="href result/ens_url; target string: _blank" tal:content="result/ens"/>
+        </td>
+        <td>
+            <a tal:attributes="href result/organ_url; target string: _blank" tal:content="result/organ"/>
+        </td>
+        <td tal:content="result/carrec"/>
+        <td class="column-center" tal:content="result/data_inici_str"/>
+        <td class="column-center" tal:content="result/data_fi_str"/>
+        <td class="column-center">
+            <input type="checkbox"
+                   tal:attributes="checked result/is_historic; disabled python: True"/>
+        </td>
     </tr>
   </tbody>
 </table>

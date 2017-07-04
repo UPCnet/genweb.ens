@@ -2,7 +2,7 @@
 
 
 class CarrecSearchResult(object):
-    def __init__(self, title, ens, ens_url, organ, organ_url, carrec, carrec_envirtud,
+    def __init__(self, title, ens, ens_url, organ, organ_url, carrec,carrec_envirtud,
                  data_inici, data_inici_str, data_fi, data_fi_str,
                  is_historic, url):
         self.title = title
@@ -11,6 +11,7 @@ class CarrecSearchResult(object):
         self.organ = organ
         self.organ_url = organ_url
         self.carrec = carrec
+        self.carrec_envirtud = carrec_envirtud
         self.data_inici = data_inici
         self.data_inici_str = data_inici_str
         self.data_fi = data_fi
@@ -42,7 +43,7 @@ class CarrecDataReporter(object):
         results = []
 
         query = {
-            'portal_type': ('genweb.ens.carrec', 'genweb.ens.carrec_upc', 'genweb.ens.persona_directiu'),
+            'portal_type': ('genweb.ens.carrec', 'genweb.ens.carrec_upc'),
             'sort_on': 'sortable_title'}
         if search_filters:
             query.update(search_filters)
@@ -51,34 +52,21 @@ class CarrecDataReporter(object):
             carrec_obj = carrec.getObject()
             ens = carrec_obj.getParentNode().getParentNode()
             organ = carrec_obj.getParentNode()
-
-            carrec_obj_data_inici = None
-            carrec_obj_data_inici_str = None
-            if carrec_obj.get('data_inici', None):
-                carrec_obj_data_inici = carrec_obj.data_inici
-                carrec_obj_data_inici_str = carrec_obj.data_inici.strftime('%d/%m/%Y')
-
-            carrec_obj_data_fi = None
-            carrec_obj_data_fi_str = None
-            if carrec_obj.get('data_fi', None):
-                carrec_obj_data_fi = carrec_obj.data_fi
-                carrec_obj_data_fi_str = carrec_obj.data_fi.strftime('%d/%m/%Y')
-
             results.append(CarrecSearchResult(
                 title=carrec_obj.title,
-                carrec_envirtud='no me sale',
-                ens=ens.get('acronim', None),
+                carrec_envirtud = carrec_obj.carrec_envirtud,
+                ens=ens.acronim,
                 ens_url=ens.absolute_url,
                 organ=organ.title,
                 organ_url=organ.absolute_url,
                 carrec=carrec_obj.carrec or "-",
-                data_inici_str=(carrec_obj_data_inici and
-                                carrec_obj_data_inici_str or
+                data_inici_str=(carrec_obj.data_inici and
+                                carrec_obj.data_inici.strftime('%d/%m/%Y') or
                                 '-'),
-                data_inici=carrec_obj_data_inici,
-                data_fi=carrec_obj_data_fi,
-                data_fi_str=(carrec_obj_data_fi and
-                             carrec_obj_data_fi_str or
+                data_inici=carrec_obj.data_inici,
+                data_fi=carrec_obj.data_fi,
+                data_fi_str=(carrec_obj.data_fi and
+                             carrec_obj.data_fi.strftime('%d/%m/%Y') or
                              '-'),
                 is_historic=carrec_obj.is_historic,
                 url=carrec_obj.absolute_url))
