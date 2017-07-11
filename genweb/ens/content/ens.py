@@ -58,7 +58,6 @@ class IEns(form.Schema):
                 'adreca_2',
                 'telefon', 'fax', 'web',
                 'tipologia_upc', 'codi', 'etiquetes',
-                'show_dades_identificatives_observacions',
                 'dades_identificatives_observacions']
     )
 
@@ -179,11 +178,6 @@ class IEns(form.Schema):
         title=_(u"Etiquetes"),
         required=False)
 
-    show_dades_identificatives_observacions = schema.Bool(
-        title=_(u"Show data observations"),
-        required = False,
-        default = False)
-
     dexteritytextindexer.searchable('dades_identificatives_observacions')
     dades_identificatives_observacions = schema.Text(
         title=_(u"Observacions"),
@@ -198,7 +192,6 @@ class IEns(form.Schema):
                 'nombre_membres',
                 'capital_social_sn', 'capital_social_import',
                 'capital_social_moneda',
-                'show_participacio_observacions',
                 'participacio_observacions']
     )
 
@@ -270,11 +263,6 @@ class IEns(form.Schema):
         title=_(u"Moneda"),
         required=False)
 
-    show_participacio_observacions = schema.Bool(
-        title = _(u"Show parcicipation observations"),
-        required = False,
-        default = False)
-
     dexteritytextindexer.searchable('participacio_observacions')
     participacio_observacions = schema.Text(
         title=_(u"Observacions"),
@@ -287,7 +275,6 @@ class IEns(form.Schema):
                 'entitats_actuals', 'data_entrada',
                 'data_entrada_procediment', 'seu_social',
                 'seu_social_estranger', 'adscripcio',
-                'show_observacions_marc_legal',
                 'marc_legal_observacions']
     )
 
@@ -330,11 +317,6 @@ class IEns(form.Schema):
     adscripcio = schema.TextLine(
         title=_(u"Adm. Pública d'adscripció"),
         required=False)
-
-    show_observacions_marc_legal = schema.Bool(
-        title = _(u"Show legal framework observations"),
-        required = False,
-        default = False)
 
     dexteritytextindexer.searchable('marc_legal_observacions')
     marc_legal_observacions = schema.Text(

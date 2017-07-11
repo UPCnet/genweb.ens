@@ -13,149 +13,162 @@
             Dades identificatives
         </h2>
         <div>
-        <dl>
-          <dt i18n:translate="Denominació">Denominació</dt>
-          <dd tal:content="context/title"/>
+            <dl>
+              <dt i18n:translate="Denominació">Denominació</dt>
+              <dd tal:content="context/title"/>
 
-          <dt i18n:translate="Acrònim">Acrònim</dt>
-          <dd tal:content="python: context.acronim or '-'"/>
+              <dt i18n:translate="Acrònim">Acrònim</dt>
+              <dd tal:content="python: context.acronim or '-'"/>
 
-          <dt i18n:translate="Objecte social">Objecte social</dt>
-          <dd tal:content="python: context.objecte_social or '-'"
-              class="fieldset-end"/>
+              <dt i18n:translate="Objecte social">Objecte social</dt>
+              <dd tal:content="python: context.objecte_social or '-'"
+                  class="fieldset-end"/>
 
-          <dt i18n:translate="Estat">Estat</dt>
-          <dd i18n:translate="" tal:content="python: context.estat or '-'" />
+              <dt i18n:translate="Estat">Estat</dt>
+              <dd i18n:translate="" tal:content="python: context.estat or '-'" />
 
-          <dt i18n:translate="NIF">NIF</dt>
-          <dd tal:content="python: context.nif or '-'"/>
+              <dt i18n:translate="NIF">NIF</dt>
+              <dd tal:content="python: context.nif or '-'"/>
 
-          <dt i18n:translate="Tipus d'institució">Tipus d'institució</dt>
-          <dd tal:content="python: context.institution_type or '-'"/>
+              <dt i18n:translate="Tipus d'institució">Tipus d'institució</dt>
+              <dd tal:content="python: context.institution_type or '-'"/>
 
-          <dt i18n:translate="Figura jurídica">Figura jurídica</dt>
-          <dd tal:content="python: context.figura_juridica or '-'"/>
+              <dt i18n:translate="Figura jurídica">Figura jurídica</dt>
+              <dd tal:content="python: context.figura_juridica or '-'"/>
 
-          <dt i18n:translate="Núm. Identif." class="subfield">Núm. Identif.</dt>
-          <dd tal:content="python: context.numero_identificacio or '-'"
-              class="fieldset-end"/>
+              <dt i18n:translate="Núm. Identif." class="subfield">Núm. Identif.</dt>
+              <dd tal:content="python: context.numero_identificacio or '-'"
+                  class="fieldset-end"/>
 
-          <dt i18n:translate="Domicili social (població)">Domicili social (població)</dt>
-          <dd tal:content="python: context.domicili_social_poblacio or '-'"/>
+              <dt i18n:translate="Domicili social (població)">Domicili social (població)</dt>
+              <dd tal:content="python: context.domicili_social_poblacio or '-'"/>
 
-          <dt i18n:translate="Domicili social (adreça)">Domicili social (adreça)</dt>
-          <dd tal:content="python: context.domicili_social_adreca or '-'"/>
+              <dt i18n:translate="Domicili social (adreça)">Domicili social (adreça)</dt>
+              <dd tal:content="python: context.domicili_social_adreca or '-'"/>
 
-          <dt i18n:translate="Adreça 2">Adreça 2</dt>
-          <dd tal:content="python: context.adreca_2 or '-'"/>
+              <dt i18n:translate="Adreça 2">Adreça 2</dt>
+              <dd tal:content="python: context.adreca_2 or '-'"/>
 
-          <dt i18n:translate="Telèfon">Telèfon</dt>
-          <dd tal:content="python: context.telefon or '-'"/>
+              <dt i18n:translate="Telèfon">Telèfon</dt>
+              <dd tal:content="python: context.telefon or '-'"/>
 
-          <dt i18n:translate="Fax">Fax</dt>
-          <dd tal:content="python: context.fax or '-'"/>
+              <dt i18n:translate="Fax">Fax</dt>
+              <dd tal:content="python: context.fax or '-'"/>
 
-          <dt i18n:translate="Web">Web</dt>
-          <dd tal:content="python: context.web or '-'"
-              class="fieldset-end"/>
+              <dt i18n:translate="Web">Web</dt>
+              <dd tal:content="python: context.web or '-'"
+                  class="fieldset-end"/>
 
-          <dt i18n:translate="Tipologia UPC">Tipologia UPC</dt>
-          <dd tal:content="python: context.tipologia_upc or '-'"/>
+              <dt i18n:translate="Tipologia UPC">Tipologia UPC</dt>
+              <dd tal:content="python: context.tipologia_upc or '-'"/>
 
-          <dt i18n:translate="Codi UPC">Codi UPC</dt>
-          <dd tal:content="python: context.codi or '-'"/>
+              <dt i18n:translate="Codi UPC">Codi UPC</dt>
+              <dd tal:content="python: context.codi or '-'"/>
 
-          <dt i18n:translate="Etiquetes">Etiquetes</dt>
-          <dd>
-            <div tal:define="categories context/Subject|nothing;
-                 url_quote  nocall:modules/Products.PythonScripts.standard/url_quote;"
-                 tal:condition="categories">
-                <span tal:repeat="category categories">
-                    <a href=""
-                       class="link-category"
-                       rel="tag"
-                       tal:content="category"
-                       tal:define="quotedCat python:url_quote(category)"
-                       tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/@@search?Subject%3Alist=${quotedCat}">
-                         Category
-                    </a>
-                    <span class="separator" tal:condition="not: repeat/category/end">,</span>
-                </span>
-            </div>
-            <!-- Pintamos las etiquetas que se introdujeron fuera de la categorización estandar -->
-            <div tal:condition="python:context.etiquetes"
-                 tal:content="python: context.etiquetes"
-                 class="fieldset-end" />
-          </dd>
-        </dl>
-        <h3 i18n:translate="Càrrecs directius">Càrrecs directius</h3>
-        <tal:block define="directius view/directius">
-          <tal:block condition="directius">
-          <input type="checkbox" class="label-aligned selector-input-historic"
-                 tal:attributes="id string:cb-directius"/>
-          <label i18n:translate="Mostra els càrrecs històrics"
-                 tal:attributes="for string:cb-directius">Mostra els càrrecs històrics</label>
-          <table class="ens-taula">
-          <thead>
-            <tr>
-              <th i18n:translate="Nom" class="column-medium">Nom</th>
-              <th i18n:translate="Càrrec" class="column-medium">Càrrec</th>
-              <th i18n:translate="Telèfon" class="column-small">Telèfon</th>
-              <th i18n:translate="Email" class="column-small">Email</th>
-              <th i18n:translate="Històric" class="column-center">Històric</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr tal:repeat="directiu directius"
-                tal:attributes="class python: 'historic' if directiu.is_historic else ''">
-              <td>
-                <a tal:attributes="href directiu/absolute_url"
-                   tal:content="directiu/title"/>
-              </td>
-              <td tal:content="python: directiu.carrec or '-'"/>
-              <td tal:content="python: directiu.telefon or '-'"/>
-              <td tal:content="python: directiu.email or '-'"/>
-              <td class="column-center">
-                <input type="checkbox" class="hidable-group-element"
-                       tal:attributes="checked directiu/is_historic; disabled python: True"/>
-              </td>
-            </tr>
-          </tbody>
-          </table>
-          </tal:block>
-          <p tal:condition="not: directius">---</p>
-        </tal:block>
-        <h3 i18n:translate="Persones de contacte">Persones de contacte</h3>
-        <tal:block define="contactes view/contactes">
-        <table tal:condition="contactes" class="ens-taula">
-          <thead>
-            <tr>
-              <th i18n:translate="Nom" class="column-medium">Nom</th>
-              <th i18n:translate="Càrrec" class="column-medium">Càrrec</th>
-              <th i18n:translate="Telèfon" class="column-small">Telèfon</th>
-              <th i18n:translate="Email">Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr tal:repeat="contacte contactes">
-              <td>
-                <a tal:attributes="href contacte/absolute_url"
-                   tal:content="contacte/title"/>
-              </td>
-              <td tal:content="python: contacte.carrec or '-'"/>
-              <td tal:content="python: contacte.telefon or '-'"/>
-              <td tal:content="python: contacte.email or '-'"/>
-            </tr>
-          </tbody>
-        </table>
-        <p tal:condition="not: contactes">---</p>
-        </tal:block>
-        <div tal:condition="context/show_dades_identificatives_observacions">
-        <h3> Observacions </h3>
-        <tal:block>
-            <div tal:content="python: context.dades_identificatives_observacions or '-'">observaciones dades identificatives</div>
-        </tal:block>
-        </div>
+              <dt i18n:translate="Etiquetes">Etiquetes</dt>
+              <dd>
+                <div tal:define="categories context/Subject|nothing;
+                     url_quote  nocall:modules/Products.PythonScripts.standard/url_quote;"
+                     tal:condition="categories">
+                    <span tal:repeat="category categories">
+                        <a href=""
+                           class="link-category"
+                           rel="tag"
+                           tal:content="category"
+                           tal:define="quotedCat python:url_quote(category)"
+                           tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/@@search?Subject%3Alist=${quotedCat}">
+                             Category
+                        </a>
+                        <span class="separator" tal:condition="not: repeat/category/end">,</span>
+                    </span>
+                </div>
+                <!-- Pintamos las etiquetas que se introdujeron fuera de la categorización estandar -->
+                <div tal:condition="python:context.etiquetes"
+                     tal:content="python: context.etiquetes"
+                     class="fieldset-end" />
+              </dd>
+            </dl>
+            <br/>
+            <h3 i18n:translate="Càrrecs directius">Càrrecs directius</h3>
+            <tal:block define="directius view/directius">
+              <tal:block condition="directius">
+              <input type="checkbox" class="label-aligned selector-input-historic"
+                     tal:attributes="id string:cb-directius"/>
+              <label i18n:translate="Mostra els càrrecs històrics"
+                     tal:attributes="for string:cb-directius">Mostra els càrrecs històrics</label>
+              <table class="ens-taula">
+              <thead>
+                <tr>
+                  <th i18n:translate="Nom" class="column-medium">Nom</th>
+                  <th i18n:translate="Càrrec" class="column-medium">Càrrec</th>
+                  <th i18n:translate="Telèfon" class="column-small">Telèfon</th>
+                  <th i18n:translate="Email" class="column-small">Email</th>
+                  <th i18n:translate="Històric" class="column-center">Històric</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr tal:repeat="directiu directius"
+                    tal:attributes="class python: 'historic' if directiu.is_historic else ''">
+                  <td>
+                    <a tal:attributes="href directiu/absolute_url"
+                       tal:content="directiu/title"/>
+                  </td>
+                  <td tal:content="python: directiu.carrec or '-'"/>
+                  <td tal:content="python: directiu.telefon or '-'"/>
+                  <td tal:content="python: directiu.email or '-'"/>
+                  <td class="column-center">
+                    <input type="checkbox" class="hidable-group-element"
+                           tal:attributes="checked directiu/is_historic; disabled python: True"/>
+                  </td>
+                </tr>
+              </tbody>
+              </table>
+              </tal:block>
+              <p tal:condition="not: directius">---</p>
+            </tal:block>
+            <h3 i18n:translate="Persones de contacte">Persones de contacte</h3>
+            <tal:block define="contactes view/contactes">
+            <table tal:condition="contactes" class="ens-taula">
+              <thead>
+                <tr>
+                  <th i18n:translate="Nom" class="column-medium">Nom</th>
+                  <th i18n:translate="Càrrec" class="column-medium">Càrrec</th>
+                  <th i18n:translate="Telèfon" class="column-small">Telèfon</th>
+                  <th i18n:translate="Email">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr tal:repeat="contacte contactes">
+                  <td>
+                    <a tal:attributes="href contacte/absolute_url"
+                       tal:content="contacte/title"/>
+                  </td>
+                  <td tal:content="python: contacte.carrec or '-'"/>
+                  <td tal:content="python: contacte.telefon or '-'"/>
+                  <td tal:content="python: contacte.email or '-'"/>
+                </tr>
+              </tbody>
+            </table>
+            <p tal:condition="not: contactes">---</p>
+            </tal:block>
+                <h3> Observacions </h3>
+                <tal:block define="observacions python: context.dades_identificatives_observacions">
+                    <tal:co condition="observacions"> 
+                        <input type="checkbox"
+                               class="label-aligned selector-input-observacions"
+                               id="obs"/>
+                        <label i18n:translate="Mostra les observacions"
+                               for="obs">Mostra les observacions</label>
+                        <div class="observacions-content"
+                             style="display: none"
+                             tal:content="observacions">
+                            observaciones dades identificatives
+                        </div>
+                    </tal:co>
+                    <tal:co condition="not: observacions">
+                    ---
+                    </tal:co>
+                </tal:block>
         </div>
 
         <h2 i18n:translate="Participació de la UPC">
@@ -323,12 +336,26 @@
           </table>
           <p tal:condition="not: unitats">---</p>
         </tal:block>
-        <div tal:condition="context/show_participacio_observacions">
+
         <h3> Observacions </h3>
-        <tal:block>
-            <div tal:content="python: context.participacio_observacions or '-'">observaciones dades participació</div>
-        </tal:block>
-        </div>
+                <tal:block define="observacions python: context.participacio_observacions">
+                    <tal:co condition="observacions"> 
+                        <input type="checkbox"
+                               class="label-aligned selector-input-observacions"
+                               id="obs"/>
+                        <label i18n:translate="Mostra les observacions"
+                               for="obs">Mostra les observacions</label>
+                        <div class="observacions-content"
+                             style="display: none"
+                             tal:content="observacions">
+                            observaciones dades participació
+                        </div>
+                    </tal:co>
+                    <tal:co condition="not: observacions">
+                    ---
+                    </tal:co>
+                </tal:block>
+
         </div>
         <h2 i18n:translate="Marc legal">Marc legal</h2>
         <div>
@@ -509,12 +536,26 @@
 
         <h3 i18n:translate="Altres documents d&apos;interès">Altres documents d&apos;interès</h3>
         <a href="altres-documents" target="_blank">Accés altres documents d&apos;interès</a>
-        <div tal:condition="context/show_observacions_marc_legal">
-            <h3> Observacions </h3>
-                <tal:block>
-                    <div tal:content="python: context.marc_legal_observacions or '-'">observaciones marc legal</div>
-                </tal:block>
-        </div>
+
+        <h3> Observacions </h3>
+
+            <tal:block define="observacions python: context.marc_legal_observacions">
+                <tal:co condition="observacions"> 
+                    <input type="checkbox"
+                           class="label-aligned selector-input-observacions"
+                           id="obs"/>
+                    <label i18n:translate="Mostra les observacions"
+                           for="obs">Mostra les observacions</label>
+                    <div class="observacions-content"
+                         style="display: none"
+                         tal:content="observacions">
+                        observaciones dades identificatives
+                    </div>
+                </tal:co>
+                <tal:co condition="not: observacions">
+                ---
+                </tal:co>
+            </tal:block>
         </div>
     </section>
     <script type="text/javascript"
