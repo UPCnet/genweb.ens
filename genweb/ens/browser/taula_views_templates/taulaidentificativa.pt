@@ -23,22 +23,23 @@
     <table class="ens-taula table-striped">
       <thead>
         <tr>
-          <th style="width: 6%;">Codi REP</th>
-          <th style="width: 6%;">Acrònim</th>          
-          <th style="width: 6%;">Denominació</th>
-          <th style="width: 6%;">NIF</th>
-          <th style="width: 6%;">Num. Identificacio</th>
-          <th style="width: 6%;">Estat</th>
-          <th style="width: 6%;">Fig. jurídica</th>
-          <th style="width: 6%;">Tipus institució</th>
-          <th style="width: 6%;">Tipologia UPC</th>     
-          <th style="width: 6%;">Seu social</th>
-          <th style="width: 6%;">Adm. Púb. Adscrip.</th>
-          <th style="width: 6%;">Participació</th>
-          <th style="width: 6%;">Quota</th>
-          <th style="width: 6%;">Etiquetes</th>
-          <th style="width: 6%;">Web</th>
-          <th style="width: 6%;">Entitats participants</th>
+          <th>Codi REP</th>
+          <th>Acrònim</th>          
+          <th>Denominació</th>
+          <th>NIF</th>
+          <th>Num. Identificacio</th>
+          <th>Estat</th>
+          <th>Fig. jurídica</th>
+          <th>Tipus institució</th>
+          <th>Tipologia UPC</th>     
+          <th>Seu social</th>
+          <th>Adm. Púb. Adscrip.</th>
+          <th>Participació</th>
+          <th>Membres UPC</th>          
+          <th>Quota</th>
+          <th>Etiquetes</th>
+          <th>Web</th>
+          <th>Entitats participants</th>
         </tr>
       </thead> 
       <tbody>
@@ -57,6 +58,7 @@
           <td tal:content="python: view.getSeu(ens)"/>
           <td tal:content="ens/adscripcio"/>
           <td class="numeric" tal:content="ens/percentatge_participacio"/>
+          <td tal:content="ens/nombre_membres"/>          
           <td class="numeric" tal:content="ens/quota"/>
           <td>
             <div tal:define="ens_tags python: view.getTags(ens)"

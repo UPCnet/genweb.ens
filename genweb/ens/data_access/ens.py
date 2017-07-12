@@ -16,7 +16,7 @@ class EnsSearchResult(object):
 
 class Identificacio(object):
     def __init__(self, codi, acronim, title, absolute_url, nif,numero_identificacio, estat, institution_type,
-                 figura_juridica,seu_social, seu_social_estranger, adscripcio, percentatge_participacio,
+                 figura_juridica,seu_social, seu_social_estranger, adscripcio, percentatge_participacio, nombre_membres,
                  aportacio, quota, tags, etiquetes, web, tipologia_upc, entitats_actuals):
         self.codi = codi
         self.acronim = acronim
@@ -31,6 +31,7 @@ class Identificacio(object):
         self.seu_social_estranger = seu_social_estranger
         self.adscripcio = adscripcio
         self.percentatge_participacio = percentatge_participacio
+        self.nombre_membres = nombre_membres
         self.aportacio = aportacio
         self.quota = quota
         self.tags = tags
@@ -355,6 +356,7 @@ class EnsDataReporter(object):
                 seu_social_estranger=ens_obj.seu_social_estranger or "-",
                 adscripcio=ens_obj.adscripcio or "-",
                 percentatge_participacio=get_percentatge_participacio(ens_obj),
+                nombre_membres=ens_obj.nombre_membres or "-",
                 aportacio=get_aportacio(ens_obj),
                 quota=get_quota(ens_obj),
                 tags = ens_obj.Subject,
