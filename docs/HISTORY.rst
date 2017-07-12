@@ -1,11 +1,12 @@
 Changelog
 =========
 
-1.7.4 (unreleased)
+1.7.4 (2017-07-12)
 ------------------
 
-- Nothing changed yet.
-
+* Add column to taula_identificativa [Corina Riba]
+* Correct errors and change observation selector [Corina Riba]
+* Change Tipologia UPC [Corina Riba]
 
 1.7.3 (2017-07-04)
 ------------------
