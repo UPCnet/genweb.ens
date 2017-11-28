@@ -123,6 +123,16 @@ class View(dexterity.DisplayForm):
             organ.Title,
             _(u" (Històric)").encode('utf-8') if organ.is_historic else u"")
 
+    def getData(self):
+        ens = self.context
+        if ens.estat == 'Actiu':
+            data = ens.data_alta
+        elif ens.estat == 'Baixa':
+            data = ens.data_baixa
+        else:
+            data = '-'
+        return data
+
 
 class Search(HomePageBase):
     grok.name('homepage')

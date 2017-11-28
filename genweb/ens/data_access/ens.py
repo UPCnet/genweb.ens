@@ -15,10 +15,11 @@ class EnsSearchResult(object):
 
 
 class Identificacio(object):
-    def __init__(self, codi, acronim, title, absolute_url, nif,numero_identificacio, estat, institution_type,
-                 figura_juridica,seu_social, seu_social_estranger, adscripcio, percentatge_participacio, nombre_membres,
+    def __init__(self, codi, num_ens, acronim, title, absolute_url, nif, numero_identificacio, estat, institution_type,
+                 figura_juridica, seu_social, seu_social_estranger, adscripcio, percentatge_participacio, nombre_membres,
                  aportacio, quota, tags, etiquetes, web, tipologia_upc, entitats_actuals):
         self.codi = codi
+        self.num_ens = num_ens
         self.acronim = acronim
         self.title = title
         self.absolute_url = absolute_url
@@ -159,9 +160,9 @@ class EnsDataReporter(object):
     def list_contenidor_by_id(self, contenidor_id):
         contenidor = None
         contenidors = self.catalog.searchResults(
-                portal_type='genweb.ens.contenidor_ens',
-                id=contenidor_id,
-                sort_on='sortable_title')
+            portal_type='genweb.ens.contenidor_ens',
+            id=contenidor_id,
+            sort_on='sortable_title')
         if contenidors:
             contenidor = contenidors[0]
         return contenidor
@@ -344,6 +345,7 @@ class EnsDataReporter(object):
             ens_obj = ens.getObject()
             identificacio.append(Identificacio(
                 codi=ens_obj.codi or "-",
+                num_ens=ens_obj.num_ens or "-",
                 acronim=ens_obj.acronim or "-",
                 title=ens_obj.title or "-",
                 absolute_url=ens_obj.absolute_url,
@@ -359,7 +361,7 @@ class EnsDataReporter(object):
                 nombre_membres=ens_obj.nombre_membres or "-",
                 aportacio=get_aportacio(ens_obj),
                 quota=get_quota(ens_obj),
-                tags = ens_obj.Subject,
+                tags=ens_obj.Subject,
                 etiquetes=ens_obj.etiquetes or "-",
                 web=ens_obj.web or "-",
                 tipologia_upc=ens_obj.tipologia_upc or "-",
@@ -387,10 +389,10 @@ class EnsDataReporter(object):
                                 denominacio=get_denominacio(ens_obj),
                                 absolute_url=ens_obj.absolute_url,
                                 organ=organ.Title.decode('utf-8'),
-                                carrec=carrec_obj.carrec,                            
+                                carrec=carrec_obj.carrec,
                                 persona=carrec_obj.title,
                                 carrec_envirtud=carrec_obj.carrec_envirtud or "-",
-                                data_nomenament=carrec_obj.data_inici and 
+                                data_nomenament=carrec_obj.data_inici and
                                 carrec_obj.data_inici.strftime('%d/%m/%Y') or "-"))
         return representacio
 

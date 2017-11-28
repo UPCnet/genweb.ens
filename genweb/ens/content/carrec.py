@@ -26,8 +26,14 @@ class ICarrec(form.Schema):
     title = schema.TextLine(
         title=_(u"Cognoms i nom"),
         required=True)
-    
-    dexteritytextindexer.searchable('carrec')    
+
+    dexteritytextindexer.searchable('dni')
+    dni = schema.TextLine(
+        title=_(u"DNI"),
+        required=False)
+
+
+    dexteritytextindexer.searchable('carrec_envirtud')
     carrec_envirtud = schema.TextLine(
         title=_(u"En virtud del seu càrrec de:"),
         required=False)
@@ -50,7 +56,6 @@ class ICarrec(form.Schema):
         defaultFactory=lambda: False,
         required=False)
 
-    dexteritytextindexer.searchable('observacions')
     observacions = schema.Text(
         title=_(u"Observacions"),
         required=False)
@@ -90,6 +95,8 @@ def get_vocabulary_representants_upc(context):
         for representant in reporter.list_representants('altres')]
 
     return SimpleVocabulary(vocabulary_terms)
+
+
 directlyProvides(get_vocabulary_representants_upc, IContextSourceBinder)
 
 
@@ -111,7 +118,7 @@ class ICarrecUPC(ICarrec):
         readonly=True,
         required=True)
 
-    form.order_before(title='carrec_envirtud')
+    form.order_before(title='dni')
     dexteritytextindexer.searchable('title')
     title = schema.Choice(
         title=_(u"Cognoms i nom"),

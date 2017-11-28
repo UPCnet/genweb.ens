@@ -59,8 +59,8 @@ class TaulaIdentificativa(grok.View, Taula):
         try:
             for category in categories():
                 quotedCat = url_quote(category)
-                tag_link =  portal_url + '/@@search?Subject%3Alist=' + quotedCat
-                tag = {'tag_name': category,'tag_url': tag_link}
+                tag_link = portal_url + '/@@search?Subject%3Alist=' + quotedCat
+                tag = {'tag_name': category, 'tag_url': tag_link}
                 tags.append(tag)
             return tags
         except:
@@ -74,6 +74,7 @@ class TaulaIdentificativaCsv(grok.View, Taula):
 
     data_header_columns = [
         "Codi REP",
+        "Núm.",
         "Acrònim",
         "Denominació",
         "NIF",
@@ -115,6 +116,7 @@ class TaulaIdentificativaCsv(grok.View, Taula):
             ens_tags = ",".join([str(tag) for tag in ens.tags()])
             writer.writerow([
                 ens.codi.encode('utf-8'),
+                ens.num_ens.encode('utf-8'),
                 ens.acronim.encode('utf-8'),
                 ens.title.encode('utf-8'),
                 ens.nif.encode('utf-8'),
@@ -131,7 +133,7 @@ class TaulaIdentificativaCsv(grok.View, Taula):
                 ens_tags,
                 ens.etiquetes.encode('utf-8'),
                 ens.web.encode('utf-8'),
-                ens.entitats_actuals.encode('utf-8')                
+                ens.entitats_actuals.encode('utf-8')
             ])
 
 

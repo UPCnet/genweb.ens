@@ -52,14 +52,7 @@ class IEns(form.Schema):
     form.fieldset(
         "dades_identificatives",
         label=u"Dades identificatives",
-        fields=['title', 'acronim', 'description', 'objecte_social',
-                'estat', 'nif', 'institution_type', 'figura_juridica', 'numero_identificacio',
-                'domicili_social_poblacio', 'domicili_social_adreca',
-                'adreca_2',
-                'telefon', 'fax', 'web',
-                'tipologia_upc', 'codi', 'etiquetes',
-                'dades_identificatives_observacions']
-    )
+        fields=['title', 'acronim', 'description', 'objecte_social', 'estat', 'data_alta', 'data_baixa', 'nif', 'institution_type', 'figura_juridica', 'numero_identificacio', 'domicili_social_poblacio', 'domicili_social_adreca', 'adreca_2', 'telefon', 'fax', 'web', 'tipologia_upc', 'codi','num_ens', 'etiquetes', 'dades_identificatives_observacions'])
 
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
@@ -88,6 +81,14 @@ class IEns(form.Schema):
         title=_(u"Estat"),
         vocabulary=get_vocabulary(estat_values),
         required=True)
+
+    data_alta = schema.Date(
+        title=_(u"Data d'alta"),
+        required=False)
+
+    data_baixa = schema.Date(
+        title=_(u"Data de baixa"),
+        required=False,)
 
     dexteritytextindexer.searchable('nif')
     nif = schema.TextLine(
@@ -162,13 +163,17 @@ class IEns(form.Schema):
             u"Instituts Universitaris de Recerca vinculats",
             u"Centres Docents Adscrits",
             u"Unitats d’Administració i Serveis",
-            u"Altra",
-            ]),
+            u"Altra"]),
         required=True)
 
     dexteritytextindexer.searchable('codi')
     codi = schema.TextLine(
         title=_(u"Codi UPC"),
+        required=False)
+
+    dexteritytextindexer.searchable('num_ens')
+    num_ens = schema.Int(
+        title=_(u"Núm."),
         required=False)
 
     # Campo oculto porque se usaran las etiquetas estandar de plone

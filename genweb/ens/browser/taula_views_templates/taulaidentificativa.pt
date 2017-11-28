@@ -24,27 +24,29 @@
       <thead>
         <tr>
           <th>Codi REP</th>
-          <th>Acrònim</th>          
+          <th>Núm.</th>
+          <th>Acrònim</th>
           <th>Denominació</th>
           <th>NIF</th>
           <th>Num. Identificacio</th>
           <th>Estat</th>
           <th>Fig. jurídica</th>
           <th>Tipus institució</th>
-          <th>Tipologia UPC</th>     
+          <th>Tipologia UPC</th>
           <th>Seu social</th>
           <th>Adm. Púb. Adscrip.</th>
           <th>Participació</th>
-          <th>Membres UPC</th>          
+          <th>Membres UPC</th>
           <th>Quota</th>
           <th>Etiquetes</th>
           <th>Web</th>
           <th>Entitats participants</th>
         </tr>
-      </thead> 
+      </thead>
       <tbody>
         <tr tal:repeat="ens view/list">
           <td tal:content="ens/codi"/>
+          <td tal:content="ens/num_ens"/>
           <td tal:content="ens/acronim"/>
           <td class="denominacio">
             <a tal:content="ens/title" tal:attributes="href ens/absolute_url"/>
@@ -58,7 +60,7 @@
           <td tal:content="python: view.getSeu(ens)"/>
           <td tal:content="ens/adscripcio"/>
           <td class="numeric" tal:content="ens/percentatge_participacio"/>
-          <td tal:content="ens/nombre_membres"/>          
+          <td tal:content="ens/nombre_membres"/>
           <td class="numeric" tal:content="ens/quota"/>
           <td>
             <div tal:define="ens_tags python: view.getTags(ens)"
@@ -74,7 +76,7 @@
           <td tal:content="ens/entitats_actuals"/>
         </tr>
       </tbody>
-    </table> 
+    </table>
   </metal:content-core>
 </body>
 </html>

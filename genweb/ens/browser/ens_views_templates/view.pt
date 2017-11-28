@@ -25,7 +25,9 @@
                   class="fieldset-end"/>
 
               <dt i18n:translate="Estat">Estat</dt>
-              <dd i18n:translate="" tal:content="python: context.estat or '-'" />
+              <dd tal:define="data view/getData">
+                <span tal:content="context/estat" /> (<span tal:content="data"/>)
+              </dd>
 
               <dt i18n:translate="NIF">NIF</dt>
               <dd tal:content="python: context.nif or '-'"/>
@@ -65,28 +67,9 @@
               <dt i18n:translate="Codi UPC">Codi UPC</dt>
               <dd tal:content="python: context.codi or '-'"/>
 
-              <dt i18n:translate="Etiquetes">Etiquetes</dt>
-              <dd>
-                <div tal:define="categories context/Subject|nothing;
-                     url_quote  nocall:modules/Products.PythonScripts.standard/url_quote;"
-                     tal:condition="categories">
-                    <span tal:repeat="category categories">
-                        <a href=""
-                           class="link-category"
-                           rel="tag"
-                           tal:content="category"
-                           tal:define="quotedCat python:url_quote(category)"
-                           tal:attributes="href string:${context/@@plone_portal_state/navigation_root_url}/@@search?Subject%3Alist=${quotedCat}">
-                             Category
-                        </a>
-                        <span class="separator" tal:condition="not: repeat/category/end">,</span>
-                    </span>
-                </div>
-                <!-- Pintamos las etiquetas que se introdujeron fuera de la categorización estandar -->
-                <div tal:condition="python:context.etiquetes"
-                     tal:content="python: context.etiquetes"
-                     class="fieldset-end" />
-              </dd>
+              <dt i18n:translate="num">Núm.:</dt>
+              <dd tal:content="python: context.num_ens or '-'"/>
+
             </dl>
             <br/>
             <h3 i18n:translate="Càrrecs directius">Càrrecs directius</h3>
@@ -153,7 +136,7 @@
             </tal:block>
                 <h3> Observacions </h3>
                 <tal:block define="observacions python: context.dades_identificatives_observacions">
-                    <tal:co condition="observacions"> 
+                    <tal:co condition="observacions">
                         <input type="checkbox"
                                class="label-aligned selector-input-observacions"
                                id="obs"/>
@@ -339,7 +322,7 @@
 
         <h3> Observacions </h3>
                 <tal:block define="observacions python: context.participacio_observacions">
-                    <tal:co condition="observacions"> 
+                    <tal:co condition="observacions">
                         <input type="checkbox"
                                class="label-aligned selector-input-observacions"
                                id="obs"/>
@@ -540,7 +523,7 @@
         <h3> Observacions </h3>
 
             <tal:block define="observacions python: context.marc_legal_observacions">
-                <tal:co condition="observacions"> 
+                <tal:co condition="observacions">
                     <input type="checkbox"
                            class="label-aligned selector-input-observacions"
                            id="obs"/>
