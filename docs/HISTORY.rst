@@ -1,11 +1,13 @@
 Changelog
 =========
 
-1.7.5 (unreleased)
+1.7.5 (2017-12-21)
 ------------------
 
-- Nothing changed yet.
-
+* New contenidor view [Corina Riba]
+* Cambios solicitados por el cliente [Corina Riba]
+* Petits canvis a petició del client [Corina Riba]
+* Change homeupc protocol and links [Corina Riba]
 
 1.7.4 (2017-07-12)
 ------------------
