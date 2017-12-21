@@ -1,0 +1,87 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:metal="http://xml.zope.org/namespaces/metal"
+            xmlns:tal="http://xml.zope.org/namespaces/tal"
+            xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+            i18n:domain="genweb.ens"
+            metal:use-macro="context/main_template/macros/master">
+
+<body>
+  <metal:custom_title fill-slot="content-title">
+    <h1 class="documentFirstHeading" i18n:translate="Inici">Inici</h1>
+  </metal:custom_title>
+
+  <metal:content-core fill-slot="content-core">
+    <nav>
+      <ul class="nav nav-pills opcions">
+        <li><a id='link_taula_identificativa'
+               tal:attributes="href string:${portal_url}/taula_identificativa">
+          Taula identificativa</a>
+        </li>
+        <li><a id='link_taula_representacio'
+               tal:attributes="href string:${portal_url}/taula_representacio">
+          Taula de representació</a>
+        </li>
+        <li><a id='link_colleccions'
+               tal:attributes="href string:${portal_url}/ca/col-leccions">
+          Col·leccions</a>
+        </li>
+      </ul>
+      <ul class="nav nav-pills opcions">
+        <li><a tal:attributes="href string:${portal_url}/ca/representants-upc">
+          Administrar representants UPC</a>
+        </li>
+        <li><a tal:attributes="href string:${portal_url}/carrec_search">
+          Cercador de càrrecs</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="input-append">
+      <div class="ens-search-field">
+      <label for="search_input_figura_juridica" i18n:translate="Figura jurídica">Figura jurídica</label>
+      <select id="search_input_figura_juridica" placeholder="Sel·lecciona">
+        <option tal:repeat="option view/figura_juridica_vocabulary"
+                tal:attributes="value python: option[0]; selected python: not option[0]"
+                tal:content="python: option[1]"></option>
+      </select>
+      </div>
+
+      <div class="ens-search-field">
+        <label for="search_input_estat" i18n:translate="Estat">Estat</label>
+        <select id="search_input_estat">
+          <option tal:repeat="option view/estat_vocabulary"
+                  tal:attributes="value python: option[0]; selected python: not option[0]"
+                  tal:content="python: option[1]"></option>
+        </select>
+      </div>
+
+      <div class="ens-search-field">
+        <label for="search_input_carpetes" i18n:translate="Cercar solament en">Cercar solament en</label>
+        <select id="search_input_carpetes" multiple="multiple">
+          <option tal:repeat="option view/carpetes_vocabulary"
+                  tal:attributes="value python: option[0]; selected python: option[2]"
+                  tal:content="python: option[1]"></option>
+        </select>
+      </div>
+
+      <div class="ens-search-field">
+        <label for="search_input_text" i18n:translate="Amb el text">Amb el text</label>
+        <input id="search_input_text" class="searchInput"
+               type="text" placeholder="Introduïu el text"/>
+      </div>
+
+      <div class="ens-search-field">
+        <input id="search_input_button" type="button" value="Cerca" class="standalone"/>
+      </div>
+    </section>
+
+    <section>
+      <div id="search_results" class="ens-search-results"></div>
+    </section>
+
+    <script type="text/javascript"
+            tal:attributes="src string:${portal_url}/++genweb++ens/ens_search.js">
+    </script>
+  </metal:content-core>
+</body>
+</html>
