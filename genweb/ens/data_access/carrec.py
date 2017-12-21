@@ -2,7 +2,7 @@
 
 
 class CarrecSearchResult(object):
-    def __init__(self, title, ens, ens_url, organ, organ_url, carrec,carrec_envirtud,
+    def __init__(self, title, ens, ens_url, organ, organ_url, carrec, carrec_envirtud,
                  data_inici, data_inici_str, data_fi, data_fi_str,
                  is_historic, url):
         self.title = title
@@ -36,8 +36,7 @@ class CarrecDataReporter(object):
             'portal_type': 'genweb.ens.representant',
             'sort_on': 'sortable_title'}
         return [result for result in self.catalog.searchResults(query)
-                if parent_id is None
-                or parent_id == result.getObject().getParentNode().id]
+                if parent_id is None or parent_id == result.getObject().getParentNode().id]
 
     def search(self, search_filters=None):
         results = []
@@ -56,7 +55,7 @@ class CarrecDataReporter(object):
 
             results.append(CarrecSearchResult(
                 title=carrec_obj.title,
-                carrec_envirtud = carrec_obj.carrec_envirtud,
+                carrec_envirtud=carrec_obj.carrec_envirtud,
                 ens=ens.acronim,
                 ens_url=ens.absolute_url,
                 organ=organ.title,
@@ -86,18 +85,17 @@ class CarrecDataReporter(object):
 
             results.append(CarrecSearchResult(
                 title=carrec_obj.title,
-                carrec_envirtud = carrec_obj.carrec_envirtud,
+                carrec_envirtud=carrec_obj.carrec_envirtud,
                 ens=ens.acronim,
                 ens_url=ens.absolute_url,
-                organ= '--',
+                organ='--',
                 organ_url='--',
                 carrec=carrec_obj.carrec or "-",
-                data_inici_str= '--',
-                data_inici= None,
-                data_fi= None,
-                data_fi_str= '--',
+                data_inici_str='--',
+                data_inici=None,
+                data_fi=None,
+                data_fi_str='--',
                 is_historic=carrec_obj.is_historic,
-                url=carrec_obj.absolute_url))        
+                url=carrec_obj.absolute_url))
 
         return sorted(results, key=lambda e: e.sortable_key)
-        

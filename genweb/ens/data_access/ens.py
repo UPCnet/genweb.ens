@@ -380,7 +380,7 @@ class EnsDataReporter(object):
         for ens in self.list(search_filters):
             ens_obj = ens.getObject()
             ens_estat = ens_obj.estat
-            if ens_estat != 'Baixa':
+            if ens_estat in ('Actiu', 'Pre-Baixa'):
                 for organ_tipus in ('Govern', 'Assessor'):
                     for organ in self.list_organs_by_ens(ens, organ_tipus):
                         for carrec in self.list_carrecs_upc_by_organ(organ, False):

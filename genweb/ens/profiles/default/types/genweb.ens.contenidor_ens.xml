@@ -13,9 +13,10 @@
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allow_discussion">False</property>
- <property name="default_view">view</property>
+ <property name="default_view">contenidor_ens_search</property>
  <property name="view_methods">
   <element value="view"/>
+  <element value="contenidor_ens_search"/>
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">cmf.AddPortalContent</property>

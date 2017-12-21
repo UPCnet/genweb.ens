@@ -26,7 +26,7 @@
 
               <dt i18n:translate="Estat">Estat</dt>
               <dd tal:define="data view/getData">
-                <span tal:content="context/estat" /> (<span tal:content="data"/>)
+                <span i18n:translate="" tal:content="context/estat"/> (<span tal:content="data"/>)
               </dd>
 
               <dt i18n:translate="NIF">NIF</dt>

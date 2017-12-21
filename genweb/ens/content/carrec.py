@@ -27,12 +27,6 @@ class ICarrec(form.Schema):
         title=_(u"Cognoms i nom"),
         required=True)
 
-    dexteritytextindexer.searchable('dni')
-    dni = schema.TextLine(
-        title=_(u"DNI"),
-        required=False)
-
-
     dexteritytextindexer.searchable('carrec_envirtud')
     carrec_envirtud = schema.TextLine(
         title=_(u"En virtud del seu càrrec de:"),
@@ -118,7 +112,6 @@ class ICarrecUPC(ICarrec):
         readonly=True,
         required=True)
 
-    form.order_before(title='dni')
     dexteritytextindexer.searchable('title')
     title = schema.Choice(
         title=_(u"Cognoms i nom"),

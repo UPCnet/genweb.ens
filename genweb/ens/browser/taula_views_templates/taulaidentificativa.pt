@@ -70,7 +70,6 @@
                     <span class="separator" tal:condition="not: repeat/tag/end">,</span>
                 </tal:rep>
             </div>
-            <div tal:content="ens/etiquetes" />
           </td>
           <td tal:content="ens/web"/>
           <td tal:content="ens/entitats_actuals"/>

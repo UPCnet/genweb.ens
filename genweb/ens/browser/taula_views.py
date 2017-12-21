@@ -163,7 +163,7 @@ class TaulaRepresentacioCsv(grok.View, Taula):
     data_header_columns = [
         "Denominació",
         "Òrgan",
-        "Càrrec"
+        "Càrrec",
         "Persona",
         "Com a...",
         "Data nom."]
