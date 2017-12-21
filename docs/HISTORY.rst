@@ -1,11 +1,11 @@
 Changelog
 =========
 
-1.7.6 (unreleased)
+1.7.5 (2017-12-21)
 ------------------
 
-- Nothing changed yet.
-
+* Merge remote-tracking branch 'origin/develop' [Corina Riba]
+* Delete wrong translation [Corina Riba]
 
 1.7.5 (2017-12-21)
 ------------------
