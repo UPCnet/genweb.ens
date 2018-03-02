@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from five import grok
 from plone import api
 from Products.CMFPlone.interfaces import IPloneSiteRoot
