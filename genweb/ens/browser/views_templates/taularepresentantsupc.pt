@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:metal="http://xml.zope.org/namespaces/metal"
+            xmlns:tal="http://xml.zope.org/namespaces/tal"
+            xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+            i18n:domain="genweb.ens"
+            metal:use-macro="context/main_template/macros/master">
+
+<body>
+  <metal:custom_title fill-slot="content-title">
+    <h1 class="documentFirstHeading" i18n:translate="Taula de representants UPC">
+      Taula de representants UPC
+    </h1>
+  </metal:custom_title>
+
+  <metal:content-core fill-slot="content-core">
+    <nav>
+        <div class="export">
+            <a tal:attributes="href view/export_url">
+                Exportar a format CSV
+            </a>
+        </div>
+    </nav>
+    <table class="ens-taula table-striped">
+      <thead>
+        <tr>
+          <th style="width: 33%;">Representant</th>
+          <th style="width: 33%;">DNI</th>
+          <th style="width: 33%;">Col·lectiu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr tal:repeat="ens view/list">
+          <tal:block tal:define="representant ens/getObject">
+            <td><a tal:content="representant/title" tal:attributes="href representant/absolute_url"/></td>
+            <td tal:content="representant/dni"/>
+            <td tal:content="representant/carrec"/>
+          </tal:block>
+        </tr>
+      </tbody>
+    </table>
+  </metal:content-core>
+</body>
+</html>
