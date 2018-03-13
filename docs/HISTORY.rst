@@ -1,11 +1,10 @@
 Changelog
 =========
 
-1.7.6 (unreleased)
+1.7.6 (2018-03-13)
 ------------------
 
-- Nothing changed yet.
-
+* Añadir vista que muestra una tabla con los datos de todos los Representantes UPC [iago.lopez]
 
 1.7.5 (2017-12-21)
 ------------------
