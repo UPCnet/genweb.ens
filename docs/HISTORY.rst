@@ -1,11 +1,25 @@
 Changelog
 =========
 
-1.7.5 (unreleased)
+1.7.6 (unreleased)
 ------------------
 
 - Nothing changed yet.
 
+
+1.7.5 (2017-12-21)
+------------------
+
+* Merge remote-tracking branch 'origin/develop' [Corina Riba]
+* Delete wrong translation [Corina Riba]
+
+1.7.5 (2017-12-21)
+------------------
+
+* New contenidor view [Corina Riba]
+* Cambios solicitados por el cliente [Corina Riba]
+* Petits canvis a petició del client [Corina Riba]
+* Change homeupc protocol and links [Corina Riba]
 
 1.7.4 (2017-07-12)
 ------------------
