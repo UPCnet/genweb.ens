@@ -1,11 +1,11 @@
 Changelog
 =========
 
-1.7.7 (unreleased)
+1.7.7 (2018-03-15)
 ------------------
 
-- Nothing changed yet.
-
+* Corrección ortografica en nombre de vista [iago.lopez]
+* Solución de encode al lanzar la vista <taula_representants_upc_csv> [iago.lopez]
 
 1.7.6 (2018-03-13)
 ------------------
