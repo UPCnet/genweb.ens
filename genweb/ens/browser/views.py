@@ -21,7 +21,7 @@ def getRepresentantsUPC():
 
 
 class TaulaRepresentatsUpc(grok.View):
-    grok.name('taula_representats_upc')
+    grok.name('taula_representants_upc')
     grok.context(Interface)
     grok.layer(IGenwebEnsLayer)
     grok.require('genweb.authenticated')
