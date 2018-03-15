@@ -70,6 +70,12 @@ class TaulaRepresentatsUpcCsv(grok.View):
 
         for representant in self.list():
             representant = representant.getObject()
+
+            if representant.dni == None:
+                representant.dni = ''
+            if representant.carrec == None:
+                representant.carrec = ''
+
             writer.writerow([
                 representant.title.encode('utf-8'),
                 representant.dni.encode('utf-8'),
