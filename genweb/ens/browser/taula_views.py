@@ -89,7 +89,7 @@ class TaulaIdentificativaCsv(grok.View, Taula):
         "Membres UPC",
         "Quota",
         "Etiquetes",
-        "Etiquetes antigues",
+        # "Etiquetes antigues",
         "Web",
         "Entitats participants"]
 
@@ -116,11 +116,11 @@ class TaulaIdentificativaCsv(grok.View, Taula):
             ens_tags = ",".join([str(tag) for tag in ens.tags()])
             writer.writerow([
                 ens.codi.encode('utf-8'),
-                ens.num_ens.encode('utf-8'),
+                ens.num_ens,
                 ens.acronim.encode('utf-8'),
                 ens.title.encode('utf-8'),
                 ens.nif.encode('utf-8'),
-                ens.numero_identificacio.encode('utf-8'),
+                ens.numero_identificacio,
                 ens.estat.encode('utf-8'),
                 ens.figura_juridica.encode('utf-8'),
                 ens.institution_type.encode('utf-8'),
@@ -131,7 +131,7 @@ class TaulaIdentificativaCsv(grok.View, Taula):
                 ens.nombre_membres.encode('utf-8'),
                 ens.quota.encode('utf-8'),
                 ens_tags,
-                ens.etiquetes.encode('utf-8'),
+                # ens.etiquetes.encode('utf-8'),
                 ens.web.encode('utf-8'),
                 ens.entitats_actuals.encode('utf-8')
             ])
