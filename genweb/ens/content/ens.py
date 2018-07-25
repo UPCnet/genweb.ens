@@ -92,14 +92,15 @@ class IEns(form.Schema):
     )
 
     institution_type = schema.Choice(
-        title=_(u"Tipus d'institució"),
+        title=_(u"Àmbit institucional"),
         vocabulary=get_vocabulary(institution_type_values),
         required=True,
-        default=None)
+        default="Altres")
 
     figura_juridica = schema.Choice(
         title=_(u"Figura jurídica"),
         vocabulary=get_vocabulary(figura_juridica_values),
+        default="Altra",
         required=True)
 
     dexteritytextindexer.searchable('numero_identificacio')
@@ -272,7 +273,7 @@ class IEns(form.Schema):
         "marc_legal",
         label=u"Marc legal",
         fields=['entitats_constituents', 'entitats_actuals', 'data_constitucio',
-                'data_entrada',  'data_baixa', 'data_entrada_procediment',
+                'data_entrada', 'data_baixa', 'data_entrada_procediment',
                 'data_baixa_procediment', 'seu_social', 'seu_social_estranger',
                 'adscripcio', 'marc_legal_observacions'])
 

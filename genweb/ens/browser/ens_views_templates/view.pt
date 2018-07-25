@@ -32,7 +32,7 @@
               <dt i18n:translate="NIF">NIF</dt>
               <dd tal:content="python: context.nif or '-'"/>
 
-              <dt i18n:translate="Tipus d'institució">Tipus d'institució</dt>
+              <dt i18n:translate="Àmbit institucional">Àmbit institucional</dt>
               <dd tal:content="python: context.institution_type or '-'"/>
 
               <dt i18n:translate="Figura jurídica">Figura jurídica</dt>
@@ -68,7 +68,7 @@
               <dd tal:content="python: context.codi or '-'"/>
 
               <dt i18n:translate="num">Núm.:</dt>
-              <dd tal:content="python: context.num_ens or '-'"/>
+              <dd tal:content="python: '%04d' % context.num_ens if context.num_ens else '-'"/>
 
             </dl>
             <br/>
