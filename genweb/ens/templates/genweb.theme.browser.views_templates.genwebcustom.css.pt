@@ -347,3 +347,18 @@ a.header-info-link img
 body.template-homepage #contentActionMenus > li:nth-child(-n+3) {
     display: none;
 }
+
+#formfield-form-widgets-data_constitucio{
+    width: 100%;
+}
+
+#formfield-form-widgets-data_entrada, #formfield-form-widgets-data_entrada_procediment{
+    width: 49%;
+    float: left;
+}
+
+#formfield-form-widgets-data_baixa, #formfield-form-widgets-data_baixa_procediment{
+    width: 49%;
+    float: right;
+}
+

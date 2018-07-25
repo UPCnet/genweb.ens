@@ -52,7 +52,10 @@ class IEns(form.Schema):
     form.fieldset(
         "dades_identificatives",
         label=u"Dades identificatives",
-        fields=['title', 'acronim', 'description', 'objecte_social', 'estat', 'data_alta', 'data_baixa', 'nif', 'institution_type', 'figura_juridica', 'numero_identificacio', 'domicili_social_poblacio', 'domicili_social_adreca', 'adreca_2', 'telefon', 'fax', 'web', 'tipologia_upc', 'codi','num_ens', 'etiquetes', 'dades_identificatives_observacions'])
+        fields=['title', 'acronim', 'description', 'objecte_social', 'estat', 'nif', 'institution_type',
+                'figura_juridica', 'numero_identificacio', 'domicili_social_poblacio',
+                'domicili_social_adreca', 'adreca_2', 'telefon', 'fax', 'web', 'tipologia_upc', 'codi',
+                'num_ens', 'etiquetes', 'dades_identificatives_observacions'])
 
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
@@ -81,14 +84,6 @@ class IEns(form.Schema):
         title=_(u"Estat"),
         vocabulary=get_vocabulary(estat_values),
         required=True)
-
-    data_alta = schema.Date(
-        title=_(u"Data d'alta"),
-        required=False)
-
-    data_baixa = schema.Date(
-        title=_(u"Data de baixa"),
-        required=False,)
 
     dexteritytextindexer.searchable('nif')
     nif = schema.TextLine(
@@ -276,16 +271,10 @@ class IEns(form.Schema):
     form.fieldset(
         "marc_legal",
         label=u"Marc legal",
-        fields=['data_constitucio', 'entitats_constituents',
-                'entitats_actuals', 'data_entrada',
-                'data_entrada_procediment', 'seu_social',
-                'seu_social_estranger', 'adscripcio',
-                'marc_legal_observacions']
-    )
-
-    data_constitucio = schema.Date(
-        title=_(u"Data de constitució"),
-        required=False)
+        fields=['entitats_constituents', 'entitats_actuals', 'data_constitucio',
+                'data_entrada',  'data_baixa', 'data_entrada_procediment',
+                'data_baixa_procediment', 'seu_social', 'seu_social_estranger',
+                'adscripcio', 'marc_legal_observacions'])
 
     dexteritytextindexer.searchable('entitats_constituents')
     entitats_constituents = schema.Text(
@@ -297,21 +286,36 @@ class IEns(form.Schema):
         title=_(u"Entitats actuals"),
         required=False)
 
+    data_constitucio = schema.Date(
+        title=_(u"Data de constitució"),
+        required=False)
+
     data_entrada = schema.Date(
-        title=_(u"Data d'entrada UPC"),
+        title=_(u"Data d'alta UPC"),
         required=False)
 
     dexteritytextindexer.searchable('data_entrada_procediment')
     data_entrada_procediment = schema.Text(
-        title=_(u"Procediment d'entrada"),
+        title=_(u"Procediment d'alta"),
+        required=False)
+
+    data_baixa = schema.Date(
+        title=_(u"Data de baixa UPC"),
+        required=False,)
+
+    dexteritytextindexer.searchable('data_baixa_procediment')
+    data_baixa_procediment = schema.Text(
+        title=_(u"Procediment de baixa"),
         required=False)
 
     seu_social = schema.Choice(
-        title=_(u"Seu social"),
+        title=_(u"Àmbit legislatiu"),
         vocabulary=get_vocabulary([
+            u"-",
             u"Catalunya",
             u"Resta d'Espanya",
             u"Estranger"]),
+        default="-",
         required=False)
 
     seu_social_estranger = schema.TextLine(

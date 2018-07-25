@@ -352,13 +352,19 @@
           <dt i18n:translate="Entitats actuals">Entitats actuals</dt>
           <dd tal:content="python: context.entitats_actuals or '-'"/>
 
-          <dt i18n:translate="Data d&apos;entrada UPC">Data d&apos;entrada UPC</dt>
+          <dt i18n:translate="Data d&apos;alta UPC">Data d&apos;alta UPC</dt>
           <dd tal:content="python: context.data_entrada and context.data_entrada.strftime('%d/%m/%Y') or '-'"/>
 
-          <dt i18n:translate="Procediment d&apos;entrada" class="subfield">Procediment d&apos;entrada</dt>
+          <dt i18n:translate="Procediment d&apos;alta" class="subfield">Procediment d&apos;alta</dt>
           <dd tal:content="python: context.data_entrada_procediment or '-'"/>
 
-          <dt i18n:translate="Seu social">Seu social</dt>
+          <dt i18n:translate="Data de baixa UPC">Data de baixa UPC</dt>
+          <dd tal:content="python: context.data_baixa and context.data_entrada.strftime('%d/%m/%Y') or '-'"/>
+
+          <dt i18n:translate="Procediment de baixa" class="subfield">Procediment de baixa</dt>
+          <dd tal:content="python: context.data_baixa_procediment or '-'"/>
+
+          <dt i18n:translate="Àmbit legislatiu">Àmbit legistlatiu</dt>
           <dd tal:content="view/seu_social"/>
 
           <dt i18n:translate="Adm. Pública d&apos;adscripció">Adm. Pública d&apos;adscripció</dt>
