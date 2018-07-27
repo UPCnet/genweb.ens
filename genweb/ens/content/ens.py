@@ -187,18 +187,30 @@ class IEns(form.Schema):
     form.fieldset(
         "participacio",
         label=u"Participació de la UPC",
-        fields=['aportacio_sn', 'aportacio_import', 'aportacio_moneda',
-                'quota_sn', 'quota_import', 'quota_moneda',
+        fields=['title1',
+                'aportacio_total', 'aportacio_sn', 'aportacio_import', 'aportacio_moneda',
                 'unitat_carrec', 'percentatge_participacio',
-                'nombre_membres',
                 'capital_social_sn', 'capital_social_import',
                 'capital_social_moneda',
-                'participacio_observacions']
+                'participacio_observacions',
+                'title2',
+                'total_membres',
+                'nombre_membres',
+                'percentatge_membres',
+                'membres_observacions',
+                'title3',
+                'quota_sn', 'quota_import', 'quota_moneda']
+    )
+
+    form.mode(title1='display')
+    title1 = schema.TextLine(
+        title=_(u""),
+        default=_(u"1. Al capital social o fons patrimonial"),
     )
 
     form.widget(aportacio_sn=RadioFieldWidget)
     aportacio_sn = schema.Choice(
-        title=_(u"Aportació inicial"),
+        title=_(u"Import UPC"),
         vocabulary=SimpleVocabulary(
             [SimpleTerm(title=_(u"Sí"), value=True),
              SimpleTerm(title=_(u"No"), value=False),
@@ -207,12 +219,22 @@ class IEns(form.Schema):
     )
 
     aportacio_import = schema.Float(
-        title=_(u"Import"),
+        title=_(u"Aportació inicial"),
         required=False)
 
     aportacio_moneda = schema.TextLine(
         title=_(u"Moneda"),
         required=False)
+
+    aportacio_total = schema.Float(
+        title=_(u"Import total"),
+        required=False)
+
+    form.mode(title3='display')
+    title3 = schema.TextLine(
+        title=_(u""),
+        default=_(u"3. Quota anual"),
+    )
 
     form.widget(quota_sn=RadioFieldWidget)
     quota_sn = schema.Choice(
@@ -232,6 +254,7 @@ class IEns(form.Schema):
         title=_(u"Moneda"),
         required=False)
 
+    form.mode(unitat_carrec='hidden')
     dexteritytextindexer.searchable('unitat_carrec')
     unitat_carrec = schema.TextLine(
         title=_(u"Unitat de càrrec"),
@@ -241,9 +264,27 @@ class IEns(form.Schema):
         title=_(u"Percentatge de participació"),
         required=False)
 
+    form.mode(title2='display')
+    title2 = schema.TextLine(
+        title=_(u""),
+        default=_(u"2. A òrgan de govern superior"),
+    )
+
+    total_membres = schema.Int(
+        title=_(u"Membres totals"),
+        required=False)
+
     dexteritytextindexer.searchable('nombre_membres')
     nombre_membres = schema.TextLine(
         title=_(u"Membres UPC als òrgans de govern"),
+        required=False)
+
+    percentatge_membres = schema.Float(
+        title=_(u"Percentatge de membres"),
+        required=False)
+
+    membres_observacions = schema.Text(
+        title=_(u"Observacions"),
         required=False)
 
     form.widget(capital_social_sn=RadioFieldWidget)
@@ -380,6 +421,21 @@ def get_percentatge_participacio(ens):
             return "{0:,.2f}%".format(ens.percentatge_participacio)
         else:
             return "-"
+
+
+def get_percentatge_membres(ens):
+        if ens.percentatge_membres:
+            return "{0:,.2f}%".format(ens.percentatge_membres)
+        else:
+            return "-"
+
+
+def get_observacions(ens, section):
+    obs = getattr(ens, section + '_observacions')
+    if obs:
+        return obs
+    else:
+        return "-"
 
 
 def get_aportacio(ens):

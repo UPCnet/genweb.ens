@@ -3,6 +3,7 @@ import datetime
 from DateTime import DateTime
 
 from genweb.ens.content.ens import (get_denominacio,
+                                    get_percentatge_membres,
                                     get_percentatge_participacio,
                                     get_aportacio, get_quota)
 
@@ -359,6 +360,7 @@ class EnsDataReporter(object):
                 adscripcio=ens_obj.adscripcio or "-",
                 percentatge_participacio=get_percentatge_participacio(ens_obj),
                 nombre_membres=ens_obj.nombre_membres or "-",
+                percentatge_membres=get_percentatge_membres(ens_obj),
                 aportacio=get_aportacio(ens_obj),
                 quota=get_quota(ens_obj),
                 tags=ens_obj.Subject,

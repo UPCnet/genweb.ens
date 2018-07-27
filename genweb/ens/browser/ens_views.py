@@ -15,8 +15,10 @@ from genweb.ens.content import ens
 from genweb.ens.interfaces import IGenwebEnsLayer
 from genweb.ens.content.ens import IEns
 from genweb.ens.content.ens import (get_percentatge_participacio,
+                                    get_percentatge_membres,
                                     get_aportacio, get_quota,
-                                    get_capital_social, get_seu_social)
+                                    get_capital_social, get_seu_social,
+                                    get_observacions)
 from genweb.ens.data_access.ens import EnsDataReporter
 from genweb.ens.browser import helper
 
@@ -28,6 +30,18 @@ class View(dexterity.DisplayForm):
     @property
     def percentatge_participacio(self):
         return get_percentatge_participacio(self.context)
+
+    @property
+    def percentatge_membres(self):
+        return get_percentatge_membres(self.context)
+
+    @property
+    def observacions_participacio(self):
+        return get_observacions(self.context, 'participacio')
+
+    @property
+    def observacions_membres(self):
+        return get_observacions(self.context, 'membres')
 
     @property
     def aportacio(self):
