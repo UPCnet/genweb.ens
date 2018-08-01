@@ -131,7 +131,6 @@ class TaulaIdentificativaCsv(grok.View, Taula):
                 ens.nombre_membres.encode('utf-8'),
                 ens.quota.encode('utf-8'),
                 ens_tags,
-                # ens.etiquetes.encode('utf-8'),
                 ens.web.encode('utf-8'),
                 ens.entitats_actuals.encode('utf-8')
             ])

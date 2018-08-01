@@ -23,26 +23,44 @@
     <table class="ens-taula table-striped">
       <thead>
         <tr>
+          <th colspan="14">Dades identificatives</th>
+          <th colspan="5">Participació</th>
+          <th colspan="8">Marc legal</th>
+        </tr>
+        <tr>
+<!--  Dades identificatives -->
+          <th>Denominació</th>
+          <th>Acrònim</th>
+          <th>Descripció</th>
+          <th>Objecte Social</th>
+          <th>Estat</th>
+          <th>NIF</th>
+          <th>Àmbit institucional</th>
+          <th>Fig. jurídica</th>
+          <th>Num. Identificacio</th>
+          <th>Web</th>
+          <th>Tipologia UPC</th>
           <th>Codi REP</th>
           <th>Núm.</th>
-          <th>Acrònim</th>
-          <th>Denominació</th>
-          <th>NIF</th>
-          <th>Num. Identificacio</th>
-          <th>Estat</th>
-          <th>Fig. jurídica</th>
-          <th>Tipus institució</th>
-          <th>Tipologia UPC</th>
-          <th>Seu social</th>
-          <th>Adm. Púb. Adscrip.</th>
-          <th>Participació</th>
-          <th>Membres UPC</th>
-          <th>Quota</th>
           <th>Etiquetes</th>
-          <th>Web</th>
-          <th>Entitats participants</th>
+<!--  Participació -->
+          <th>A capital</th>
+          <th>% capital</th>
+          <th>Quota</th>
+          <th>A òrgan superior</th>
+          <th>% membres</th>
+<!--  Marc legal -->
+          <th>Membres constituents</th>
+          <th>Membres actuals</th>
+          <th>Constitució ens</th>
+          <th>Data alta UPC</th>
+          <th>Data baixa UPC</th>
+          <th>Seu social</th>
+          <th>Adscripció</th>
+          <th>Data estatuts</th>
         </tr>
       </thead>
+
       <tbody>
         <tr tal:repeat="ens view/list">
           <td tal:content="ens/codi"/>

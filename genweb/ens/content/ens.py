@@ -52,10 +52,12 @@ class IEns(form.Schema):
     form.fieldset(
         "dades_identificatives",
         label=u"Dades identificatives",
-        fields=['title', 'acronim', 'description', 'objecte_social', 'estat', 'nif', 'institution_type',
-                'figura_juridica', 'numero_identificacio', 'domicili_social_poblacio',
-                'domicili_social_adreca', 'adreca_2', 'telefon', 'fax', 'web', 'tipologia_upc', 'codi',
-                'num_ens', 'etiquetes', 'dades_identificatives_observacions'])
+        fields=['title', 'acronim', 'description', 'objecte_social',
+                'estat', 'nif', 'institution_type', 'figura_juridica',
+                'numero_identificacio', 'domicili_social_poblacio',
+                'domicili_social_adreca', 'adreca_2', 'telefon', 'fax',
+                'web', 'tipologia_upc', 'codi', 'num_ens', 'etiquetes',
+                'dades_identificatives_observacions'])
 
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
@@ -313,10 +315,11 @@ class IEns(form.Schema):
     form.fieldset(
         "marc_legal",
         label=u"Marc legal",
-        fields=['entitats_constituents', 'entitats_actuals', 'data_constitucio',
-                'data_entrada', 'data_baixa', 'data_entrada_procediment',
-                'data_baixa_procediment', 'seu_social', 'seu_social_estranger',
-                'adscripcio', 'marc_legal_observacions'])
+        fields=['entitats_constituents', 'entitats_actuals',
+                'data_constitucio', 'data_entrada', 'data_baixa',
+                'data_entrada_procediment', 'data_baixa_procediment',
+                'seu_social', 'seu_social_estranger', 'adscripcio',
+                'marc_legal_observacions'])
 
     dexteritytextindexer.searchable('entitats_constituents')
     entitats_constituents = schema.Text(

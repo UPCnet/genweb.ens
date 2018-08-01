@@ -23,12 +23,15 @@
     <table class="ens-taula table-striped">
       <thead>
         <tr>
-          <th style="width: 20%;">Denominació</th>
-          <th style="width: 15%;">Òrgan</th>
-          <th style="width: 15%;">Càrrec</th>
-          <th style="width: 20%;">Persona</th>
-          <th style="width: 15%;">Com a...</th>          
-          <th style="width: 15%;">Data nom.</th>
+          <th >Denominació</th>
+          <th>Acrònim</th>
+          <th>Òrgan</th>
+          <th>Càrrec</th>
+          <th>Persona</th>
+          <th>En qualitat de...</th>
+          <th>Data nom.</th>
+          <th>Data venciment</th>
+          <th>Data fi</th>
         </tr>
       </thead>
       <tbody>

@@ -60,7 +60,6 @@ class TaulaRepresentatsUpcCsv(grok.View):
             'attachment; filename="{0}"'.format(header_filename))
         return output_file.getvalue()
 
-
     def list(self):
         return getRepresentantsUPC()
 
@@ -71,9 +70,9 @@ class TaulaRepresentatsUpcCsv(grok.View):
         for representant in self.list():
             representant = representant.getObject()
 
-            if representant.dni == None:
+            if representant.dni is None:
                 representant.dni = ''
-            if representant.carrec == None:
+            if representant.carrec is None:
                 representant.carrec = ''
 
             writer.writerow([

@@ -16,31 +16,34 @@ class EnsSearchResult(object):
 
 
 class Identificacio(object):
-    def __init__(self, codi, num_ens, acronim, title, absolute_url, nif, numero_identificacio, estat, institution_type,
-                 figura_juridica, seu_social, seu_social_estranger, adscripcio, percentatge_participacio, nombre_membres,
-                 aportacio, quota, tags, etiquetes, web, tipologia_upc, entitats_actuals):
-        self.codi = codi
-        self.num_ens = num_ens
-        self.acronim = acronim
+    def __init__(self, title, acronim, description, objecte_social, estat, nif, institution_type, figura_juridica, numero_identificacio, web, tipologia_upc, codi, num_ens, tags, aportacio, percentatge_participacio, quota, nombre_membres, percentatge_membres, membres_constituents, membres_actuals, data_constitucio, data_entrada, data_baixa, seu_social, adscripcio, absolute_url):
         self.title = title
-        self.absolute_url = absolute_url
-        self.nif = nif
-        self.numero_identificacio = numero_identificacio
+        self.acronim = acronim
+        self.description = description
+        self.objecte_social = objecte_social
         self.estat = estat
+        self.nif = nif
         self.institution_type = institution_type
         self.figura_juridica = figura_juridica
-        self.seu_social = seu_social
-        self.seu_social_estranger = seu_social_estranger
-        self.adscripcio = adscripcio
-        self.percentatge_participacio = percentatge_participacio
-        self.nombre_membres = nombre_membres
-        self.aportacio = aportacio
-        self.quota = quota
-        self.tags = tags
-        self.etiquetes = etiquetes
+        self.numero_identificacio = numero_identificacio
         self.web = web
         self.tipologia_upc = tipologia_upc
-        self.entitats_actuals = entitats_actuals
+        self.codi = codi
+        self.num_ens = num_ens
+        self.tags = tags
+        self.aportacio = aportacio
+        self.percentatge_participacio = percentatge_participacio
+        self.quota = quota
+        self.nombre_membres = nombre_membres
+        self.percentatge_membres = percentatge_membres
+        self.membres_constituents = membres_constituents
+        self.membres_actuals = membres_actuals
+        self.data_constitucio = data_constitucio
+        self.data_entrada = data_entrada
+        self.data_baixa = data_baixa
+        self.seu_social = seu_social
+        self.adscripcio = adscripcio
+        self.absolute_url = absolute_url
 
 
 class Representacio(object):
@@ -345,29 +348,36 @@ class EnsDataReporter(object):
         for ens in self.list(search_filters):
             ens_obj = ens.getObject()
             identificacio.append(Identificacio(
-                codi=ens_obj.codi or "-",
-                num_ens=ens_obj.num_ens or "-",
-                acronim=ens_obj.acronim or "-",
-                title=ens_obj.title or "-",
-                absolute_url=ens_obj.absolute_url,
-                nif=ens_obj.nif or "-",
-                numero_identificacio=ens_obj.numero_identificacio or "-",
-                estat=ens_obj.estat or "-",
-                institution_type=ens_obj.institution_type or "-",
-                figura_juridica=ens_obj.figura_juridica or "-",
-                seu_social=ens_obj.seu_social or "-",
-                seu_social_estranger=ens_obj.seu_social_estranger or "-",
-                adscripcio=ens_obj.adscripcio or "-",
-                percentatge_participacio=get_percentatge_participacio(ens_obj),
-                nombre_membres=ens_obj.nombre_membres or "-",
-                percentatge_membres=get_percentatge_membres(ens_obj),
-                aportacio=get_aportacio(ens_obj),
-                quota=get_quota(ens_obj),
-                tags=ens_obj.Subject,
-                etiquetes=ens_obj.etiquetes or "-",
-                web=ens_obj.web or "-",
-                tipologia_upc=ens_obj.tipologia_upc or "-",
-                entitats_actuals=ens_obj.entitats_actuals or "-"))
+                title=ens_obj.title or "-",                                         # denominacio
+                acronim=ens_obj.acronim or "-",                                     # acronim
+                description=ens_obj.description,                                    # descripcio
+                objecte_social=ens_obj.objecte_social,                              # objecte social
+                estat=ens_obj.estat or "-",                                         # estat
+                nif=ens_obj.nif or "-",                                             # NIF
+                institution_type=ens_obj.institution_type or "-",                   # Àmbit institucional
+                figura_juridica=ens_obj.figura_juridica or "-",                     # Figura jurídica
+                numero_identificacio=ens_obj.numero_identificacio or "-",           # Num. identificació
+                web=ens_obj.web or "-",                                             # web
+                tipologia_upc=ens_obj.tipologia_upc or "-",                         # Tipologia UPC
+                codi=ens_obj.codi or "-",                                           # Codi UPC
+                num_ens=ens_obj.num_ens or "-",                                     # Num. UPC
+                tags=ens_obj.Subject,                                               # Categorització
+                aportacio=get_aportacio(ens_obj),                                   # A capital
+                percentatge_participacio=get_percentatge_participacio(ens_obj),     # % capital
+                quota=get_quota(ens_obj),                                           # Quota
+                nombre_membres=ens_obj.nombre_membres or "-",                       # A órgan sup.
+                percentatge_membres=get_percentatge_membres(ens_obj),               # % membres
+                membres_constituents="-",                                           # Membres constituents
+                membres_actuals="-",                                                # Membres actuals
+                data_constitucio=ens_obj.data_constitucio,                          # Cosntitució ENS
+                data_entrada=ens_obj.data_entrada,                                  # Data alta UPC
+                data_baixa=ens_obj.data_baixa,                                      # Data baixa UPC
+                seu_social=ens_obj.seu_social or "-",                               # Seu social
+                adscripcio=ens_obj.adscripcio or "-",                               # Adscripció
+                # data_estatuts=estatus_obj.data_estatuts or "-",                         # Data estatus
+
+                absolute_url=ens_obj.absolute_url)                                  # URL
+            )
         return identificacio
 
     def list_representacio(self, is_historic=None, search_filters=None):

@@ -379,7 +379,7 @@
           <dd tal:content="python: context.data_entrada_procediment or '-'"/>
 
           <dt i18n:translate="Data de baixa UPC">Data de baixa UPC</dt>
-          <dd tal:content="python: context.data_baixa and context.data_entrada.strftime('%d/%m/%Y') or '-'"/>
+          <dd tal:content="python: context.data_baixa and context.data_baixa.strftime('%d/%m/%Y') or '-'"/>
 
           <dt i18n:translate="Procediment de baixa" class="subfield">Procediment de baixa</dt>
           <dd tal:content="python: context.data_baixa_procediment or '-'"/>

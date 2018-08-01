@@ -140,7 +140,7 @@ class View(dexterity.DisplayForm):
     def getData(self):
         ens = self.context
         if ens.estat == 'Actiu':
-            data = ens.data_alta
+            data = ens.data_entrada
         elif ens.estat == 'Baixa':
             data = ens.data_baixa
         else:
