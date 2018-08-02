@@ -352,14 +352,23 @@ body.template-homepage #contentActionMenus > li:nth-child(-n+3) {
     width: 100%;
 }
 
-#formfield-form-widgets-data_entrada, #formfield-form-widgets-data_entrada_procediment{
+#formfield-form-widgets-data_entrada,
+#formfield-form-widgets-data_entrada_acord,
+#formfield-form-widgets-data_entrada_procediment{
     width: 49%;
     float: left;
 }
 
-#formfield-form-widgets-data_baixa, #formfield-form-widgets-data_baixa_procediment{
+#formfield-form-widgets-data_baixa,
+#formfield-form-widgets-data_baixa_acord,
+#formfield-form-widgets-data_baixa_procediment{
     width: 49%;
     float: right;
+}
+
+input#form-widgets-data_entrada_acord,
+input#form-widgets-data_baixa_acord {
+    width: 96%;
 }
 
 #form-widgets-title1, #form-widgets-title2, #form-widgets-title3{

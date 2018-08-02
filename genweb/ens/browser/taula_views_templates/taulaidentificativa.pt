@@ -54,7 +54,7 @@
           <th>Membres actuals</th>
           <th>Constitució ens</th>
           <th>Data alta UPC</th>
-          <th>Data baixa UPC</th>
+          <th>Acord UPC</th>
           <th>Seu social</th>
           <th>Adscripció</th>
           <th>Data estatuts</th>
@@ -101,7 +101,7 @@
           <td tal:content="ens/membres_actuals">Membres actuals</td>
           <td tal:content="ens/data_constitucio">Constitució ens</td>
           <td tal:content="ens/data_entrada">Data alta UPC</td>
-          <td tal:content="ens/data_baixa">Data baixa UPC</td>
+          <td tal:content="ens/data_entrada_acord">Acord UPC</td>
           <td tal:content="ens/seu_social">Seu social</td>
           <td tal:content="ens/adscripcio">Adscripció</td>
           <td tal:content="ens/data_estatuts">Data estatuts</td>

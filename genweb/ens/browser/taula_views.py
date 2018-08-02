@@ -96,7 +96,7 @@ class TaulaIdentificativaCsv(grok.View, Taula):
         "Membres actuals",
         "Constitució ens",
         "Data alta UPC",
-        "Data baixa UPC",
+        "Acord UPC",
         "Seu social",
         "Adscripció",
         "Data estatuts"]
@@ -146,7 +146,7 @@ class TaulaIdentificativaCsv(grok.View, Taula):
                 ens.membres_actuals.encode('utf-8') or "-",
                 ens.data_constitucio or "-",
                 ens.data_entrada or "-",
-                ens.data_baixa or "-",
+                ens.data_entrada_acord.encode('utf-8') or "-",
                 ens.seu_social.encode('utf-8') or "-",
                 ens.adscripcio.encode('utf-8') or "-",
                 ens.data_estatuts.encode('utf-8') or "-"

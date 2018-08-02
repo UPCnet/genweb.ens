@@ -16,7 +16,7 @@ class EnsSearchResult(object):
 
 
 class Identificacio(object):
-    def __init__(self, title, acronim, description, objecte_social, estat, nif, institution_type, figura_juridica, numero_identificacio, web, tipologia_upc, codi, num_ens, tags, aportacio, percentatge_participacio, quota, nombre_membres, percentatge_membres, membres_constituents, membres_actuals, data_constitucio, data_entrada, data_baixa, seu_social, adscripcio, data_estatuts, absolute_url):
+    def __init__(self, title, acronim, description, objecte_social, estat, nif, institution_type, figura_juridica, numero_identificacio, web, tipologia_upc, codi, num_ens, tags, aportacio, percentatge_participacio, quota, nombre_membres, percentatge_membres, membres_constituents, membres_actuals, data_constitucio, data_entrada, data_entrada_acord, seu_social, adscripcio, data_estatuts, absolute_url):
         self.title = title
         self.acronim = acronim
         self.description = description
@@ -40,7 +40,7 @@ class Identificacio(object):
         self.membres_actuals = membres_actuals
         self.data_constitucio = data_constitucio
         self.data_entrada = data_entrada
-        self.data_baixa = data_baixa
+        self.data_entrada_acord = data_entrada_acord
         self.seu_social = seu_social
         self.adscripcio = adscripcio
         self.data_estatuts = data_estatuts
@@ -353,7 +353,6 @@ class EnsDataReporter(object):
 
             data_constitucio = ens_obj.data_constitucio.strftime('%d/%m/%Y') if hasattr(ens_obj.data_constitucio, 'strftime') else None
             data_entrada = ens_obj.data_entrada.strftime('%d/%m/%Y') if hasattr(ens_obj.data_entrada, 'strftime') else None
-            data_baixa = ens_obj.data_baixa.strftime('%d/%m/%Y') if hasattr(ens_obj.data_baixa, 'strftime') else None
 
             identificacio.append(Identificacio(
                 title=ens_obj.title or "-",                                                 # Denominacio
@@ -379,7 +378,7 @@ class EnsDataReporter(object):
                 membres_actuals="-",                                                        # Membres actuals
                 data_constitucio=data_constitucio or "-",                                   # Constitució ENS
                 data_entrada=data_entrada or "-",                                           # Data alta UPC
-                data_baixa=data_baixa or "-",                                               # Data baixa UPC
+                data_entrada_acord=ens_obj.data_entrada_acord or "-",                       # Acord UPC
                 seu_social=ens_obj.seu_social or "-",                                       # Seu social
                 adscripcio=ens_obj.adscripcio or "-",                                       # Adscripció
                 data_estatuts="-",                                                          # Data estatus

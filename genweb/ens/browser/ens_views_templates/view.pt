@@ -375,11 +375,17 @@
           <dt i18n:translate="Data d&apos;alta UPC">Data d&apos;alta UPC</dt>
           <dd tal:content="python: context.data_entrada and context.data_entrada.strftime('%d/%m/%Y') or '-'"/>
 
+          <dt i18n:translate="Acord d&apos;alta" class="subfield">Acord d&apos;alta</dt>
+          <dd tal:content="python: context.data_entrada_acord or '-'"/>
+
           <dt i18n:translate="Procediment d&apos;alta" class="subfield">Procediment d&apos;alta</dt>
           <dd tal:content="python: context.data_entrada_procediment or '-'"/>
 
           <dt i18n:translate="Data de baixa UPC">Data de baixa UPC</dt>
           <dd tal:content="python: context.data_baixa and context.data_baixa.strftime('%d/%m/%Y') or '-'"/>
+
+          <dt i18n:translate="Acord de baixa" class="subfield">Acord de baixa</dt>
+          <dd tal:content="python: context.data_baixa_acord or '-'"/>
 
           <dt i18n:translate="Procediment de baixa" class="subfield">Procediment de baixa</dt>
           <dd tal:content="python: context.data_baixa_procediment or '-'"/>

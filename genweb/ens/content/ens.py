@@ -317,6 +317,7 @@ class IEns(form.Schema):
         label=u"Marc legal",
         fields=['entitats_constituents', 'entitats_actuals',
                 'data_constitucio', 'data_entrada', 'data_baixa',
+                'data_entrada_acord', 'data_baixa_acord',
                 'data_entrada_procediment', 'data_baixa_procediment',
                 'seu_social', 'seu_social_estranger', 'adscripcio',
                 'marc_legal_observacions'])
@@ -339,6 +340,11 @@ class IEns(form.Schema):
         title=_(u"Data d'alta UPC"),
         required=False)
 
+    dexteritytextindexer.searchable('data_entrada_acord')
+    data_entrada_acord = schema.TextLine(
+        title=_(u"Acord d'alta"),
+        required=False)
+
     dexteritytextindexer.searchable('data_entrada_procediment')
     data_entrada_procediment = schema.Text(
         title=_(u"Procediment d'alta"),
@@ -347,6 +353,11 @@ class IEns(form.Schema):
     data_baixa = schema.Date(
         title=_(u"Data de baixa UPC"),
         required=False,)
+
+    dexteritytextindexer.searchable('data_baixa_acord')
+    data_baixa_acord = schema.TextLine(
+        title=_(u"Acord de baixa"),
+        required=False)
 
     dexteritytextindexer.searchable('data_baixa_procediment')
     data_baixa_procediment = schema.Text(
