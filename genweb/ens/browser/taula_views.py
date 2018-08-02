@@ -73,25 +73,33 @@ class TaulaIdentificativaCsv(grok.View, Taula):
     grok.layer(IGenwebEnsLayer)
 
     data_header_columns = [
-        "Codi REP",
-        "Núm.",
-        "Acrònim",
         "Denominació",
-        "NIF",
-        "Num. Identificacio",
+        "Acrònim",
+        "Descripció",
+        "Objecte Social",
         "Estat",
+        "NIF",
+        "Àmbit institucional",
         "Fig. jurídica",
-        "Tipus institució",
-        "Tipologia UPC",
-        "Seu social",
-        "Adm. Púb. Adscrip.",
-        "Participació",
-        "Membres UPC",
-        "Quota",
-        "Etiquetes",
-        # "Etiquetes antigues",
+        "Num. Identificacio",
         "Web",
-        "Entitats participants"]
+        "Tipologia UPC",
+        "Codi UPC",
+        "Núm. UPC",
+        "Etiquetes",
+        "% capital",
+        "A capital",
+        "Quota",
+        "A òrgan superior",
+        "% membres",
+        "Membres constituents",
+        "Membres actuals",
+        "Constitució ens",
+        "Data alta UPC",
+        "Data baixa UPC",
+        "Seu social",
+        "Adscripció",
+        "Data estatuts"]
 
     def render(self):
         output_file = StringIO()
@@ -115,24 +123,33 @@ class TaulaIdentificativaCsv(grok.View, Taula):
         for ens in reporter.list_identificacio(self.parse_search_filters()):
             ens_tags = ",".join([str(tag) for tag in ens.tags()])
             writer.writerow([
-                ens.codi.encode('utf-8'),
-                ens.num_ens,
-                ens.acronim.encode('utf-8'),
-                ens.title.encode('utf-8'),
-                ens.nif.encode('utf-8'),
-                ens.numero_identificacio,
-                ens.estat.encode('utf-8'),
-                ens.figura_juridica.encode('utf-8'),
-                ens.institution_type.encode('utf-8'),
-                ens.tipologia_upc.encode('utf-8'),
-                ens.seu_social.encode('utf-8'),
-                ens.adscripcio.encode('utf-8'),
-                ens.percentatge_participacio.encode('utf-8'),
-                ens.nombre_membres.encode('utf-8'),
-                ens.quota.encode('utf-8'),
-                ens_tags,
-                ens.web.encode('utf-8'),
-                ens.entitats_actuals.encode('utf-8')
+                ens.title.encode('utf-8') or "-",
+                ens.acronim.encode('utf-8') or "-",
+                ens.description.encode('utf-8') or "-",
+                ens.objecte_social.encode('utf-8') or "-",
+                ens.estat.encode('utf-8') or "-",
+                ens.nif.encode('utf-8') or "-",
+                ens.institution_type.encode('utf-8') or "-",
+                ens.figura_juridica.encode('utf-8') or "-",
+                ens.numero_identificacio or "-",
+                ens.web.encode('utf-8') or "-",
+                ens.tipologia_upc.encode('utf-8') or "-",
+                ens.codi.encode('utf-8') or "-",
+                ens.num_ens or "-",
+                ens_tags or "-",
+                ens.aportacio.encode('utf-8') or "-",
+                ens.percentatge_participacio.encode('utf-8') or "-",
+                ens.quota.encode('utf-8') or "-",
+                ens.nombre_membres.encode('utf-8') or "-",
+                ens.percentatge_membres.encode('utf-8') or "-",
+                ens.membres_constituents.encode('utf-8') or "-",
+                ens.membres_actuals.encode('utf-8') or "-",
+                ens.data_constitucio or "-",
+                ens.data_entrada or "-",
+                ens.data_baixa or "-",
+                ens.seu_social.encode('utf-8') or "-",
+                ens.adscripcio.encode('utf-8') or "-",
+                ens.data_estatuts.encode('utf-8') or "-"
             ])
 
 
@@ -161,11 +178,14 @@ class TaulaRepresentacioCsv(grok.View, Taula):
 
     data_header_columns = [
         "Denominació",
+        "Acrònim",
         "Òrgan",
-        "Càrrec",
-        "Persona",
-        "Com a...",
-        "Data nom."]
+        "Càrrec a l'òrgan",
+        "Nom persona",
+        "En qualitat de ...",
+        "Data inici",
+        "Data venciment",
+        "Data fi"]
 
     def render(self):
         output_file = StringIO()
@@ -190,10 +210,13 @@ class TaulaRepresentacioCsv(grok.View, Taula):
                 is_historic=False,
                 search_filters=self.parse_search_filters()):
             writer.writerow([
-                ens.denominacio.encode('utf-8'),
-                ens.organ.encode('utf-8'),
-                ens.carrec.encode('utf-8'),
-                ens.persona.encode('utf-8'),
-                ens.carrec_envirtud.encode('utf-8'),
-                ens.data_nomenament.encode('utf-8')
+                ens.denominacio.encode('utf-8') or "-",
+                ens.acronim.encode('utf-8') or "-",
+                ens.organ.encode('utf-8') or "-",
+                ens.carrec.encode('utf-8') or "-",
+                ens.persona.encode('utf-8') or "-",
+                ens.qualitat.encode('utf-8') or "-",
+                ens.data_inici or "-",
+                ens.data_venciment or "-",
+                ens.data_fi or "-",
             ])

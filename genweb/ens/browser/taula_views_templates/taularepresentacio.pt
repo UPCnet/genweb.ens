@@ -23,25 +23,30 @@
     <table class="ens-taula table-striped">
       <thead>
         <tr>
-          <th >Denominació</th>
+          <th>Denominació</th>
           <th>Acrònim</th>
           <th>Òrgan</th>
-          <th>Càrrec</th>
-          <th>Persona</th>
+          <th>Càrrec a l'òrgan</th>
+          <th>Nom persona</th>
           <th>En qualitat de...</th>
-          <th>Data nom.</th>
+          <th>Data inici</th>
           <th>Data venciment</th>
           <th>Data fi</th>
         </tr>
       </thead>
       <tbody>
         <tr tal:repeat="ens view/list">
-          <td class="denominacio"><a tal:content="ens/denominacio" tal:attributes="href ens/absolute_url"/></td>
+          <td class="denominacio">
+            <a tal:content="ens/denominacio" tal:attributes="href ens/absolute_url"/>
+          </td>
+          <td tal:content="ens/acronim"/>
           <td tal:content="ens/organ"/>
           <td tal:content="ens/carrec"/>
           <td tal:content="ens/persona"/>
-          <td tal:content="ens/carrec_envirtud"/>
-          <td tal:content="ens/data_nomenament"/>
+          <td tal:content="ens/qualitat"/>
+          <td tal:content="ens/data_inici"/>
+          <td tal:content="ens/data_venciment"/>
+          <td tal:content="ens/data_fi"/>
         </tr>
       </tbody>
     </table>

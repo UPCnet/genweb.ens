@@ -16,7 +16,7 @@ class EnsSearchResult(object):
 
 
 class Identificacio(object):
-    def __init__(self, title, acronim, description, objecte_social, estat, nif, institution_type, figura_juridica, numero_identificacio, web, tipologia_upc, codi, num_ens, tags, aportacio, percentatge_participacio, quota, nombre_membres, percentatge_membres, membres_constituents, membres_actuals, data_constitucio, data_entrada, data_baixa, seu_social, adscripcio, absolute_url):
+    def __init__(self, title, acronim, description, objecte_social, estat, nif, institution_type, figura_juridica, numero_identificacio, web, tipologia_upc, codi, num_ens, tags, aportacio, percentatge_participacio, quota, nombre_membres, percentatge_membres, membres_constituents, membres_actuals, data_constitucio, data_entrada, data_baixa, seu_social, adscripcio, data_estatuts, absolute_url):
         self.title = title
         self.acronim = acronim
         self.description = description
@@ -43,19 +43,22 @@ class Identificacio(object):
         self.data_baixa = data_baixa
         self.seu_social = seu_social
         self.adscripcio = adscripcio
+        self.data_estatuts = data_estatuts
         self.absolute_url = absolute_url
 
 
 class Representacio(object):
-    def __init__(self, denominacio, absolute_url, organ, carrec, persona, carrec_envirtud,
-                 data_nomenament):
+    def __init__(self, denominacio, acronim, organ, carrec, persona, qualitat, data_inici, data_venciment, data_fi, absolute_url):
         self.denominacio = denominacio
-        self.absolute_url = absolute_url
+        self.acronim = acronim
         self.organ = organ
         self.carrec = carrec
         self.persona = persona
-        self.carrec_envirtud = carrec_envirtud
-        self.data_nomenament = data_nomenament
+        self.qualitat = qualitat
+        self.data_inici = data_inici
+        self.data_venciment = data_venciment
+        self.data_fi = data_fi
+        self.absolute_url = absolute_url
 
 
 def get_sortable_key_by_date(obj):
@@ -347,36 +350,40 @@ class EnsDataReporter(object):
         identificacio = []
         for ens in self.list(search_filters):
             ens_obj = ens.getObject()
-            identificacio.append(Identificacio(
-                title=ens_obj.title or "-",                                         # denominacio
-                acronim=ens_obj.acronim or "-",                                     # acronim
-                description=ens_obj.description,                                    # descripcio
-                objecte_social=ens_obj.objecte_social,                              # objecte social
-                estat=ens_obj.estat or "-",                                         # estat
-                nif=ens_obj.nif or "-",                                             # NIF
-                institution_type=ens_obj.institution_type or "-",                   # Àmbit institucional
-                figura_juridica=ens_obj.figura_juridica or "-",                     # Figura jurídica
-                numero_identificacio=ens_obj.numero_identificacio or "-",           # Num. identificació
-                web=ens_obj.web or "-",                                             # web
-                tipologia_upc=ens_obj.tipologia_upc or "-",                         # Tipologia UPC
-                codi=ens_obj.codi or "-",                                           # Codi UPC
-                num_ens=ens_obj.num_ens or "-",                                     # Num. UPC
-                tags=ens_obj.Subject,                                               # Categorització
-                aportacio=get_aportacio(ens_obj),                                   # A capital
-                percentatge_participacio=get_percentatge_participacio(ens_obj),     # % capital
-                quota=get_quota(ens_obj),                                           # Quota
-                nombre_membres=ens_obj.nombre_membres or "-",                       # A órgan sup.
-                percentatge_membres=get_percentatge_membres(ens_obj),               # % membres
-                membres_constituents="-",                                           # Membres constituents
-                membres_actuals="-",                                                # Membres actuals
-                data_constitucio=ens_obj.data_constitucio,                          # Cosntitució ENS
-                data_entrada=ens_obj.data_entrada,                                  # Data alta UPC
-                data_baixa=ens_obj.data_baixa,                                      # Data baixa UPC
-                seu_social=ens_obj.seu_social or "-",                               # Seu social
-                adscripcio=ens_obj.adscripcio or "-",                               # Adscripció
-                # data_estatuts=estatus_obj.data_estatuts or "-",                         # Data estatus
 
-                absolute_url=ens_obj.absolute_url)                                  # URL
+            data_constitucio = ens_obj.data_constitucio.strftime('%d/%m/%Y') if hasattr(ens_obj.data_constitucio, 'strftime') else None
+            data_entrada = ens_obj.data_entrada.strftime('%d/%m/%Y') if hasattr(ens_obj.data_entrada, 'strftime') else None
+            data_baixa = ens_obj.data_baixa.strftime('%d/%m/%Y') if hasattr(ens_obj.data_baixa, 'strftime') else None
+
+            identificacio.append(Identificacio(
+                title=ens_obj.title or "-",                                                 # Denominacio
+                acronim=ens_obj.acronim or "-",                                             # Acronim
+                description=ens_obj.description or "-",                                     # Descripcio
+                objecte_social=ens_obj.objecte_social or "-",                               # Objecte social
+                estat=ens_obj.estat or "-",                                                 # Estat
+                nif=ens_obj.nif or "-",                                                     # NIF
+                institution_type=ens_obj.institution_type or "-",                           # Àmbit institucional
+                figura_juridica=ens_obj.figura_juridica or "-",                             # Figura jurídica
+                numero_identificacio=ens_obj.numero_identificacio or "-",                   # Num. identificació
+                web=ens_obj.web or "-",                                                     # Web
+                tipologia_upc=ens_obj.tipologia_upc or "-",                                 # Tipologia UPC
+                codi=ens_obj.codi or "-",                                                   # Codi UPC
+                num_ens=ens_obj.num_ens or "-",                                             # Num. UPC
+                tags=ens_obj.Subject or "-",                                                # Categorització
+                aportacio=get_aportacio(ens_obj) or "-",                                    # A capital
+                percentatge_participacio=get_percentatge_participacio(ens_obj) or "-",      # % capital
+                quota=get_quota(ens_obj) or "-",                                            # Quota
+                nombre_membres=ens_obj.nombre_membres or "-",                               # A órgan sup.
+                percentatge_membres=get_percentatge_membres(ens_obj) or "-",                # % membres
+                membres_constituents="-",                                                   # Membres constituents
+                membres_actuals="-",                                                        # Membres actuals
+                data_constitucio=data_constitucio or "-",                                   # Constitució ENS
+                data_entrada=data_entrada or "-",                                           # Data alta UPC
+                data_baixa=data_baixa or "-",                                               # Data baixa UPC
+                seu_social=ens_obj.seu_social or "-",                                       # Seu social
+                adscripcio=ens_obj.adscripcio or "-",                                       # Adscripció
+                data_estatuts="-",                                                          # Data estatus
+                absolute_url=ens_obj.absolute_url)                                          # URL
             )
         return identificacio
 
@@ -397,15 +404,23 @@ class EnsDataReporter(object):
                     for organ in self.list_organs_by_ens(ens, organ_tipus):
                         for carrec in self.list_carrecs_upc_by_organ(organ, False):
                             carrec_obj = carrec.getObject()
+
+                            data_inici = carrec_obj.data_inici.strftime('%d/%m/%Y') if hasattr(carrec_obj.data_inici, 'strftime') else None
+                            data_venciment = carrec_obj.effective_date.strftime('%d/%m/%Y') if hasattr(carrec_obj.effective_date, 'strftime') else None
+                            data_fi = carrec_obj.data_fi.strftime('%d/%m/%Y') if hasattr(carrec_obj.data_fi, 'strftime') else None
+
                             representacio.append(Representacio(
-                                denominacio=get_denominacio(ens_obj),
-                                absolute_url=ens_obj.absolute_url,
-                                organ=organ.Title.decode('utf-8'),
-                                carrec=carrec_obj.carrec,
-                                persona=carrec_obj.title,
-                                carrec_envirtud=carrec_obj.carrec_envirtud or "-",
-                                data_nomenament=carrec_obj.data_inici and
-                                carrec_obj.data_inici.strftime('%d/%m/%Y') or "-"))
+                                denominacio=ens_obj.title or "-",                           # Denominacio
+                                acronim=ens_obj.acronim or "-",                             # Acronim
+                                organ=organ.Title or "-",                                   # Òrgan
+                                carrec=carrec_obj.carrec or "-",                            # Càrrec a l'òrgan
+                                persona=carrec_obj.title or "-",                            # Nom persona
+                                qualitat=carrec_obj.carrec_envirtud or "-",                 # En qualitat de...
+                                data_inici=data_inici or "-",                               # Data inici
+                                data_venciment=data_venciment or "-",                       # Data venciment
+                                data_fi=data_fi or "-",                                     # Data fi
+                                absolute_url=ens_obj.absolute_url)                          # URL
+                            )
         return representacio
 
     def search(self, search_filters=None):

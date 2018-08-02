@@ -28,7 +28,7 @@
           <th colspan="8">Marc legal</th>
         </tr>
         <tr>
-<!--  Dades identificatives -->
+          <!--  Dades identificatives -->
           <th>Denominació</th>
           <th>Acrònim</th>
           <th>Descripció</th>
@@ -40,16 +40,16 @@
           <th>Num. Identificacio</th>
           <th>Web</th>
           <th>Tipologia UPC</th>
-          <th>Codi REP</th>
-          <th>Núm.</th>
+          <th>Codi UPC</th>
+          <th>Núm. UPC</th>
           <th>Etiquetes</th>
-<!--  Participació -->
-          <th>A capital</th>
+          <!--  Participació -->
           <th>% capital</th>
+          <th>A capital</th>
           <th>Quota</th>
           <th>A òrgan superior</th>
           <th>% membres</th>
-<!--  Marc legal -->
+          <!--  Marc legal -->
           <th>Membres constituents</th>
           <th>Membres actuals</th>
           <th>Constitució ens</th>
@@ -63,23 +63,24 @@
 
       <tbody>
         <tr tal:repeat="ens view/list">
-          <td tal:content="ens/codi"/>
-          <td tal:content="ens/num_ens"/>
-          <td tal:content="ens/acronim"/>
+          <!--  Dades identificatives -->
           <td class="denominacio">
-            <a tal:content="ens/title" tal:attributes="href ens/absolute_url"/>
+            <a tal:content="ens/title" tal:attributes="href ens/absolute_url">Denominació</a>
           </td>
-          <td tal:content="ens/nif"/>
-          <td tal:content="ens/numero_identificacio"/>
-          <td i18n:translate="" tal:content="ens/estat"/>
-          <td tal:content="ens/figura_juridica"/>
-          <td tal:content="ens/institution_type"/>
-          <td tal:content="ens/tipologia_upc"/>
-          <td tal:content="python: view.getSeu(ens)"/>
-          <td tal:content="ens/adscripcio"/>
-          <td class="numeric" tal:content="ens/percentatge_participacio"/>
-          <td tal:content="ens/nombre_membres"/>
-          <td class="numeric" tal:content="ens/quota"/>
+          <td tal:content="ens/acronim">Acrònim</td>
+          <td tal:content="ens/description">Descripció</td>
+          <td tal:content="ens/objecte_social">Objecte Social</td>
+          <td i18n:translate="" tal:content="ens/estat">Estat</td>
+          <td tal:content="ens/nif">NIF</td>
+          <td tal:content="ens/institution_type">Àmbit institucional</td>
+          <td tal:content="ens/figura_juridica">Fig. jurídica</td>
+          <td tal:content="ens/numero_identificacio">Num. Identificacio</td>
+          <td>
+            <a tal:content="ens/web" tal:attributes="href ens/web">Web</a>
+          </td>
+          <td tal:content="ens/tipologia_upc">Tipologia UPC</td>
+          <td tal:content="ens/codi">Codi REP</td>
+          <td tal:content="ens/num_ens">Núm.</td>
           <td>
             <div tal:define="ens_tags python: view.getTags(ens)"
                  tal:condition="ens_tags">
@@ -89,8 +90,21 @@
                 </tal:rep>
             </div>
           </td>
-          <td tal:content="ens/web"/>
-          <td tal:content="ens/entitats_actuals"/>
+          <!--  Participació -->
+          <td tal:content="ens/aportacio">A capital</td>
+          <td tal:content="ens/percentatge_participacio">% capital</td>
+          <td tal:content="ens/quota">Quota</td>
+          <td tal:content="ens/nombre_membres">A òrgan superior</td>
+          <td tal:content="ens/percentatge_membres">% membres</td>
+          <!--  Marc legal -->
+          <td tal:content="ens/membres_constituents">Membres constituents</td>
+          <td tal:content="ens/membres_actuals">Membres actuals</td>
+          <td tal:content="ens/data_constitucio">Constitució ens</td>
+          <td tal:content="ens/data_entrada">Data alta UPC</td>
+          <td tal:content="ens/data_baixa">Data baixa UPC</td>
+          <td tal:content="ens/seu_social">Seu social</td>
+          <td tal:content="ens/adscripcio">Adscripció</td>
+          <td tal:content="ens/data_estatuts">Data estatuts</td>
         </tr>
       </tbody>
     </table>
