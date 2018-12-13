@@ -1,11 +1,10 @@
 Changelog
 =========
 
-1.7.8 (unreleased)
+1.7.8 (2018-12-13)
 ------------------
 
-- Nothing changed yet.
-
+* Eliminar etiquetas antiguas del csv y error al exportar csv [Corina Riba]
 
 1.7.7 (2018-03-15)
 ------------------
