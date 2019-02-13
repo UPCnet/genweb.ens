@@ -85,7 +85,7 @@ class CarrecDataReporter(object):
 
             results.append(CarrecSearchResult(
                 title=carrec_obj.title,
-                carrec_envirtud=carrec_obj.carrec_envirtud or '-',
+                carrec_envirtud='-',
                 ens=ens.acronim,
                 ens_url=ens.absolute_url,
                 organ='--',
