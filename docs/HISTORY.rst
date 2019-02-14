@@ -1,11 +1,18 @@
 Changelog
 =========
 
-1.7.8 (unreleased)
+1.7.8 (2019-02-14)
 ------------------
 
-- Nothing changed yet.
-
+* Bug cercador per carrec fixed [r.ventura]
+* Fix error when carrec_envirtud is empty [Corina Riba]
+* Marc legal add acord fields [iago.lopez]
+* New Taula identificativa and Taula representació + Import CSV [iago.lopez]
+* New Taula identificativa and Taula representació [Corina Riba]
+* Arrenge Participacio section [Corina Riba]
+* Arrange Dades significatives view and data [Corina Riba]
+* Arrange Marc legal view and content [Corina Riba]
+* Eliminar etiquetas antiguas del csv y error al exportar csv [Corina Riba]
 
 1.7.7 (2018-03-15)
 ------------------
