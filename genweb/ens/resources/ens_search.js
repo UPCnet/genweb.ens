@@ -65,7 +65,7 @@ $(document).ready(function ()
         ens_search();
     });
 
-    apply_filter_to_link($('#link_taula_identificativa'));
+    apply_filter_to_link($('#link_taula_dentitats'));
     apply_filter_to_link($('#link_taula_representacio'));
 
     ens_search();

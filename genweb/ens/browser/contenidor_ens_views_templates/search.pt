@@ -14,8 +14,8 @@
     <nav>
       <ul class="nav nav-pills opcions">
         <li><a id='link_taula_identificativa'
-               tal:attributes="href string:${portal_url}/taula_identificativa">
-          Taula identificativa</a>
+               tal:attributes="href string:${portal_url}/taula_dentitats">
+          Taula d'entitats</a>
         </li>
         <li><a id='link_taula_representacio'
                tal:attributes="href string:${portal_url}/taula_representacio">
@@ -27,8 +27,8 @@
         </li>
       </ul>
       <ul class="nav nav-pills opcions">
-        <li><a tal:attributes="href string:${portal_url}/ca/representants-upc">
-          Administrar representants UPC</a>
+        <li><a tal:attributes="href string:${portal_url}/ca/administrar-persones">
+          Administrar persones</a>
         </li>
         <li><a tal:attributes="href string:${portal_url}/carrec_search">
           Cercador de càrrecs</a>

@@ -14,6 +14,7 @@ data_folder_name = 'data'
 consell_direccio_file_name = 'consell_direccio.csv'
 fields_to_index = [('estat', 'FieldIndex'),
                    ('figura_juridica', 'FieldIndex'),
+                   ('dni', 'FieldIndex'),
                    ('carrec', 'FieldIndex'),
                    ('is_historic', 'FieldIndex'),
                    ('data', 'DateIndex'),

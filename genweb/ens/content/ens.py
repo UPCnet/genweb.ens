@@ -32,11 +32,11 @@ estat_values = [
     u"Altre"]
 
 institution_type_values = [
-    u"Autonòmica",
-    u"Estatal",
+    _(u"Estatal"),
+    u"GenCat",
     u"Local",
     u"Internacional",
-    u"Altres"]
+    u"Altres CCAA"]
 
 
 class IEns(form.Schema):
@@ -96,8 +96,7 @@ class IEns(form.Schema):
     institution_type = schema.Choice(
         title=_(u"Àmbit institucional"),
         vocabulary=get_vocabulary(institution_type_values),
-        required=True,
-        default="Altres")
+        required=True)
 
     figura_juridica = schema.Choice(
         title=_(u"Figura jurídica"),
@@ -190,10 +189,12 @@ class IEns(form.Schema):
         "participacio",
         label=u"Participació de la UPC",
         fields=['title1',
-                'aportacio_total', 'aportacio_sn', 'aportacio_import', 'aportacio_moneda',
-                'unitat_carrec', 'percentatge_participacio',
-                'capital_social_sn', 'capital_social_import',
-                'capital_social_moneda',
+                'participacio_data',
+                'capital_social_sn', 'capital_social_import', 'capital_social_moneda',
+                'aportacio_total', 'aportacio_total_moneda',
+                'aportacio_sn', 'aportacio_import', 'aportacio_moneda',
+                'percentatge_participacio',
+                'unitat_carrec',
                 'participacio_observacions',
                 'title2',
                 'total_membres',
@@ -201,7 +202,7 @@ class IEns(form.Schema):
                 'percentatge_membres',
                 'membres_observacions',
                 'title3',
-                'quota_sn', 'quota_import', 'quota_moneda']
+                'quota_sn', 'quota_import', 'quota_moneda', 'quota_observacions']
     )
 
     form.mode(title1='display')
@@ -211,6 +212,7 @@ class IEns(form.Schema):
     )
 
     form.widget(aportacio_sn=RadioFieldWidget)
+    form.omitted('aportacio_sn')
     aportacio_sn = schema.Choice(
         title=_(u"Import UPC"),
         vocabulary=SimpleVocabulary(
@@ -221,7 +223,11 @@ class IEns(form.Schema):
     )
 
     aportacio_import = schema.Float(
-        title=_(u"Aportació inicial"),
+        title=_(u"Aportació inicial UPC"),
+        required=False)
+
+    participacio_data = schema.Date(
+        title=_(u"Data"),
         required=False)
 
     aportacio_moneda = schema.TextLine(
@@ -229,7 +235,11 @@ class IEns(form.Schema):
         required=False)
 
     aportacio_total = schema.Float(
-        title=_(u"Import total"),
+        title=_(u"Capital inicial total"),
+        required=False)
+
+    aportacio_total_moneda = schema.TextLine(
+        title=_(u"Moneda"),
         required=False)
 
     form.mode(title3='display')
@@ -239,6 +249,7 @@ class IEns(form.Schema):
     )
 
     form.widget(quota_sn=RadioFieldWidget)
+    form.omitted('quota_sn')
     quota_sn = schema.Choice(
         title=_(u"Quota"),
         vocabulary=SimpleVocabulary(
@@ -256,6 +267,10 @@ class IEns(form.Schema):
         title=_(u"Moneda"),
         required=False)
 
+    quota_observacions = schema.Text(
+        title=_(u"Observacions"),
+        required=False)
+
     form.mode(unitat_carrec='hidden')
     dexteritytextindexer.searchable('unitat_carrec')
     unitat_carrec = schema.TextLine(
@@ -263,7 +278,7 @@ class IEns(form.Schema):
         required=False)
 
     percentatge_participacio = schema.Float(
-        title=_(u"Percentatge de participació"),
+        title=_(u"% UPC en capital"),
         required=False)
 
     form.mode(title2='display')
@@ -282,7 +297,7 @@ class IEns(form.Schema):
         required=False)
 
     percentatge_membres = schema.Float(
-        title=_(u"Percentatge de membres"),
+        title=_(u"% UPC en vots"),
         required=False)
 
     membres_observacions = schema.Text(
@@ -290,6 +305,7 @@ class IEns(form.Schema):
         required=False)
 
     form.widget(capital_social_sn=RadioFieldWidget)
+    form.omitted('capital_social_sn')
     capital_social_sn = schema.Choice(
         title=_(u"Participació en capital social o fons patrimonial"),
         vocabulary=SimpleVocabulary(
@@ -300,7 +316,7 @@ class IEns(form.Schema):
     )
 
     capital_social_import = schema.Float(
-        title=_(u"Import"),
+        title=_(u"Fons patrimonial"),
         required=False)
 
     capital_social_moneda = schema.TextLine(
@@ -316,8 +332,8 @@ class IEns(form.Schema):
         "marc_legal",
         label=u"Marc legal",
         fields=['entitats_constituents', 'entitats_actuals',
-                'data_constitucio', 'data_entrada', 'data_baixa',
-                'data_entrada_acord', 'data_baixa_acord',
+                'data_constitucio', 'data_estatuts', 'data_entrada',
+                'data_baixa', 'data_entrada_acord', 'data_baixa_acord',
                 'data_entrada_procediment', 'data_baixa_procediment',
                 'seu_social', 'seu_social_estranger', 'adscripcio',
                 'marc_legal_observacions'])
@@ -334,6 +350,10 @@ class IEns(form.Schema):
 
     data_constitucio = schema.Date(
         title=_(u"Data de constitució"),
+        required=False)
+
+    data_estatuts = schema.Date(
+        title=_(u"Data estatuts"),
         required=False)
 
     data_entrada = schema.Date(
@@ -449,52 +469,59 @@ def get_observacions(ens, section):
     if obs:
         return obs
     else:
-        return "-"
+        return False
+
+
+def get_data_participacio(ens):
+    return ens.participacio_data.strftime('%d/%m/%Y') if ens.participacio_data else "-"
+
+
+def get_aportacio_total(ens):
+    if ens.aportacio_total:
+        moneda = "" if ens.aportacio_total_moneda is None \
+                 else " " + ens.aportacio_total_moneda.encode("utf-8")
+        return "{0:,.2f}{1}".format(
+            ens.aportacio_total, moneda).decode('utf-8')
+    else:
+        return '-'
 
 
 def get_aportacio(ens):
-    if ens.aportacio_sn is None:
-        return "-"
-    elif not ens.aportacio_sn:
-        return _(u"No")
+    if ens.aportacio_import:
+        moneda = "" if ens.aportacio_moneda is None \
+                 else " " + ens.aportacio_moneda.encode("utf-8")
+        return "{0:,.2f}{1}".format(
+            ens.aportacio_import, moneda).decode('utf-8')
     else:
-        if ens.aportacio_import:
-            moneda = "" if ens.aportacio_moneda is None \
-                     else " " + ens.aportacio_moneda.encode("utf-8")
-            return "{0:,.2f}{1}".format(
-                ens.aportacio_import, moneda).decode('utf-8')
-        else:
-            return _(u"Sí")
+        return '-'
 
 
 def get_quota(ens):
-    if ens.quota_sn is None:
-        return "-"
-    elif not ens.quota_sn:
-        return _(u"No")
+    if ens.quota_import:
+        moneda = "" if ens.quota_moneda is None \
+            else " " + ens.quota_moneda.encode("utf-8")
+        return "{0:,.2f}{1}".format(
+            ens.quota_import, moneda).decode('utf-8')
     else:
-        if ens.quota_import:
-            moneda = "" if ens.quota_moneda is None \
-                else " " + ens.quota_moneda.encode("utf-8")
-            return "{0:,.2f}{1}".format(
-                ens.quota_import, moneda).decode('utf-8')
-        else:
-            return _(u"Sí")
+        return '-'
 
 
 def get_capital_social(ens):
-    if ens.capital_social_sn is None:
-        return "-"
-    elif not ens.capital_social_sn:
-        return _(u"No")
+    if ens.capital_social_import:
+        moneda = "" if ens.capital_social_moneda is None \
+            else " " + ens.capital_social_moneda.encode("utf-8")
+        return "{0:,.2f}{1}".format(
+            ens.capital_social_import, moneda).decode('utf-8')
     else:
-        if ens.capital_social_import:
-            moneda = "" if ens.capital_social_moneda is None \
-                else " " + ens.capital_social_moneda.encode("utf-8")
-            return "{0:,.2f}{1}".format(
-                ens.capital_social_import, moneda).decode('utf-8')
-        else:
-            return _(u"Sí")
+        return '-'
+
+
+def get_capital_social_data(ens):
+    capital_social = get_capital_social(ens)
+    data_participacio = get_data_participacio(ens)
+    if capital_social == '-' and data_participacio == '-':
+        return '-'
+    return capital_social + " (" + data_participacio + ")"
 
 
 def get_seu_social(ens):

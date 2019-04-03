@@ -3,7 +3,7 @@
 
 class CarrecSearchResult(object):
     def __init__(self, title, ens, ens_url, organ, organ_url, carrec, carrec_envirtud,
-                 data_inici, data_inici_str, data_fi, data_fi_str,
+                 data_inici, vigencia, data_inici_str, data_fi, data_fi_str,
                  is_historic, url):
         self.title = title
         self.ens = ens
@@ -13,6 +13,7 @@ class CarrecSearchResult(object):
         self.carrec = carrec
         self.carrec_envirtud = carrec_envirtud
         self.data_inici = data_inici
+        self.vigencia = vigencia
         self.data_inici_str = data_inici_str
         self.data_fi = data_fi
         self.data_fi_str = data_fi_str
@@ -50,13 +51,17 @@ class CarrecDataReporter(object):
         for carrec in self.catalog.searchResults(query):
 
             carrec_obj = carrec.getObject()
+
+            if 'is_historic' in query and carrec_obj.estat == 'Baixa':
+                continue
+
             ens = carrec_obj.getParentNode().getParentNode()
             organ = carrec_obj.getParentNode()
 
             results.append(CarrecSearchResult(
                 title=carrec_obj.title,
                 carrec_envirtud=carrec_obj.carrec_envirtud,
-                ens=ens.acronim,
+                ens=ens.title + " (" + ens.acronim + ")",
                 ens_url=ens.absolute_url,
                 organ=organ.title,
                 organ_url=organ.absolute_url,
@@ -69,6 +74,7 @@ class CarrecDataReporter(object):
                 data_fi_str=(carrec_obj.data_fi and
                              carrec_obj.data_fi.strftime('%d/%m/%Y') or
                              '-'),
+                vigencia=carrec_obj.vigencia or "-",
                 is_historic=carrec_obj.is_historic,
                 url=carrec_obj.absolute_url))
 
@@ -81,20 +87,24 @@ class CarrecDataReporter(object):
         for carrec_directiu in self.catalog.searchResults(query):
 
             carrec_obj = carrec_directiu.getObject()
-            ens = carrec_obj.getParentNode()
 
+            if 'is_historic' in query and carrec_obj.estat == 'Baixa':
+                continue
+
+            ens = carrec_obj.getParentNode()
             results.append(CarrecSearchResult(
                 title=carrec_obj.title,
                 carrec_envirtud='-',
-                ens=ens.acronim,
+                ens=ens.title + " (" + ens.acronim + ")",
                 ens_url=ens.absolute_url,
-                organ='--',
-                organ_url='--',
+                organ='-',
+                organ_url='-',
                 carrec=carrec_obj.carrec or "-",
-                data_inici_str='--',
+                data_inici_str='-',
                 data_inici=None,
                 data_fi=None,
-                data_fi_str='--',
+                data_fi_str='-',
+                vigencia='-',
                 is_historic=carrec_obj.is_historic,
                 url=carrec_obj.absolute_url))
 

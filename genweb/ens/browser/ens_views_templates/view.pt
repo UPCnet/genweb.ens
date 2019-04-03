@@ -38,7 +38,7 @@
               <dt i18n:translate="Figura jurídica">Figura jurídica</dt>
               <dd tal:content="python: context.figura_juridica or '-'"/>
 
-              <dt i18n:translate="Núm. Identif." class="subfield">Núm. Identif.</dt>
+              <dt i18n:translate="Identificadors">Identificadors</dt>
               <dd tal:content="python: context.numero_identificacio or '-'"
                   class="fieldset-end"/>
 
@@ -67,7 +67,7 @@
               <dt i18n:translate="Codi UPC">Codi UPC</dt>
               <dd tal:content="python: context.codi or '-'"/>
 
-              <dt i18n:translate="num">Núm.:</dt>
+              <dt i18n:translate="num" class="subfield">Núm.:</dt>
               <dd tal:content="python: '%04d' % context.num_ens if context.num_ens else '-'"/>
 
             </dl>
@@ -167,14 +167,27 @@
         <div id="participation">
         <h4>1. Al capital social o fons patrimonial</h4>
         <dl>
-          <dt i18n:translate="">Import total</dt>
-          <dd tal:content="view/aportacio"/>
-          <dt i18n:translate="">Import UPC</dt>
+          <dt i18n:translate="">Data</dt>
+          <dd tal:content="view/data_participacio"/>
+          <dt i18n:translate="">Fons patrimonal</dt>
+          <dd tal:content="view/capital_social"/>
+          <dt i18n:translate="">Capital inicial total</dt>
+          <dd tal:content="view/aportacio_total"/>
+          <dt i18n:translate="">Aportació inicial UPC</dt>
           <dd tal:content="view/aportacio"/>
           <dt i18n:translate="Percentatge de participació">Percentatge de participació</dt>
           <dd tal:content="view/percentatge_participacio"/>
-          <dt i18n:translate="">Observacions</dt>
-          <dd tal:content="view/observacions_participacio" />
+          <dt i18n:translate="">
+            <input type="checkbox" class="observacions_participacio-switch label-aligned"
+                   tal:condition="view/observacions_participacio" />
+            <span i18n:translate="">Observacions</span>
+          </dt>
+          <dd>
+            <span class="observacions_participacio-content"
+                  tal:condition="view/observacions_participacio"
+                  tal:content="view/observacions_participacio" ></span>
+            <span tal:condition="not:view/observacions_participacio">-</span>
+          </dd>
         </dl>
         <br/>
           <h4>2. A òrgan de govern superior</h4>
@@ -185,16 +198,36 @@
           <dd tal:content="python: context.nombre_membres or '-'"/>
 <!--           <dt i18n:translate="Part. en cap. social o fons patrimonial">Part. en cap. social o fons patrimonial</dt>
           <dd tal:content="view/capital_social"/> -->
-          <dt i18n:translate="">Percentage membres</dt>
+          <dt i18n:translate="">% UPC en vots</dt>
           <dd tal:content="view/percentatge_membres" />
-          <dt i18n:translate="">Observacions</dt>
-          <dd tal:content="view/observacions_membres" />
+          <dt i18n:translate="">
+            <input type="checkbox" class="observacions_membres-switch label-aligned"
+                   tal:condition="view/observacions_membres" />
+            <span i18n:translate="">Observacions</span>
+          </dt>
+          <dd>
+            <span class="observacions_membres-content"
+                  tal:condition="view/observacions_membres"
+                  tal:content="view/observacions_membres" ></span>
+            <span tal:condition="not:view/observacions_membres">-</span>
+          </dd>
         </dl>
         <br/>
         <h4>3. Quota anual</h4>
         <dl>
           <dt i18n:translate="Quota">Quota anual</dt>
           <dd tal:content="view/quota"/>
+          <dt>
+            <input type="checkbox" class="observacions_quota-switch label-aligned"
+                   tal:condition="view/observacions_quota" />
+            <span i18n:translate="">Observacions</span>
+          </dt>
+          <dd>
+            <span class="observacions_quota-content"
+                  tal:condition="view/observacions_quota"
+                  tal:content="view/observacions_quota" ></span>
+            <span tal:condition="not:view/observacions_quota">-</span>
+          </dd>
         </dl>
         <br/>
 
@@ -225,8 +258,10 @@
                     <th i18n:translate="Nom" class="column-medium">Nom</th>
                     <th i18n:translate="Càrrec" class="column-small">Càrrec</th>
                     <th i18n:translate="Data inici" class="column-small">Data inici</th>
+                    <th i18n:translate="Vigènc" class="column-small">Vigènc</th>
                     <th i18n:translate="Data fi" class="column-small">Data fi</th>
                     <th i18n:translate="Històric" class="column-center">Històric</th>
+                    <th i18n:translate="Ratificat" class="column-center">Ratificat</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -240,10 +275,15 @@
                         </td>
                         <td tal:content="carrec/carrec"/>
                         <td tal:content="python: carrec.data_inici and carrec.data_inici.strftime('%d/%m/%Y') or '-'"/>
+                        <td tal:content="carrec/vigencia"/>
                         <td tal:content="python: carrec.data_fi and carrec.data_fi.strftime('%d/%m/%Y') or '-'"/>
                         <td class="column-center">
-                          <input type="checkbox" class="hidable-group-element"
-                                 tal:attributes="checked carrec/is_historic; disabled python: True"/>
+                          <input type="checkbox" class="hidable-group-element" disabled="disabled"
+                                 tal:attributes="checked carrec/is_historic;"/>
+                        </td>
+                        <td class="column-center">
+                          <input type="checkbox" disabled="disabled"
+                                 tal:attributes="checked carrec/nomenaments_anteriors;"/>
                         </td>
                       </tr>
                     </tal:block>
@@ -285,8 +325,10 @@
                   <th i18n:translate="Nom" class="column-medium">Nom</th>
                   <th i18n:translate="Càrrec" class="column-small">Càrrec</th>
                   <th i18n:translate="Data inici" class="column-small">Data inici</th>
+                  <th i18n:translate="Vigènc" class="column-small">Vigènc</th>
                   <th i18n:translate="Data fi" class="column-small">Data fi</th>
                   <th i18n:translate="Històric" class="column-center">Històric</th>
+                  <th i18n:translate="Ratificat" class="column-center">Ratificat</th>
                 </tr>
               </thead>
               <tbody>
@@ -300,9 +342,15 @@
                       </td>
                       <td tal:content="carrec/carrec"/>
                       <td tal:content="python: carrec.data_inici and carrec.data_inici.strftime('%d/%m/%Y') or '-'"/>
+                      <td tal:content="carrec/vigencia"/>
                       <td tal:content="python: carrec.data_fi and carrec.data_fi.strftime('%d/%m/%Y') or '-'"/>
                       <td class="column-center">
-                        <input type="checkbox" class="hidable-group-element" tal:attributes="checked carrec/is_historic; disabled python: True"/>
+                        <input type="checkbox" class="hidable-group-element" disabled="disabled"
+                               tal:attributes="checked carrec/is_historic;"/>
+                      </td>
+                      <td class="column-center">
+                        <input type="checkbox" disabled="disabled"
+                               tal:attributes="checked carrec/nomenaments_anteriors;"/>
                       </td>
                     </tr>
                   </tal:block>
@@ -389,9 +437,6 @@
 
           <dt i18n:translate="Procediment de baixa" class="subfield">Procediment de baixa</dt>
           <dd tal:content="python: context.data_baixa_procediment or '-'"/>
-
-          <dt i18n:translate="Àmbit legislatiu">Àmbit legistlatiu</dt>
-          <dd tal:content="view/seu_social"/>
 
           <dt i18n:translate="Adm. Pública d&apos;adscripció">Adm. Pública d&apos;adscripció</dt>
           <dd tal:content="view/adscripcio"/>

@@ -16,6 +16,8 @@ from genweb.ens.interfaces import IGenwebEnsLayer
 from genweb.ens.content.ens import IEns
 from genweb.ens.content.ens import (get_percentatge_participacio,
                                     get_percentatge_membres,
+                                    get_data_participacio,
+                                    get_aportacio_total,
                                     get_aportacio, get_quota,
                                     get_capital_social, get_seu_social,
                                     get_observacions)
@@ -42,6 +44,18 @@ class View(dexterity.DisplayForm):
     @property
     def observacions_membres(self):
         return get_observacions(self.context, 'membres')
+
+    @property
+    def observacions_quota(self):
+        return get_observacions(self.context, 'quota')
+
+    @property
+    def data_participacio(self):
+        return get_data_participacio(self.context)
+
+    @property
+    def aportacio_total(self):
+        return get_aportacio_total(self.context)
 
     @property
     def aportacio(self):
@@ -140,9 +154,9 @@ class View(dexterity.DisplayForm):
     def getData(self):
         ens = self.context
         if ens.estat == 'Actiu':
-            data = ens.data_entrada
+            data = ens.data_entrada.strftime('%d/%m/%Y') if ens.data_entrada else '-'
         elif ens.estat == 'Baixa':
-            data = ens.data_baixa
+            data = ens.data_baixa.strftime('%d/%m/%Y') if ens.data_baixa else '-'
         else:
             data = '-'
         return data

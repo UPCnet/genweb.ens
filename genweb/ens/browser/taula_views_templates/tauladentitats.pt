@@ -7,8 +7,8 @@
 
 <body>
   <metal:custom_title fill-slot="content-title">
-    <h1 class="documentFirstHeading" i18n:translate="Taula identificativa">
-      Taula identificativa
+    <h1 class="documentFirstHeading" i18n:translate="Taula d'entitats">
+      Taula d'entitats
     </h1>
   </metal:custom_title>
 
@@ -24,38 +24,38 @@
       <thead>
         <tr>
           <th colspan="14">Dades identificatives</th>
-          <th colspan="5">Participació</th>
-          <th colspan="8">Marc legal</th>
+          <th colspan="6">Participació</th>
+          <th colspan="7">Marc legal</th>
         </tr>
         <tr>
           <!--  Dades identificatives -->
           <th>Denominació</th>
           <th>Acrònim</th>
-          <th>Descripció</th>
-          <th>Objecte Social</th>
           <th>Estat</th>
           <th>NIF</th>
           <th>Àmbit institucional</th>
-          <th>Fig. jurídica</th>
-          <th>Num. Identificacio</th>
+          <th>Figura jurídica</th>
+          <th>Identificadors</th>
           <th>Web</th>
           <th>Tipologia UPC</th>
           <th>Codi UPC</th>
           <th>Núm. UPC</th>
           <th>Etiquetes</th>
+          <th>Data alta UPC</th>
+          <th>Data baixa UPC</th>
           <!--  Participació -->
-          <th>% capital</th>
-          <th>A capital</th>
+          <th>Fons patrimonial (data)</th>
+          <th>Cap. inicial total</th>
+          <th>Aportació inicial UPC</th>
+          <th>% UPC en capital</th>
+          <th>% UPC en vots</th>
           <th>Quota</th>
-          <th>A òrgan superior</th>
-          <th>% membres</th>
           <!--  Marc legal -->
-          <th>Membres constituents</th>
-          <th>Membres actuals</th>
-          <th>Constitució ens</th>
+          <th>Entitats constituents</th>
+          <th>Entitats actuals</th>
+          <th>Data de constitució</th>
           <th>Data alta UPC</th>
           <th>Acord UPC</th>
-          <th>Seu social</th>
           <th>Adscripció</th>
           <th>Data estatuts</th>
         </tr>
@@ -68,13 +68,11 @@
             <a tal:content="ens/title" tal:attributes="href ens/absolute_url">Denominació</a>
           </td>
           <td tal:content="ens/acronim">Acrònim</td>
-          <td tal:content="ens/description">Descripció</td>
-          <td tal:content="ens/objecte_social">Objecte Social</td>
           <td i18n:translate="" tal:content="ens/estat">Estat</td>
           <td tal:content="ens/nif">NIF</td>
           <td tal:content="ens/institution_type">Àmbit institucional</td>
-          <td tal:content="ens/figura_juridica">Fig. jurídica</td>
-          <td tal:content="ens/numero_identificacio">Num. Identificacio</td>
+          <td tal:content="ens/figura_juridica">Figura jurídica</td>
+          <td tal:content="ens/numero_identificacio">Identificadors</td>
           <td>
             <a tal:content="ens/web" tal:attributes="href ens/web">Web</a>
           </td>
@@ -90,19 +88,21 @@
                 </tal:rep>
             </div>
           </td>
+          <td tal:content="ens/data_entrada">Data alta UPC</td>
+          <td tal:content="ens/data_baixa">Data baixa UPC</td>
           <!--  Participació -->
-          <td tal:content="ens/aportacio">A capital</td>
-          <td tal:content="ens/percentatge_participacio">% capital</td>
+          <td tal:content="ens/capital_social">Fons patrimonial (data)</td>
+          <td tal:content="ens/aportacio_total">Cap. inicial total</td>
+          <td tal:content="ens/aportacio_import">Aportació inicial UPC</td>
+          <td tal:content="ens/percentatge_participacio">% UPC en capital</td>
+          <td tal:content="ens/percentatge_membres">% UPC en vots</td>
           <td tal:content="ens/quota">Quota</td>
-          <td tal:content="ens/nombre_membres">A òrgan superior</td>
-          <td tal:content="ens/percentatge_membres">% membres</td>
           <!--  Marc legal -->
-          <td tal:content="ens/membres_constituents">Membres constituents</td>
-          <td tal:content="ens/membres_actuals">Membres actuals</td>
-          <td tal:content="ens/data_constitucio">Constitució ens</td>
+          <td tal:content="ens/entitats_constituents">Entitats constituents</td>
+          <td tal:content="ens/entitats_actuals">Entitats actuals</td>
+          <td tal:content="ens/data_constitucio">Data de constitució</td>
           <td tal:content="ens/data_entrada">Data alta UPC</td>
           <td tal:content="ens/data_entrada_acord">Acord UPC</td>
-          <td tal:content="ens/seu_social">Seu social</td>
           <td tal:content="ens/adscripcio">Adscripció</td>
           <td tal:content="ens/data_estatuts">Data estatuts</td>
         </tr>

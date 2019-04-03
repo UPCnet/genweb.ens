@@ -68,8 +68,17 @@ msgstr "Òrgan associat a un ens"
 msgid "Carrec directiu"
 msgstr "Càrrec directiu"
 
+msgid "Carrec"
+msgstr "Càrrec"
+
 msgid "Carrec directiu d'un ens"
 msgstr "Càrrec directiu d'un ens"
 
 msgid "Càrrec que pot representar UPC en algun ens"
 msgstr "Carrec que pot representar UPC en algun ens"
+
+msgid "Actiu"
+msgstr "Alta"
+
+msgid "Estatal"
+msgstr "Estat"

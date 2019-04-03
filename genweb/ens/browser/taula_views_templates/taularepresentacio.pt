@@ -30,7 +30,7 @@
           <th>Nom persona</th>
           <th>En qualitat de...</th>
           <th>Data inici</th>
-          <th>Data venciment</th>
+          <th>Vigència</th>
           <th>Data fi</th>
         </tr>
       </thead>
@@ -45,7 +45,7 @@
           <td tal:content="ens/persona"/>
           <td tal:content="ens/qualitat"/>
           <td tal:content="ens/data_inici"/>
-          <td tal:content="ens/data_venciment"/>
+          <td tal:content="ens/vigencia"/>
           <td tal:content="ens/data_fi"/>
         </tr>
       </tbody>
