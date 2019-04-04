@@ -70,7 +70,7 @@
           <td tal:content="ens/acronim">Acrònim</td>
           <td i18n:translate="" tal:content="ens/estat">Estat</td>
           <td tal:content="ens/nif">NIF</td>
-          <td tal:content="ens/institution_type">Àmbit institucional</td>
+          <td i18n:translate="" tal:content="ens/institution_type">Àmbit institucional</td>
           <td tal:content="ens/figura_juridica">Figura jurídica</td>
           <td tal:content="ens/numero_identificacio">Identificadors</td>
           <td>

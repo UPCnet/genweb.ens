@@ -82,3 +82,6 @@ msgstr "Alta"
 
 msgid "Estatal"
 msgstr "Estat"
+
+msgid "Autonòmica"
+msgstr "GenCat"

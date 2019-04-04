@@ -33,7 +33,7 @@ estat_values = [
 
 institution_type_values = [
     _(u"Estatal"),
-    u"GenCat",
+    _(u"Autonòmica"),
     u"Local",
     u"Internacional",
     u"Altres CCAA"]

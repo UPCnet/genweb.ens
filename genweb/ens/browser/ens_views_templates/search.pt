@@ -13,7 +13,7 @@
   <metal:content-core fill-slot="content-core">
     <nav>
       <ul class="nav nav-pills opcions">
-        <li><a id='link_taula_identificativa'
+        <li><a id='link_taula_dentitats'
                tal:attributes="href string:${portal_url}/taula_dentitats">
           Taula d'entitats</a>
         </li>

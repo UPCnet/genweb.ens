@@ -33,7 +33,7 @@
               <dd tal:content="python: context.nif or '-'"/>
 
               <dt i18n:translate="Àmbit institucional">Àmbit institucional</dt>
-              <dd tal:content="python: context.institution_type or '-'"/>
+              <dd i18n:translate="" tal:content="python: context.institution_type or '-'"/>
 
               <dt i18n:translate="Figura jurídica">Figura jurídica</dt>
               <dd tal:content="python: context.figura_juridica or '-'"/>
