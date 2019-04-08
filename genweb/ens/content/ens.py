@@ -332,7 +332,7 @@ class IEns(form.Schema):
         "marc_legal",
         label=u"Marc legal",
         fields=['entitats_constituents', 'entitats_actuals',
-                'data_constitucio', 'data_estatuts', 'data_entrada',
+                'data_constitucio', 'data_entrada',
                 'data_baixa', 'data_entrada_acord', 'data_baixa_acord',
                 'data_entrada_procediment', 'data_baixa_procediment',
                 'seu_social', 'seu_social_estranger', 'adscripcio',
@@ -350,10 +350,6 @@ class IEns(form.Schema):
 
     data_constitucio = schema.Date(
         title=_(u"Data de constitució"),
-        required=False)
-
-    data_estatuts = schema.Date(
-        title=_(u"Data estatuts"),
         required=False)
 
     data_entrada = schema.Date(

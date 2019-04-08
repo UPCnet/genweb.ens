@@ -352,7 +352,6 @@ body.template-homepage #contentActionMenus > li:nth-child(-n+3) {
     width: 100%;
 }
 
-#formfield-form-widgets-data_constitucio,
 #formfield-form-widgets-data_entrada,
 #formfield-form-widgets-data_entrada_acord,
 #formfield-form-widgets-data_entrada_procediment {
@@ -360,7 +359,6 @@ body.template-homepage #contentActionMenus > li:nth-child(-n+3) {
     float: left;
 }
 
-#formfield-form-widgets-data_estatuts,
 #formfield-form-widgets-data_baixa,
 #formfield-form-widgets-data_baixa_acord,
 #formfield-form-widgets-data_baixa_procediment {

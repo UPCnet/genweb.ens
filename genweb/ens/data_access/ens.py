@@ -357,7 +357,10 @@ class EnsDataReporter(object):
             data_constitucio = ens_obj.data_constitucio.strftime('%d/%m/%Y') if hasattr(ens_obj.data_constitucio, 'strftime') else None
             data_entrada = ens_obj.data_entrada.strftime('%d/%m/%Y') if hasattr(ens_obj.data_entrada, 'strftime') else None
             data_baixa = ens_obj.data_baixa.strftime('%d/%m/%Y') if hasattr(ens_obj.data_baixa, 'strftime') else None
-            data_estatuts = ens_obj.data_estatuts.strftime('%d/%m/%Y') if hasattr(ens_obj.data_estatuts, 'strftime') else None
+            data_estatuts = [estatut for estatut in self.list_estatuts_by_ens_obj(ens_obj, is_vigent=True)]
+            if data_estatuts:
+                data_estatuts = sorted(data_estatuts, key=get_sortable_key_by_date, reverse=True)[0]
+                data_estatuts = data_estatuts.data.strftime('%d/%m/%Y') if hasattr(data_estatuts.data, 'strftime') else None
             identificacio.append(Entitat(
                 title=ens_obj.title or "-",                                                 # Denominacio
                 acronim=ens_obj.acronim or "-",                                             # Acronim

@@ -8,7 +8,8 @@
 <body>
 
   <metal:content-core fill-slot="content-core">
-    <section id="ens-metadata" class="ens-metadata">
+    <section id="ens-metadata" class="ens-metadata"
+             tal:define="estatuts_vigents view/estatuts_vigents">
         <h2 i18n:translate="Dades indentificatives">
             Dades identificatives
         </h2>
@@ -169,7 +170,7 @@
         <dl>
           <dt i18n:translate="">Data</dt>
           <dd tal:content="view/data_participacio"/>
-          <dt i18n:translate="">Fons patrimonal</dt>
+          <dt i18n:translate="">Fons patrimonial</dt>
           <dd tal:content="view/capital_social"/>
           <dt i18n:translate="">Capital inicial total</dt>
           <dd tal:content="view/aportacio_total"/>
@@ -258,7 +259,7 @@
                     <th i18n:translate="Nom" class="column-medium">Nom</th>
                     <th i18n:translate="Càrrec" class="column-small">Càrrec</th>
                     <th i18n:translate="Data inici" class="column-small">Data inici</th>
-                    <th i18n:translate="Vigènc" class="column-small">Vigènc</th>
+                    <th i18n:translate="Vigència" class="column-small">Vigència</th>
                     <th i18n:translate="Data fi" class="column-small">Data fi</th>
                     <th i18n:translate="Històric" class="column-center">Històric</th>
                     <th i18n:translate="Ratificat" class="column-center">Ratificat</th>
@@ -325,7 +326,7 @@
                   <th i18n:translate="Nom" class="column-medium">Nom</th>
                   <th i18n:translate="Càrrec" class="column-small">Càrrec</th>
                   <th i18n:translate="Data inici" class="column-small">Data inici</th>
-                  <th i18n:translate="Vigènc" class="column-small">Vigènc</th>
+                  <th i18n:translate="Vigència" class="column-small">Vigència</th>
                   <th i18n:translate="Data fi" class="column-small">Data fi</th>
                   <th i18n:translate="Històric" class="column-center">Històric</th>
                   <th i18n:translate="Ratificat" class="column-center">Ratificat</th>
@@ -413,6 +414,9 @@
         <dl>
           <dt i18n:translate="Data de constitució">Data de constitució</dt>
           <dd tal:content="python: context.data_constitucio and context.data_constitucio.strftime('%d/%m/%Y') or '-'"/>
+
+          <dt i18n:translate="Data estatus">Data estatus</dt>
+          <dd tal:content="python: estatuts_vigents[0].data and estatuts_vigents[0].data.strftime('%d/%m/%Y') or '-'"/>
 
           <dt i18n:translate="Entitats constituents">Entitats constituents</dt>
           <dd tal:content="python: context.entitats_constituents or '-'"/>
@@ -506,7 +510,7 @@
 
         <h3 i18n:translate="Estatuts i normatives">Estatuts i normatives</h3>
         <h4 i18n:translate="Vigents">Vigents</h4>
-        <tal:block define="estatuts_vigents view/estatuts_vigents">
+        <tal:block>
         <table tal:condition="estatuts_vigents" class="ens-taula">
           <thead>
             <tr>
