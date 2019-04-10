@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from plone.directives import form
-from zope import schema
 from collective import dexteritytextindexer
+from five import grok
+from plone.directives import form
+from plone.indexer import indexer
+from zope import schema
 
 from genweb.ens import _
 
@@ -26,6 +28,6 @@ class IPersona(form.Schema):
 
     dexteritytextindexer.searchable('carrec')
     carrec = schema.TextLine(
-        title=_(u"Col·lectiu"),
+        title=_(u"Carrec"),
         required=False
     )

@@ -2,7 +2,8 @@
 import datetime
 from DateTime import DateTime
 
-from genweb.ens.content.ens import (get_denominacio,
+from genweb.ens.content.ens import (get_capital_social_data,
+                                    get_aportacio_total,
                                     get_percentatge_membres,
                                     get_percentatge_participacio,
                                     get_aportacio, get_quota)
@@ -15,8 +16,8 @@ class EnsSearchResult(object):
         self.url = url
 
 
-class Identificacio(object):
-    def __init__(self, title, acronim, description, objecte_social, estat, nif, institution_type, figura_juridica, numero_identificacio, web, tipologia_upc, codi, num_ens, tags, aportacio, percentatge_participacio, quota, nombre_membres, percentatge_membres, membres_constituents, membres_actuals, data_constitucio, data_entrada, data_entrada_acord, seu_social, adscripcio, data_estatuts, absolute_url):
+class Entitat(object):
+    def __init__(self, title, acronim, description, objecte_social, estat, nif, institution_type, figura_juridica, numero_identificacio, web, tipologia_upc, codi, num_ens, tags, data_baixa, capital_social, aportacio_total, aportacio_import, percentatge_participacio, quota, percentatge_membres, entitats_constituents, entitats_actuals, data_constitucio, data_entrada, data_entrada_acord, adscripcio, data_estatuts, absolute_url):
         self.title = title
         self.acronim = acronim
         self.description = description
@@ -31,24 +32,26 @@ class Identificacio(object):
         self.codi = codi
         self.num_ens = num_ens
         self.tags = tags
-        self.aportacio = aportacio
+        # self.data_entrada = data_entrada
+        self.data_baixa = data_baixa
+        self.capital_social = capital_social
+        self.aportacio_total = aportacio_total
+        self.aportacio_import = aportacio_import
+        self.percentatge_membres = percentatge_membres
         self.percentatge_participacio = percentatge_participacio
         self.quota = quota
-        self.nombre_membres = nombre_membres
-        self.percentatge_membres = percentatge_membres
-        self.membres_constituents = membres_constituents
-        self.membres_actuals = membres_actuals
+        self.entitats_constituents = entitats_constituents
+        self.entitats_actuals = entitats_actuals
         self.data_constitucio = data_constitucio
         self.data_entrada = data_entrada
         self.data_entrada_acord = data_entrada_acord
-        self.seu_social = seu_social
         self.adscripcio = adscripcio
         self.data_estatuts = data_estatuts
         self.absolute_url = absolute_url
 
 
 class Representacio(object):
-    def __init__(self, denominacio, acronim, organ, carrec, persona, qualitat, data_inici, data_venciment, data_fi, absolute_url):
+    def __init__(self, denominacio, acronim, organ, carrec, persona, qualitat, data_inici, vigencia, data_fi, absolute_url):
         self.denominacio = denominacio
         self.acronim = acronim
         self.organ = organ
@@ -56,7 +59,7 @@ class Representacio(object):
         self.persona = persona
         self.qualitat = qualitat
         self.data_inici = data_inici
-        self.data_venciment = data_venciment
+        self.vigencia = vigencia
         self.data_fi = data_fi
         self.absolute_url = absolute_url
 
@@ -343,7 +346,7 @@ class EnsDataReporter(object):
 
         return carrecs_by_organ
 
-    def list_identificacio(self, search_filters=None):
+    def list_entitats(self, search_filters=None):
         """
         List all the ens(s)' identification info.
         """
@@ -353,8 +356,12 @@ class EnsDataReporter(object):
 
             data_constitucio = ens_obj.data_constitucio.strftime('%d/%m/%Y') if hasattr(ens_obj.data_constitucio, 'strftime') else None
             data_entrada = ens_obj.data_entrada.strftime('%d/%m/%Y') if hasattr(ens_obj.data_entrada, 'strftime') else None
-
-            identificacio.append(Identificacio(
+            data_baixa = ens_obj.data_baixa.strftime('%d/%m/%Y') if hasattr(ens_obj.data_baixa, 'strftime') else None
+            data_estatuts = [estatut for estatut in self.list_estatuts_by_ens_obj(ens_obj, is_vigent=True)]
+            if data_estatuts:
+                data_estatuts = sorted(data_estatuts, key=get_sortable_key_by_date, reverse=True)[0]
+                data_estatuts = data_estatuts.data.strftime('%d/%m/%Y') if hasattr(data_estatuts.data, 'strftime') else None
+            identificacio.append(Entitat(
                 title=ens_obj.title or "-",                                                 # Denominacio
                 acronim=ens_obj.acronim or "-",                                             # Acronim
                 description=ens_obj.description or "-",                                     # Descripcio
@@ -369,19 +376,21 @@ class EnsDataReporter(object):
                 codi=ens_obj.codi or "-",                                                   # Codi UPC
                 num_ens=ens_obj.num_ens or "-",                                             # Num. UPC
                 tags=ens_obj.Subject or "-",                                                # Categorització
-                aportacio=get_aportacio(ens_obj) or "-",                                    # A capital
-                percentatge_participacio=get_percentatge_participacio(ens_obj) or "-",      # % capital
+                # data_entrada=data_entrada or "-",                                         # Data alta UPC
+                data_baixa=data_baixa or "-",                                               # Data baixa UPC
+                capital_social=get_capital_social_data(ens_obj) or "-",                     # Fons patrimonial (data)
+                aportacio_total=get_aportacio_total(ens_obj) or "-",                        # Cap. inicial total
+                aportacio_import=get_aportacio(ens_obj) or "-",                             # Aportació inicial UPC
+                percentatge_participacio=get_percentatge_participacio(ens_obj) or "-",      # % UPC en capital
+                percentatge_membres=get_percentatge_membres(ens_obj) or "-",                # % UPC en vots
                 quota=get_quota(ens_obj) or "-",                                            # Quota
-                nombre_membres=ens_obj.nombre_membres or "-",                               # A órgan sup.
-                percentatge_membres=get_percentatge_membres(ens_obj) or "-",                # % membres
-                membres_constituents="-",                                                   # Membres constituents
-                membres_actuals="-",                                                        # Membres actuals
-                data_constitucio=data_constitucio or "-",                                   # Constitució ENS
+                entitats_constituents=ens_obj.entitats_constituents or "-",                 # Entitats constituents
+                entitats_actuals=ens_obj.entitats_actuals or "-",                           # Entitats actuals
+                data_constitucio=data_constitucio or "-",                                   # Data de constitució
                 data_entrada=data_entrada or "-",                                           # Data alta UPC
                 data_entrada_acord=ens_obj.data_entrada_acord or "-",                       # Acord UPC
-                seu_social=ens_obj.seu_social or "-",                                       # Seu social
                 adscripcio=ens_obj.adscripcio or "-",                                       # Adscripció
-                data_estatuts="-",                                                          # Data estatus
+                data_estatuts=data_estatuts or "-",                                         # Data estatus
                 absolute_url=ens_obj.absolute_url)                                          # URL
             )
         return identificacio
@@ -405,7 +414,6 @@ class EnsDataReporter(object):
                             carrec_obj = carrec.getObject()
 
                             data_inici = carrec_obj.data_inici.strftime('%d/%m/%Y') if hasattr(carrec_obj.data_inici, 'strftime') else None
-                            data_venciment = carrec_obj.effective_date.strftime('%d/%m/%Y') if hasattr(carrec_obj.effective_date, 'strftime') else None
                             data_fi = carrec_obj.data_fi.strftime('%d/%m/%Y') if hasattr(carrec_obj.data_fi, 'strftime') else None
 
                             representacio.append(Representacio(
@@ -416,7 +424,7 @@ class EnsDataReporter(object):
                                 persona=carrec_obj.title or "-",                            # Nom persona
                                 qualitat=carrec_obj.carrec_envirtud or "-",                 # En qualitat de...
                                 data_inici=data_inici or "-",                               # Data inici
-                                data_venciment=data_venciment or "-",                       # Data venciment
+                                vigencia=carrec_obj.vigencia or "-",                        # Vigència
                                 data_fi=data_fi or "-",                                     # Data fi
                                 absolute_url=ens_obj.absolute_url)                          # URL
                             )

@@ -4,13 +4,14 @@
   <thead>
     <tr>
       <th class="column-medium">Nom</th>
-      <th class="column-small">Com a...</th>
-      <th class="column-xsmall">Ens</th>
+      <th class="column-small">En qualitat de...</th>
+      <th class="column-small">Ens</th>
       <th class="column-small">Òrgan</th>
-      <th class="column-small">Càrrec</th>
+      <th class="column-small">Càrrec a l'òrgan</th>
       <th class="column-xsmall column-center">Data inici</th>
+      <th class="column-mall">Vigència</th>
       <th class="column-xsmall column-center">Data fi</th>
-      <th class="column-center">Històric</th>
+      <th class="column-xsmall column-center">Històric</th>
     </tr>
   </thead>
   <tbody id="results">
@@ -28,6 +29,7 @@
         </td>
         <td tal:content="result/carrec"/>
         <td class="column-center" tal:content="result/data_inici_str"/>
+        <td tal:content="result/vigencia"/>
         <td class="column-center" tal:content="result/data_fi_str"/>
         <td class="column-center">
             <input type="checkbox"

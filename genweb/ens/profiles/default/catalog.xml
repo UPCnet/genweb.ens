@@ -3,6 +3,7 @@
   <column value="acronim"/>
   <column value="adscripcio"/>
   <column value="aportacio_import"/>
+  <column value="dni"/>
   <column value="carrec"/>
   <column value="composicio"/>
   <column value="estat"/>

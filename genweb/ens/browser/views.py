@@ -15,7 +15,7 @@ def getRepresentantsUPC():
     catalog = api.portal.get_tool('portal_catalog')
     root_path = '/'.join(api.portal.get().getPhysicalPath())
     language = api.portal.get_current_language()
-    path = root_path + '/' + language + '/representants-upc/altres'
+    path = root_path + '/' + language + '/administrar-persones/persones'
     return catalog(portal_type=('genweb.ens.representant'),
                    path=path)
 

@@ -44,4 +44,34 @@ $(document).ready(function()
         }
     });
 
+    $(".observacions_participacio-content").css('display', 'none');
+    $("input[type=checkbox].observacions_participacio-switch").change(function() {
+        if(this.checked) {
+            $(".observacions_participacio-content").css('display', 'block');
+        }
+        else {
+            $(".observacions_participacio-content").css('display', 'none');
+        }
+    });
+
+    $(".observacions_membres-content").css('display', 'none');
+    $("input[type=checkbox].observacions_membres-switch").change(function() {
+        if(this.checked) {
+            $(".observacions_membres-content").css('display', 'block');
+        }
+        else {
+            $(".observacions_membres-content").css('display', 'none');
+        }
+    });
+
+    $(".observacions_quota-content").css('display', 'none');
+    $("input[type=checkbox].observacions_quota-switch").change(function() {
+        if(this.checked) {
+            $(".observacions_quota-content").css('display', 'block');
+        }
+        else {
+            $(".observacions_quota-content").css('display', 'none');
+        }
+    });
+
 });

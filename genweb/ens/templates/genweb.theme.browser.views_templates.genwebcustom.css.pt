@@ -354,15 +354,31 @@ body.template-homepage #contentActionMenus > li:nth-child(-n+3) {
 
 #formfield-form-widgets-data_entrada,
 #formfield-form-widgets-data_entrada_acord,
-#formfield-form-widgets-data_entrada_procediment{
+#formfield-form-widgets-data_entrada_procediment {
     width: 49%;
     float: left;
 }
 
 #formfield-form-widgets-data_baixa,
 #formfield-form-widgets-data_baixa_acord,
-#formfield-form-widgets-data_baixa_procediment{
+#formfield-form-widgets-data_baixa_procediment {
     width: 49%;
+    float: right;
+}
+
+#formfield-form-widgets-quota_import,
+#formfield-form-widgets-aportacio_import,
+#formfield-form-widgets-aportacio_total,
+#formfield-form-widgets-capital_social_import {
+    width: 33%;
+    float: left;
+}
+
+#formfield-form-widgets-quota_moneda,
+#formfield-form-widgets-aportacio_moneda,
+#formfield-form-widgets-aportacio_total_moneda,
+#formfield-form-widgets-capital_social_moneda {
+    width: 66%;
     float: right;
 }
 
