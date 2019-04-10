@@ -1,11 +1,14 @@
 Changelog
 =========
 
-1.7.10 (unreleased)
+1.7.10 (2019-04-10)
 -------------------
 
-- Nothing changed yet.
-
+* Merge remote-tracking branch 'origin/develop' [Iago López Fernández]
+* Correccio literal: Canvis reunió 19/03/19 [Iago López Fernández]
+* Correccions: Canvis reunió 19/03/19 [Iago López Fernández]
+* Correccions: Canvis reunió 19/03/19 [Iago López Fernández]
+* Canvis reunió 19/03/19 [Iago López Fernández]
 
 1.7.9 (2019-02-15)
 ------------------
