@@ -416,7 +416,7 @@
           <dd tal:content="python: context.data_constitucio and context.data_constitucio.strftime('%d/%m/%Y') or '-'"/>
 
           <dt i18n:translate="Data estatuts">Data estatuts</dt>
-          <dd tal:content="python: estatuts_vigents[0].data and estatuts_vigents[0].data.strftime('%d/%m/%Y') or '-'"/>
+          <dd tal:content="python: len(estatuts_vigents) > 0 and estatuts_vigents[0].data and estatuts_vigents[0].data.strftime('%d/%m/%Y') or '-'"/>
 
           <dt i18n:translate="Entitats constituents">Entitats constituents</dt>
           <dd tal:content="python: context.entitats_constituents or '-'"/>
