@@ -1,11 +1,10 @@
 Changelog
 =========
 
-1.7.11 (unreleased)
+1.7.11 (2019-05-08)
 -------------------
 
-- Nothing changed yet.
-
+* Fix error quan no hi ha estatus vigents [Iago López Fernández]
 
 1.7.10 (2019-04-10)
 -------------------
