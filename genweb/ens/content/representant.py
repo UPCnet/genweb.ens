@@ -13,7 +13,7 @@ carrecs = [
     u"PAS",
     u"Estudiant",
     u"Extern",
-    u"Externs CS"]
+    u"Extern CS"]
 
 
 class IRepresentant(IPersona):

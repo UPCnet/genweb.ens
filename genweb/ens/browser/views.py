@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-
 from StringIO import StringIO
-import json
-import csv
 
 from plone import api
 from five import grok
 from zope.interface import Interface
 
 from genweb.ens.interfaces import IGenwebEnsLayer
+
+import csv
+import json
+import transaction
 
 
 def getRepresentantsUPC():
@@ -80,3 +81,21 @@ class TaulaRepresentatsUpcCsv(grok.View):
                 representant.dni.encode('utf-8'),
                 representant.carrec.encode('utf-8')
             ])
+
+
+class FixCarrecRepresents(grok.View):
+    grok.name('fix_carrec_representants')
+    grok.context(Interface)
+    grok.layer(IGenwebEnsLayer)
+    grok.require('cmf.ManagePortal')
+
+    def render(self):
+        representants = getRepresentantsUPC()
+        for representant in representants:
+            obj = representant.getObject()
+            if obj.carrec == 'Externs CS':
+                obj.carrec = 'Extern CS'
+                obj.reindexObject()
+
+        transaction.commit()
+        return 'Done!'
