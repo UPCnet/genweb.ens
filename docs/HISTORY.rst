@@ -1,11 +1,10 @@
 Changelog
 =========
 
-1.7.12 (unreleased)
+1.7.12 (2019-11-06)
 -------------------
 
-- Nothing changed yet.
-
+* Fix Externs CS to Extern CS [Iago López Fernández]
 
 1.7.11 (2019-05-08)
 -------------------
