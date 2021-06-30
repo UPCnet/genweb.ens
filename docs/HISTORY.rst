@@ -1,11 +1,10 @@
 Changelog
 =========
 
-1.7.13 (unreleased)
+1.7.13 (2021-06-30)
 -------------------
 
-- Nothing changed yet.
-
+* http -> https [Iago López Fernández]
 
 1.7.12 (2019-11-06)
 -------------------
